@@ -12,5 +12,9 @@ export default Fonts = {
     OpenSansExtraBoldasfasd:'OpenSans-ExtraBold',
     OpenSansMedium:'OpenSans-Semibold',
     OpenSansLight:'OpenSans-Light',
+
+    NexaBold: 'NexaBold',
+    NexaRegular: 'NexaRegular',
+
     
 }

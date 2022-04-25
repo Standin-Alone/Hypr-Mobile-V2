@@ -1,5 +1,7 @@
 
-import { PrimaryButton 
+import { 
+    PrimaryButton,
+    PrimaryButtonOutline
     } from "./buttons";
 
 import { 
@@ -13,6 +15,9 @@ import { PrimaryHeader
 export default {
     // Buttons
     PrimaryButton,
+    PrimaryButtonOutline,
+
+
 
     PrimaryTextInput,
     

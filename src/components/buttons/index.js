@@ -44,3 +44,44 @@ export const PrimaryButton = ({
         </TouchableOpacity>
     </LinearGradient>
 );
+
+
+export const PrimaryButtonOutline = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    isLoading,
+    loadingTitle
+})=>(   
+
+    <LinearGradient
+    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+    colors={[constants.Colors.light,constants.Colors.light]}
+    style={[styles.primaryButtonOutline]}
+    >
+        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "center",alignItems: "center",padding:14}} >
+            <View style={{ flexDirection:'row' }}>
+      
+
+            {
+                isLoading ?
+                <Spinner                     
+                    isVisible={isLoading} 
+                    size={30} 
+                    type={'FadingCircleAlt'} 
+                    color={constants.Colors.primary}
+                    
+                />
+                :
+
+                <Text style={[styles.primaryButtonOutlineText]}>
+                    { isLoading ? loadingTitle : title}
+                </Text>
+
+            }
+            </View>
+        </TouchableOpacity>
+    </LinearGradient>
+);

@@ -15,20 +15,20 @@ export default class Login extends React.Component {
               focus:false,
               error:false,
               errorMessage:'',
-              data:''
+              value:''
           },
           password:{
             focus:false,
             error:false,
             errorMessage:'',
-            data:''
+            value:''
           },  
           isLoading:false
       };
      
     }
 
-    setMyState = (data)=>this.setState(data);
+    setMyState = (value)=>this.setState(value);
 
     // handleLogin
     handleLogin = ()=>{
@@ -74,8 +74,8 @@ export default class Login extends React.Component {
                                     isFocus={this.state.username.focus}
                                     isError={this.state.username.error}
                                     errorMessage={this.state.username.errorMessage}
-                                    value={this.state.username.data}
-                                    onChangeText={(value)=>this.setState({username:{...this.state.username,data:value,error:false}})}                                
+                                    value={this.state.username.value}
+                                    onChangeText={(value)=>this.setState({username:{...this.state.username,value:value,error:false}})}                                
                             />                        
                         </View>
 
@@ -88,8 +88,8 @@ export default class Login extends React.Component {
                                 isFocus={this.state.password.focus}
                                 isError={this.state.password.error}
                                 errorMessage={this.state.password.errorMessage}
-                                value={this.state.password.data}
-                                onChangeText={(value)=>this.setState({password:{...this.state.password,data:value,error:false}})}
+                                value={this.state.password.value}
+                                onChangeText={(value)=>this.setState({password:{...this.state.password,value:value,error:false}})}
                                 secureTextEntry={true}
                             />                        
                         </View>
@@ -102,7 +102,7 @@ export default class Login extends React.Component {
                             <Animated.View>
                                 <Components.PrimaryButton  
                                     onPress={this.handleLogin}                      
-                                    title={"Login"}                                
+                                    title={"Log In"}                                
                                     isLoading={this.state.isLoading}
                                 />
                             </Animated.View>

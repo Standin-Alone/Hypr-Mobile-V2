@@ -17,7 +17,8 @@ export const styles = StyleSheet.create({
         borderRadius:10,        
         borderColor:constants.Colors.gray,        
         fontFamily:constants.Fonts.GothamRegular,
-        paddingLeft:constants.Dimensions.vw(8),        
+        paddingLeft:constants.Dimensions.vw(10),                
+        paddingVertical:   constants.Dimensions.vh(4),        
         fontSize:18
     },
     primaryErrorMessage:{
@@ -26,6 +27,7 @@ export const styles = StyleSheet.create({
     },
     icon:{
         position:'absolute',
+        top:constants.Dimensions.vh(1),
         left:5
 
     }

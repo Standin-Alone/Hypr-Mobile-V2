@@ -27,7 +27,7 @@ export const PrimaryTextInput = ({
             <View style={styles.icon}>
                 <MaterialIcons 
                     name={iconName} 
-                    size={30} 
+                    size={40} 
                     color={isFocus ||  value != '' ? 
                                 constants.Colors.primary 
                                 : 

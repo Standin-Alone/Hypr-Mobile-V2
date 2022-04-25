@@ -4,11 +4,9 @@ import getBaseUrl from '../utils/config';
 import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
-export const login = (payload,setState) => {
- 
-    // console.warn('login',payload)
-    // console.warn('url',`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`);
-        
+
+
+export const login = (payload,setState) => {     
     //turn on loading
     setState({isLoading:true});
     // Check Internet Connection
@@ -76,8 +74,66 @@ export const login = (payload,setState) => {
                 text1:'No internet Connection!'
             })
              // turn off loading
-                    setState({isLoading:false});
+            setState({isLoading:false});
         }
+    });
+
+}
+
+
+export const verifyOtp = (payload,setState)=>{
+    setState({isLoading:true});
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            if(payload.otp.value.length == 4){
+
+                setState({otp:{...payload.otp,error:false},isLoading:false})
+                
+            }else{          
+                setState({otp:{...payload.otp,error:true},isLoading:false})
+                Toast.show({
+                    type:'error',
+                    text1:'Please put your one time pin.',                
+                });
+            }
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+export const resendOtp = (payload,setState)=>{
+    setState({isLoadingResendButton:true});
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+            
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoadingResendButton:false});
+         }
     });
 
 }
