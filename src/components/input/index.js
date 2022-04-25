@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import PhoneInput from "react-native-phone-number-input";
 export const PrimaryTextInput = ({
     label,
     onChangeText,
@@ -28,13 +28,11 @@ export const PrimaryTextInput = ({
                 <MaterialIcons 
                     name={iconName} 
                     size={40} 
-                    color={isFocus ||  value != '' ? 
-                                constants.Colors.primary 
-                                : 
-                                isError ? 
-                                    constants.Colors.danger
-                                    :
-                                    constants.Colors.gray
+                    color={isError ? constants.Colors.danger :
+                                                isFocus ||  value != '' ? 
+                                                        constants.Colors.primary                                                                                                           
+                                                        :
+                                                            constants.Colors.gray
                             } 
                     style={{ top:10 }} />
             </View>
@@ -45,12 +43,10 @@ export const PrimaryTextInput = ({
                     placeholder={placeholder}     
                     placeholderTextColor={constants.Colors.gray}            
                     style={[styles.primaryInput,
-                                {borderColor: isFocus ||  value != '' ? 
-                                                        constants.Colors.primary 
-                                                        : 
-                                                        isError ? 
-                                                            constants.Colors.danger
-                                                            :
+                                {borderColor:  isError ? constants.Colors.danger :
+                                                isFocus ||  value != '' ? 
+                                                        constants.Colors.primary                                                                                                           
+                                                        :
                                                             constants.Colors.gray
                                 }]} 
                     onFocus={onFocus} 
@@ -60,13 +56,13 @@ export const PrimaryTextInput = ({
                     adjustsFontSizeToFit
                     />
                 {isError && 
-                    <View style={{ flexDirection:'row' }}>
+                    <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
                         <MaterialIcons 
                             name={'error-outline'} 
                             size={16} 
                             color={constants.Colors.danger}                     
                             />
-                            <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> Please enter your email</Text>
+                            <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> {errorMessage}</Text>
                     </View>
                 }
             </View>
@@ -74,3 +70,39 @@ export const PrimaryTextInput = ({
        
    </View>
 );
+
+
+export const PrimaryPhoneInput = ({
+
+value,
+onChangeText,
+onChangeFormattedText,
+onChangeCountry,
+isError,
+errorMessage
+})=>{
+    return (
+        <View>
+            <PhoneInput           
+                textInputStyle={styles.phoneInput}
+                defaultValue={value}
+                defaultCode="PH"
+                layout="first"
+                onChangeText={onChangeText}
+                onChangeFormattedText={onChangeFormattedText}          
+                onChangeCountry = {onChangeCountry}    
+                containerStyle ={styles.phoneInputContainer}                       
+            />
+             {isError && 
+                    <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
+                        <MaterialIcons 
+                            name={'error-outline'} 
+                            size={16} 
+                            color={constants.Colors.danger}                     
+                            />
+                            <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> {errorMessage}</Text>
+                    </View>
+            }
+        </View>
+    )
+}

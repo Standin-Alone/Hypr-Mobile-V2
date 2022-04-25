@@ -17,7 +17,7 @@ export const styles = StyleSheet.create({
         borderRadius:10,        
         borderColor:constants.Colors.gray,        
         fontFamily:constants.Fonts.GothamRegular,
-        paddingLeft:constants.Dimensions.vw(10),                
+        paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
         fontSize:18
     },
@@ -29,7 +29,18 @@ export const styles = StyleSheet.create({
         position:'absolute',
         top:constants.Dimensions.vh(1),
         left:5
-
+    },
+    phoneInput:{
+        
+        width:constants.Dimensions.vw(90),        
+        borderColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.GothamRegular,        
+        paddingVertical:   constants.Dimensions.vh(1),        
+        fontSize:18
+    },
+    phoneInputContainer:{        
+        height:constants.Dimensions.vh(15),        
+        width:constants.Dimensions.vw(90),        
     }
   
 });

@@ -1,11 +1,12 @@
 export default Colors = {
     dark:'#000000',
     light:'#ffffff',
-    primary: '#3EB489', 
-    secondary:'#38ef7d',        
+    primary: '#246EE9', 
+    secondary:'#6803ff',        
     gradient:{
-        primary:'',
-        secondary:'',
+        primary:'#246EE9',
+        secondary:'#6803ff',
+        tertiary:'#FF2400'
     }, 
     danger:'',
     warning:'',

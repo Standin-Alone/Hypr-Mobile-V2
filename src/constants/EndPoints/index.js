@@ -1,5 +1,6 @@
 const EndPoints = {
-    LOGIN:'login'
+    LOGIN:'login',
+    CREATE_ACCOUNT:'/user/sign-up',
 
 }
 

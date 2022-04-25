@@ -5,7 +5,8 @@ import {
     } from "./buttons";
 
 import { 
-        PrimaryTextInput 
+        PrimaryTextInput,
+        PrimaryPhoneInput
     } from "./input";
 
 import { PrimaryHeader
@@ -20,6 +21,7 @@ export default {
 
 
     PrimaryTextInput,
+    PrimaryPhoneInput,
     
 
     PrimaryHeader

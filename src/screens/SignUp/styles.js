@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
     },
     form:{
         flexDirection:'column',
-        top:constants.Dimensions.vh(30),
+        top:constants.Dimensions.vh(5),
         left:constants.Dimensions.vw(5)
     },
     buttonContainer:{        

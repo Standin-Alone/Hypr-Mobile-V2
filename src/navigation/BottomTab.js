@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Home from '../screens/BottomTab/Home';
+import Market from '../screens/BottomTab/Market';
 import UserProfile from '../screens/BottomTab/UserProfile';
 import constants from '../constants';
 
@@ -25,8 +25,8 @@ export const BottomTabNavigator = ()=>(
         }}
      >
         <BottomTab.Screen 
-            name ="Home" 
-            component={Home}
+            name ="Market" 
+            component={Market}
             options={{                 
                 
                 tabBarIcon: ({color})=>(
@@ -39,7 +39,7 @@ export const BottomTabNavigator = ()=>(
             name ="UserProfile" 
             component={UserProfile}
             options={{ 
-                title:"User Account",
+                title:"My Profile",
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Octicons name="person-fill" size={30} color={color}/>
                 )
