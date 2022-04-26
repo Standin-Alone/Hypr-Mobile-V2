@@ -35,13 +35,13 @@ export default class Login extends React.Component {
                 
     
         let payload = {
-            username    : this.state.username,
-            password : this.state.password
+            username    : this.state.username.value,
+            password : this.state.password.value
         };
 
         
 
-        return login(payload,this.setMyState);               
+        return login(payload,this.setMyState,this.props);               
         
               
     }

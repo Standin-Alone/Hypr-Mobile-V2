@@ -6,7 +6,7 @@ import {
 
 import { 
         PrimaryTextInput,
-        PrimaryPhoneInput
+        PrimaryPhoneInput   
     } from "./input";
 
 import { PrimaryHeader
@@ -22,7 +22,7 @@ export default {
 
     PrimaryTextInput,
     PrimaryPhoneInput,
-    
+ 
 
     PrimaryHeader
 

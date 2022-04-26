@@ -5,6 +5,8 @@ import constants from '../../constants';
 import { styles } from './styles';
 import { PrimaryHeader } from '../../components/headers';
 import { createAccount } from '../../actions/auth';
+import moment from 'moment';
+
 
 export default class SignUp extends React.Component {
     constructor(props) {
@@ -33,6 +35,13 @@ export default class SignUp extends React.Component {
             error:false,
             errorMessage:'',
             value:''
+          },
+          birthday:{
+            focus:false,
+            error:false,
+            errorMessage:'',
+            value:'',
+            openDatePicker:false
           },
           username:{
             focus:false,
@@ -66,11 +75,12 @@ export default class SignUp extends React.Component {
             lastName:this.state.lastName.value,
             email:this.state.email.value,
             contact:this.state.contact.value,            
+            birthday:this.state.birthday.value,            
             password:this.state.password.value,
             confirmPassword:this.state.confirmPassword.value,
         }
         
-        return createAccount(payload,this.setMyState)
+        return createAccount(payload,this.setMyState,this.props)
         
     }
 
@@ -133,6 +143,23 @@ export default class SignUp extends React.Component {
                    
                         <View>     
                             <Components.PrimaryTextInput
+                                    placeholder={"Birthday"}
+                                    iconName="calendar-today"
+                                    onFocus={()=>this.setState({birthday:{...this.state.birthday,focus:true}})}
+                                    onBlur={()=>this.setState({birthday:{...this.state.birthday,focus:false}})}
+                                    isFocus={this.state.birthday.focus}
+                                    isError={this.state.birthday.error}
+                                    errorMessage={this.state.birthday.errorMessage}                                    
+                                    value={this.state.birthday.value}
+                                    onChangeDate={(setValue,value)=>this.setState({birthday:{...this.state.birthday,value:moment(value).format('MM-DD-YYYY'),error:false,openDatePicker:false}})}
+                                    
+                                    openDatePicker={this.state.birthday.openDatePicker}
+                                    onPressIn={()=>this.setState({birthday:{...this.state.birthday,openDatePicker:this.state.birthday.openDatePicker ? false : true }})}
+                            />                        
+                        </View>
+
+                        <View>     
+                            <Components.PrimaryTextInput
                                     placeholder={"Password"}
                                     iconName="vpn-key"
                                     onFocus={()=>this.setState({password:{...this.state.password,focus:true}})}
@@ -145,6 +172,8 @@ export default class SignUp extends React.Component {
                                     secureTextEntry={true}
                             />                        
                         </View>
+
+
 
                         <View>     
                             <Components.PrimaryTextInput

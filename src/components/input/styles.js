@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(90),
         borderRadius:10,        
         borderColor:constants.Colors.gray,        
-        fontFamily:constants.Fonts.GothamRegular,
+        fontFamily:constants.Fonts.GothamMedium,
         paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
         fontSize:18
@@ -34,7 +34,7 @@ export const styles = StyleSheet.create({
         
         width:constants.Dimensions.vw(90),        
         borderColor:constants.Colors.gray,        
-        fontFamily:constants.Fonts.GothamRegular,        
+        fontFamily:constants.Fonts.GothamMedium,        
         paddingVertical:   constants.Dimensions.vh(1),        
         fontSize:18
     },

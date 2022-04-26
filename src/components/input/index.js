@@ -6,6 +6,8 @@ import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PhoneInput from "react-native-phone-number-input";
+import RNDateTimePicker from '@react-native-community/datetimepicker';
+
 export const PrimaryTextInput = ({
     label,
     onChangeText,
@@ -17,7 +19,10 @@ export const PrimaryTextInput = ({
     placeholder,
     isError,
     errorMessage,
-    value
+    value,
+    openDatePicker,
+    onPressIn,
+    onChangeDate
     
 
 })=>(   
@@ -40,6 +45,7 @@ export const PrimaryTextInput = ({
             <View>
                 
                 <TextInput 
+                    onPressIn={onPressIn}
                     placeholder={placeholder}     
                     placeholderTextColor={constants.Colors.gray}            
                     style={[styles.primaryInput,
@@ -53,8 +59,21 @@ export const PrimaryTextInput = ({
                     onBlur={onBlur} 
                     secureTextEntry={secureTextEntry} 
                     onChangeText={onChangeText}
+                    value={value}
                     adjustsFontSizeToFit
                     />
+
+                {
+                    openDatePicker &&
+                    <RNDateTimePicker            
+                        onChange={onChangeDate}    
+                        
+                        display={'spinner'}                 
+                        value={new Date(1999,4,20)} 
+                    />
+                }
+
+
                 {isError && 
                     <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
                         <MaterialIcons 
@@ -106,3 +125,4 @@ errorMessage
         </View>
     )
 }
+

@@ -4,12 +4,14 @@ import getBaseUrl from '../utils/config';
 import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
+import moment from 'moment';
 
 
-
-export const createAccount = (payload,setState)=>{
+export const createAccount = (payload,setState,props)=>{
     setState({isLoading:true});
+    console.warn(payload)
     let countError = 0;
+    let computeAge = 0;
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -17,7 +19,8 @@ export const createAccount = (payload,setState)=>{
 
             // validate payload
             Object.keys(payload).map((item,index)=>{                
-                if(payload[item] !== undefined){                    
+                if(payload[item] !== undefined || payload[item] != '' ){  
+                    
                     if(payload[item] == ''){
                         setState({[item]:{...payload[item],error:true,errorMessage:`Please enter this required field.`}})                                                
                         countError++;
@@ -25,7 +28,7 @@ export const createAccount = (payload,setState)=>{
                         if(item == 'email'){
                             // VALIDATE EMAIL
                             if(!constants.RegEx.EMAIL_REGEX.pattern.test(payload[item])){
-                                setState({[item]:{...payload[item],error:true,errorMessage:constants.RegEx.EMAIL_REGEX.errorMessage}})                                                
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:constants.RegEx.EMAIL_REGEX.errorMessage}})                                                
                                 countError++;
                             }
                         }
@@ -33,18 +36,50 @@ export const createAccount = (payload,setState)=>{
                         if(item == 'password'){        
                             // VALIDATE PASSWORD                    
                             if(!constants.RegEx.PASSWORD_REGEX.pattern.test(payload[item])){
-                                setState({[item]:{...payload[item],error:true,errorMessage:constants.RegEx.PASSWORD_REGEX.errorMessage}})    
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:constants.RegEx.PASSWORD_REGEX.errorMessage}})    
                                 countError++;
                             }
                         }
 
-                        if(item == 'contact'){        
-                            // VALIDATE CONTACT                    
-                            if(!constants.RegEx.PHONE_NUMBER_REGX.pattern.test(payload[item])){
-                                setState({[item]:{...payload[item],error:true,errorMessage:constants.RegEx.PHONE_NUMBER_REGX.errorMessage}})    
+
+                        if(item == 'password'){        
+                            // VALIDATE PASSWORD                    
+                            if(payload[item]  != payload['confirmPassword']){
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:'Your password and confirm password does not matched.'}})    
                                 countError++;
                             }
                         }
+
+                        if(item == 'confirmPassword'){        
+                            // VALIDATE CONFIRM PASSWORD                    
+                            if(payload[item]  != payload['password']){
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:'Your password and confirm password does not matched.'}})    
+                                countError++;
+                            }
+                        }
+
+
+                        if(item == 'contact'){        
+                            // VALIDATE CONTACT                    
+                            if(!constants.RegEx.PHONE_NUMBER_REGX.pattern.test(payload[item])){
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:constants.RegEx.PHONE_NUMBER_REGX.errorMessage}})    
+                                countError++;
+                            }
+                        }
+
+                        if(item == 'birthday'){    
+                            // COMPUTE AGE
+                            let getDateNow = moment(new Date(),"MM-DD-YYYY");
+                            let birthday = moment(payload[item],"MM-DD-YYYY");
+                            computeAge = getDateNow.diff(birthday, 'years');
+                        
+                            
+                            // VALIDATE AGE                   
+                            if(computeAge < 18){
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:`Your age must be 18 and above.`}})    
+                                countError++;
+                            }
+                        }                      
                     }
                 }
             })
@@ -52,24 +87,32 @@ export const createAccount = (payload,setState)=>{
             
             // check error count
             if(countError == 0){
+
                 let clean_payload = {
                     first_name:payload.firstName,
                     last_name:payload.lastName,
                     email:payload.email,
                     phone:payload.contact,
+                    birthday:payload.birthday,
+                    age:computeAge,
                     username:payload.email,
-                    password:payload.password,                    
+                    password:payload.password,
+                    age:computeAge               
                 }
 
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT}`,clean_payload).then((response)=>{                    
                     
                     if(response.data.status == true){
+                        
                         Toast.show({
                             type:'success',
                             text1: 'Success!',
                             text2: response.data.message
                         });
+
+                        props.navigation.goBack();
                         setState({isLoading:false});
+
                     }else{
                         Toast.show({
                             type:'error',
@@ -114,6 +157,7 @@ export const createAccount = (payload,setState)=>{
 export const login = (payload,setState) => {     
     //turn on loading
     setState({isLoading:true});
+    let countError = 0;
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
             
@@ -121,24 +165,21 @@ export const login = (payload,setState) => {
         if(state.isConnected && state.isInternetReachable){
             
 
-            setState({username:{...payload.username,error:false}})
-            setState({password:{...payload.password,error:false}})
+             // validate payload
+             Object.keys(payload).map((item,index)=>{                
+                if(payload[item] !== undefined || payload[item] != '' ){                      
+                    if(payload[item] == ''){
+                        setState({[item]:{...payload[item],error:true,errorMessage:`Please enter your ${item}.`}})                                                
+                        countError++;
+                    }                                     
+                }
+            })            
             
-            if(payload.username.data == '' || payload.password.data == ''){
-
-                setState({username:{...payload.username,error:true},password:{...payload.password,error:true}})
-
-
-                // turn off loading
-                setState({isLoading:false});                
-            }else{
-                
-                
-      
-
+            if(countError == 0){
+                                      
                 let clean_payload = {
-                    username : payload.username.data,
-                    password : payload.password.data
+                    username : payload.username,
+                    password : payload.password
                 }
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
@@ -170,6 +211,8 @@ export const login = (payload,setState) => {
                     setState({isLoading:false});
                 });
 
+            }else{
+                setState({isLoading:false});
             }
                         
         }else{
