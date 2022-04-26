@@ -7,14 +7,33 @@ import constants from '../../constants';
 
 export const styles = StyleSheet.create({  
     marketContainer:{
+        justifyContent:'flex-end',
         flexDirection:'row',
-        backgroundColor:'transparent',
+               
+    },
+    buttonContainer:{
+        justifyContent:'flex-end',
+        flexDirection:'row',
         
     },
     primaryContainer:{
         flexDirection:'row',
-        backgroundColor:'transparent',
-        
+        backgroundColor:'transparent',        
+    },
+    searchButton:{
+        height:constants.Dimensions.vh(10),
+        top:constants.Dimensions.vh(3),
+        borderWidth:1,
+        borderColor:constants.Colors.primary,
+        padding:'1%',
+        borderRadius:20,
+        width:constants.Dimensions.vw(65)      
+    },  
+    searchText:{
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:13,
+        alignSelf:'center',        
+        color:constants.Colors.primary
     },
     primaryTitle:{
         fontFamily:constants.Fonts.GothamBold,

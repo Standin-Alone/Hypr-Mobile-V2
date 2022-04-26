@@ -6,13 +6,14 @@ import {Dimensions, StyleSheet} from 'react-native';
 import constants from '../../constants';
 
 export const styles = StyleSheet.create({  
-    productCardContainer:{                
+    productCardContainer:{        
+        flexDirection:'column',        
         backgroundColor:constants.Colors.light,                        
         marginHorizontal:constants.Dimensions.vw(1),        
         marginVertical:constants.Dimensions.vh(1),
         borderRadius:10,        
         width:constants.Dimensions.vw(45),                
-        height:constants.Dimensions.vh(70),                
+        padding:'2%'                       
     },
     title:{
         fontFamily:constants.Fonts.GothamBold,
@@ -20,7 +21,8 @@ export const styles = StyleSheet.create({
         top:constants.Dimensions.vh(2),
         color:constants.Colors.primary
     },
-    productName:{
+    productName:{        
+        flexWrap: 'wrap',
         fontFamily:constants.Fonts.OpenSansMedium,
         fontSize:14,
         top:constants.Dimensions.vh(2),        
@@ -35,6 +37,7 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(50),                
         height:constants.Dimensions.vh(40),
         alignSelf:'center',
+        overflow:'hidden'
         
     },
     

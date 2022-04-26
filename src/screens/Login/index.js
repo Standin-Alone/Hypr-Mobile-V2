@@ -55,16 +55,23 @@ export default class Login extends React.Component {
         return(
             <>                              
                 <View style={styles.container}>
-                  
-                    <View style={styles.form}>                    
+
+                    <View style={styles.bannerContainer}>
                         <View>
                             <Image source={constants.Images.loginCover} style={styles.loginCover}/>
                         </View>
-                        <View style={styles.headerContainer}>
-                            <Text style={styles.headerText}>Welcome to My Company</Text>
-                            <Text style={styles.subtitleText}>Sign in to start shopping.</Text>
-                        </View>
 
+                        <View style={styles.headerContainer}>
+                                <View style={{ left:constants.Dimensions.vw(5) }}>
+                                    <Text style={styles.headerText}>Welcome to My Company</Text>
+                                    <Text style={styles.subtitleText}>Sign in to start shopping.</Text>
+                                </View>
+                        </View>
+                    </View>
+
+                    <View style={styles.form}>                    
+                        
+                     
                         <View>     
                             <Components.PrimaryTextInput
                                     placeholder={"Username/Email"}

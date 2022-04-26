@@ -5,28 +5,53 @@ import { styles } from "./styles";
 import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 export const MarketHeader = ({
     title,
-    onGoBack
+    onGoBack,
+    onGoToShoppingCart,
+    goToWishList,
+    goToShoppingCart,
+    goToSearch
  })=>(   
-    <>  
-         <View style={styles.marketContainer}>
-
-            <View style={{flexDirection:'row',justifyContent:'flex-end' }}>        
-             <TouchableOpacity onPress={onGoBack}>
-                 <MaterialIcons 
-                     name="chevron-left" 
-                     size={55} 
-                     color={constants.Colors.primary}
-                 />
-             </TouchableOpacity>
-             </View>
-          
- 
-         
-         </View>             
+    <>      
+        <View style={styles.marketContainer}>            
+            <View style={styles.buttonContainer}>
+                <TouchableOpacity onPress={goToSearch} style={styles.searchButton}>
+                    <View style={{ flexDirection:'row' }}>                    
+                        <View style={{ flexDirection:'row',justifyContent:'flex-start' }}>
+                            <MaterialIcons 
+                                name="search" 
+                                size={30} 
+                                color={constants.Colors.primary}
+                            />
+                        </View>
+                        <View style={{ flexDirection:'row',justifyContent:'center' }}>
+                            <Text style={styles.searchText}>Search</Text>
+                        </View>           
+                    </View>         
+                </TouchableOpacity>
+            </View>
+            <View style={styles.buttonContainer}>                     
+                <TouchableOpacity onPress={goToShoppingCart} style={{ padding:15 }}>
+                    <MaterialIcons 
+                        name="shopping-cart" 
+                        size={30} 
+                        color={constants.Colors.primary}
+                    />
+                </TouchableOpacity>                       
+            </View>  
+            <View style={styles.buttonContainer}>                     
+                <TouchableOpacity onPress={goToWishList}  style={{ padding:15 }}>
+                    <MaterialCommunityIcons 
+                        name="cards-heart" 
+                        size={30} 
+                        color={constants.Colors.primary}
+                    />
+                </TouchableOpacity>                       
+            </View>                       
+         </View>    
     </>
  );
 

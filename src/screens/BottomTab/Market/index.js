@@ -21,12 +21,22 @@ export default class Market extends React.Component {
     componentDidMount(){        
         getAllProducts(this.setMyState)
     }
-    
+
+
+
+    handleAddToCart = (item)=>{
+        let parameters = {            
+            pid:item.pid
+        }    
+        console.warn(parameters);
+    }
+
     renderAllProducts = (result) => (        
             <Components.ProductCard                    
                 productImage={result.item.productImage}
                 productName={result.item.productNameEn}
                 productPrice={result.item.sellPrice}
+                addToCart = {this.handleAddToCart(result.item)}
             />
     )
 

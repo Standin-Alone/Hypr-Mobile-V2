@@ -11,8 +11,13 @@ export const styles = StyleSheet.create({
         backgroundColor:constants.Colors.light
         
     },
+    bannerContainer:{
+        top:constants.Dimensions.vh(15),       
+           
+    },
     form:{
-        top:constants.Dimensions.vh(30),        
+        top:constants.Dimensions.vh(30),       
+        
         alignSelf:'center',
         flexDirection:"column",        
         
@@ -21,12 +26,16 @@ export const styles = StyleSheet.create({
         top:20
     },
     headerContainer:{        
-        justifyContent:'center',        
+        justifyContent:'center',  
+        flexDirection:'column',
+        
     },
     headerText:{
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:30,        
-        color:constants.Colors.primary                
+        fontSize:25,        
+        color:constants.Colors.primary,
+        justifyContent:'flex-start'
+        
     },
     subtitleText:{
         fontFamily:constants.Fonts.OpenSansMedium,

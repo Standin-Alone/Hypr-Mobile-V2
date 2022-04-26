@@ -20,7 +20,7 @@ export const PrimaryButton = ({
     colors={[constants.Colors.primary, constants.Colors.secondary]}
     style={[styles.primaryButton]}
     >
-        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "center",alignItems: "center",padding:14}} >
+        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "center",alignItems: "center",padding:'2%'}} >
             <View style={{ flexDirection:'row' }}>
       
 
