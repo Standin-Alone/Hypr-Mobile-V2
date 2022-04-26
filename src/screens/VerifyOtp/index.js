@@ -38,10 +38,11 @@ export default class VerifyOtp extends React.Component {
     handleVerifyOtp = (value)=>{        
 
         let payload = {
-            otp    : this.state.otp,         
+            otp    : this.state.otp.value,  
+            userId : this.props.route.params.userId       
         };
                     
-        return verifyOtp(payload,this.setMyState);
+        return verifyOtp(payload,this.setMyState,this.props);
     }
 
     handleResendOtp = ()=>{

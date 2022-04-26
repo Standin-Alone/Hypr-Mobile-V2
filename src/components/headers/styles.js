@@ -6,6 +6,11 @@ import {Dimensions, StyleSheet} from 'react-native';
 import constants from '../../constants';
 
 export const styles = StyleSheet.create({  
+    marketContainer:{
+        flexDirection:'row',
+        backgroundColor:'transparent',
+        
+    },
     primaryContainer:{
         flexDirection:'row',
         backgroundColor:'transparent',

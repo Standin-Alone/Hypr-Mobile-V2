@@ -6,6 +6,32 @@ import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+
+export const MarketHeader = ({
+    title,
+    onGoBack
+ })=>(   
+    <>  
+         <View style={styles.marketContainer}>
+
+            <View style={{flexDirection:'row',justifyContent:'flex-end' }}>        
+             <TouchableOpacity onPress={onGoBack}>
+                 <MaterialIcons 
+                     name="chevron-left" 
+                     size={55} 
+                     color={constants.Colors.primary}
+                 />
+             </TouchableOpacity>
+             </View>
+          
+ 
+         
+         </View>             
+    </>
+ );
+
+
+
 export const PrimaryHeader = ({
    title,
    onGoBack

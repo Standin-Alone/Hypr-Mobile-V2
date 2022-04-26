@@ -154,7 +154,7 @@ export const createAccount = (payload,setState,props)=>{
 
 
 
-export const login = (payload,setState) => {     
+export const login = (payload,setState,props) => {     
     //turn on loading
     setState({isLoading:true});
     let countError = 0;
@@ -183,12 +183,20 @@ export const login = (payload,setState) => {
                 }
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
-                    console.warn(response.data)
+                    console.warn(response.data);
                     if(response.data.status == true){
                         Toast.show({
                             type:'success',
                             text1: response.data.message
                         });
+
+                        console.warn(response.data);
+                        let params = {
+                            userId: response.data.userId
+                        }
+                        
+                        // NAVIGATE TO VERIFY OTP
+                        props.navigation.navigate('VerifyOtp',params);
                     }else{
                         Toast.show({
                             type:'error',
@@ -229,7 +237,7 @@ export const login = (payload,setState) => {
 }
 
 
-export const verifyOtp = (payload,setState)=>{
+export const verifyOtp = (payload,setState,props)=>{
     setState({isLoading:true});
 
     // Check Internet Connection
@@ -237,8 +245,48 @@ export const verifyOtp = (payload,setState)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            if(payload.otp.value.length == 4){
+            if(payload.otp.length == 4){
 
+
+                let clean_payload = {
+                    otp : payload.otp,
+                    userId : payload.userId
+                }
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.VERIFY_OTP}`,clean_payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+                        Toast.show({
+                            type:'success',
+                            text1: response.data.message
+                        });                                                      
+                        // NAVIGATE TO MARKET
+                        props.navigation.navigate('Home');
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+
+                     // turn off loading
+                     setState({isLoading:false});
+                }).catch((error)=>{
+                    
+                    console.log(error);
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+
+
+
+                
                 setState({otp:{...payload.otp,error:false},isLoading:false})
                 
             }else{          

@@ -9,8 +9,15 @@ import {
         PrimaryPhoneInput   
     } from "./input";
 
-import { PrimaryHeader
+import { 
+    PrimaryHeader,
+    MarketHeader
     } from "./headers";
+
+
+import { 
+    ProductCard
+    } from "./cards";
 
 
 export default {
@@ -24,7 +31,11 @@ export default {
     PrimaryPhoneInput,
  
 
-    PrimaryHeader
+    PrimaryHeader,
+    MarketHeader,
+
+
+    ProductCard
 
 
 }
