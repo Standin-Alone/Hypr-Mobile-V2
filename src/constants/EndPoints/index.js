@@ -5,7 +5,8 @@ const EndPoints = {
     RESEND_OTP:'/user/resend-otp',
 
 
-    GET_ALL_PRODUCTS:'/get-products'
+    GET_ALL_PRODUCTS:'/get-products',
+    GET_PRODUCT_VARIANTS:'/get-variants',
 
 }
 

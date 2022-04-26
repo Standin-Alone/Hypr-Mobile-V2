@@ -4,11 +4,21 @@ import { StyleSheet } from 'react-native';
 import Market from '../screens/BottomTab/Market';
 import UserProfile from '../screens/BottomTab/UserProfile';
 import constants from '../constants';
-
+import { MarketStackComponent } from './MarketStack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 const BottomTab = createBottomTabNavigator();
 
+export function getTabBarVisibility(route) {   
+    console.warn(route)
+    // if (route.name != 'MarketHome') {
+    //     console.warn('none')
+    //   return 'flex';
+    // }else{
+    //     return 'none';
+    // }
+    
+  }
 
 export const BottomTabNavigator = ()=>(
 
@@ -19,20 +29,19 @@ export const BottomTabNavigator = ()=>(
             tabBarActiveTintColor: constants.Colors.primary,
             tabBarInactiveTintColor: constants.Colors.dark_tint,
             tabBarLabelStyle:styles.tabBarLabelStyle,
-            tabBarStyle:styles.barStyle,
+            tabBarStyle:styles.barStyle,            
             headerShown:false
             
         }}
      >
         <BottomTab.Screen 
-            name ="Market" 
-            component={Market}
-            options={{                 
-                
+            name ="Home" 
+            component={MarketStackComponent}
+            options={({route,navigation})=>({                                                  
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Octicons name="home" size={30} color={color}/>
                 )
-             }}
+             })}
         />
 
         <BottomTab.Screen 

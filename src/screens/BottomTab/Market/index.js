@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { getAllProducts } from '../../../actions/market';
+import { getAllProducts,getProductVariants} from '../../../actions/market';
 import Components from '../../../components';
 import { styles } from './styles';
 
@@ -25,10 +25,12 @@ export default class Market extends React.Component {
 
 
     handleAddToCart = (item)=>{
+        
         let parameters = {            
             pid:item.pid
         }    
-        console.warn(parameters);
+
+        return getProductVariants(parameters,this.setMyState,this.props)
     }
 
     renderAllProducts = (result) => (        
@@ -36,7 +38,8 @@ export default class Market extends React.Component {
                 productImage={result.item.productImage}
                 productName={result.item.productNameEn}
                 productPrice={result.item.sellPrice}
-                addToCart = {this.handleAddToCart(result.item)}
+                addToCart = {()=>this.handleAddToCart(result.item)}
+                
             />
     )
 

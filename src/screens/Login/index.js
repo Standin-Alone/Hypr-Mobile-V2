@@ -63,15 +63,13 @@ export default class Login extends React.Component {
 
                         <View style={styles.headerContainer}>
                                 <View style={{ left:constants.Dimensions.vw(5) }}>
-                                    <Text style={styles.headerText}>Welcome to My Company</Text>
+                                    <Text style={styles.headerText}>Welcome to Hypr</Text>
                                     <Text style={styles.subtitleText}>Sign in to start shopping.</Text>
                                 </View>
                         </View>
                     </View>
 
-                    <View style={styles.form}>                    
-                        
-                     
+                    <View style={styles.form}>                                                                 
                         <View>     
                             <Components.PrimaryTextInput
                                     placeholder={"Username/Email"}
