@@ -16,8 +16,10 @@ import {
 
 
 import { 
-    ProductCard
+    ProductCard,
+    VariantCard
     } from "./cards";
+
 
 
 export default {
@@ -35,7 +37,8 @@ export default {
     MarketHeader,
 
 
-    ProductCard
+    ProductCard,
+    VariantCard
 
 
 }

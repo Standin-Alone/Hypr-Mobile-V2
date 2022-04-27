@@ -71,7 +71,7 @@ export const getProductVariants = (payload,setState,props)=>{
                 if(response.data.result == true){
                                                                    
                     let variantList = response.data.data;
-
+                    
                     let parameters = {
                         variantList:variantList
                     }

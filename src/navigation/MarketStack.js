@@ -15,9 +15,11 @@ export const MarketStackComponent= () => {
 
             <MarketStack.Screen
                 component={Market}
-                name={'MarketHome'}
+                name={'Market'}
                 options={{ }}                
             />  
+
+            
            <MarketStack.Screen
                 component={VariantList}
                 name={'VariantList'}
