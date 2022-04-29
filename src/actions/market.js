@@ -4,7 +4,8 @@ import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
-import {SET_SESSION,GET_SESSION} from '../utils/async_storage'
+import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
+import { setUserIdSession } from "../utils/async_storage";
 
 export const getAllProducts = (setState)=>{
 
@@ -81,10 +82,11 @@ export const getShippingAddress = async (setState)=>{
                 if(response.data.status == true){
                                                                    
                     
-                    let dataToJson = JSON.stringify(response.data.data);
+                    
+                    SET_SESSION('SHIPPING_ADDRESS',response.data.data);
 
-                    SET_SESSION('shipping_address',dataToJson);
-                    SET_SESSION('user_id','62674caa088e058650c5aa17')
+                    
+                    SET_SESSION('USER_ID','62674caa088e058650c5aa17')
                 }else{
                     Toast.show({
                         type:'error',

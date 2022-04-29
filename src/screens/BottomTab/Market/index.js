@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, View } from 'react-native';
 import { getAllProducts,getProductVariants,getShippingAddress} from '../../../actions/market';
 import Components from '../../../components';
-import { SET_SESSION } from '../../../utils/async_storage';
+import { SET_SESSION } from '../../../utils/async_storage/model';
 import { styles } from './styles';
 
 

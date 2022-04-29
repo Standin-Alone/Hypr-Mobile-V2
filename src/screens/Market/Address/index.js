@@ -7,30 +7,42 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
-import { GET_SESSION } from '../../../utils/async_storage';
-
+import { getShipping, GET_SESSION } from '../../../utils/async_storage/index';
+import {getShippingAddress} from '../../../actions/market';
 
 
 export default class Address extends React.Component {
     constructor(props) {
       super(props);
       this.state = {        
-          shippingAddress:GET_SESSION('shipping_address')    
+          shippingAddress:[] ,
+          isLoading:false  
       };
     }
-    componentDidMount(){
-                
-    }
+
+     
+    setMyState = (value)=>this.setState(value)
+
+
+
+
+     componentDidMount(){          
+        getShippingAddress(this.setMyState);
+        
+        GET_SESSION('SHIPPING_ADDRESS').then((value)=>{
+            this.setState({shippingAddress:value});
+        })
+    }   
     
 
-    renderAddress = ({item,index})=>(
-        <View>
+    renderAddress = async ({item,index})=>{
+        console.warn('items',item)
+        return (<View>
             <Components.AddressCard
-                data={this.state.shippingAddress}
+                data={item}
             />
-
         </View>
-    )
+    )}
 
 
     handleGoToAddressForm = ()=>{

@@ -77,7 +77,7 @@ export const AddressCard = ({
 })=>(
    <View style={styles.addressCardContainer}>
       <View style={styles.addressCard}>
-         <Text>{data}</Text>
+         <Text>{data.zip_code}</Text>
 
       </View>
    </View>

@@ -7,7 +7,7 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
-import { GET_SESSION} from '../../../utils/async_storage';
+import { GET_SESSION} from '../../../utils/async_storage/model';
 
 import { saveAddress,getCities,getShippingAddress} from '../../../actions/market';
 

@@ -1,37 +1,31 @@
+import { setSession,getSession } from "./model";
 
-import AsyncStorage from '@react-native-async-storage/async-storage';
-const SET_SESSION = async (
-    name,
-    data
-)=>{
-
-    try {
-        let setSession = await AsyncStorage.setItem(name, data)
-
-        console.warn(setSession)
-      } catch (e) {
-        // saving error
-        console.warn(e);
-      }
-
-    return true;
-}   
+export const SET_SESSION = async (name,value) => {
+    return new Promise(function (resolve) {
+        resolve(setSession(name, value));
+    });
+}
 
 
-const GET_SESSION = async (
-name    
-)=>{
-    try {
-
-        const value = await AsyncStorage.getItem(name);        
-         
-        return value;
-        
-      } catch (e) {
-        // saving error
-        console.warn(e);
-      }    
-}   
 
 
-export {SET_SESSION,GET_SESSION};
+
+export const GET_SESSION = async (value) => {
+ 
+        return new Promise(function (resolve) {
+            resolve(getSession(value));
+        });
+    
+}
+
+
+
+
+
+
+
+export const getShipping = async () => {
+    return new Promise(function (resolve) {
+        resolve(readStorage('SHIPPIN_ADDRESS'));
+    });
+}
