@@ -1,4 +1,3 @@
-
 // STYLESHEET
 
 import React from 'react';
@@ -16,6 +15,7 @@ export const styles = StyleSheet.create({
     },
     primaryButtonText:{        
         textAlign:'center',
+        top:5,
         fontSize:20,
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.light
@@ -34,6 +34,12 @@ export const styles = StyleSheet.create({
         fontSize:20,
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.primary
+    },
+    changeDeliveryText:{
+        textAlign:'center',
+        fontSize:14,
+        fontFamily:constants.Fonts.GothamBold,        
+        top:5,
+        color:constants.Colors.gray
     }
 });
-

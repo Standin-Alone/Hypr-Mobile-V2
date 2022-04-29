@@ -41,6 +41,27 @@ export const styles = StyleSheet.create({
     phoneInputContainer:{        
         height:constants.Dimensions.vh(15),        
         width:constants.Dimensions.vw(90),        
+    },
+    country:{
+        borderWidth:1,
+        width:constants.Dimensions.vw(90),
+        borderRadius:10,        
+        borderColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.GothamMedium,
+        paddingLeft:constants.Dimensions.vw(12),                
+        paddingVertical:   constants.Dimensions.vh(4),        
+        fontSize:18
+    },
+    citySelect:{
+        backgroundColor:'transparent',
+        borderWidth:1,
+        width:constants.Dimensions.vw(90),
+        borderRadius:10,        
+        borderColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.GothamMedium,
+        paddingLeft:constants.Dimensions.vw(12),                
+        paddingVertical:   constants.Dimensions.vh(4),        
+        fontSize:18
     }
   
 });

@@ -13,10 +13,25 @@ export const MarketHeader = ({
     onGoToShoppingCart,
     goToWishList,
     goToShoppingCart,
-    goToSearch
+    goToSearch,
+    showSearch,
+    showGoback
  })=>(   
-    <>      
-        <View style={styles.marketContainer}>            
+    <>   
+        
+        <View style={styles.marketContainer}>     
+        {showGoback &&       
+           <View style={{justifyContent:'flex-start',flexDirection:'row', right:constants.Dimensions.vw(60) }}>
+                <TouchableOpacity onPress={onGoBack} style={styles.goBackButton}>
+                    <MaterialIcons 
+                        name="chevron-left" 
+                        size={45} 
+                        color={constants.Colors.primary}
+                    />
+                </TouchableOpacity>
+            </View>
+            }
+            {showSearch &&
             <View style={styles.buttonContainer}>
                 <TouchableOpacity onPress={goToSearch} style={styles.searchButton}>
                     <View style={{ flexDirection:'row' }}>                    
@@ -33,6 +48,7 @@ export const MarketHeader = ({
                     </View>         
                 </TouchableOpacity>
             </View>
+            }
             <View style={styles.buttonContainer}>                     
                 <TouchableOpacity onPress={goToShoppingCart} style={{ padding:15 }}>
                     <MaterialIcons 
@@ -59,14 +75,18 @@ export const MarketHeader = ({
 
 export const PrimaryHeader = ({
    title,
-   onGoBack
+   onGoBack,
+   goToWishList,
+   goToShoppingCart,    
+   showMarketButtons,
+   
 })=>(   
    <>  
         <View style={styles.primaryContainer}>
             <TouchableOpacity onPress={onGoBack}>
                 <MaterialIcons 
                     name="chevron-left" 
-                    size={55} 
+                    size={40} 
                     color={constants.Colors.primary}
                 />
             </TouchableOpacity>
@@ -76,6 +96,34 @@ export const PrimaryHeader = ({
                     {title}
                 </Text>
             </View>
+
+
+
+            {showMarketButtons &&            
+            <View style={{  justifyContent:'flex-end',
+            flexDirection:'row',
+             }}>
+            
+                <View style={styles.buttonContainer}>                     
+                    <TouchableOpacity onPress={goToShoppingCart} style={{ padding:15 }}>
+                        <MaterialIcons 
+                            name="shopping-cart" 
+                            size={30} 
+                            color={constants.Colors.primary}
+                        />
+                    </TouchableOpacity>                       
+                </View>  
+                <View style={styles.buttonContainer}>                     
+                    <TouchableOpacity onPress={goToWishList}  style={{ padding:15 }}>
+                        <MaterialCommunityIcons 
+                            name="cards-heart" 
+                            size={30} 
+                            color={constants.Colors.primary}
+                        />
+                    </TouchableOpacity>                       
+                </View>   
+            </View>
+            }
 
         
         </View>             

@@ -1,6 +1,10 @@
-import { createStackNavigator } from '@react-navigation/stack';
+import { createStackNavigator,CardStyleInterpolators} from '@react-navigation/stack';
 import React from 'react';
+import constants from '../constants';
 import Market from '../screens/BottomTab/Market';
+import Address from '../screens/Market/Address';
+import AddressForm from '../screens/Market/AddressForm';
+import ProductDetail from '../screens/Market/ProductDetail';
 import VariantList from '../screens/Market/VariantList';
 const MarketStack = createStackNavigator();
 
@@ -15,15 +19,34 @@ export const MarketStackComponent= () => {
 
             <MarketStack.Screen
                 component={Market}
-                name={'Market'}
+                name={constants.ScreenNames.Market.MARKET}
                 options={{ }}                
             />  
 
             
            <MarketStack.Screen
                 component={VariantList}
-                name={'VariantList'}
-                options={{ gestureEnabled: false , headerShown: false, }}                
+                name={constants.ScreenNames.Market.VARIANT_LIST}
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}                
+            />           
+
+
+            <MarketStack.Screen
+                component={ProductDetail}
+                name={constants.ScreenNames.Market.PRODUCT_DETAIL}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />     
+
+            <MarketStack.Screen
+                component={Address}
+                name={constants.ScreenNames.Market.ADDRESS}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />           
+
+            <MarketStack.Screen
+                component={AddressForm}
+                name={constants.ScreenNames.Market.ADDRESS_FORM}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
             />           
 
                   

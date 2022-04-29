@@ -1,8 +1,10 @@
 import React from 'react';
 import { FlatList, View } from 'react-native';
-import { getAllProducts,getProductVariants} from '../../../actions/market';
+import { getAllProducts,getProductVariants,getShippingAddress} from '../../../actions/market';
 import Components from '../../../components';
+import { SET_SESSION } from '../../../utils/async_storage';
 import { styles } from './styles';
+
 
 
 
@@ -13,13 +15,18 @@ export default class Market extends React.Component {
           isLoading:false,
           products:[]
       };
+
+      
     }
     
     setMyState = (value)=>this.setState(value);
 
 
     componentDidMount(){        
+      
         getAllProducts(this.setMyState)
+        
+        getShippingAddress(this.setMyState);
     }
 
 
@@ -48,6 +55,7 @@ export default class Market extends React.Component {
             <>
                 <View>
                     <Components.MarketHeader
+                        showSearch={true}
                     />
                     <FlatList
                         numColumns={2}

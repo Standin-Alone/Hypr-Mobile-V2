@@ -7,6 +7,8 @@ import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PhoneInput from "react-native-phone-number-input";
 import RNDateTimePicker from '@react-native-community/datetimepicker';
+import CountryPicker from 'react-native-country-picker-modal';
+import MultiSelect from 'react-native-multiple-select';
 
 export const PrimaryTextInput = ({
     label,
@@ -22,8 +24,8 @@ export const PrimaryTextInput = ({
     value,
     openDatePicker,
     onPressIn,
-    onChangeDate
-    
+    onChangeDate,
+    multiline
 
 })=>(   
 
@@ -45,6 +47,7 @@ export const PrimaryTextInput = ({
             <View>
                 
                 <TextInput 
+                    multiline={multiline}
                     onPressIn={onPressIn}
                     placeholder={placeholder}     
                     placeholderTextColor={constants.Colors.gray}            
@@ -126,3 +129,142 @@ errorMessage
     )
 }
 
+
+
+
+export const PrimaryCountrySelect = ({
+    
+    onSelectCountry,
+    iconName,
+    isError,
+    errorMessage,
+    value,
+    onOpen,
+    onClose,
+    isFocus,
+    
+   
+    })=>{
+        return (
+            <View>
+              
+
+                <View style={styles.primaryContainer}>  
+                            <View style={styles.icon}>
+                                <MaterialIcons 
+                                    name={iconName} 
+                                    size={40} 
+                                    color={isError ? constants.Colors.danger :
+                                                            isFocus ||  value != '' ? 
+                                                                        constants.Colors.primary                                                                                                           
+                                                                        :
+                                                                            constants.Colors.gray
+                                            } 
+                                    style={{ top:10 }} />
+                            </View>
+
+                            <View>
+                                <CountryPicker
+                                  withFlag
+                                  withFilter
+                                  onSelect={onSelectCountry}
+                                  containerButtonStyle={[styles.country, {borderColor:  isError ? constants.Colors.danger :
+                                                                                    isFocus ||  value != '' ? 
+                                                                                            constants.Colors.primary                                                                                                           
+                                                                                            :
+                                                                                                constants.Colors.gray
+                                                        }]}
+                                  countryCode={value}
+                                  withCountryNameButton
+                                  onOpen={onOpen}
+                                  onClose={onClose}
+                                />
+                                 {isError && 
+                                        <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
+                                            <MaterialIcons 
+                                                name={'error-outline'} 
+                                                size={16} 
+                                                color={constants.Colors.danger}                     
+                                                />
+                                                <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> {errorMessage}</Text>
+                                        </View>
+                                }
+                            </View>
+                </View>                
+            </View>
+        )
+}
+    
+    
+
+
+export const PrimaryCitySelect = ({
+    
+    onSelect,
+    iconName,
+    isError,
+    value,    
+    isFocus,
+    items,
+    errorMessage
+   
+    })=>{
+        return (
+            
+   <View>
+        <View style={styles.primaryContainer}>  
+            <View style={styles.icon}>
+            <MaterialIcons 
+                name={iconName} 
+                size={40} 
+                color={isError ? constants.Colors.danger :
+                                            isFocus ||  value != '' ? 
+                                                    constants.Colors.primary                                                                                                           
+                                                    :
+                                                        constants.Colors.gray
+                        } 
+                style={{ top:10 }} />
+        </View>
+
+        <MultiSelect
+          hideTags
+          items={items}
+          uniqueKey="_id"          
+          onSelectedItemsChange={onSelect}
+          fixedHeight={constants.Dimensions.vh(10)}
+          selectedItems={[value]}
+          styleMainWrapper={styles.citySelect}
+          styleDropdownMenu={{ backgroundColor:'transparent' }}
+          selectText="Select City"
+          searchInputPlaceholderText="Search city..."          
+          altFontFamily="ProximaNova-Light"
+          tagRemoveIconColor="#CCC"
+          tagBorderColor="#CCC"
+          tagTextColor="#CCC"
+          selectedItemTextColor={constants.Colors.dark}
+          selectedItemIconColor={constants.Colors.dark}
+          itemTextColor="#000"
+          displayKey="state_name"
+          searchInputStyle={{ color: constants.Colors.dark_tint }}
+          styleTextDropdown={{ backgroundColor:'transparent' }}           
+          styleInputGroup={{ backgroundColor:'transparent'  }}           
+          styleDropdownMenuSubsection={{ backgroundColor:'transparent' }}
+          noItemsText={"No Cities"}          
+          submitButtonText="Submit"          
+          single={true}
+        />
+
+        {isError && 
+                <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
+                    <MaterialIcons 
+                        name={'error-outline'} 
+                        size={16} 
+                        color={constants.Colors.danger}                     
+                        />
+                        <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> {errorMessage}</Text>
+                </View>
+        }
+     </View>   
+    </View>
+        )
+}

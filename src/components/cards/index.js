@@ -1,11 +1,10 @@
 
 import React from "react";
-import { View,TouchableOpacity,TextInput,Text,Image} from "react-native";
+import { View,TouchableOpacity,Text,Image} from "react-native";
 import { styles } from "./styles";
-import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { ParallaxImage } from "react-native-snap-carousel";
+import FastImage from 'react-native-fast-image'
 
 
 
@@ -29,9 +28,7 @@ export const ProductCard = ({
             <View>
                   <Text style={styles.productPrice}> ${productPrice}</Text>
             </View>      
-         </View>   
-         
-            
+         </View>                        
       </TouchableOpacity>                         
    </>
 );
@@ -39,21 +36,15 @@ export const ProductCard = ({
 
 
 export const VariantCard = ({
-   checkVariant,
+   viewProduct,
    data,
    parallaxProps   
-})=>{
-
-   console.warn(data);
-   
-   return (
+})=> (
    <View style={[styles.variantCardContainer]}>  
       <View style={{ flex:1 }}>
-         <Image source={{ uri:data.productImage}} style={styles.variantImage} />         
+         <Image source={{ uri:data.variantImage}} style={styles.variantImage} resizeMode="contain" />         
 
          <View style={styles.variantInfo}>
-
-
          
          <View style={styles.variantNameContainer}>
             <Text style={styles.variantName} numberOfLines={3}  adjustsFontSizeToFit>{data.variantName}</Text>         
@@ -62,14 +53,14 @@ export const VariantCard = ({
          <View style={{ flexDirection:'row',position:'absolute',top:constants.Dimensions.vh(30),left:0,right:0}}>
                <Text style={styles.variantPrice} adjustsFontSizeToFit > ${data.variantPrice}</Text> 
                <View style={{ flexDirection:'row',justifyContent:'flex-end' }}>
-                  <TouchableOpacity onPress={checkVariant}  style={styles.checkVariant}>
+                  <TouchableOpacity onPress={viewProduct}  style={styles.checkVariant}>
                      <View style={{ flexDirection:'row' }}>
                         <MaterialIcons 
-                              name="shopping-cart" 
+                              name="preview" 
                               size={30} 
                               color={constants.Colors.light}
                         />
-                        <Text style={styles.checkVariantText} >Check Variant</Text>
+                        <Text style={styles.checkVariantText} >View Product </Text>
                      </View>                  
                   </TouchableOpacity>     
                </View>      
@@ -78,4 +69,16 @@ export const VariantCard = ({
       </View>       
    </View>      
 
-)}
+)
+
+
+export const AddressCard = ({
+   data,  
+})=>(
+   <View style={styles.addressCardContainer}>
+      <View style={styles.addressCard}>
+         <Text>{data}</Text>
+
+      </View>
+   </View>
+)

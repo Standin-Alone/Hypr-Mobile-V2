@@ -41,9 +41,10 @@ export const BottomTabNavigator = ()=>(
 
      >
         <BottomTab.Screen 
-            name ="MarketHome" 
+            name ={constants.ScreenNames.BottomTab.MARKET_HOME} 
             component={MarketStackComponent}
-            options={({route,navigation})=>({         
+            options={({route,navigation})=>({    
+                title:'Market',     
                 tabBarStyle:{display:getTabBarVisibility(route)},          
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Octicons name="home" size={30} color={color}/>
@@ -52,7 +53,7 @@ export const BottomTabNavigator = ()=>(
         />
 
         <BottomTab.Screen 
-            name ="UserProfile" 
+            name ={constants.ScreenNames.BottomTab.USER_PROFILE} 
             component={UserProfile}
             options={{ 
                 title:"My Profile",

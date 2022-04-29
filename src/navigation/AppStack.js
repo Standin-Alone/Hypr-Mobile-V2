@@ -11,6 +11,7 @@ import SignUp from "../screens/SignUp";
 import Authentication from "../screens/Authentication";
 import VerifyOtp from "../screens/VerifyOtp";
 import {BottomTabNavigator} from "./BottomTab";
+import constants from "../constants";
 
 
 LogBox.ignoreLogs([
@@ -24,12 +25,12 @@ const Stack  = createStackNavigator();
 
 const AppStack = () =>(
 
-    <Stack.Navigator initialRouteName="Home" screenOptions={{headerShown:false }} >
-        <Stack.Screen component={Authentication} name={"Authentication"}/>
-        <Stack.Screen component={Login} name={"Login"} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
-        <Stack.Screen component={SignUp} name={"SignUp"} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
-        <Stack.Screen component={VerifyOtp} name={"VerifyOtp"} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
-        <Stack.Screen component={BottomTabNavigator} name={"Home"} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+    <Stack.Navigator initialRouteName={constants.ScreenNames.AppStack.HOME} screenOptions={{headerShown:false }} >
+        <Stack.Screen component={Authentication} name={constants.ScreenNames.AppStack.AUTHENTICATION}/>
+        <Stack.Screen component={Login} name={constants.ScreenNames.AppStack.LOGIN} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={SignUp} name={constants.ScreenNames.AppStack.SIGNUP} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={VerifyOtp} name={constants.ScreenNames.AppStack.VERIFY_OTP} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={BottomTabNavigator} name={constants.ScreenNames.AppStack.HOME} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
         
     </Stack.Navigator>

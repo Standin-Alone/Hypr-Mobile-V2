@@ -26,25 +26,30 @@ export default class VariantList extends React.Component {
             cleanVariantList.push({
                 variantName:item.variantNameEn,
                 variantPrice: item.variantSellPrice,
-                productImage: item.variantImage
+                variantImage: item.variantImage
             })
         })
         this.setState({variantList:cleanVariantList})        
     }
 
+setMyState = (value)=>this.setState
+    handleViewProduct = (variant) =>{
+        
+        let parameters = {
+            variant:variant
+        }
 
-    handleCheckVariant = () =>{
-
+        this.props.navigation.navigate(constants.ScreenNames.Market.PRODUCT_DETAIL,parameters)
     }
 
     
     renderItem = ({item,index},parallaxProps)=>{
-        // console.warn(item);
+        
         return(
             <Components.VariantCard
                 data={item}
                 parallaxProps={parallaxProps}    
-                checkVariant={this.handleCheckVariant}            
+                viewProduct={()=>this.handleViewProduct(item)}            
             />
         )
     }

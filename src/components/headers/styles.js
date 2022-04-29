@@ -6,15 +6,13 @@ import {Dimensions, StyleSheet} from 'react-native';
 import constants from '../../constants';
 
 export const styles = StyleSheet.create({  
-    marketContainer:{
-        justifyContent:'flex-end',
-        flexDirection:'row',
-               
+    marketContainer:{        
+        flexDirection:'row',                
+        justifyContent:'flex-end',        
     },
     buttonContainer:{
         justifyContent:'flex-end',
-        flexDirection:'row',
-        
+        flexDirection:'row',                
     },
     primaryContainer:{
         flexDirection:'row',
@@ -37,7 +35,7 @@ export const styles = StyleSheet.create({
     },
     primaryTitle:{
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:25,
+        fontSize:20,
         top:constants.Dimensions.vh(2),
         color:constants.Colors.primary
     }

@@ -70,7 +70,7 @@ export const styles = StyleSheet.create({
         left:constants.Dimensions.vw(5),
         justifyContent:'flex-start',
         maxWidth:constants.Dimensions.vw(70),        
-        bottom: constants.Dimensions.vh(15),                            
+        
         
     },
     variantPrice:{
@@ -90,11 +90,21 @@ export const styles = StyleSheet.create({
     checkVariantText:{
         fontFamily:constants.Fonts.OpenSansMedium,
         color:constants.Colors.light,
-        top:constants.Dimensions.vh(1),   
+        top:constants.Dimensions.vh(2),   
         fontSize:14,
-    }
-    
-    
-  
+    },
+
+
+    addressCardContainer:{                             
+        backgroundColor:constants.Colors.light,
+        borderRadius: 8,
+        width: constants.Dimensions.itemWidth,
+        height: constants.Dimensions.vh(150),
+        flexDirection:'column',        
+        elevation: 1,            
+    },
+    addressCard:{
+        
+    }  
 });
 

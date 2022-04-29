@@ -1,11 +1,11 @@
 import React from 'react';
-import { View,Text,Image,Animated} from 'react-native';
+import { View,Text,Animated} from 'react-native';
 import Components from '../../components';
 import constants from '../../constants';
 import { styles } from './styles';
 import { login } from '../../actions/auth';
 import { POST } from '../../utils/axios';
-
+import FastImage from 'react-native-fast-image'
 export default class Login extends React.Component {
     constructor(props) {
       super(props);
@@ -58,7 +58,7 @@ export default class Login extends React.Component {
 
                     <View style={styles.bannerContainer}>
                         <View>
-                            <Image source={constants.Images.hyprLogo} style={styles.loginCover} resizeMode="contain"/>
+                            <FastImage source={constants.Images.hyprLogo} style={styles.loginCover} resizeMode="contain"/>
                         </View>
 
                         <View style={styles.headerContainer}>
