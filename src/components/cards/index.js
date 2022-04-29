@@ -74,11 +74,24 @@ export const VariantCard = ({
 
 export const AddressCard = ({
    data,  
+   isSelected
 })=>(
-   <View style={styles.addressCardContainer}>
+   <View style={[styles.addressCardContainer,{
+      borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
+      borderWidth:1
+   }]}>
       <View style={styles.addressCard}>
-         <Text>{data.zip_code}</Text>
-
+         <View style={{flex:0.5}}>
+            <FastImage source={constants.Images.addressIcon} resizeMode={FastImage.resizeMode.contain} style={styles.addressIcon}/>
+         </View>    
+         <View style={{flex:1,flexDirection:'column',alignSelf:'baseline',top:6}}>
+            <Text style={styles.countryText}>{data.country}</Text>
+            <Text style={{flexWrap: 'wrap'}}>{data.full_name}</Text>
+            <Text  style={{flexWrap: 'wrap'}} numberOfLines={5}> {data.address}</Text>
+            <Text style={{flexWrap: 'wrap'}}>{data.city}</Text>
+            <Text  style={{flexWrap: 'wrap'}}>{data.zip_code}</Text>                        
+         </View>     
+         
       </View>
    </View>
 )

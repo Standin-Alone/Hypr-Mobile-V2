@@ -8,7 +8,8 @@ import constants from '../../../constants';
 export const styles = StyleSheet.create({  
    container:{
        flexDirection:'column',
-       left:constants.Dimensions.vw(5)
+       left:constants.Dimensions.vw(5),
+       
    }
   
 });

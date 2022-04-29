@@ -98,13 +98,28 @@ export const styles = StyleSheet.create({
     addressCardContainer:{                             
         backgroundColor:constants.Colors.light,
         borderRadius: 8,
-        width: constants.Dimensions.itemWidth,
-        height: constants.Dimensions.vh(150),
+        width: constants.Dimensions.vw(90),
+        height: constants.Dimensions.vh(40),
         flexDirection:'column',        
         elevation: 1,            
+        marginVertical:constants.Dimensions.vh(2),
+        marginHorizontal:constants.Dimensions.vw(2)
     },
     addressCard:{
+        flexDirection:'row',
+        justifyContent:'flex-start', 
+        flex:1
         
-    }  
+    },
+    addressIcon:{
+        width:constants.Dimensions.vw(30),
+        height:constants.Dimensions.vh(30)
+    },
+    countryText:{
+        fontFamily:constants.Fonts.GothamBold,
+        color:constants.Colors.dark,        
+        fontSize:20, 
+        flexWrap: 'wrap'
+    }
 });
 

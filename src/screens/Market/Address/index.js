@@ -26,27 +26,27 @@ export default class Address extends React.Component {
 
 
 
-     componentDidMount(){          
-        getShippingAddress(this.setMyState);
-        
-        GET_SESSION('SHIPPING_ADDRESS').then((value)=>{
-            this.setState({shippingAddress:value});
-        })
+     async componentDidMount(){          
+       
+       getShippingAddress(this.setMyState);     
     }   
     
 
-    renderAddress = async ({item,index})=>{
-        console.warn('items',item)
+    renderAddress =  ({item,index})=>{
+      
+        console.warn(item)
         return (<View>
-            <Components.AddressCard
-                data={item}
-            />
-        </View>
-    )}
+                    <Components.AddressCard
+                        data={item}
+                        isSelected={item.is_selected}
+                    />
+                </View>
+        )
+    }
 
 
     handleGoToAddressForm = ()=>{
-
+        // console.warn(this.state.shippingAddress);
         this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS_FORM);
     }
 
@@ -70,11 +70,15 @@ export default class Address extends React.Component {
                         onPress={this.handleGoToAddressForm}
                     />
 
-                    <FlatList
+                                 
+                </View>
+
+                <FlatList
                         data={this.state.shippingAddress}
                         renderItem={this.renderAddress}
-                    />                    
-                </View>
+                        contentContainerStyle={{top:constants.Dimensions.vh(5)}}
+                        
+                    />   
             </>
         )
     }

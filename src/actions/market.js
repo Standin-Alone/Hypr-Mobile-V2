@@ -6,6 +6,7 @@ import {POST,GET} from '../utils/axios';
 import moment from 'moment';
 import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
 import { setUserIdSession } from "../utils/async_storage";
+import { calculateFreight } from "../utils/functions";
 
 export const getAllProducts = (setState)=>{
 
@@ -70,7 +71,7 @@ export const getShippingAddress = async (setState)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            let userId = '62674caa088e058650c5aa17';
+            let userId = '6266a22a45f2f2777ad5e4dc';
 
             let payload = {
                 userId:userId
@@ -81,12 +82,10 @@ export const getShippingAddress = async (setState)=>{
                
                 if(response.data.status == true){
                                                                    
-                    
-                    
-                    SET_SESSION('SHIPPING_ADDRESS',response.data.data);
-
-                    
-                    SET_SESSION('USER_ID','62674caa088e058650c5aa17')
+                    SET_SESSION('USER_ID',userId) 
+                    setState({shippingAddress:response.data.data.length == 0 ? [] :  response.data.data});                                                          
+                                        
+                                        
                 }else{
                     Toast.show({
                         type:'error',
@@ -126,7 +125,7 @@ export const getShippingAddress = async (setState)=>{
 
 
 
-export const getProductVariants = (payload,setState,props)=>{
+export const getProductVariants = async (payload,setState,props)=>{
     setState({isLoading:true});
     
     // Check Internet Connection
@@ -140,10 +139,13 @@ export const getProductVariants = (payload,setState,props)=>{
                                                                    
                     let variantList = response.data.data;
                     
-                    let parameters = {
-                        variantList:variantList
-                    }
                     
+                    let parameters = {
+                        variantList:variantList,
+                        
+                    }
+
+
                     props.navigation.navigate('VariantList',parameters);
 
                 }else{
@@ -195,7 +197,6 @@ export const getCities = (payload,setState)=>{
          if(state.isConnected && state.isInternetReachable){
 
     
-
                         
             // GET REQUEST
             GET(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_CITIES}/${payload.countryCode}`).then((response)=>{                    
@@ -238,7 +239,7 @@ export const getCities = (payload,setState)=>{
 }
 
 export const saveAddress = (payload,setState,props)=>{
-    setState({isLoading:false});
+    setState({isLoading:true});
   
     let countError = 0;
     // Check Internet Connection
@@ -308,6 +309,65 @@ export const saveAddress = (payload,setState,props)=>{
             }else{
                 setState({isLoading:false});
             }
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+export const addToCart =  (payload,setState)=>{
+    setState({isLoading:true});
+  
+    console.warn('payloads',payload)
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){            
+
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.ADD_TO_CART}`,payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+
+                        Toast.show({
+                            type:'success',
+                            text1: response.data.message
+                        });
+                        
+                 
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+                
+                    // turn off loading
+                    setState({isLoading:false});
+                }).catch((error)=>{
+                    console.warn('sample error ', error)
+                    
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+           
 
          }else{
              //  No internet Connection

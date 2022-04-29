@@ -117,13 +117,13 @@ export const ChangeDeliveryButton = ({
 })=>(   
 
         <TouchableOpacity  onPress={onPress} >
-            <View style={{ flexDirection:'row' }}>
+            <View style={{ flexDirection:'row',justifyContent:'center' }}>
                 <MaterialIcons 
                     name="location-on" 
                     size={30} 
                     color={constants.Colors.secondary}
                 />
-                <Text style={[styles.changeDeliveryText]}>
+                <Text style={[styles.changeDeliveryText]} numberOfLines={1} ellipsizeMode="tail">
                     { isLoading ? loadingTitle : title}
                 </Text>
 

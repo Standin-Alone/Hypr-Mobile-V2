@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View } from 'react-native';
+import { FlatList, View,Text } from 'react-native';
 import { getAllProducts,getProductVariants,getShippingAddress} from '../../../actions/market';
 import Components from '../../../components';
 import { SET_SESSION } from '../../../utils/async_storage/model';
@@ -57,6 +57,9 @@ export default class Market extends React.Component {
                     <Components.MarketHeader
                         showSearch={true}
                     />
+                    <View style={styles.titleContainer}>
+                        <Text style={styles.title}>Featured Products</Text>
+                    </View>
                     <FlatList
                         numColumns={2}
                         data = {this.state.products}

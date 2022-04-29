@@ -11,25 +11,36 @@ export const styles = StyleSheet.create({
     },
     deliveryContainer:{
         top:constants.Dimensions.vh(2),
-        backgroundColor:constants.Colors.light,
-        height:constants.Dimensions.vh(30),
-        flexDirection:'row',
-        justifyContent:'flex-end'
+        backgroundColor:constants.Colors.light,             
+        height:constants.Dimensions.vh(20),        
+        padding:'2%', 
+        flexDirection:'column',
+        justifyContent:'space-between'
+     
     },
     deliveryTitle:{
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.dark_tint,
         fontSize:20,          
     },
+    deliveryContent:{
+        flex:0.5
+    },
+    deliveryButton:{
+        flex:0.5
+    },
     changeDeliveryButton:{
-        
+        justifyContent:'flex-end'
+    },
+    deiveryContent:{
+        justifyContent:'flex-end'
     },
     deliveryTitleContainer:{
         right:constants.Dimensions.vw(29),
     },  
     variantImage:{
         width:constants.Dimensions.vw(100),
-        height:constants.Dimensions.vh(100),
+        height:constants.Dimensions.vh(80),
         resizeMode:'contain'
     },
     variantNameContainer:{

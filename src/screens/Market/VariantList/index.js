@@ -3,8 +3,11 @@ import { Component } from 'react';
 import { View,Text} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
+import { getShippingAddress } from '../../../actions/market';
 import Components from '../../../components';
 import constants from '../../../constants';
+import { GET_SESSION } from '../../../utils/async_storage';
+import { calculateFreight } from '../../../utils/functions';
 
 
 
@@ -15,31 +18,41 @@ export default class VariantList extends React.Component {
       this.state = {
         params:this.props.route.params,        
         activeIndex:0,
-        variantList:[]
+        variantList:[],
+        shippingAddress:[]
       };
     }
 
+    setMyState = (value)=>this.setState(value)
+
     componentDidMount(){
-        console.warn(this.state.params.variantList);
+
+        getShippingAddress(this.setMyState);
+
         let cleanVariantList = [];
         this.state.params.variantList.map((item)=>{
             cleanVariantList.push({
                 variantName:item.variantNameEn,
                 variantPrice: item.variantSellPrice,
-                variantImage: item.variantImage
+                variantImage: item.variantImage,
+                variantSku: item.variantSku,
             })
         })
         this.setState({variantList:cleanVariantList})        
     }
 
-setMyState = (value)=>this.setState
-    handleViewProduct = (variant) =>{
+
+
+    handleViewProduct = async (variant) =>{
         
-        let parameters = {
-            variant:variant
+        let payload = {
+            variant:variant,
+            shippingAddress: this.state.shippingAddress.filter(item=>item.is_selected== true)[0],
+            userId : await GET_SESSION('USER_ID')
         }
 
-        this.props.navigation.navigate(constants.ScreenNames.Market.PRODUCT_DETAIL,parameters)
+        let resultCalculation =  calculateFreight(payload,this.setMyState,this.props);
+        
     }
 
     

@@ -9,6 +9,12 @@ const EndPoints = {
     GET_PRODUCT_VARIANTS:'/get-variants',
     GET_SHIPPING_ADDRESS:'/market/get-shipping-address',
 
+    ADD_TO_CART:'/market/add-to-cart',
+
+    CALCULATE_FREIGHT:'/freight-calculate',
+
+
+
     SAVE_ADDRESS:'/market/save-address',
     GET_CITIES:'/market/get-cities',
 

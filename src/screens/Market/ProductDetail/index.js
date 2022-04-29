@@ -7,7 +7,8 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
-import { GET_SESSION } from '../../../utils/async_storage/model';
+import { GET_SESSION } from '../../../utils/async_storage';
+import { getShippingAddress,addToCart } from '../../../actions/market';
 
 
 
@@ -15,17 +16,35 @@ export default class ProductDetail extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
-        variant:this.props.route.params.variant,
-        
-
+        variant:this.props.route.params.variant,     
+        freightCalculation:this.props.route.params.freightCalculation,   
+        shippingAddress:[],
+        isLoading:false
       };
     }
+
+    setMyState = (value)=>this.setState(value)
+
     componentDidMount(){
         
-        
+        getShippingAddress(this.setMyState)
     }
 
     handleAddToWishList = ()=>{
+
+    }
+
+    handleAddToCart = async ()=>{
+        let userId = await GET_SESSION('USER_ID');
+       
+        let payload = {
+            variant:this.state.variant,
+            userId: userId
+        }
+
+   
+
+        return addToCart(payload,this.setMyState)
 
     }
 
@@ -43,7 +62,7 @@ export default class ProductDetail extends React.Component {
                     showGoback={true}                                  
                 />
                 <View style={styles.variantContainer}>                                                 
-                    <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage}/>
+                    <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
 
                     <View  style={styles.variantNameContainer}>
                         <View>
@@ -56,20 +75,68 @@ export default class ProductDetail extends React.Component {
                         </View>
                     </View>
                     
-                    <View  style={styles.deliveryContainer}>
-                        <View style={styles.deliveryTitleContainer}>                                                            
-                            <Text style={ styles.deliveryTitle}>Delivery</Text>
-                        </View>
-                        <View style={{ flexDirection:'row',justifyContent:'flex-end'}}>
-                            
-
-                            <View style={styles.changeDeliveryButton}>
-                                    <Components.ChangeDeliveryButton
-                                        title={'No delivery address...'}
-                                        onPress={this.handleGoToChangeAddress}
-                                    />
+                    <View  style={styles.deliveryContainer}>      
+                        <View style={{flexDirection:'row',flex:1}}>
+                            <View style={styles.deliveryContent}>            
+                                <Text style={ styles.deliveryTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery</Text>
                             </View>
-                        </View>
+
+                            <View style={styles.deliveryButton}>
+                                <View style={styles.changeDeliveryButton}>
+                                        <Components.ChangeDeliveryButton
+                                            title={this.state.shippingAddress.length == 0 ? 'No delivery address...'  : this.state.shippingAddress.filter((item)=>item.is_selected==true)[0].address}
+                                            onPress={this.handleGoToChangeAddress}
+                                        />
+                                </View>
+                            </View>    
+                        </View>    
+
+                        <View style={{flexDirection:'row',flex:1}}>
+                            <View style={styles.deliveryContent}>            
+                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery </Text>
+                            </View>
+
+                            <View style={styles.deliveryButton}>
+                                <View style={styles.changeDeliveryButton}>
+                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+
+                                        {this.state.freightCalculation[0].logisticName}
+                                    </Text> 
+                                </View>
+                            </View>    
+                        </View>  
+
+                        <View style={{flexDirection:'row',flex:1}}>
+                            <View style={styles.deliveryContent}>            
+                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Days</Text>
+                            </View>
+
+                            <View style={styles.deliveryButton}>
+                                <View style={styles.changeDeliveryButton}>
+                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+
+                                        {this.state.freightCalculation[0].logisticAging} Days
+                                    </Text> 
+                                </View>
+                            </View>    
+                        </View>  
+
+
+                        <View style={{flexDirection:'row',flex:1}}>
+                            <View style={styles.deliveryContent}>            
+                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Fee</Text>
+                            </View>
+
+                            <View style={styles.deliveryButton}>
+                                <View style={styles.changeDeliveryButton}>
+                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+                                        ${this.state.freightCalculation[0].logisticPrice}
+                                    </Text> 
+                                </View>
+                            </View>    
+                        </View>  
+
+                        
                     </View>
                 </View>
 
@@ -85,7 +152,8 @@ export default class ProductDetail extends React.Component {
                         <Components.PrimaryButton
                             title="Add To Cart"
                             moreStyle={styles.addToCartButton}
-                            
+                            onPress={this.handleAddToCart}
+                            isLoading={this.state.isLoading}
                         />   
 
                         <Components.PrimaryButton

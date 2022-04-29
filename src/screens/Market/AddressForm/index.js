@@ -7,7 +7,7 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
-import { GET_SESSION} from '../../../utils/async_storage/model';
+import { GET_SESSION} from '../../../utils/async_storage/index';
 
 import { saveAddress,getCities,getShippingAddress} from '../../../actions/market';
 
@@ -71,14 +71,15 @@ export default class AddressForm extends React.Component {
     setMyState = (value)=>this.setState(value)
 
     componentDidMount(){
-        getShippingAddress(this.setMyState);
+        let shippingAddress = getShippingAddress(this.setMyState).shippingAddress;
+        this.setState({shippingAddress:shippingAddress})
     }
     
 
     renderAddress = ({item,index})=>(
         <View>
             <Components.AddressCard
-                data={this.state.shippingAddress}
+                data={item}
                 iconName={"flag"}
             />
 
@@ -112,7 +113,8 @@ export default class AddressForm extends React.Component {
 
     handleSaveAddress = async  ()=>{
         let payload = {
-            userId: await GET_SESSION('user_id'),
+            // userId: await GET_SESSION('user_id'),
+            userId: '6266a22a45f2f2777ad5e4dc',           
             firstName:this.state.firstName.value,
             lastName:this.state.lastName.value,
             contact:this.state.contact.value,

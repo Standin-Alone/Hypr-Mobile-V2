@@ -25,7 +25,7 @@ const Stack  = createStackNavigator();
 
 const AppStack = () =>(
 
-    <Stack.Navigator initialRouteName={constants.ScreenNames.AppStack.HOME} screenOptions={{headerShown:false }} >
+        <Stack.Navigator initialRouteName={constants.ScreenNames.AppStack.HOME} screenOptions={{headerShown:false }} >
         <Stack.Screen component={Authentication} name={constants.ScreenNames.AppStack.AUTHENTICATION}/>
         <Stack.Screen component={Login} name={constants.ScreenNames.AppStack.LOGIN} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={SignUp} name={constants.ScreenNames.AppStack.SIGNUP} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
