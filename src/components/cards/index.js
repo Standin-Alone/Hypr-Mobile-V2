@@ -74,12 +74,15 @@ export const VariantCard = ({
 
 export const AddressCard = ({
    data,  
-   isSelected
+   isSelected,
+   onSelect
 })=>(
-   <View style={[styles.addressCardContainer,{
+   <TouchableOpacity style={[styles.addressCardContainer,{
       borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
       borderWidth:1
-   }]}>
+   }]}
+   onPress={onSelect}   
+   >
       <View style={styles.addressCard}>
          <View style={{flex:0.5}}>
             <FastImage source={constants.Images.addressIcon} resizeMode={FastImage.resizeMode.contain} style={styles.addressIcon}/>
@@ -93,5 +96,5 @@ export const AddressCard = ({
          </View>     
          
       </View>
-   </View>
+   </TouchableOpacity>
 )

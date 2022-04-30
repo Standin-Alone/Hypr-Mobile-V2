@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart } from '../../../actions/market';
+import { getShippingAddress,addToCart,addToWishList, getWishList } from '../../../actions/market';
 
 
 
@@ -19,38 +19,68 @@ export default class ProductDetail extends React.Component {
         variant:this.props.route.params.variant,     
         freightCalculation:this.props.route.params.freightCalculation,   
         shippingAddress:[],
+        wishList:[],
         isLoading:false
       };
     }
 
     setMyState = (value)=>this.setState(value)
 
+    
+
     componentDidMount(){
-        
+           
+     
         getShippingAddress(this.setMyState)
+        getWishList(this.setMyState)                         
     }
 
-    handleAddToWishList = ()=>{
+    handleUpdateStateFromChangeAddress = (newFreight)=>{
+        // get latest shipping address info
+        getShippingAddress(this.setMyState)
+        this.setState({freightCalculation:newFreight});
+    }
 
+    handleAddToWishList = async ()=>{
+        
+
+        let userId = await GET_SESSION('USER_ID');
+                
+        let payload = {
+            variant:this.state.variant,
+            userId: userId,            
+        }
+
+        return addToWishList(payload,this.setMyState)
     }
 
     handleAddToCart = async ()=>{
         let userId = await GET_SESSION('USER_ID');
-       
-        let payload = {
-            variant:this.state.variant,
-            userId: userId
+        
+        if(this.state.shippingAddress.length != 0){
+            let payload = {
+                variant:this.state.variant,
+                userId: userId,
+                shippingAddress:this.state.shippingAddress.filter((item)=>item.is_selected==true)[0],
+                freightCalculation:this.state.freightCalculation
+            }
+            return addToCart(payload,this.setMyState)
+        }else{
+            Toast.show({
+                type:'error',
+                text1: 'Please set your address first.'
+            });
         }
 
    
 
-        return addToCart(payload,this.setMyState)
+
 
     }
 
     handleGoToChangeAddress = () =>{
 
-        this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS);
+        this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS,{variant:this.state.variant,reCalculateFreight : this.handleUpdateStateFromChangeAddress.bind(this)});
     }
     
     render(){
@@ -93,12 +123,12 @@ export default class ProductDetail extends React.Component {
 
                         <View style={{flexDirection:'row',flex:1}}>
                             <View style={styles.deliveryContent}>            
-                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery </Text>
+                                <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery </Text>
                             </View>
 
                             <View style={styles.deliveryButton}>
                                 <View style={styles.changeDeliveryButton}>
-                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
 
                                         {this.state.freightCalculation[0].logisticName}
                                     </Text> 
@@ -108,12 +138,12 @@ export default class ProductDetail extends React.Component {
 
                         <View style={{flexDirection:'row',flex:1}}>
                             <View style={styles.deliveryContent}>            
-                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Days</Text>
+                                <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Days</Text>
                             </View>
 
-                            <View style={styles.deliveryButton}>
+                            <View style={styles.deliveryDays}>
                                 <View style={styles.changeDeliveryButton}>
-                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
 
                                         {this.state.freightCalculation[0].logisticAging} Days
                                     </Text> 
@@ -124,12 +154,12 @@ export default class ProductDetail extends React.Component {
 
                         <View style={{flexDirection:'row',flex:1}}>
                             <View style={styles.deliveryContent}>            
-                                <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Fee</Text>
+                                <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Fee</Text>
                             </View>
 
                             <View style={styles.deliveryButton}>
                                 <View style={styles.changeDeliveryButton}>
-                                    <Text style={ styles.deliveryPriceTitle} numberOfLines={1} ellipsizeMode='tail'>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
                                         ${this.state.freightCalculation[0].logisticPrice}
                                     </Text> 
                                 </View>
@@ -144,9 +174,9 @@ export default class ProductDetail extends React.Component {
                     <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
                         <TouchableOpacity onPress={this.handleAddToWishList}  style={{  marginHorizontal:constants.Dimensions.vw(2) ,top:2 }}>
                             <constants.Icons.MaterialCommunityIcons 
-                                name="cards-heart" 
+                                name={ this.state.wishList.filter((item)=>item.variant_id == this.state.variant.variantVid).length != 0 ? 'heart': 'heart-outline'} 
                                 size={40} 
-                                color={constants.Colors.danger}
+                                color={constants.Colors.danger}                               
                             />
                         </TouchableOpacity>
                         <Components.PrimaryButton

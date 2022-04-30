@@ -30,9 +30,12 @@ export default class VariantList extends React.Component {
         getShippingAddress(this.setMyState);
 
         let cleanVariantList = [];
+        console.warn(this.state.params.variantList)
         this.state.params.variantList.map((item)=>{
             cleanVariantList.push({
                 variantName:item.variantNameEn,
+                variantPid: item.pid,
+                variantVid: item.vid,
                 variantPrice: item.variantSellPrice,
                 variantImage: item.variantImage,
                 variantSku: item.variantSku,
@@ -51,7 +54,7 @@ export default class VariantList extends React.Component {
             userId : await GET_SESSION('USER_ID')
         }
 
-        let resultCalculation =  calculateFreight(payload,this.setMyState,this.props);
+        calculateFreight(payload,this.setMyState,this.props);
         
     }
 

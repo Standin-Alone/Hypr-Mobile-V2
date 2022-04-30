@@ -31,15 +31,23 @@ export const calculateFreight = (payload,setState,props)=>{
                 
             // POST REQUEST
             POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CALCULATE_FREIGHT}`,cleanPayload).then((response)=>{                    
-                console.warn(response.data)
+              
                 if(response.data.result == true){
                     
-                    let parameters ={
-                        variant:payload.variant,
-                        freightCalculation:response.data.data
-                    }
-                    props.navigation.navigate(constants.ScreenNames.Market.PRODUCT_DETAIL,parameters)   
 
+                    if(payload.screenName == 'address'){
+                        props.route.params.reCalculateFreight(response.data.data)
+                     
+                        props.navigation.goBack();
+                    }else{
+                        let parameters ={
+                            variant:payload.variant,
+                            freightCalculation:response.data.data
+                        }
+                        console.warn('params',parameters);
+                        props.navigation.navigate(constants.ScreenNames.Market.PRODUCT_DETAIL,parameters)       
+                    }
+                  
                 }else{
                     Toast.show({
                         type:'error',

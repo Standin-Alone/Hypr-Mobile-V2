@@ -10,9 +10,9 @@ export const styles = StyleSheet.create({
         flexDirection:'column',                        
     },
     deliveryContainer:{
-        top:constants.Dimensions.vh(2),
+        top:constants.Dimensions.vh(4),
         backgroundColor:constants.Colors.light,             
-        height:constants.Dimensions.vh(20),        
+        height:constants.Dimensions.vh(30),        
         padding:'2%', 
         flexDirection:'column',
         justifyContent:'space-between'
@@ -24,10 +24,20 @@ export const styles = StyleSheet.create({
         fontSize:20,          
     },
     deliveryContent:{
-        flex:0.5
+        flex:1.6
     },
     deliveryButton:{
-        flex:0.5
+        flex:0.5,
+        
+    },
+    deliveryDays:{
+        flex:0.5,
+        
+    },
+    deliverySubtitle:{
+        fontFamily:constants.Fonts.GothamBold,
+        color:constants.Colors.gray,
+        fontSize:14,      
     },
     changeDeliveryButton:{
         justifyContent:'flex-end'
@@ -45,7 +55,8 @@ export const styles = StyleSheet.create({
     },
     variantNameContainer:{
         flexDirection:'column', 
-        height:constants.Dimensions.vh(30)  ,
+        height:constants.Dimensions.vh(30),
+        top:constants.Dimensions.vh(2),
         backgroundColor:constants.Colors.light
     },
     variantPriceContainer:{
