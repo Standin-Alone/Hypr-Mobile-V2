@@ -6,11 +6,14 @@ import Address from '../screens/Market/Address';
 import AddressForm from '../screens/Market/AddressForm';
 import ProductDetail from '../screens/Market/ProductDetail';
 import VariantList from '../screens/Market/VariantList';
+import Cart from '../screens/Market/Cart';
 const MarketStack = createStackNavigator();
 
 export const MarketStackComponent= () => {
     return (
         <MarketStack.Navigator            
+
+
             screenOptions={{
                 gestureEnabled: false , headerShown: false,
                 
@@ -46,6 +49,13 @@ export const MarketStackComponent= () => {
             <MarketStack.Screen
                 component={AddressForm}
                 name={constants.ScreenNames.Market.ADDRESS_FORM}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />   
+
+
+              <MarketStack.Screen
+                component={Cart}
+                name={constants.ScreenNames.Market.CART}
                 options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
             />           
 

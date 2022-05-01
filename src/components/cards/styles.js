@@ -120,6 +120,26 @@ export const styles = StyleSheet.create({
         color:constants.Colors.dark,        
         fontSize:20, 
         flexWrap: 'wrap'
-    }
+    },
+
+    cartCardContainer:{                             
+        backgroundColor:constants.Colors.light,
+        borderRadius: 8,
+        width: constants.Dimensions.vw(90),
+        height: constants.Dimensions.vh(40),
+        flexDirection:'column',        
+        elevation: 1,            
+        marginVertical:constants.Dimensions.vh(2),
+        marginHorizontal:constants.Dimensions.vw(2)
+    },
+    cartCard:{
+        flexDirection:'row',
+        justifyContent:'flex-start', 
+        flex:1
+    },
+    cartImage:{
+        width:constants.Dimensions.vw(30),
+        height:constants.Dimensions.vh(30)
+    },
 });
 

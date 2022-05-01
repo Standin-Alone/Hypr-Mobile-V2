@@ -98,3 +98,39 @@ export const AddressCard = ({
       </View>
    </TouchableOpacity>
 )
+
+
+export const CountryCartCard = ({
+   data,  
+   isSelected,
+   onSelect
+})=>(
+   <TouchableOpacity style={[styles.cartCardContainer,{
+      borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
+      borderWidth:1
+   }]}
+   onPress={onSelect}   
+   >
+      <View style={styles.cartCard}>
+            <Text>{data}</Text>         
+      </View>
+   </TouchableOpacity>
+)
+
+
+export const CartCard = ({
+   data,  
+   isSelected,
+   onSelect
+})=>(
+   <TouchableOpacity style={[styles.cartCardContainer,{
+      borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
+      borderWidth:1
+   }]}
+   onPress={onSelect}   
+   >
+      <View style={styles.cartCard}>
+            <Text>{data}</Text>         
+      </View>
+   </TouchableOpacity>
+)

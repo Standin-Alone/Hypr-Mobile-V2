@@ -6,7 +6,7 @@ import {POST,GET} from '../utils/axios';
 import moment from 'moment';
 import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
 import { setUserIdSession } from "../utils/async_storage";
-import { calculateFreight } from "../utils/functions";
+import { calculateFreight,groupBy } from "../utils/functions";
 
 export const getAllProducts = (setState)=>{
 
@@ -547,6 +547,78 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
                     setState({isLoading:false});
                 });
            
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+
+
+export const getCart = async (setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let userId = '6266a22a45f2f2777ad5e4dc';
+
+            let payload = {
+                userId:userId
+            }
+                
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_CART}`,payload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                    
+                        
+                    
+                    let getCountry = [];
+                    
+                    response.data.data.map((itemCountry)=>{                      
+                        if(!getCountry.includes(itemCountry.shipping_address[0].country)){
+                            getCountry.push(itemCountry.shipping_address[0].country)
+                        }   
+                    })
+
+                    setState({cart:response.data.data.length == 0 ? [] :response.data.data,
+                            cartPerCountry:getCountry});
+                                        
+                                        
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
 
          }else{
              //  No internet Connection

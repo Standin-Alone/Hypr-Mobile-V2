@@ -58,6 +58,7 @@ export default class ProductDetail extends React.Component {
         let userId = await GET_SESSION('USER_ID');
         
         if(this.state.shippingAddress.length != 0){
+            
             let payload = {
                 variant:this.state.variant,
                 userId: userId,

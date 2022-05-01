@@ -16,7 +16,8 @@ export default {
        VARIANT_LIST:'VariantList',
        PRODUCT_DETAIL:'ProductDetail',
        ADDRESS:'Address',
-       ADDRESS_FORM:'AddressForm'
+       ADDRESS_FORM:'AddressForm',
+       CART:'Cart'
    }
     
 }

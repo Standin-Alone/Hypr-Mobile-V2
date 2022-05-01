@@ -21,7 +21,9 @@ import {
 import { 
     ProductCard,
     VariantCard,
-    AddressCard
+    AddressCard,
+    CartCard,
+    CountryCartCard
     } from "./cards";
 
 
@@ -46,7 +48,9 @@ export default {
 
     ProductCard,
     VariantCard,
-    AddressCard
+    AddressCard,
+    CartCard,
+    CountryCartCard
 
 
 }

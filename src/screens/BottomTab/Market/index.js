@@ -2,6 +2,7 @@ import React from 'react';
 import { FlatList, View,Text } from 'react-native';
 import { getAllProducts,getProductVariants,getShippingAddress} from '../../../actions/market';
 import Components from '../../../components';
+import constants from '../../../constants';
 import { SET_SESSION } from '../../../utils/async_storage/model';
 import { styles } from './styles';
 
@@ -56,6 +57,7 @@ export default class Market extends React.Component {
                 <View>
                     <Components.MarketHeader
                         showSearch={true}
+                        goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
                     />
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Featured Products</Text>

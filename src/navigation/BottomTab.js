@@ -37,6 +37,8 @@ export const BottomTabNavigator = ()=>(
             headerShown:false            
         })}
 
+        
+
 
 
      >
