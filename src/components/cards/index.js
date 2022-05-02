@@ -100,28 +100,15 @@ export const AddressCard = ({
 )
 
 
-export const CountryCartCard = ({
-   data,  
-   isSelected,
-   onSelect
-})=>(
-   <TouchableOpacity style={[styles.cartCardContainer,{
-      borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
-      borderWidth:1
-   }]}
-   onPress={onSelect}   
-   >
-      <View style={styles.cartCard}>
-            <Text>{data}</Text>         
-      </View>
-   </TouchableOpacity>
-)
 
 
 export const CartCard = ({
    data,  
    isSelected,
-   onSelect
+   onSelect,
+   quantity,
+   onIncreaseQuantity,
+   onDecreaseQuantity
 })=>(
    <TouchableOpacity style={[styles.cartCardContainer,{
       borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
@@ -129,8 +116,31 @@ export const CartCard = ({
    }]}
    onPress={onSelect}   
    >
-      <View style={styles.cartCard}>
-            <Text>{data}</Text>         
+      
+      <View style={styles.cartFirstColumn}>
+         <FastImage source={{uri:data.product_img}} resizeMode={FastImage.resizeMode.contain} style={styles.cartImage}/>
       </View>
+
+      <View style={styles.cartSecondColumn}>
+         <View style={{top:constants.Dimensions.vh(10)}}>
+            <Text style={styles.cartVariantName} numberOfLines={2}>{data.variant_name}</Text>
+
+            <View style={{flexDirection:'row',top:constants.Dimensions.vh(10),justifyContent:'flex-start'}}>
+               <TouchableOpacity onPress={onDecreaseQuantity}>
+                  <MaterialIcons name="remove-circle-outline" size={30}  color={constants.Colors.dark_tint}/>
+               </TouchableOpacity>            
+                  <View>
+                     <Text style={styles.quantity}>{quantity}</Text>
+                  </View>                           
+               <TouchableOpacity onPress={onIncreaseQuantity}>
+                  <MaterialIcons name="add-circle-outline" size={30} color={constants.Colors.dark_tint}/>
+               </TouchableOpacity>
+               <Text style={styles.cartTotalAmount} numberOfLines={2}>${data.total_amount}</Text>
+            </View>
+            
+         </View>
+      </View>
+       
+      
    </TouchableOpacity>
 )

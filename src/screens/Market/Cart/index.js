@@ -1,23 +1,25 @@
 import React from 'react';
 
-import { View,Image,Text,TouchableOpacity,InteractionManager, FlatList} from 'react-native';
+import { View,Text,ScrollView,InteractionManager, FlatList} from 'react-native';
 
-import Carousel from 'react-native-snap-carousel';
 import Components from '../../../components';
 import constants from '../../../constants';
-import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { getCart } from '../../../actions/market';
+import { getCart,increaseQuantity,decreaseQuantity } from '../../../actions/market';
+import { GET_SESSION } from '../../../utils/async_storage';
+import { computeCart } from "../../../utils/functions";
+import { checkout} from '../../../actions/order';
+
 export default class Cart extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-          isReadyToRender:false,             
+          isReadyToRender:true,             
           cart:[],   
           cartPerCountry:[],
           isLoading:false,
-          
+          selectedProducts:[]          
       };
     }
 
@@ -31,29 +33,79 @@ export default class Cart extends React.Component {
        
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
-
        })
-       
+ 
     }   
 
 
-    renderCart  = ({item,index})=>{
+    handleSelectProduct = (item)=>{
+        let selectedProducts = [...this.state.cart];
+
+        selectedProducts.map((product)=>{
+            if(product._id == item._id ){       
+            
+
+                if(product.shipping_address[0].country == item.shipping_address[0].country){
+                    if(item.isSelected){
+                        product.isSelected = false 
+                    }else{                    
+                        product.isSelected = true                    
+                    }   
+                }
+                           
+            }
+        });
+      
+        this.setState({cart:selectedProducts});
+    }
+
+    handleDecreaseQuantity = (item)=>{
+
+        let payload = {
+            item:item
+        }
+
+        return decreaseQuantity(payload,this.setMyState,this.props)
+    }
+
+    handleIncreaseQuantity = (item)=>{
+        let payload = {
+            item:item
+        }
+        return increaseQuantity(payload,this.setMyState,this.props)
+    }
+
+    renderCart  = ({item,index})=>{        
         return(
-            <View>
-               <Components.CartCard 
+            <>
+                <Components.CartCard
                     data={item}
-               /> 
-            </View>
+                    onSelect={()=>this.handleSelectProduct(item)}
+                    onDecreaseQuantity={()=>this.handleDecreaseQuantity(item)}
+                    onIncreaseQuantity={()=>this.handleIncreaseQuantity(item)}
+                    isSelected={item.isSelected}
+                    quantity={item.quantity}               
+                />
+            </>
         )
     }
 
+  
     renderCartCountry = ({item,index})=>{
-        return (<View>
-                    <Components.CountryCartCard 
-                        data={item}
-                    >
-                                          
-                    </Components.CountryCartCard>
+        
+        return (<View style={styles.countryContainer}>            
+
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={styles.countryText}>{item}</Text>
+                        {/* <TouchableOpacity>
+                                <Text>Select All</Text>
+                        </TouchableOpacity> */}
+                    </View>  
+
+                    <FlatList
+                        data={this.state.cart.filter((filterVal)=>filterVal.shipping_address[0].country == item)}
+                        renderItem={this.renderCart}                        
+                    />                                                                              
                 </View>
         )
     }
@@ -70,6 +122,18 @@ export default class Cart extends React.Component {
         </View>
     )
 
+
+    handleCheckout = async () =>{
+
+        let payload = {
+           cart:this.state.cart.filter((item)=>item.isSelected == true),
+           userId: await GET_SESSION('USER_ID')
+        }
+
+        return checkout(payload,this.setMyState,props)
+    }
+    
+
     render(){
      
         return this.state.isReadyToRender ? (
@@ -79,15 +143,25 @@ export default class Cart extends React.Component {
                     title={'My Cart'}
                 />             
 
-
-                <FlatList
-                    data={this.state.cartPerCountry}
-                    renderItem={this.renderCartCountry}
-                    contentContainerStyle={{top:constants.Dimensions.vh(5)}}
-                    ListEmptyComponent={this.renderEmptyComponent}
-                />   
-
-           
+            <View>
+                <ScrollView>
+                    <FlatList
+                        scrollEnabled
+                        data={this.state.cartPerCountry}
+                        renderItem={this.renderCartCountry}
+                        contentContainerStyle={{top:constants.Dimensions.vh(5),paddingBottom:constants.Dimensions.vh(80)}}
+                        ListEmptyComponent={this.renderEmptyComponent}
+                    />   
+                </ScrollView>
+            </View>
+            <View style={styles.buttonContainer}>
+                <Components.PrimaryButton                              
+                    title={`Checkout $${computeCart(this.state.cart.filter((item)=>item.isSelected == true))}`}  
+                    onPress={this.handleCheckOut}                          
+                    isLoading={this.state.isLoading}
+                />
+            </View>
+            
             </>
         ) : (
 

@@ -83,3 +83,9 @@ export const calculateFreight = (payload,setState,props)=>{
 
 }
 
+
+export const computeCart = (cart)=>{
+    
+    return cart.reduce((itemA,itemB)=> itemA = itemA + parseFloat(itemB.total_amount),0);
+}
+

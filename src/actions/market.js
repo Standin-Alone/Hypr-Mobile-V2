@@ -566,8 +566,7 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
 
 
 export const getCart = async (setState)=>{
-    setState({isLoading:true});
-    
+
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -584,7 +583,7 @@ export const getCart = async (setState)=>{
                
                 if(response.data.status == true){
                     
-                        
+                    console.warn(response.data.data)
                     
                     let getCountry = [];
                     
@@ -594,10 +593,123 @@ export const getCart = async (setState)=>{
                         }   
                     })
 
-                    setState({cart:response.data.data.length == 0 ? [] :response.data.data,
-                            cartPerCountry:getCountry});
+                    let newCart = response.data.data.map((obj)=>({...obj,isSelected:false}));
+
+                    setState({cart:response.data.data.length == 0 ? [] :newCart,cartPerCountry:getCountry});
                                         
                                         
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+              
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+               
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+            
+         }
+    });
+
+}
+
+
+
+
+
+export const increaseQuantity = async (payload,setState,props)=>{
+    
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let cleanPayload ={
+                item:payload.item,
+                userId: await GET_SESSION('USER_ID')
+
+            }
+        
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.INCREASE_QUANTITY}`,cleanPayload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                          
+                    getCart(setState);
+                               
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+            
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+            
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })           
+         }
+    });
+
+}
+
+
+
+
+
+export const decreaseQuantity = async (payload,setState,props)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let cleanPayload ={
+                item:payload.item,
+                userId: await GET_SESSION('USER_ID')
+
+            }
+        
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.DECREASE_QUANTITY}`,cleanPayload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                          
+                    getCart(setState);
+                               
                 }else{
                     Toast.show({
                         type:'error',
@@ -632,3 +744,4 @@ export const getCart = async (setState)=>{
     });
 
 }
+

@@ -56,6 +56,7 @@ export default class Address extends React.Component {
                         data={item}
                         isSelected={item.is_selected}
                         onSelect = {()=>this.handleSelectAddress(item)}
+                  
                     />
                 </View>
         )

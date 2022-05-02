@@ -17,11 +17,18 @@ const EndPoints = {
     ADD_TO_WISHLIST:'/market/add-to-wishlist',
 
     CALCULATE_FREIGHT:'/freight-calculate',
+    INCREASE_QUANTITY:'/market/increase-quantity',
+    DECREASE_QUANTITY:'/market/decrease-quantity',
 
 
 
     SAVE_ADDRESS:'/market/save-address',
     GET_CITIES:'/market/get-cities',
+
+
+    // ORDER
+
+    CHECKOUT:'/create-order',
 
 }
 

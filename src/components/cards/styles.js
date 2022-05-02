@@ -58,8 +58,7 @@ export const styles = StyleSheet.create({
         bottom: constants.Dimensions.vh(10),
         resizeMode: 'contain',      
     },
-    variantName:{                
-             
+    variantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
         fontSize:25,
         
@@ -115,31 +114,58 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(30),
         height:constants.Dimensions.vh(30)
     },
-    countryText:{
-        fontFamily:constants.Fonts.GothamBold,
-        color:constants.Colors.dark,        
-        fontSize:20, 
-        flexWrap: 'wrap'
-    },
 
     cartCardContainer:{                             
         backgroundColor:constants.Colors.light,
-        borderRadius: 8,
+        borderRadius: 10,
         width: constants.Dimensions.vw(90),
-        height: constants.Dimensions.vh(40),
-        flexDirection:'column',        
+        height: constants.Dimensions.vh(50),
+        flexDirection:'row',        
         elevation: 1,            
         marginVertical:constants.Dimensions.vh(2),
         marginHorizontal:constants.Dimensions.vw(2)
     },
-    cartCard:{
-        flexDirection:'row',
-        justifyContent:'flex-start', 
-        flex:1
+    cartFirstColumn:{        
+        flex:1,
+        paddingVertical:constants.Dimensions.vh(10),
+        paddingHorizontal:constants.Dimensions.vw(2)
+    },
+    
+    cartSecondColumn:{     
+        flex:2
+    },
+    cartVariantName:{                             
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:16,
+        
     },
     cartImage:{
+        
         width:constants.Dimensions.vw(30),
         height:constants.Dimensions.vh(30)
     },
+    cartOrderCard:{        
+        flexDirection:'row',
+        borderWidth:0.5,
+        borderRadius:15,
+        width:constants.Dimensions.vw(80),
+        height:constants.Dimensions.vh(30),
+        borderColor:constants.Colors.dark_tint,
+        marginVertical:constants.Dimensions.vh(50),
+        marginTop:20        
+    },
+    variantNameText:{
+        fontSize:20
+    },
+    quantity:{
+        fontSize:20,
+        fontFamily:constants.Fonts.OpenSansMedium
+    },
+    cartTotalAmount:{
+        fontSize:25,
+        left:constants.Dimensions.vw(10),
+        fontFamily:constants.Fonts.GothamBold,
+        color:constants.Colors.danger
+    }
 });
 

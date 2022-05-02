@@ -22,8 +22,15 @@ export const styles = StyleSheet.create({
 emptyCartText:{
     fontFamily:constants.Fonts.GothamBold,
     fontSize:40,
-    textAlign:'center'
-    
+    textAlign:'center'    
+},
+countryText:{
+    fontFamily:constants.Fonts.GothamBold,
+    color:constants.Colors.dark,
+    fontSize:20,        
+},
+countryContainer:{
+  left:constants.Dimensions.vw(2)
 }
   
 });
