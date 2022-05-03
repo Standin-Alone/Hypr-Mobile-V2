@@ -19,7 +19,8 @@ export default {
        ADDRESS_FORM:'AddressForm',
        SEARCH:'Search',
        CART:'Cart',
-       WISH_LIST:'WishList'
+       WISH_LIST:'WishList',
+       ORDER:'Order',
    }
     
 }

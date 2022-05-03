@@ -26,9 +26,7 @@ export const checkout = (payload,setState,props)=>{
             let address = payload.cart[0].shipping_address[0];
             console.warn(cart);
              
-             cleanPayload.zip = address.zip_code;
-             // cleanPayload.sccode  = address.country_code;
-             // cleanPayload.country = address.country;
+             cleanPayload.zip = address.zip_code;      
              cleanPayload.sccode  = address.country_code;
              cleanPayload.country = address.country;
              cleanPayload.province = address.city;
@@ -57,7 +55,18 @@ export const checkout = (payload,setState,props)=>{
                 if(response.data.result == true){
                                                                    
                     
-                    setState({products:response.data.data.list})
+                    setState({orderId:response.data.data})
+
+
+                    let parameters = {
+                        cart:cart,
+                        orderId:response.data.data
+                    }
+
+                    
+                    props.navigation.navigate(constants.ScreenNames.Market.ORDER,parameters);
+
+                    
 
                 }else{
                     Toast.show({
