@@ -7,6 +7,8 @@ import AddressForm from '../screens/Market/AddressForm';
 import ProductDetail from '../screens/Market/ProductDetail';
 import VariantList from '../screens/Market/VariantList';
 import Cart from '../screens/Market/Cart';
+import Search from '../screens/Market/Search';
+import WishList from '../screens/Market/WishList';
 const MarketStack = createStackNavigator();
 
 export const MarketStackComponent= () => {
@@ -31,8 +33,19 @@ export const MarketStackComponent= () => {
                 component={VariantList}
                 name={constants.ScreenNames.Market.VARIANT_LIST}
                 options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}                
-            />           
+            />      
+                 
+            <MarketStack.Screen
+                component={WishList}
+                name={constants.ScreenNames.Market.WISH_LIST}
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}                
+            />      
 
+            <MarketStack.Screen
+                component={Search}
+                name={constants.ScreenNames.Market.SEARCH}
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}                
+            />           
 
             <MarketStack.Screen
                 component={ProductDetail}
@@ -53,7 +66,7 @@ export const MarketStackComponent= () => {
             />   
 
 
-              <MarketStack.Screen
+            <MarketStack.Screen
                 component={Cart}
                 name={constants.ScreenNames.Market.CART}
                 options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                

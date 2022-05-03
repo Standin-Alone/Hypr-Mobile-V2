@@ -9,8 +9,6 @@ import FastImage from 'react-native-fast-image'
 
 
 export const ProductCard = ({
-   title,
-   onGoBack,
    productImage,
    productName,
    productPrice,
@@ -28,6 +26,34 @@ export const ProductCard = ({
             <View>
                   <Text style={styles.productPrice}> ${productPrice}</Text>
             </View>      
+         </View>                        
+      </TouchableOpacity>                         
+   </>
+);
+
+
+export const SearchProductCard = ({
+   productImage,
+   productName,
+   productPrice,
+   addToCart,
+   
+})=>(   
+   <>          
+      <TouchableOpacity onPress={addToCart} style={styles.productSearchCardContainer}>
+         <View style={{ flexDirection:'row'}}>
+            <View >
+               <Image source={{ uri:productImage}} resizeMode="contain" style={styles.productSearchImage}/>         
+            </View>   
+            <View style={{flexDirection:'column',flex:1}}>                  
+                  <View>
+                        <Text style={styles.productSearchName} adjustsFontSizeToFit numberOfLines={2}>{productName}</Text>
+                  </View>         
+                  <View style={{justifyContent:'flex-end',flexDirection:'row',top:constants.Dimensions.vh(9)}}>
+                        <Text style={styles.productSearchPrice} adjustsFontSizeToFit> ${productPrice}</Text>
+                  </View>  
+            </View>
+                
          </View>                        
       </TouchableOpacity>                         
    </>

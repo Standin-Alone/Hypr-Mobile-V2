@@ -79,6 +79,15 @@ export const PrimaryHeader = ({
    goToWishList,
    goToShoppingCart,    
    showMarketButtons,
+   showSearchText,
+   onChangeSearchText,
+   onSearchSubmit,
+
+
+   onBlur,
+   onFocus,
+   isFocus,
+   value,
    
 })=>(   
    <>  
@@ -97,6 +106,39 @@ export const PrimaryHeader = ({
                 </Text>
             </View>
 
+
+            {showSearchText &&
+                <View style={{  justifyContent:'flex-end',flexDirection:'row',}}>
+
+                    <View style={{flexDirection:'row'}}>
+                        <View style={{top:constants.Dimensions.vh(4)}}>
+                            <MaterialIcons 
+                                name="search" 
+                                size={20} 
+                                color={constants.Colors.primary}
+                                style={styles.searchIcon}
+                            />
+                        </View>
+                        <View>
+                            <TextInput
+                                onChangeText={onChangeSearchText}
+                                style={[styles.searchTextInput, {borderColor: isFocus ||  value != '' ? 
+                                                        constants.Colors.primary                                                                                                           
+                                                        :
+                                                        constants.Colors.gray
+                                    }]}
+                                autoFocus={true}
+                                placeholder={'What are you looking for?'}
+                                onBlur={onBlur}
+                                onFocus={onFocus}
+                                value={value}                                
+                                onSubmitEditing={onSearchSubmit}
+                            />
+                        </View>
+                    </View>
+                    
+                </View>
+            }
 
 
             {showMarketButtons &&            

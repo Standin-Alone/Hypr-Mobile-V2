@@ -33,6 +33,20 @@ export const styles = StyleSheet.create({
         alignSelf:'center',        
         color:constants.Colors.primary
     },
+    searchTextInput:{
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:16,       
+        borderWidth:1,
+        top:constants.Dimensions.vh(2),
+        height:constants.Dimensions.vh(10),
+        width:constants.Dimensions.vw(80),        
+        paddingLeft:constants.Dimensions.vw(8),        
+        borderRadius:20,
+        color:constants.Colors.primary
+    },
+    searchIcon:{
+        left:constants.Dimensions.vw(8),
+    },
     primaryTitle:{
         fontFamily:constants.Fonts.GothamBold,
         fontSize:20,

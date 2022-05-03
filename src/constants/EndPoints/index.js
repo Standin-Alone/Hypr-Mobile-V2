@@ -6,6 +6,7 @@ const EndPoints = {
 
 
     GET_ALL_PRODUCTS:'/get-products',
+    SEARCH_PRODUCTS:'/search-products',
     GET_PRODUCT_VARIANTS:'/get-variants',
     GET_SHIPPING_ADDRESS:'/market/get-shipping-address',
     

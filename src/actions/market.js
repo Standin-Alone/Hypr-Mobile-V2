@@ -64,18 +64,73 @@ export const getAllProducts = (setState)=>{
 
 
 
-export const getWishList = async (setState)=>{
-    setState({isLoading:true});
+
+
+
+export const searchProducts = (payload,setState)=>{
+
+  
+    
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            let userId = '6266a22a45f2f2777ad5e4dc';
+        
+            // POSTREQUEST
+            POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.SEARCH_PRODUCTS}`,payload).then((response)=>{                    
+               
+                if(response.data.result == true){
+                                                                   
+                    
+                    setState({products:response.data.data.list})
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+              
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+            
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+export const getWishList = async (setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then(async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
 
             let payload = {
-                userId:userId
+                userId: await GET_SESSION('USER_ID')
             }
                 
             // POST REQUEST
@@ -506,6 +561,58 @@ export const addToCart =  (payload,setState)=>{
 
 
 
+
+export const buyNow =  (payload,setState,props)=>{
+    setState({isLoading:true});
+  
+    console.warn('payloads',payload)
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){            
+
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.ADD_TO_CART}`,payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+                                                
+                        props.navigation.navigate(constants.ScreenNames.Market.CART);
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+                
+                    // turn off loading
+                    setState({isLoading:false});
+                }).catch((error)=>{
+                    console.warn('sample error ', error)
+                    
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+           
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
 
 export const updateSelectedAddress =  (payload,setState,props)=>{
     setState({isLoading:true});

@@ -48,6 +48,13 @@ export default class AddressForm extends React.Component {
             value:''
             
         },
+        state:{
+            focus:false,
+            error:false,
+            errorMessage:'',
+            value:''
+            
+        },
         address:{
             focus:false,
             error:false,
@@ -104,22 +111,33 @@ export default class AddressForm extends React.Component {
 
         let selectedCity = value[0];
   
-       
+       console.warn(selectedCity);
         this.setState({city:{...this.state.city,value:selectedCity,error:false}})
         
     }  
 
 
+    handleSelectState = (value)=>{
+
+        let selectedState = value[0];
+  
+  
+        this.setState({state:{...this.state.state,value:selectedState,error:false}})
+        
+    }  
+
 
     handleSaveAddress = async  ()=>{
+
+        console.warn(this.state.city);
         let payload = {
-            // userId: await GET_SESSION('user_id'),
-            userId: '6266a22a45f2f2777ad5e4dc',           
+            userId: await GET_SESSION('user_id'),            
             firstName:this.state.firstName.value,
             lastName:this.state.lastName.value,
             contact:this.state.contact.value,
             zipCode:this.state.zipCode.value,
-            city:this.state.city.value,
+            state:this.state.state.value,
+            city:this.state.city.value,            
             country:this.state.country.value,
             countryName:this.state.country.countryName,
             address:this.state.address.value,
@@ -186,6 +204,20 @@ export default class AddressForm extends React.Component {
                                         iconName="flag"
                                 />                        
                             </View>
+
+
+                            <View>     
+                                <Components.PrimaryStateSelect
+                                        onSelect={this.handleSelectState}                                    
+                                        value={this.state.state.value}
+                                        items={this.state.cities}
+                                        errorMessage={this.state.state.errorMessage}
+                                        isError={this.state.state.error}
+                                        isFocus={this.state.state.focus}
+                                        iconName="flag"
+                                />                        
+                            </View>
+
 
 
                             <View>     

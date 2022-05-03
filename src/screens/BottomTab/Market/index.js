@@ -48,6 +48,7 @@ export default class Market extends React.Component {
                 productPrice={result.item.sellPrice}
                 addToCart = {()=>this.handleAddToCart(result.item)}
                 
+                
             />
     )
 
@@ -58,6 +59,8 @@ export default class Market extends React.Component {
                     <Components.MarketHeader
                         showSearch={true}
                         goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
+                        goToSearch={()=>this.props.navigation.navigate(constants.ScreenNames.Market.SEARCH)}
+                        goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                     />
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Featured Products</Text>

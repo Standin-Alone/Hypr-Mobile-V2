@@ -10,6 +10,7 @@ import { getCart,increaseQuantity,decreaseQuantity } from '../../../actions/mark
 import { GET_SESSION } from '../../../utils/async_storage';
 import { computeCart } from "../../../utils/functions";
 import { checkout} from '../../../actions/order';
+import Toast from 'react-native-toast-message';
 
 export default class Cart extends React.Component {
     constructor(props) {
@@ -125,12 +126,26 @@ export default class Cart extends React.Component {
 
     handleCheckout = async () =>{
 
-        let payload = {
-           cart:this.state.cart.filter((item)=>item.isSelected == true),
-           userId: await GET_SESSION('USER_ID')
-        }
 
-        return checkout(payload,this.setMyState,props)
+        let checkIfCartIsEmpty = this.state.cart.filter((item)=>item.isSelected == true).length;
+
+        if(checkIfCartIsEmpty != 0){
+
+        
+            let payload = {
+                cart:this.state.cart.filter((item)=>item.isSelected == true),
+                userId: await GET_SESSION('USER_ID')
+            }
+
+            return checkout(payload,this.setMyState,this.props)
+        }else{
+            Toast.show({
+                text1: 'Error',
+                text2: "Please select at least one product.",
+                type: "error",
+                position: "top"
+            });
+        }
     }
     
 
@@ -157,7 +172,7 @@ export default class Cart extends React.Component {
             <View style={styles.buttonContainer}>
                 <Components.PrimaryButton                              
                     title={`Checkout $${computeCart(this.state.cart.filter((item)=>item.isSelected == true))}`}  
-                    onPress={this.handleCheckOut}                          
+                    onPress={this.handleCheckout}                          
                     isLoading={this.state.isLoading}
                 />
             </View>

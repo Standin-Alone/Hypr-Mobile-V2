@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart,addToWishList, getWishList } from '../../../actions/market';
+import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow } from '../../../actions/market';
 
 
 
@@ -79,6 +79,28 @@ export default class ProductDetail extends React.Component {
 
     }
 
+
+    handleBuyNow = async ()=>{
+        let userId = await GET_SESSION('USER_ID');
+        
+        if(this.state.shippingAddress.length != 0){
+            
+            let payload = {
+                variant:this.state.variant,
+                userId: userId,
+                shippingAddress:this.state.shippingAddress.filter((item)=>item.is_selected==true)[0],
+                freightCalculation:this.state.freightCalculation
+            }
+            return buyNow(payload,this.setMyState,this.props)
+        }else{
+            Toast.show({
+                type:'error',
+                text1: 'Please set your address first.'
+            });
+        }
+
+    }
+
     handleGoToChangeAddress = () =>{
 
         this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS,{variant:this.state.variant,reCalculateFreight : this.handleUpdateStateFromChangeAddress.bind(this)});
@@ -90,7 +112,10 @@ export default class ProductDetail extends React.Component {
             <>
                 <Components.MarketHeader
                     onGoBack = {()=>this.props.navigation.goBack()}      
-                    showGoback={true}                                  
+                    goToShoppingCart = {()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}                         
+                    showGoback={true}                                                      
+                    goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
+
                 />
                 <View style={styles.variantContainer}>                                                 
                     <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
@@ -190,6 +215,7 @@ export default class ProductDetail extends React.Component {
                         <Components.PrimaryButton
                             title="Buy Now"
                             moreStyle={styles.buyNowButton}
+                            onPress={this.handleBuyNow}
                         />                    
                     </View>
                 </View>

@@ -17,7 +17,9 @@ export default {
        PRODUCT_DETAIL:'ProductDetail',
        ADDRESS:'Address',
        ADDRESS_FORM:'AddressForm',
-       CART:'Cart'
+       SEARCH:'Search',
+       CART:'Cart',
+       WISH_LIST:'WishList'
    }
     
 }

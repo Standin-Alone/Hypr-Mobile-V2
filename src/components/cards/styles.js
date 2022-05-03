@@ -16,6 +16,33 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(45),                
         padding:'2%'                       
     },
+    productSearchCardContainer:{        
+        flexDirection:'column',        
+        backgroundColor:constants.Colors.light,                        
+        marginHorizontal:constants.Dimensions.vw(1),        
+        marginVertical:constants.Dimensions.vh(1),
+        borderRadius:10,        
+        width:constants.Dimensions.vw(90),                
+        padding:'2%'                       
+    },
+    productSearchName:{        
+        flexWrap: 'wrap',
+        fontFamily:constants.Fonts.OpenSansBold,
+        fontSize:19,
+        top:constants.Dimensions.vh(2),        
+    },
+    productSearchPrice:{
+        fontFamily:constants.Fonts.OpenSansBold,
+        fontSize:20,
+        color:constants.Colors.dark,
+        top:constants.Dimensions.vh(2),        
+    },
+    productSearchImage:{
+        width:constants.Dimensions.vw(20),                
+        height:constants.Dimensions.vh(28),
+        alignSelf:'center',
+        overflow:'hidden'        
+    },
     title:{
         fontFamily:constants.Fonts.GothamBold,
         fontSize:25,
@@ -31,7 +58,7 @@ export const styles = StyleSheet.create({
     productPrice:{
         fontFamily:constants.Fonts.GothamBold,
         fontSize:20,
-        color:constants.Colors.dark_tint,
+        color:constants.Colors.dark,
         top:constants.Dimensions.vh(2),        
     },
     productImage:{

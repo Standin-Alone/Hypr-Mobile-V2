@@ -9,7 +9,8 @@ import {
         PrimaryTextInput,
         PrimaryPhoneInput ,
         PrimaryCountrySelect,
-        PrimaryCitySelect
+        PrimaryCitySelect,
+        PrimaryStateSelect
     } from "./input";
 
 import { 
@@ -22,7 +23,8 @@ import {
     ProductCard,
     VariantCard,
     AddressCard,
-    CartCard
+    CartCard,
+    SearchProductCard
     } from "./cards";
 
 
@@ -39,6 +41,7 @@ export default {
     PrimaryPhoneInput,
     PrimaryCountrySelect,
     PrimaryCitySelect,
+    PrimaryStateSelect,
  
 
     PrimaryHeader,
@@ -48,7 +51,8 @@ export default {
     ProductCard,
     VariantCard,
     AddressCard,
-    CartCard
+    CartCard,
+    SearchProductCard
 
 
 }

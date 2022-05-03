@@ -5,6 +5,7 @@ import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
+import { SET_SESSION } from "../utils/async_storage";
 
 
 export const createAccount = (payload,setState,props)=>{
@@ -259,7 +260,9 @@ export const verifyOtp = (payload,setState,props)=>{
                         Toast.show({
                             type:'success',
                             text1: response.data.message
-                        });                                                      
+                        });                     
+                        
+                        SET_SESSION('USER_ID',payload.userId)
                         // NAVIGATE TO MARKET
                         props.navigation.navigate('Home');
                     }else{

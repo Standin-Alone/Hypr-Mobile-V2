@@ -229,7 +229,7 @@ export const PrimaryCitySelect = ({
         <MultiSelect
           hideTags
           items={items}
-          uniqueKey="_id"          
+          uniqueKey="state_name"          
           onSelectedItemsChange={onSelect}
           fixedHeight={constants.Dimensions.vh(10)}
           selectedItems={[value]}
@@ -250,6 +250,83 @@ export const PrimaryCitySelect = ({
           styleInputGroup={{ backgroundColor:'transparent'  }}           
           styleDropdownMenuSubsection={{ backgroundColor:'transparent' }}
           noItemsText={"No Cities"}          
+          submitButtonText="Submit"          
+          single={true}
+        />
+
+        {isError && 
+                <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
+                    <MaterialIcons 
+                        name={'error-outline'} 
+                        size={16} 
+                        color={constants.Colors.danger}                     
+                        />
+                        <Text style={styles.primaryErrorMessage} adjustsFontSizeToFit> {errorMessage}</Text>
+                </View>
+        }
+     </View>   
+    </View>
+        )
+}
+
+
+
+
+
+
+
+export const PrimaryStateSelect = ({
+    
+    onSelect,
+    iconName,
+    isError,
+    value,    
+    isFocus,
+    items,
+    errorMessage
+   
+    })=>{
+        return (
+            
+   <View>
+        <View style={styles.primaryContainer}>  
+            <View style={styles.icon}>
+            <MaterialIcons 
+                name={iconName} 
+                size={40} 
+                color={isError ? constants.Colors.danger :
+                                            isFocus ||  value != '' ? 
+                                                    constants.Colors.primary                                                                                                           
+                                                    :
+                                                        constants.Colors.gray
+                        } 
+                style={{ top:10 }} />
+        </View>
+
+        <MultiSelect
+          hideTags
+          items={items}
+          uniqueKey="state_name"          
+          onSelectedItemsChange={onSelect}
+          fixedHeight={constants.Dimensions.vh(10)}
+          selectedItems={[value]}
+          styleMainWrapper={styles.citySelect}
+          styleDropdownMenu={{ backgroundColor:'transparent' }}
+          selectText="Select State"
+          searchInputPlaceholderText="Search state..."          
+          altFontFamily="ProximaNova-Light"
+          tagRemoveIconColor="#CCC"
+          tagBorderColor="#CCC"
+          tagTextColor="#CCC"
+          selectedItemTextColor={constants.Colors.dark}
+          selectedItemIconColor={constants.Colors.dark}
+          itemTextColor="#000"
+          displayKey="state_name"
+          searchInputStyle={{ color: constants.Colors.dark_tint }}
+          styleTextDropdown={{ backgroundColor:'transparent' }}           
+          styleInputGroup={{ backgroundColor:'transparent'  }}           
+          styleDropdownMenuSubsection={{ backgroundColor:'transparent' }}
+          noItemsText={"No Cities"}                    
           submitButtonText="Submit"          
           single={true}
         />

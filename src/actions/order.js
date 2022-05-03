@@ -16,10 +16,44 @@ export const checkout = (payload,setState,props)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
+
+
+            let cleanPayload = {
+                products:[]
+            };
+
+            let cart = payload.cart;
+            let address = payload.cart[0].shipping_address[0];
+            console.warn(cart);
+             
+             cleanPayload.zip = address.zip_code;
+             // cleanPayload.sccode  = address.country_code;
+             // cleanPayload.country = address.country;
+             cleanPayload.sccode  = address.country_code;
+             cleanPayload.country = address.country;
+             cleanPayload.province = address.city;
+             cleanPayload.city = address.city;
+             cleanPayload.address = address.address;
+             cleanPayload.name = address.full_name;
+             cleanPayload.phone = address.contact;
+             cleanPayload.fccode = 'CN';
+             cleanPayload.logistic = payload.cart[0].freight_calculation[0].logisticName;               
+             
+             cart.map((product=>{
+                 
+                 cleanPayload.products.push({
+                     vid:product.variant_id,
+                     quantity: product.quantity,
+                     shippingName: `${product.variant_name}`,
+                     sellPrice: product.product_price,
+                 })
+             }))
+
             
+             console.warn(cleanPayload);
             // POST REQUEST
-            POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECKOUT}`).then((response)=>{                    
-                console.warn(response.data.data.list[0]);
+            POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECKOUT}`,cleanPayload).then((response)=>{                    
+                console.warn(response);
                 if(response.data.result == true){
                                                                    
                     
