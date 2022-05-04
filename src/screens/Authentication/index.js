@@ -13,7 +13,7 @@ export default class Authentication extends React.Component {
     async componentDidMount(){
         let checkSession = await GET_SESSION('USER_ID');
 
-        if(checkSession){
+        if(checkSession){            
             this.props.navigation.replace(constants.ScreenNames.AppStack.HOME);
         }else{
             this.props.navigation.replace(constants.ScreenNames.AppStack.LOGIN);

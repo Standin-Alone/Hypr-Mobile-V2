@@ -8,6 +8,7 @@ export default {
 
    },
    BottomTab:{
+      HOME:'Home',
       MARKET_HOME:"MarketHome",
       USER_PROFILE:"UserProfile"
    },

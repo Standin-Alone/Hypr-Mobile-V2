@@ -11,6 +11,7 @@ import { GET_SESSION } from '../../../utils/async_storage';
 import { computeCart } from "../../../utils/functions";
 import { checkout} from '../../../actions/order';
 import Toast from 'react-native-toast-message';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export default class Order extends React.Component {
     constructor(props) {
@@ -101,16 +102,51 @@ export default class Order extends React.Component {
                 />             
 
             <View>
-                <ScrollView>
-                    <FlatList
-                        scrollEnabled
-                        data={this.state.cart}
-                        renderItem={this.renderCart}
-                        contentContainerStyle={{top:constants.Dimensions.vh(5),paddingBottom:constants.Dimensions.vh(80)}}
-                        ListEmptyComponent={this.renderEmptyComponent}
-                    />   
+                <ScrollView style={{ height:constants.Dimensions.vh(115),}}>
+                    <View style={{flexGrow:1}}>
+                        <FlatList
+                            scrollEnabled
+                            data={this.state.cart}
+                            renderItem={this.renderCart}
+                            contentContainerStyle={{
+                                top:constants.Dimensions.vh(5),
+                                paddingBottom:constants.Dimensions.vh(30),                           
+                                
+                            }}
+                            ListEmptyComponent={this.renderEmptyComponent}
+                        />   
+                    </View>
                 </ScrollView>
             </View>
+            
+            
+            <View style={styles.totalContainer}>
+
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+                   <View style={{flex:1,justifyContent:'flex-start'}}>
+                        <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}>Total:</Text>
+                   </View>
+                   <View style={{flex:0,justifyContent:'flex-end'}}>
+                        <Text style={[styles.subTotalValue,{color:constants.Colors.dark}]} >${computeCart(this.state.cart)}</Text>
+                   </View>                                  
+               </View>
+            </View>
+
+            
+            <View style={styles.paymentMethodContainer}>
+
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+                   <View style={{flex:1,justifyContent:'flex-start'}}>
+                        <Text style={styles.subTotalText}>Payment Method:</Text>
+                   </View>
+                   <TouchableOpacity style={{flex:0,justifyContent:'flex-end'}}>
+                        <Text style={styles.subTotalValue} >Select Payment...</Text>
+                   </TouchableOpacity>                                  
+               </View>
+       
+
+            </View>
+
             <View style={styles.buttonContainer}>       
                
                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10),bottom:constants.Dimensions.vh(2)}}>
@@ -121,14 +157,7 @@ export default class Order extends React.Component {
                         <Text style={styles.subTotalValue} >{this.state.orderId}</Text>
                    </View>                                  
                </View>         
-               <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10),bottom:constants.Dimensions.vh(2)}}>
-                   <View style={{flex:1,justifyContent:'flex-start'}}>
-                        <Text style={styles.subTotalText}>Sub Total:</Text>
-                   </View>
-                   <View style={{flex:0,justifyContent:'flex-end'}}>
-                        <Text style={styles.subTotalValue} >${computeCart(this.state.cart)}</Text>
-                   </View>                                  
-               </View>
+               
             
                 <Components.PrimaryButton                              
                     title={`Pay $${computeCart(this.state.cart)}`}  

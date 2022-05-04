@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet } from 'react-native';
 
-import Market from '../screens/BottomTab/Market';
+import Home from '../screens/BottomTab/Home';
 import UserProfile from '../screens/BottomTab/UserProfile';
 import constants from '../constants';
 import { MarketStackComponent } from './MarketStack';
@@ -42,6 +42,19 @@ export const BottomTabNavigator = ()=>(
 
 
      >
+
+        <BottomTab.Screen 
+            name ={constants.ScreenNames.BottomTab.HOME} 
+            component={Home}
+            options={({route,navigation})=>({    
+                title:'Home',     
+                tabBarStyle:{display:getTabBarVisibility(route)},          
+                tabBarIcon: ({color})=>(
+                    <constants.Icons.Ionicons name="home" size={30} color={color}/>
+                )
+             })}
+        />
+
         <BottomTab.Screen 
             name ={constants.ScreenNames.BottomTab.MARKET_HOME} 
             component={MarketStackComponent}
@@ -49,7 +62,7 @@ export const BottomTabNavigator = ()=>(
                 title:'Market',     
                 tabBarStyle:{display:getTabBarVisibility(route)},          
                 tabBarIcon: ({color})=>(
-                    <constants.Icons.Octicons name="home" size={30} color={color}/>
+                    <constants.Icons.Ionicons name="cart" size={30} color={color}/>
                 )
              })}
         />

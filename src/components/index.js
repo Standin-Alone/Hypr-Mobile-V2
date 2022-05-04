@@ -26,7 +26,10 @@ import {
     CartCard,
     SearchProductCard
     } from "./cards";
-
+import {
+    Loader
+} 
+from "./loader"
 
 
 export default {
@@ -52,7 +55,9 @@ export default {
     VariantCard,
     AddressCard,
     CartCard,
-    SearchProductCard
+    SearchProductCard,
+
+    Loader
 
 
 }

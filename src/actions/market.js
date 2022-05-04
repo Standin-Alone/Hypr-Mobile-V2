@@ -302,6 +302,58 @@ export const getProductVariants = async (payload,setState,props)=>{
 
 
 
+export const getState = (payload,setState)=>{
+    
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+    
+                        
+            // GET REQUEST
+            GET(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_STATE}/${payload.countryName}`).then((response)=>{                    
+            
+                if(response.data.status == true){
+
+                    // LOAD STATE
+                    setState({states:response.data.data});
+                    console.warn(response.data.data);
+                    
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+                           
+            }).catch((error)=>{
+                console.warn(error)
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                
+            });
+        
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+        
+         }
+    });
+}
+
+
+
 export const getCities = (payload,setState)=>{
     
 

@@ -73,7 +73,8 @@ export default class VariantList extends React.Component {
     render(){
         
         return(
-            <>
+            <>  
+                <Components.Loader isLoading={this.state.isLoading}/>   
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}
                     title="Select Variant"

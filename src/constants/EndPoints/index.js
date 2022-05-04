@@ -25,6 +25,7 @@ const EndPoints = {
 
     SAVE_ADDRESS:'/market/save-address',
     GET_CITIES:'/market/get-cities',
+    GET_STATE:'/market/get-state',
 
 
     // ORDER

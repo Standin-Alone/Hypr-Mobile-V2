@@ -9,7 +9,7 @@ import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION} from '../../../utils/async_storage/index';
 
-import { saveAddress,getCities,getShippingAddress} from '../../../actions/market';
+import { saveAddress,getState,getShippingAddress} from '../../../actions/market';
 
 export default class AddressForm extends React.Component {
      constructor(props) {
@@ -70,6 +70,7 @@ export default class AddressForm extends React.Component {
             countryName:''
         },
         cities:[],
+        states:[],
         isLoading:false
       };
     }
@@ -101,9 +102,9 @@ export default class AddressForm extends React.Component {
         this.setState({country:{...this.state.country,value:selectedCountryCode,countryName:selectedCountryName,error:false}})
         
         let payload = {
-            countryCode:selectedCountryCode
+            countryName:selectedCountryName
         }
-        return getCities(payload,this.setMyState)
+        return getState(payload,this.setMyState)
     }  
 
 
@@ -210,7 +211,7 @@ export default class AddressForm extends React.Component {
                                 <Components.PrimaryStateSelect
                                         onSelect={this.handleSelectState}                                    
                                         value={this.state.state.value}
-                                        items={this.state.cities}
+                                        items={this.state.states}
                                         errorMessage={this.state.state.errorMessage}
                                         isError={this.state.state.error}
                                         isFocus={this.state.state.focus}
@@ -219,7 +220,7 @@ export default class AddressForm extends React.Component {
                             </View>
 
 
-
+{/* 
                             <View>     
                                 <Components.PrimaryCitySelect
                                         onSelect={this.handleSelectCity}                                    
@@ -230,7 +231,7 @@ export default class AddressForm extends React.Component {
                                         isFocus={this.state.city.focus}
                                         iconName="flag"
                                 />                        
-                            </View>
+                            </View> */}
 
                             {/* <View>     
                                 <Components.PrimaryTextInput

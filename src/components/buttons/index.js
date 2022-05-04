@@ -22,7 +22,7 @@ export const PrimaryButton = ({
 
     <LinearGradient
     start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-    colors={[constants.Colors.primary, constants.Colors.secondary]}
+    colors={[constants.Colors.gradient.primary, constants.Colors.gradient.secondary]}
     style={[styles.primaryButton,moreStyle]}
     >
         <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "center",alignItems: "center",padding:'2%'}} >

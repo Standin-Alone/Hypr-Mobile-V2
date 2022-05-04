@@ -4,9 +4,9 @@ export default Colors = {
     primary: '#246EE9', 
     secondary:'#6803ff',        
     gradient:{
-        primary:'#246EE9',
-        secondary:'#6803ff',
-        tertiary:'#FF2400'
+        primary:'#BB22FE',
+        secondary:'#0561D0',
+        tertiary:'#2787FA'
     }, 
     danger:'',
     warning:'',

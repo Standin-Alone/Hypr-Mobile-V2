@@ -49,6 +49,18 @@ subTotalText:{
 subTotalValue:{
     fontFamily:constants.Fonts.OpenSansMedium,
     fontSize:16,
+},
+totalContainer:{    
+    paddingVertical:constants.Dimensions.vh(2),
+    top:constants.Dimensions.vh(18),
+    backgroundColor:constants.Colors.light,
+    flexDirection:'column',
+},
+paymentMethodContainer:{    
+    paddingVertical:constants.Dimensions.vh(5),
+    top:constants.Dimensions.vh(20),
+    backgroundColor:constants.Colors.light,
+    flexDirection:'column',
 }
   
 });

@@ -55,7 +55,8 @@ export default class Market extends React.Component {
     render(){
         return(
             <>
-                <View>
+                <View  style={{flex:1}}>
+                    <Components.Loader isLoading={this.state.isLoading}/>
                     <Components.MarketHeader
                         showSearch={true}
                         goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
