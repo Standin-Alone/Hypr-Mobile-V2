@@ -8,6 +8,7 @@ import { MarketStackComponent } from './MarketStack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { SocialStackComponent } from './SocialStack';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -44,8 +45,8 @@ export const BottomTabNavigator = ()=>(
      >
 
         <BottomTab.Screen 
-            name ={constants.ScreenNames.BottomTab.HOME} 
-            component={Home}
+            name ={constants.ScreenNames.BottomTab.SOCIAL_HOME} 
+            component={SocialStackComponent}
             options={({route,navigation})=>({    
                 title:'Home',     
                 tabBarStyle:{display:getTabBarVisibility(route)},          

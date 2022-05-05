@@ -31,6 +31,9 @@ import {
 } 
 from "./loader"
 
+import {
+    PaymentMethodModal
+} from "./modal"
 
 export default {
     // Buttons
@@ -57,7 +60,9 @@ export default {
     CartCard,
     SearchProductCard,
 
-    Loader
+    Loader,
+
+    PaymentMethodModal
 
 
 }

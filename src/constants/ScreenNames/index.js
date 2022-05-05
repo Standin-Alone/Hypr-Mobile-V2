@@ -8,7 +8,7 @@ export default {
 
    },
    BottomTab:{
-      HOME:'Home',
+      SOCIAL_HOME:'SocialHome',
       MARKET_HOME:"MarketHome",
       USER_PROFILE:"UserProfile"
    },
@@ -22,6 +22,12 @@ export default {
        CART:'Cart',
        WISH_LIST:'WishList',
        ORDER:'Order',
-   }
+   },
+   Social:{
+      SOCIAL:'Social',
+      CREATE_POST:'CreatePost',
+      
+   
+  }
     
 }

@@ -20,6 +20,8 @@ export default class Order extends React.Component {
           isReadyToRender:true,    
           cart:this.props.route.params.cart,
           orderId:this.props.route.params.orderId,           
+          selectedPaymentMethod:'',
+          openPaymentMethodModal:false
       };
     }
 
@@ -84,13 +86,28 @@ export default class Order extends React.Component {
         </View>
     )
 
+    
+    handleOpenPaymentModal(){
+        
+        this.setState({openPaymentMethodModal:true})
+    }
 
+
+    // HANDLE PAY BUTTON
     handlePay = async () =>{
 
+        let payload ={
+            cart:this.state.cart
 
-       
+        }
+
+        return pay(payload,this.setMyState,this.props)
     }
     
+    
+    handleSelectPaymentMethod = (paymentMethod)=>{
+        this.setState({selectedPaymentMethod:paymentMethod,openPaymentMethodModal:false})
+    }
 
     render(){
      
@@ -101,7 +118,16 @@ export default class Order extends React.Component {
                     title={'My Orders'}
                 />             
 
+            <Components.PaymentMethodModal
+                openModal={this.state.openPaymentMethodModal}
+                onCloseModal={()=> this.setState({openPaymentMethodModal:false})}
+                onPress={(paymentMethod)=>this.handleSelectPaymentMethod(paymentMethod)}
+            />
             <View>
+              
+                <View style={styles.itemCountContainer}>
+                    <Text style={styles.itemCountText}>{`${this.state.cart.length} items`}</Text>
+                </View>
                 <ScrollView style={{ height:constants.Dimensions.vh(115),}}>
                     <View style={{flexGrow:1}}>
                         <FlatList
@@ -139,9 +165,24 @@ export default class Order extends React.Component {
                    <View style={{flex:1,justifyContent:'flex-start'}}>
                         <Text style={styles.subTotalText}>Payment Method:</Text>
                    </View>
-                   <TouchableOpacity style={{flex:0,justifyContent:'flex-end'}}>
-                        <Text style={styles.subTotalValue} >Select Payment...</Text>
-                   </TouchableOpacity>                                  
+
+          
+                        <TouchableOpacity style={{flex:0,justifyContent:'flex-end'}} onPress={()=>this.handleOpenPaymentModal()}>
+                            <Text style={styles.subTotalValue} >    
+                            {  this.state.selectedPaymentMethod == '' ?
+                                 'Select Payment...' 
+                                 : 
+                                 <constants.Icons.FontAwesome 
+                                    name={'cc-'+this.state.selectedPaymentMethod}
+                                    size={30}
+                                    color={constants.Colors.primary}
+                                /> 
+                                } </Text>
+                        </TouchableOpacity>   
+                        
+                        
+                    
+                                                 
                </View>
        
 

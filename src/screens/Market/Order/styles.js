@@ -61,6 +61,13 @@ paymentMethodContainer:{
     top:constants.Dimensions.vh(20),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
+},
+itemCountContainer:{    
+    left:constants.Dimensions.vw(4),    
+},
+itemCountText:{
+    fontFamily:constants.Fonts.OpenSansMedium,
+    fontSize:16,
 }
   
 });

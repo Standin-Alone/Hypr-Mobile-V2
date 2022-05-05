@@ -56,7 +56,8 @@ export default class Cart extends React.Component {
                            
             }
         });
-      
+
+        
         this.setState({cart:selectedProducts});
     }
 
