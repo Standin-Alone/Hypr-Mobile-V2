@@ -101,3 +101,148 @@ export const checkout = (payload,setState,props)=>{
     });
 
 }
+
+
+// STRIPE FUNCTION
+export const payWithStripe = ()=>{
+
+}
+
+// PAYPAL FUNCTION
+export const payWithPaypal = (payload,setState) =>{
+
+
+
+
+     
+    // POST REQUEST
+    POST(`${getBaseUrl().accesspoint}${constants.EndPoints.PAY_WITH_PAYPAL}`,payload).then((response)=>{                    
+        
+        
+       
+         // turn off loading
+         setState({isLoading:false});
+    }).catch((error)=>{
+        console.warn(error)
+        Toast.show({
+            type:'error',
+            text1:'Something went wrong!'
+        });
+        
+        // turn off loading
+        setState({isLoading:false});
+    });
+
+}
+
+
+
+export const pay = (payload,setState,props)=>{
+
+  
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // PAY WITH PAYPAL
+            if(payload.paymentMethod == 'paypal'){
+
+
+                props.navigation.navigate(constants.ScreenNames.Market.PAYMENT,payload)
+            }
+            // PAY WITH STRIPE
+            else if(payload.paymentMethod == 'stripe'){
+
+            }
+         
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+// FINAL SUCESS PAYMENT ACTION
+export const successPayment = (payload,setState,props)=>{
+    
+  
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+            let url = payload.url;    
+            let spliturl = url.split('?');     
+            let splitotherhalf = spliturl[1].split('&');
+         
+            
+            let paymentId = splitotherhalf[0].replace("paymentId=","");
+            let payerId = splitotherhalf[2].replace("PayerID=","");
+
+            console.warn('payerId',payerId);
+            console.warn('paymentId',paymentId);
+
+            let cleanPayload = {
+                cart:payload.cart,
+                orderId:payload.orderId,
+                userId:payload.userId,
+                paymentMethod:payload.paymentMethod,
+                paymentId:paymentId,
+                payerId:payerId,
+            }
+
+
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.FINAL_SUCCESS_PAYMENT}`,cleanPayload).then((response)=>{                    
+                                
+                if(response.data.status == true){
+                    Toast.show({
+                        type:'success',
+                        text1:response.data.message
+                    });
+
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                    });
+                }else{
+
+                }
+                // turn off loading
+                setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+            
+         
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}

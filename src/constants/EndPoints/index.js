@@ -27,10 +27,13 @@ const EndPoints = {
     GET_CITIES:'/market/get-cities',
     GET_STATE:'/market/get-state',
 
+    
 
     // ORDER
 
     CHECKOUT:'/create-order',
+    PAY_WITH_PAYPAL:'/payment/pay-with-paypal',
+    FINAL_SUCCESS_PAYMENT:'/payment/final-success-payment',
 
 }
 

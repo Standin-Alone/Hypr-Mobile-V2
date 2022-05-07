@@ -45,7 +45,7 @@ export default class AddressForm extends React.Component {
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'San jose'
             
         },
         state:{
@@ -132,7 +132,7 @@ export default class AddressForm extends React.Component {
 
         console.warn(this.state.city);
         let payload = {
-            userId: await GET_SESSION('user_id'),            
+            userId: await GET_SESSION('USER_ID'),            
             firstName:this.state.firstName.value,
             lastName:this.state.lastName.value,
             contact:this.state.contact.value,

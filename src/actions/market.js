@@ -419,6 +419,8 @@ export const saveAddress = (payload,setState,props)=>{
                 if(payload[item] !== undefined || payload[item] != '' ){  
                     
                     if(payload[item] == ''){
+
+                        console.warn(item);
                         setState({[item]:{...payload[item],error:true,errorMessage:`Please enter this required field.`}})                                                
                         countError++;
                     }else{                    
@@ -435,6 +437,7 @@ export const saveAddress = (payload,setState,props)=>{
                 }
             })            
 
+      
             // check error count
             if(countError == 0){                
 

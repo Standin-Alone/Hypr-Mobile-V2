@@ -6,12 +6,13 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import {styles} from './styles';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { getCart,increaseQuantity,decreaseQuantity } from '../../../actions/market';
-import { GET_SESSION } from '../../../utils/async_storage';
+import { increaseQuantity,decreaseQuantity } from '../../../actions/market';
+
 import { computeCart } from "../../../utils/functions";
-import { checkout} from '../../../actions/order';
+import { pay} from '../../../actions/order';
 import Toast from 'react-native-toast-message';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { GET_SESSION } from '../../../utils/async_storage';
 
 export default class Order extends React.Component {
     constructor(props) {
@@ -97,11 +98,23 @@ export default class Order extends React.Component {
     handlePay = async () =>{
 
         let payload ={
-            cart:this.state.cart
-
+            cart:this.state.cart,
+            paymentMethod:this.state.selectedPaymentMethod,
+            orderId:this.state.orderId,
+            userId: await GET_SESSION('USER_ID')
         }
 
-        return pay(payload,this.setMyState,this.props)
+        if(this.state.selectedPaymentMethod != ''){
+            return pay(payload,this.setMyState,this.props)
+        }else{
+            Toast.show({
+                type:'error',
+                text1: 'Error',
+                text2:'Please select payment method first'
+            });
+        }
+
+        
     }
     
     

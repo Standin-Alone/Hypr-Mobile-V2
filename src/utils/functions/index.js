@@ -14,7 +14,7 @@ export const calculateFreight = (payload,setState,props)=>{
 
   
     let cleanPayload = {
-                    eccode: payload.shippingAddress.country_code, // end country code / kung san dadating
+                    eccode: payload.shippingAddress?.country_code ? payload.shippingAddress.country_code : 'PH', // end country code / kung san dadating
                     products: [
                         {
                             quantity: 1,

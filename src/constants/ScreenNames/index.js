@@ -22,6 +22,7 @@ export default {
        CART:'Cart',
        WISH_LIST:'WishList',
        ORDER:'Order',
+       PAYMENT:'Payment'
    },
    Social:{
       SOCIAL:'Social',

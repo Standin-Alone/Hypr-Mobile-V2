@@ -10,6 +10,7 @@ import Cart from '../screens/Market/Cart';
 import Search from '../screens/Market/Search';
 import WishList from '../screens/Market/WishList';
 import Order from '../screens/Market/Order';
+import Payment from '../screens/Market/Payment';
 const MarketStack = createStackNavigator();
 
 export const MarketStackComponent= () => {
@@ -76,6 +77,11 @@ export const MarketStackComponent= () => {
              <MarketStack.Screen
                 component={Order}
                 name={constants.ScreenNames.Market.ORDER}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />         
+            <MarketStack.Screen
+                component={Payment}
+                name={constants.ScreenNames.Market.PAYMENT}
                 options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
             />           
 
