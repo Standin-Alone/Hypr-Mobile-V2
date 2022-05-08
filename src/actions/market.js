@@ -134,11 +134,70 @@ export const getWishList = async (setState)=>{
             }
                 
             // POST REQUEST
-            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_WISH_LIST}`,payload).then((response)=>{                    
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_WISH_LIST}`,payload).then(async (response)=>{                    
                 
                 if(response.data.status == true){
-                    
+                    console.warn(response.data.data.length);
                     setState({wishList:response.data.data.length == 0 ? [] :  response.data.data});                                                          
+                                        
+                                        
+                }else{
+                    // Toast.show({
+                    //     type:'error',
+                    //     text1: response.data.message
+                    // });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+export const getCartCount = async (setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let userId = await GET_SESSION('USER_ID');
+
+            let payload = {
+                userId:userId
+            }
+                
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_CART_COUNT}`,payload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                                                   
+                    
+                    setState({notificationCount:response.data.data});                                                          
                                         
                                         
                 }else{
@@ -175,6 +234,7 @@ export const getWishList = async (setState)=>{
     });
 
 }
+
 
 
 export const getShippingAddress = async (setState)=>{
@@ -690,9 +750,7 @@ export const removeProductFromWishList = (payload,setState,props)=>{
                                 text1:'Success',                    
                                 text2: response.data.message
                         });
-                        
-                        payload.getWishList(setState);
-                        
+                        getWishList(setState);
 
                     }else{
                         Toast.show({
@@ -701,6 +759,8 @@ export const removeProductFromWishList = (payload,setState,props)=>{
                         });
 
                     }
+
+                    
                 
                     // turn off loading
                     setState({isLoading:false});

@@ -60,5 +60,13 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,        
         top:5,
         color:constants.Colors.gray
+    },
+    
+    buttonWithTopIconText:{
+        textAlign:'center',
+        fontSize:14,
+        fontFamily:constants.Fonts.OpenSansMedium,        
+        top:5,
+        color:constants.Colors.dark_tint
     }
 });

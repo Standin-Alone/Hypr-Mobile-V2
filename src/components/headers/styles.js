@@ -52,6 +52,17 @@ export const styles = StyleSheet.create({
         fontSize:20,
         top:constants.Dimensions.vh(2),
         color:constants.Colors.primary
+    },
+    notification:{
+        position: "absolute",
+        left: constants.Dimensions.vw(10),
+        bottom: constants.Dimensions.vh(9),
+        width: 20,
+        height: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+        backgroundColor: constants.Colors.danger
     }
   
 });

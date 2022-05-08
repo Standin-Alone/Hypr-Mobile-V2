@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow } from '../../../actions/market';
+import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
 
 
@@ -18,6 +18,7 @@ export default class ProductDetail extends React.Component {
       this.state = {
         variant:this.props.route.params.variant,     
         freightCalculation:this.props.route.params.freightCalculation,   
+        notificationCount:0,
         shippingAddress:[],
         wishList:[],
         isLoading:false
@@ -30,9 +31,14 @@ export default class ProductDetail extends React.Component {
 
     componentDidMount(){
            
+
+        this.props.navigation.addListener('focus',()=>{
+            getShippingAddress(this.setMyState)
+            getWishList(this.setMyState)     
+            getCartCount(this.setMyState)
+        })
      
-        getShippingAddress(this.setMyState)
-        getWishList(this.setMyState)                         
+                         
     }
 
     handleUpdateStateFromChangeAddress = (newFreight)=>{
@@ -119,7 +125,8 @@ export default class ProductDetail extends React.Component {
                     goToShoppingCart = {()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}                         
                     showGoback={true}                                                      
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
-
+                    isNotificationCount
+                    notificationCount={this.state.notificationCount}
                 />
                 <View style={styles.variantContainer}>                                                 
                     <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>

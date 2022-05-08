@@ -1,16 +1,14 @@
 
-
-
 // STYLESHEET
 
 import React from 'react';
 import {StyleSheet} from 'react-native';
-import constants from '../../../constants';
+import constants from '../../constants';
 
 export const styles = StyleSheet.create({
- myOrdersContainer:{
-    flexDirection:'row',
-    justifyContent:'space-evenly'
- }
+    container:{
+        flex:1,
+    },
+   
 });
 

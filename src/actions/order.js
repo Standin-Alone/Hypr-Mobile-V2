@@ -202,20 +202,31 @@ export const successPayment = (payload,setState,props)=>{
                 payerId:payerId,
             }
 
-
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.FINAL_SUCCESS_PAYMENT}`,cleanPayload).then((response)=>{                    
                                 
                 if(response.data.status == true){
-                    Toast.show({
-                        type:'success',
-                        text1:response.data.message
-                    });
 
-                    props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                    let confirmOrderPayload = {
+                        orderId:payload.orderId
+                    }
+                    // CONFIRM ORDER PAYMENT
+                    POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{                                                                  
+
+                        if(result.data.result == true){
+                            props.navigation.reset({
+                                index: 0,
+                                routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                            });        
+                        }else{
+                            Toast.show({
+                                type:'error',
+                                text1:'Something went wrong!',
+                                text2:result.data.message
+                            });
+                        }
                     });
+                                     
                 }else{
 
                 }

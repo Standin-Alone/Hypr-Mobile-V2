@@ -20,20 +20,21 @@ export default class WishList extends React.Component {
     setMyState = (value)=>this.setState(value)
 
 
-    async componentDidMount(){    
+    componentDidMount(){    
         getWishList(this.setMyState);
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
-         console.warn(this.state.wishList);
+         
        })
  
     }   
 
+
     handleRemoveProductFromWishList = async (item)=>{
         console.warn(item);
         let payload = {
-            wishListId:item._id,
-            getWishList: this.getWishList(this.setMyState).bind(this)
+            wishListId:item._id,  
+            reloadWishList:()=>getWishList(this.setMyState)
         }
 
         return removeProductFromWishList(payload,this.setMyState,this.props)
@@ -66,7 +67,9 @@ export default class WishList extends React.Component {
                 />      
 
                 <FlatList
+                    
                     data={this.state.wishList}
+                    extraData={this.state}
                     renderItem={this.renderItem}
                     contentContainerStyle={styles.allProductsContainer}                  
                 />

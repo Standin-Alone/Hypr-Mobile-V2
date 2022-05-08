@@ -1,6 +1,6 @@
 import React from 'react';
 import { FlatList, View,Text } from 'react-native';
-import { getAllProducts,getProductVariants,getShippingAddress} from '../../../actions/market';
+import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../../actions/market';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { SET_SESSION } from '../../../utils/async_storage/model';
@@ -14,6 +14,7 @@ export default class Market extends React.Component {
       super(props);
       this.state = {   
           isLoading:false,
+          notificationCount:0,
           products:[]
       };
 
@@ -25,9 +26,13 @@ export default class Market extends React.Component {
 
     componentDidMount(){        
       
-        getAllProducts(this.setMyState)
-        
-        getShippingAddress(this.setMyState);
+
+        this.props.navigation.addListener('focus',()=>{
+            getAllProducts(this.setMyState)        
+            getShippingAddress(this.setMyState);
+            getCartCount(this.setMyState)
+        })
+       
     }
 
 
@@ -63,6 +68,8 @@ export default class Market extends React.Component {
                         goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
                         goToSearch={()=>this.props.navigation.navigate(constants.ScreenNames.Market.SEARCH)}
                         goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
+                        isNotificationCount
+                        notificationCount={this.state.notificationCount}
                     />
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Featured Products</Text>

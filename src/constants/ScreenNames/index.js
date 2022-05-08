@@ -28,7 +28,12 @@ export default {
       PROFILE:'Profile',       
       ACCOUNT_SETTINGS:'AccountSettings',
       ADDRESS_BOOK:'AddressBook',
-      ADDRESS_EDIT_FORM:'AddressEditForm'
+      ADDRESS_EDIT_FORM:'AddressEditForm',
+      tracking:{
+         TO_VERIFY:'ToVerify',
+         TO_SHIP:'ToShip',
+         TO_RECEIVE:'ToReceive',
+      }
    },
    Social:{
       SOCIAL:'Social',

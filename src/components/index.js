@@ -3,7 +3,8 @@ import {
     PrimaryButton,
     PrimaryButtonOutline,
     ChangeDeliveryButton,
-    PrimaryButtonNoOutline
+    PrimaryButtonNoOutline,
+    ButtonWithTopIcon
     } from "./buttons";
 
 import { 
@@ -43,6 +44,7 @@ export default {
     PrimaryButtonOutline,
     PrimaryButtonNoOutline,
     ChangeDeliveryButton,
+    ButtonWithTopIcon,
 
 
 

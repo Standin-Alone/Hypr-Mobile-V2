@@ -187,3 +187,33 @@ export const ChangeDeliveryButton = ({
         </TouchableOpacity>
 
 );
+
+
+export const ButtonWithTopIcon = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    isLoading,
+    loadingTitle,
+    iconName
+})=>(   
+
+        <TouchableOpacity  onPress={onPress} >
+            <View style={{ flexDirection:'column',justifyContent:'center' }}>
+                <constants.Icons.FontAwesome5 
+                    name={iconName} 
+                    size={20} 
+                    color={constants.Colors.secondary}
+                    style={{alignSelf:'center'}}
+                />
+                <Text style={[styles.buttonWithTopIconText]} numberOfLines={1} ellipsizeMode="tail">
+                    { isLoading ? loadingTitle : title}
+                </Text>
+
+        
+            </View>
+        </TouchableOpacity>
+
+);

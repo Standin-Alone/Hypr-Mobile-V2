@@ -39,7 +39,9 @@ export const MarketHeader = ({
     goToShoppingCart,
     goToSearch,
     showSearch,
-    showGoback
+    showGoback,
+    isNotificationCount,
+    notificationCount
  })=>(   
     <>   
         
@@ -81,6 +83,14 @@ export const MarketHeader = ({
                         color={constants.Colors.primary}
                     />
                 </TouchableOpacity>                       
+                {
+                    isNotificationCount &&
+                    <View
+                        style={styles.notification}
+                    >
+                        <Text style={{ fontSize: 12, color: "#fff" }}>{notificationCount}</Text>
+                    </View>
+                }
             </View>  
             <View style={styles.buttonContainer}>                     
                 <TouchableOpacity onPress={goToWishList}  style={{ padding:15 }}>
