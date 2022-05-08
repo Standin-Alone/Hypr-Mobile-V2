@@ -26,7 +26,8 @@ export const styles = StyleSheet.create({
         borderRadius:240,    
         borderWidth:1,
         borderColor:constants.Colors.primary,
-        elevation:2
+        elevation:2,
+        backgroundColor:constants.Colors.light
         
     },
     primaryButtonOutlineText:{        
@@ -35,6 +36,24 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.primary
     },
+
+
+    primaryButtonNoOutline:{
+        height:constants.Dimensions.vh(12),
+        width:constants.Dimensions.vw(100),  
+        backgroundColor:constants.Colors.light,
+        borderColor:constants.Colors.dark_tint,        
+        borderWidth:0.2,
+                
+    },
+    primaryButtonNoOutlineText:{        
+        textAlign:'center',
+        fontSize:20,
+        fontFamily:constants.Fonts.OpenSansRegular,        
+        color:constants.Colors.dark_tint
+    },
+
+
     changeDeliveryText:{
         textAlign:'center',
         fontSize:14,

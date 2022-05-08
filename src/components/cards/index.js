@@ -37,6 +37,8 @@ export const SearchProductCard = ({
    productName,
    productPrice,
    addToCart,
+   showRemoveFromWishList,
+   onRemove
    
 })=>(   
    <>          
@@ -49,10 +51,23 @@ export const SearchProductCard = ({
                   <View>
                         <Text style={styles.productSearchName} adjustsFontSizeToFit numberOfLines={2}>{productName}</Text>
                   </View>         
-                  <View style={{justifyContent:'flex-end',flexDirection:'row',top:constants.Dimensions.vh(9)}}>
+                  <View style={{justifyContent:'flex-end',flexDirection:'row',top:constants.Dimensions.vh(9),left:constants.Dimensions.vw(10)}}>
                         <Text style={styles.productSearchPrice} adjustsFontSizeToFit> ${productPrice}</Text>
                   </View>  
             </View>
+
+            {true &&
+            <View style={{flexDirection:'row',flex:0.2, justifyContent:'flex-end'}}>                  
+               <TouchableOpacity onPress={onRemove}>
+                     <constants.Icons.Ionicons
+                           name="trash-outline"
+                           size={16}
+                           color={constants.Colors.dark_tint}
+                     />
+               </TouchableOpacity>
+            </View>
+            }
+            
                 
          </View>                        
       </TouchableOpacity>                         
@@ -101,7 +116,8 @@ export const VariantCard = ({
 export const AddressCard = ({
    data,  
    isSelected,
-   onSelect
+   onSelect,
+   goToEditAddress
 })=>(
    <TouchableOpacity style={[styles.addressCardContainer,{
       borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
@@ -110,16 +126,22 @@ export const AddressCard = ({
    onPress={onSelect}   
    >
       <View style={styles.addressCard}>
-         <View style={{flex:0.5}}>
+         <View style={{flex:0.4}}>
             <FastImage source={constants.Images.addressIcon} resizeMode={FastImage.resizeMode.contain} style={styles.addressIcon}/>
          </View>    
-         <View style={{flex:1,flexDirection:'column',alignSelf:'baseline',top:6}}>
-            <Text style={styles.countryText}>{data.country}</Text>
-            <Text style={{flexWrap: 'wrap'}}>{data.full_name}</Text>
+         <View style={{flex:0.8,flexDirection:'column',alignSelf:'baseline',top:6}}>            
+            <Text style={{flexWrap: 'wrap'}}>{data.full_name}</Text>         
+            <Text style={styles.countryText}>{data.country}</Text>            
             <Text  style={{flexWrap: 'wrap'}} numberOfLines={5}> {data.address}</Text>
             <Text style={{flexWrap: 'wrap'}}>{data.city}</Text>
             <Text  style={{flexWrap: 'wrap'}}>{data.zip_code}</Text>                        
-         </View>     
+         </View>    
+         <View style={{flex:0.2,flexDirection:'column',alignSelf:'baseline',top:6}}>
+            <TouchableOpacity onPress={goToEditAddress}>
+               <Text style={styles.editButtonText}>Edit</Text>
+            </TouchableOpacity>
+                                
+         </View>    
          
       </View>
    </TouchableOpacity>

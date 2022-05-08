@@ -35,7 +35,8 @@ export default class Market extends React.Component {
     handleAddToCart = (item)=>{
         
         let parameters = {            
-            pid:item.pid
+            pid:item.pid,
+            productName:item.productNameEn
         }    
 
         return getProductVariants(parameters,this.setMyState,this.props)

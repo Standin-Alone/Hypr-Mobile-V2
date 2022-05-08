@@ -24,11 +24,15 @@ export default {
        ORDER:'Order',
        PAYMENT:'Payment'
    },
+   Profile:{
+      PROFILE:'Profile',       
+      ACCOUNT_SETTINGS:'AccountSettings',
+      ADDRESS_BOOK:'AddressBook',
+      ADDRESS_EDIT_FORM:'AddressEditForm'
+   },
    Social:{
       SOCIAL:'Social',
-      CREATE_POST:'CreatePost',
-      
-   
+      CREATE_POST:'CreatePost',         
   }
     
 }

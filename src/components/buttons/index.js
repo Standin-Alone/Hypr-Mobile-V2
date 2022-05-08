@@ -61,13 +61,15 @@ export const PrimaryButtonOutline = ({
     loadingTitle,
     showIcon,
     iconName,
-    iconSize
+    iconSize,
+    moreStyle,
+    moreTextStyle
 })=>(   
 
-    <LinearGradient
-    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-    colors={[constants.Colors.light,constants.Colors.light]}
-    style={[styles.primaryButtonOutline]}
+    <View
+
+
+    style={[styles.primaryButtonOutline,moreStyle]}
     >
         <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "center",alignItems: "center",padding:10}} >
             <View style={{ flexDirection:'row' }}>
@@ -92,16 +94,69 @@ export const PrimaryButtonOutline = ({
                 />
                 :
 
-                <Text style={[styles.primaryButtonOutlineText]}>
+                <Text style={[styles.primaryButtonOutlineText,moreTextStyle]}>
                     { isLoading ? loadingTitle : title}
                 </Text>
 
             }
             </View>
         </TouchableOpacity>
-    </LinearGradient>
+    </View>
 );
 
+
+
+
+
+export const PrimaryButtonNoOutline = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    isLoading,
+    loadingTitle,
+    showIcon,
+    iconName,
+    iconSize
+})=>(   
+
+    <View
+   
+    style={[styles.primaryButtonNoOutline]}
+    >
+        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "flex-start",padding:10}} >
+            <View style={{ flexDirection:'row' }}>
+
+            {showIcon &&
+
+                <MaterialIcons 
+                    name={iconName}
+                    size={iconSize} 
+                    color={constants.Colors.primary}
+                />
+            }
+
+            {
+                isLoading ?
+                <Spinner                     
+                    isVisible={isLoading} 
+                    size={30} 
+                    type={'FadingCircleAlt'} 
+                    color={constants.Colors.primary}
+                    
+                />
+                :
+
+                <Text style={[styles.primaryButtonNoOutlineText]}>
+                    { isLoading ? loadingTitle : title}
+                </Text>
+
+            }
+            </View>
+        </TouchableOpacity>
+    </View>
+);
 
 
 

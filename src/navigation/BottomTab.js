@@ -9,6 +9,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { useNavigation } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { SocialStackComponent } from './SocialStack';
+import { ProfileStackComponent } from './ProfileStack';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -17,7 +18,7 @@ export function getTabBarVisibility(route) {
     
     const routeName = getFocusedRouteNameFromRoute(route);
         
-    if (routeName != 'Market' && routeName !== undefined) {        
+    if (( routeName != 'Market' && routeName != 'Profile' && routeName != 'Social') && routeName !== undefined) {        
       return 'none';
     }else{
         return 'flex';
@@ -70,13 +71,14 @@ export const BottomTabNavigator = ()=>(
 
         <BottomTab.Screen 
             name ={constants.ScreenNames.BottomTab.USER_PROFILE} 
-            component={UserProfile}
-            options={{ 
+            component={ProfileStackComponent}
+            options={({route,navigation})=>({    
                 title:"My Profile",
+                tabBarStyle:{display:getTabBarVisibility(route)}, 
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Octicons name="person-fill" size={30} color={color}/>
                 )
-             }}
+             })}
         />
     </BottomTab.Navigator>
 )

@@ -2,7 +2,8 @@
 import { 
     PrimaryButton,
     PrimaryButtonOutline,
-    ChangeDeliveryButton
+    ChangeDeliveryButton,
+    PrimaryButtonNoOutline
     } from "./buttons";
 
 import { 
@@ -15,7 +16,8 @@ import {
 
 import { 
     PrimaryHeader,
-    MarketHeader
+    MarketHeader,
+    ProfileHeader
     } from "./headers";
 
 
@@ -39,6 +41,7 @@ export default {
     // Buttons
     PrimaryButton,
     PrimaryButtonOutline,
+    PrimaryButtonNoOutline,
     ChangeDeliveryButton,
 
 
@@ -52,6 +55,7 @@ export default {
 
     PrimaryHeader,
     MarketHeader,
+    ProfileHeader,
 
 
     ProductCard,

@@ -2,7 +2,7 @@ import React from 'react';
 
 import { View,Text,InteractionManager} from 'react-native';
 import Components from '../../../components';
-import { getWishList} from '../../../actions/market';
+import { getWishList,removeProductFromWishList} from '../../../actions/market';
 import { FlatList } from 'react-native-gesture-handler';
 import { styles } from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
@@ -29,7 +29,15 @@ export default class WishList extends React.Component {
  
     }   
 
+    handleRemoveProductFromWishList = async (item)=>{
+        console.warn(item);
+        let payload = {
+            wishListId:item._id,
+            getWishList: this.getWishList(this.setMyState).bind(this)
+        }
 
+        return removeProductFromWishList(payload,this.setMyState,this.props)
+    }
 
     renderItem = ({item,index})=>{
         console.warn(item);
@@ -39,7 +47,7 @@ export default class WishList extends React.Component {
                    productImage ={item.product_img}
                    productName  ={item.variant_name}
                    productPrice  ={item.product_price}    
-                               
+                   onRemove={()=>this.handleRemoveProductFromWishList(item)}
                 />
             </View>
         )

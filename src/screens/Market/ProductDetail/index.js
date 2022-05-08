@@ -9,7 +9,7 @@ import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow } from '../../../actions/market';
-
+import Toast from 'react-native-toast-message';
 
 
 export default class ProductDetail extends React.Component {
@@ -68,8 +68,10 @@ export default class ProductDetail extends React.Component {
             return addToCart(payload,this.setMyState)
         }else{
             Toast.show({
-                type:'error',
-                text1: 'Please set your address first.'
+                type:'info',
+                text1: 'Message',
+                text2: 'Please set your address first.',
+                position:'top'
             });
         }
 
@@ -94,8 +96,10 @@ export default class ProductDetail extends React.Component {
             return buyNow(payload,this.setMyState,this.props)
         }else{
             Toast.show({
-                type:'error',
-                text1: 'Please set your address first.'
+                type:'info',
+                text1: 'Message',
+                text2: 'Please set your address first.',
+                position:'top'
             });
         }
 

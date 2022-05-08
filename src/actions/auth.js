@@ -107,7 +107,7 @@ export const createAccount = (payload,setState,props)=>{
                         
                         Toast.show({
                             type:'success',
-                            text1: 'Success!',
+                            text1: 'Success',
                             text2: response.data.message
                         });
 
@@ -187,8 +187,9 @@ export const login = (payload,setState,props) => {
                     console.warn(response.data);
                     if(response.data.status == true){
                         Toast.show({
-                            type:'success',
-                            text1: response.data.message
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
                         });
 
                         console.warn(response.data);
@@ -258,8 +259,9 @@ export const verifyOtp = (payload,setState,props)=>{
                     
                     if(response.data.status == true){
                         Toast.show({
-                            type:'success',
-                            text1: response.data.message
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
                         });                     
                         
                         SET_SESSION('USER_ID',payload.userId)

@@ -16,6 +16,7 @@ const EndPoints = {
     ADD_TO_CART:'/market/add-to-cart',
     GET_CART:'/market/get-cart',
     ADD_TO_WISHLIST:'/market/add-to-wishlist',
+    REMOVE_PRODUCT_FROM_WISHLIST:'/market/remove-product-from-wishlist',
 
     CALCULATE_FREIGHT:'/freight-calculate',
     INCREASE_QUANTITY:'/market/increase-quantity',
@@ -24,6 +25,8 @@ const EndPoints = {
 
 
     SAVE_ADDRESS:'/market/save-address',
+    UPDATE_ADDRESS:'/market/update-address',
+    DELETE_ADDRESS:'/market/delete-address',
     GET_CITIES:'/market/get-cities',
     GET_STATE:'/market/get-state',
 

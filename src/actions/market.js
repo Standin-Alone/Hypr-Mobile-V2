@@ -250,9 +250,20 @@ export const getProductVariants = async (payload,setState,props)=>{
             GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_PRODUCT_VARIANTS}?pid=${payload.pid}`).then((response)=>{                    
                
                 if(response.data.result == true){
-                                                                   
+                    
+                    
+                    
                     let variantList = response.data.data;
                     
+                    // check if variant has a name 
+                    variantList.map((items)=>{
+
+                        if(items.variantNameEn == null || items.variantNameEn == '' ){
+                            items.variantNameEn = payload.productName
+                        }
+                    })
+
+
                     
                     let parameters = {
                         variantList:variantList,
@@ -260,7 +271,7 @@ export const getProductVariants = async (payload,setState,props)=>{
                     }
 
 
-                    props.navigation.navigate('VariantList',parameters);
+                    props.navigation.navigate(constants.ScreenNames.Market.VARIANT_LIST,parameters);
 
                 }else{
                     Toast.show({
@@ -448,8 +459,9 @@ export const saveAddress = (payload,setState,props)=>{
                     if(response.data.status == true){
 
                         Toast.show({
-                            type:'success',
-                            text1: response.data.message
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
                         });
                         
                         props.navigation.goBack();
@@ -495,6 +507,229 @@ export const saveAddress = (payload,setState,props)=>{
 
 
 
+export const deleteAddress = (payload,setState,props)=>{
+    setState({isLoading:true});
+  
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // VALIDATE  PAYLOAD
+    
+
+                
+
+                
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.DELETE_ADDRESS}`,payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+
+                        Toast.show({
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
+                        });
+                        
+                        props.navigation.goBack();
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+                
+                    // turn off loading
+                    setState({isLoading:false});
+                }).catch((error)=>{
+                    console.warn('sample error ', error)
+                    
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+           
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+export const updateAddress = (payload,setState,props)=>{
+    setState({isLoading:true});
+  
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // VALIDATE  PAYLOAD
+            // validate payload
+            Object.keys(payload).map((item,index)=>{                
+                if(payload[item] !== undefined || payload[item] != '' ){  
+                    
+                    if(payload[item] == ''){
+
+                        console.warn(item);
+                        setState({[item]:{...payload[item],error:true,errorMessage:`Please enter this required field.`}})                                                
+                        countError++;
+                    }else{                    
+                       
+                        if(item == 'contact'){        
+                            // VALIDATE CONTACT                    
+                            if(!constants.RegEx.PHONE_NUMBER_REGX.pattern.test(payload[item])){
+                                setState({[item]:{...payload[item],value:payload[item],error:true,errorMessage:constants.RegEx.PHONE_NUMBER_REGX.errorMessage}})    
+                                countError++;
+                            }
+                        }
+                                          
+                    }
+                }
+            })            
+
+      
+            // check error count
+            if(countError == 0){                
+
+                
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.UPDATE_ADDRESS}`,payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+
+                        Toast.show({
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
+                        });
+                        
+                        props.navigation.goBack();
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+                
+                    // turn off loading
+                    setState({isLoading:false});
+                }).catch((error)=>{
+                    console.warn('sample error ', error)
+                    
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+            }else{
+                setState({isLoading:false});
+            }
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+
+export const removeProductFromWishList = (payload,setState,props)=>{
+    setState({isLoading:true});
+  
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // VALIDATE  PAYLOAD
+    
+
+                
+
+                
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.REMOVE_PRODUCT_FROM_WISHLIST}`,payload).then((response)=>{                    
+                    
+                    if(response.data.status == true){
+
+                        Toast.show({
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
+                        });
+                        
+                        payload.getWishList(setState);
+                        
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+
+                    }
+                
+                    // turn off loading
+                    setState({isLoading:false});
+                }).catch((error)=>{
+                    console.warn('sample error ', error)
+                    
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+           
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
 
 export const addToWishList =  (payload,setState)=>{
     setState({isLoading:true});
@@ -511,8 +746,9 @@ export const addToWishList =  (payload,setState)=>{
                     if(response.data.status == true){
 
                         Toast.show({
-                            type:'success',
-                            text1: response.data.message
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
                         });
                         
 
@@ -572,8 +808,9 @@ export const addToCart =  (payload,setState)=>{
                     if(response.data.status == true){
 
                         Toast.show({
-                            type:'success',
-                            text1: response.data.message
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
                         });
                         
                  

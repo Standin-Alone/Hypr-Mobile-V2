@@ -1,5 +1,7 @@
 import React from 'react';
 import { View } from 'react-native';
+import Components from '../../../components';
+import constants from '../../../constants';
 
 
 export default class UserProfile extends React.Component {
@@ -11,10 +13,10 @@ export default class UserProfile extends React.Component {
 
     render(){
         return(
-            <>
-                <View>
-                    
-                </View>
+            <>  
+                <Components.ProfileHeader
+                    goToProfileSettings={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.ACCOUNT_SETTINGS)}
+                />
             </>
         )
     }

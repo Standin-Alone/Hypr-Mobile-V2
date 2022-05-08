@@ -252,6 +252,7 @@ export const PrimaryCitySelect = ({
           noItemsText={"No Cities"}          
           submitButtonText="Submit"          
           single={true}
+        
         />
 
         {isError && 
@@ -327,8 +328,9 @@ export const PrimaryStateSelect = ({
           styleTextDropdownSelected={{fontFamily:constants.Fonts.GothamMedium}}
           styleInputGroup={{ backgroundColor:'transparent',fontFamily:constants.Fonts.GothamMedium  }}           
           styleDropdownMenuSubsection={{ backgroundColor:'transparent' }}
-          noItemsText={"No Cities"}                    
-          submitButtonText="Submit"          
+          noItemsText={"No States"}                    
+          submitButtonText="Submit"     
+               
           single={true}
         />
 

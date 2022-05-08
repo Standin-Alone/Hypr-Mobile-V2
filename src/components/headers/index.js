@@ -7,6 +7,30 @@ import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+
+export const ProfileHeader = ({
+    goToProfileSettings
+ })=>(   
+    <>   
+        
+        <View style={styles.marketContainer}>     
+
+            <View style={styles.buttonContainer}>                     
+                <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
+                    <MaterialCommunityIcons 
+                        name="cog" 
+                        size={30} 
+                        color={constants.Colors.primary}
+                    />
+                </TouchableOpacity>                       
+            </View>                       
+         </View>    
+    </>
+ );
+
+
+
+
 export const MarketHeader = ({
     title,
     onGoBack,
@@ -72,6 +96,8 @@ export const MarketHeader = ({
  );
 
 
+
+ 
 
 export const PrimaryHeader = ({
    title,

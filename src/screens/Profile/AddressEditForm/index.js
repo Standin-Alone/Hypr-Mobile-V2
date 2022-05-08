@@ -9,65 +9,66 @@ import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION} from '../../../utils/async_storage/index';
 
-import { saveAddress,getState,getShippingAddress} from '../../../actions/market';
+import { updateAddress,deleteAddress,getState,getShippingAddress} from '../../../actions/market';
 
-export default class AddressForm extends React.Component {
+export default class AddressEditForm extends React.Component {
      constructor(props) {
       super(props);
-      this.state = {        
+      this.state = {  
+                
           shippingAddress:GET_SESSION('shipping_address'),          
           firstName:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:this.props.route.params.full_name.split(/(\s+)/)[0]
         },
         lastName:{
           focus:false,
           error:false,
           errorMessage:'',
-          value:''
+          value:this.props.route.params.full_name.split(/(\s+)/)[2]
         },        
         contact:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:this.props.route.params.contact
         },
         country:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'',
-            countryName:''
+            value:this.props.route.params.country_code,
+            countryName:this.props.route.params.country
         },
         city:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:this.props.route.params.city
             
         },
         state:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:this.props.route.params.state
             
         },
         address:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'',
-            countryName:''
+            value:this.props.route.params.address,
+           
         },
         zipCode:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'',
-            countryName:''
+            value:this.props.route.params.zip_code,
+         
         },
         cities:[],
         states:[],
@@ -79,8 +80,10 @@ export default class AddressForm extends React.Component {
     setMyState = (value)=>this.setState(value)
 
     componentDidMount(){
+  
         let shippingAddress = getShippingAddress(this.setMyState).shippingAddress;
         this.setState({shippingAddress:shippingAddress})
+        
     }
     
 
@@ -128,11 +131,12 @@ export default class AddressForm extends React.Component {
     }  
 
 
-    handleSaveAddress = async  ()=>{
+    handleUpdateAddress = async  ()=>{
 
         console.warn(this.state.city);
         let payload = {
             userId: await GET_SESSION('USER_ID'),            
+            addressId:this.props.route.params.id,
             firstName:this.state.firstName.value,
             lastName:this.state.lastName.value,
             contact:this.state.contact.value,
@@ -144,7 +148,18 @@ export default class AddressForm extends React.Component {
             address:this.state.address.value,
         }
         
-        return saveAddress(payload,this.setMyState,this.props)
+        return updateAddress(payload,this.setMyState,this.props)
+    }
+
+    handleDeleteAddress = async ()=>{
+        
+        console.warn(this.state.city);
+        let payload = {
+            userId: await GET_SESSION('USER_ID'),            
+            addressId:this.props.route.params.id,    
+        }
+        
+        return deleteAddress(payload,this.setMyState,this.props)
     }
     render(){
      
@@ -152,7 +167,7 @@ export default class AddressForm extends React.Component {
             <>
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
-                    title={'Add Address'}
+                    title={'Edit Address'}
                 />             
                 <ScrollView>
                     <View style={styles.container} >                   
@@ -235,34 +250,6 @@ export default class AddressForm extends React.Component {
                             </View>
 
 
-{/* 
-                            <View>     
-                                <Components.PrimaryCitySelect
-                                        onSelect={this.handleSelectCity}                                    
-                                        value={this.state.city.value}
-                                        items={this.state.cities}
-                                        errorMessage={this.state.city.errorMessage}
-                                        isError={this.state.city.error}
-                                        isFocus={this.state.city.focus}
-                                        iconName="flag"
-                                />                        
-                            </View> */}
-
-                            {/* <View>     
-                                <Components.PrimaryTextInput
-                                        placeholder={"City"}
-                                        iconName="map"
-                                        onFocus={()=>this.setState({city:{...this.state.city,focus:true}})}
-                                        onBlur={()=>this.setState({city:{...this.state.city,focus:false}})}
-                                        isFocus={this.state.city.focus}
-                                        isError={this.state.city.error}
-                                        errorMessage={this.state.city.errorMessage}
-                                        value={this.state.city.value}
-                                        onChangeText={(value)=>this.setState({city:{...this.state.city,value:value,error:false}})}                                
-                                />                        
-                            </View> */}
-
-
 
                             <View>     
                                 <Components.PrimaryTextInput
@@ -298,12 +285,20 @@ export default class AddressForm extends React.Component {
 
 
                         </View>    
+
+                        <Components.PrimaryButtonOutline
+                               title="Delete Address"
+                               moreStyle={styles.deleteAddressButtonStyle}
+                               moreTextStyle={{color:constants.Colors.danger}}
+                               isLoading={this.state.isLoading}
+                               onPress={this.handleDeleteAddress}
+                        />
+
                         <Components.PrimaryButton
-                                title="Save"
-                                moreStyle={styles.addToCartButton}
+                                title="Save"                                
                                 isLoading={this.state.isLoading}
-                                onPress={this.handleSaveAddress}
-                            />
+                                onPress={this.handleUpdateAddress}
+                        />
                     </View>
                 </ScrollView>
             </>

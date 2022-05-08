@@ -28,7 +28,7 @@ export const styles = StyleSheet.create({
     productSearchName:{        
         flexWrap: 'wrap',
         fontFamily:constants.Fonts.OpenSansBold,
-        fontSize:19,
+        fontSize:16,
         top:constants.Dimensions.vh(2),        
     },
     productSearchPrice:{
@@ -124,7 +124,7 @@ export const styles = StyleSheet.create({
     addressCardContainer:{                             
         backgroundColor:constants.Colors.light,
         borderRadius: 8,
-        width: constants.Dimensions.vw(90),
+        width: constants.Dimensions.vw(95),
         height: constants.Dimensions.vh(40),
         flexDirection:'column',        
         elevation: 1,            
@@ -193,6 +193,10 @@ export const styles = StyleSheet.create({
         left:constants.Dimensions.vw(10),
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.danger
-    }
+    },
+    editButtonText:{
+        fontSize:14,
+        color:constants.Colors.primary
+    },
 });
 
