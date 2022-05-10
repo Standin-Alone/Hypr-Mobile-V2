@@ -214,6 +214,11 @@ export const successPayment = (payload,setState,props)=>{
                     POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{                                                                  
 
                         if(result.data.result == true){
+                            Toast.show({
+                                type:'success',
+                                text1:'Success',
+                                text2:'Successfully paid your order. Please wait for your order to verify.'
+                            });
                             props.navigation.reset({
                                 index: 0,
                                 routes: [{ name: constants.ScreenNames.AppStack.HOME }]

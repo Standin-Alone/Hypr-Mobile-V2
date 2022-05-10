@@ -2,11 +2,12 @@ import React from 'react';
 
 import { View,Text,InteractionManager} from 'react-native';
 import Components from '../../../components';
-import { searchProducts} from '../../../actions/market';
+import { getProductVariants, searchProducts} from '../../../actions/market';
 import { FlatList } from 'react-native-gesture-handler';
 import { styles } from './styles';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import constants from '../../../constants';
+
 export default class Search extends React.Component {
     constructor(props) {
       super(props);
@@ -48,6 +49,16 @@ export default class Search extends React.Component {
         this.setState({search:{...this.state.search,value:value}})
     }
 
+    handleAddToCart = (item)=>{
+        
+        let parameters = {            
+            pid:item.pid,
+            productName:item.productNameEn
+        }    
+
+        return getProductVariants(parameters,this.setMyState,this.props)
+    }
+
     renderItem = ({item,index})=>{
         
         return(
@@ -56,8 +67,8 @@ export default class Search extends React.Component {
                    productImage ={item.productImage}
                    productName  ={item.productNameEn}
                    productPrice  ={item.sellPrice}   
-                 
-
+                   addToCart={()=>this.handleAddToCart(item)}
+                    
                 />
             </View>
         )

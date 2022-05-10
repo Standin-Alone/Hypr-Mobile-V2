@@ -34,4 +34,18 @@ name
 }   
 
 
-export {setSession,getSession};
+const clearSession = async function  (
+ 
+  ){
+      try {
+  
+          await AsyncStorage.clear();
+          
+        } catch (e) {
+          // saving error
+          return e;
+        }    
+  }   
+
+  
+export {setSession,getSession,clearSession};

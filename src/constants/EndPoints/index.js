@@ -3,6 +3,8 @@ const EndPoints = {
     CREATE_ACCOUNT:'/user/sign-up',
     VERIFY_OTP:'/user/verify-otp',
     RESEND_OTP:'/user/resend-otp',
+    GET_USER_INFO:'/user/get-user-info',
+
 
 
     GET_ALL_PRODUCTS:'/get-products',
@@ -40,6 +42,10 @@ const EndPoints = {
     FINAL_SUCCESS_PAYMENT:'/payment/final-success-payment',
     CONFIRM_ORDER:'/confirm-order',
 
+    // TRACKING
+    CHECK_ORDER_STATUS:'/fetch-order',
+    GET_TO_VERIFY_ORDERS:'/tracking/get-to-verify-orders',
+    GET_TRACKING_DETAILS:'/tracking-details',
 }
 
 

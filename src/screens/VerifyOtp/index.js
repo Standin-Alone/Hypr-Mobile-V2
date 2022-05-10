@@ -47,7 +47,8 @@ export default class VerifyOtp extends React.Component {
 
     handleResendOtp = ()=>{
         let payload = {
-            email    : this.state.email,         
+            email    : this.state.email,    
+            userId : this.props.route.params.userId        
         };
 
         return resendOtp(payload,this.setMyState);
@@ -66,7 +67,7 @@ export default class VerifyOtp extends React.Component {
                 <View style={styles.otpVerificationTitleContainer}>
                     <Text style={styles.otpVerificationTitle} adjustsFontSizeToFit>OTP Verification</Text>
                     <Text style={styles.otpSubtitle} adjustsFontSizeToFit numberOfLines={3}>Enter the OTP has sent to
-                        <Text style={styles.email}> sample@gmail.com</Text>
+                        <Text style={styles.email}> {this.props.route.params.email  }</Text>
                     </Text>
                 </View>
                 <View style={styles.codeFieldContainer}>

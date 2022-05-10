@@ -10,11 +10,12 @@ export const styles = StyleSheet.create({
     productCardContainer:{        
         flexDirection:'column',        
         backgroundColor:constants.Colors.light,                        
-        marginHorizontal:constants.Dimensions.vw(1),        
+        marginHorizontal:constants.Dimensions.vw(2),        
         marginVertical:constants.Dimensions.vh(1),
         borderRadius:10,        
         width:constants.Dimensions.vw(45),                
-        padding:'2%'                       
+        paddingVertical: constants.Dimensions.vh(5),
+        paddingHorizontal:constants.Dimensions.vw(2),        
     },
     productSearchCardContainer:{        
         flexDirection:'column',        

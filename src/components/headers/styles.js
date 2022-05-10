@@ -9,6 +9,7 @@ export const styles = StyleSheet.create({
     marketContainer:{        
         flexDirection:'row',                
         justifyContent:'flex-end',        
+        backgroundColor:'transparent'
     },
     buttonContainer:{
         justifyContent:'flex-end',

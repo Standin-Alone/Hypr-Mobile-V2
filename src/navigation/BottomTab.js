@@ -30,7 +30,7 @@ export const BottomTabNavigator = ()=>(
 
     <BottomTab.Navigator            
         screenOptions={(navigation)=>({
-            tabBarActiveBackgroundColor: constants.Colors.light,
+            tabBarActiveBackgroundColor: constants.Colors.primary_tint,
             tabBarInactiveBackgroundColor: constants.Colors.light,
             tabBarActiveTintColor: constants.Colors.primary,
             tabBarInactiveTintColor: constants.Colors.dark_tint,
@@ -62,7 +62,7 @@ export const BottomTabNavigator = ()=>(
             component={MarketStackComponent}
             options={({route,navigation})=>({    
                 title:'Market',     
-                tabBarStyle:{display:getTabBarVisibility(route)},          
+                tabBarStyle:{display:getTabBarVisibility(route)},                          
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Ionicons name="cart" size={30} color={color}/>
                 )

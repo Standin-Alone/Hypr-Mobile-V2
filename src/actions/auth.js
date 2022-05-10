@@ -5,7 +5,7 @@ import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
-import { SET_SESSION } from "../utils/async_storage";
+import { GET_SESSION, SET_SESSION } from "../utils/async_storage";
 
 
 export const createAccount = (payload,setState,props)=>{
@@ -194,7 +194,8 @@ export const login = (payload,setState,props) => {
 
                         console.warn(response.data);
                         let params = {
-                            userId: response.data.userId
+                            userId: response.data.userId,
+                            email:response.data.email
                         }
                         
                         // NAVIGATE TO VERIFY OTP
@@ -324,7 +325,45 @@ export const resendOtp = (payload,setState)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-            
+            let cleanPayload = {
+                userId:payload.userId
+            }
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.RESEND_OTP}`,cleanPayload).then((response)=>{                    
+                console.warn(response.data);
+                if(response.data.status == true){
+                                                                   
+                 
+                    Toast.show({
+                        type:'success',
+                        text1:'Success',                    
+                        text2: response.data.message
+                    });     
+               
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: 'Error',
+                        text2:response.data.errorMessage
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoadingResendButton:false});
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1: 'Error',
+                    text2:error
+                });
+
+                // turn off loading
+                setState({isLoadingResendButton:false});
+                              
+            });
 
          }else{
              //  No internet Connection
@@ -338,3 +377,63 @@ export const resendOtp = (payload,setState)=>{
     });
 
 }
+
+
+
+
+export const getUserInfo = (setState)=>{
+
+  
+
+    
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let userId = await GET_SESSION('USER_ID');
+            
+            let payload = {
+                userId:userId
+            }
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
+                console.warn(response.data.data);
+                if(response.data.status == true){
+                                                                   
+                 
+                    setState({userInfo:response.data.data})
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: 'Error',
+                        text2:response.data.errorMessage
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1: 'Error',
+                    text2:error
+                });
+                              
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+         
+         }
+    });
+
+}
+

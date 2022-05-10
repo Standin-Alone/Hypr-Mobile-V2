@@ -6,6 +6,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import Spinner from 'react-native-spinkit';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
+import  Ionicons from 'react-native-vector-icons/Ionicons';
 
 
 export const PrimaryButton = ({
@@ -118,7 +119,8 @@ export const PrimaryButtonNoOutline = ({
     loadingTitle,
     showIcon,
     iconName,
-    iconSize
+    iconSize,
+    iconColor
 })=>(   
 
     <View
@@ -130,10 +132,10 @@ export const PrimaryButtonNoOutline = ({
 
             {showIcon &&
 
-                <MaterialIcons 
+                <Ionicons 
                     name={iconName}
                     size={iconSize} 
-                    color={constants.Colors.primary}
+                    color={iconColor ? iconColor : constants.Colors.primary}
                 />
             }
 
@@ -159,6 +161,54 @@ export const PrimaryButtonNoOutline = ({
 );
 
 
+
+
+export const OrderCardButton = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    isLoading,
+    loadingTitle,
+    showIcon,
+    iconName,
+    iconSize,
+
+})=>(   
+
+    <View
+   
+    style={[styles.primaryButtonNoOutline,{height:constants.Dimensions.vh(30)}]}
+    >
+        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "flex-start",padding:10}} >
+            <View style={{ flexDirection:'row' ,justifyContent:'space-around'}}>
+
+
+            
+            {showIcon &&
+
+                <constants.Icons.FontAwesome5 
+                    name={iconName}
+                    size={iconSize} 
+                    color={constants.Colors.primary}
+                />
+            }
+
+            <View style={{flexDirection:'column'}}>                             
+                <Text>Order Number:</Text>
+                <Text style={[styles.primaryButtonNoOutlineText]}>
+                    {title}
+                </Text>
+                <Text>
+                    
+                </Text>
+            </View>
+
+            </View>
+        </TouchableOpacity>
+    </View>
+);
 
 
 export const ChangeDeliveryButton = ({
@@ -187,6 +237,13 @@ export const ChangeDeliveryButton = ({
         </TouchableOpacity>
 
 );
+
+
+
+
+
+
+
 
 
 export const ButtonWithTopIcon = ({

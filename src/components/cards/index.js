@@ -51,12 +51,12 @@ export const SearchProductCard = ({
                   <View>
                         <Text style={styles.productSearchName} adjustsFontSizeToFit numberOfLines={2}>{productName}</Text>
                   </View>         
-                  <View style={{justifyContent:'flex-end',flexDirection:'row',top:constants.Dimensions.vh(9),left:constants.Dimensions.vw(10)}}>
+                  <View style={{justifyContent:'flex-end',flexDirection:'row',top:constants.Dimensions.vh(9),left:constants.Dimensions.vw(showRemoveFromWishList ? 10 : 0)}}>
                         <Text style={styles.productSearchPrice} adjustsFontSizeToFit> ${productPrice}</Text>
                   </View>  
             </View>
 
-            {true &&
+            {showRemoveFromWishList &&
             <View style={{flexDirection:'row',flex:0.2, justifyContent:'flex-end'}}>                  
                <TouchableOpacity onPress={onRemove}>
                      <constants.Icons.Ionicons

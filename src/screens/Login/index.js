@@ -4,7 +4,7 @@ import Components from '../../components';
 import constants from '../../constants';
 import { styles } from './styles';
 import { login } from '../../actions/auth';
-import { POST } from '../../utils/axios';
+
 import FastImage from 'react-native-fast-image'
 export default class Login extends React.Component {
     constructor(props) {

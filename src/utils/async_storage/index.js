@@ -1,4 +1,4 @@
-import { setSession,getSession } from "./model";
+import { setSession,getSession,clearSession } from "./model";
 
 export const SET_SESSION = async (name,value) => {
     return new Promise(function (resolve) {
@@ -19,13 +19,15 @@ export const GET_SESSION = async (value) => {
 }
 
 
-
-
-
-
-
-export const getShipping = async () => {
+export const CLEAR_SESSION = async (value) => {
+ 
     return new Promise(function (resolve) {
-        resolve(readStorage('SHIPPIN_ADDRESS'));
+        resolve(clearSession(value));
     });
+
 }
+
+
+
+
+

@@ -16,5 +16,9 @@ export default Fonts = {
     NexaBold: 'NexaBold',
     NexaRegular: 'NexaRegular',
 
-    
+    PoppinsBold: 'Poppins-Bold',
+    PoppinsExtraBold: 'Poppins-ExtraBold',
+    PoppinsMedium: 'Poppins-Medium',
+    PoppinsRegular: 'Poppins-Regular',
+    PoppinsLight: 'Poppins-Light',
 }

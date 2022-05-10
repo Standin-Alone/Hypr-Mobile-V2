@@ -1,8 +1,10 @@
 import React from 'react';
 import { View } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
+import { getToVerifyOrders,checkOrdersStatus } from '../../../../actions/tracking';
 import Components from '../../../../components';
 import constants from '../../../../constants';
+import { GET_SESSION } from '../../../../utils/async_storage';
 
 
 export default class ToVerify extends React.Component {
@@ -13,18 +15,29 @@ export default class ToVerify extends React.Component {
       };
     }
 
+    setMyState = (value)=>this.setState(value);
 
-    componentDidMount(){
+    async componentDidMount(){
+
+        let payload = {
+            userId: await GET_SESSION('USER_ID')
+        }
+
+        // getToVerifyOrders(payload,this.setMyState);
+        checkOrdersStatus(payload,this.setMyState)
+        // this.props.navigation.addListener('focus',()=>{
+        //     getToVerifyOrders(payload,this.setMyState);
+        // })
         
     }
 
-    renderButtons = ({item,index}) =>{
+    renderItems = ({item,index}) =>{
         return (
-            <Components.PrimaryButtonNoOutline
-                title={item.name}
+            <Components.OrderCardButton
+                title={item.order_number}
                 showIcon={true}
-                iconName={item.icon}
-                iconSize={20}
+                iconName={'clipboard-list'}
+                iconSize={50}
                 onPress={()=>this.props.navigation.navigate(item.navigateTo)}
             />
 
@@ -41,7 +54,7 @@ export default class ToVerify extends React.Component {
                 />
                 <FlatList
                     data={this.state.orders}            
-                    renderItem={this.renderButtons}
+                    renderItem={this.renderItems}
                 /> 
                
             </>

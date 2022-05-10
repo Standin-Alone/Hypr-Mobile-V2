@@ -47,7 +47,8 @@ export default class WishList extends React.Component {
                 <Components.SearchProductCard
                    productImage ={item.product_img}
                    productName  ={item.variant_name}
-                   productPrice  ={item.product_price}    
+                   productPrice  ={item.product_price}   
+                   showRemoveFromWishList 
                    onRemove={()=>this.handleRemoveProductFromWishList(item)}
                 />
             </View>

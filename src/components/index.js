@@ -4,7 +4,8 @@ import {
     PrimaryButtonOutline,
     ChangeDeliveryButton,
     PrimaryButtonNoOutline,
-    ButtonWithTopIcon
+    ButtonWithTopIcon,
+    OrderCardButton
     } from "./buttons";
 
 import { 
@@ -45,7 +46,7 @@ export default {
     PrimaryButtonNoOutline,
     ChangeDeliveryButton,
     ButtonWithTopIcon,
-
+    OrderCardButton,
 
 
     PrimaryTextInput,

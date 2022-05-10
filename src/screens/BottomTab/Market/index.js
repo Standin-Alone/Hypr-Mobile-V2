@@ -5,7 +5,7 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import { SET_SESSION } from '../../../utils/async_storage/model';
 import { styles } from './styles';
-
+import MasonryList from '@react-native-seoul/masonry-list';
 
 
 
@@ -53,8 +53,7 @@ export default class Market extends React.Component {
                 productName={result.item.productNameEn}
                 productPrice={result.item.sellPrice}
                 addToCart = {()=>this.handleAddToCart(result.item)}
-                
-                
+                                
             />
     )
 
@@ -74,12 +73,19 @@ export default class Market extends React.Component {
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Featured Products</Text>
                     </View>
-                    <FlatList
+                    <MasonryList
+                        keyExtractor={(item)=>item.pid}   
+                        data = {this.state.products}
+                        renderItem = {this.renderAllProducts}
+                        style ={styles.allProductsContainer}                        
+                    /> 
+
+                    {/* <FlatList
                         numColumns={2}
                         data = {this.state.products}
                         renderItem = {this.renderAllProducts}
                         contentContainerStyle={styles.allProductsContainer}                        
-                    />                
+                    />                 */}
                 </View>
             </>
         )
