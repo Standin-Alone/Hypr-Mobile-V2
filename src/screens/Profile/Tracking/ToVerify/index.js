@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View,InteractionManager } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import { getToVerifyOrders,checkOrdersStatus } from '../../../../actions/tracking';
 import Components from '../../../../components';
@@ -10,7 +10,8 @@ import { GET_SESSION } from '../../../../utils/async_storage';
 export default class ToVerify extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {        
+      this.state = {   
+        isReadyToRender:false,     
         orders:[]
       };
     }
@@ -23,22 +24,21 @@ export default class ToVerify extends React.Component {
             userId: await GET_SESSION('USER_ID')
         }
 
-        // getToVerifyOrders(payload,this.setMyState);
+          
         checkOrdersStatus(payload,this.setMyState)
-        // this.props.navigation.addListener('focus',()=>{
-        //     getToVerifyOrders(payload,this.setMyState);
-        // })
-        
+     
     }
 
     renderItems = ({item,index}) =>{
+
+        console.warn('item',item);
         return (
             <Components.OrderCardButton
-                title={item.order_number}
+                title={item?.orderNum}                
                 showIcon={true}
                 iconName={'clipboard-list'}
                 iconSize={50}
-                onPress={()=>this.props.navigation.navigate(item.navigateTo)}
+                onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Market.ORDER_STATUS,{orderInfo:item})}
             />
 
         )
@@ -47,16 +47,27 @@ export default class ToVerify extends React.Component {
     
     render(){
         return(
-            <>  
+
+            <>
                 <Components.PrimaryHeader
-                    title={"To Verify"}
-                    onGoBack={()=>this.props.navigation.goBack()}
+                     title={"To Verify"}
+                     onGoBack={()=>this.props.navigation.goBack()}
                 />
-                <FlatList
-                    data={this.state.orders}            
-                    renderItem={this.renderItems}
-                /> 
-               
+              
+                {this.state.isReadyToRender ?(
+                    <>                    
+                        <FlatList
+                            data={this.state.orders}            
+                            renderItem={this.renderItems}
+                        />                 
+                    </>
+                
+                ) : (
+                    <View>
+                        <Components.LoadingScreen />
+                    </View>
+                )}
+
             </>
         )
     }

@@ -22,7 +22,8 @@ export default {
        CART:'Cart',
        WISH_LIST:'WishList',
        ORDER:'Order',
-       PAYMENT:'Payment'
+       PAYMENT:'Payment',
+       ORDER_STATUS:'OrderStatus',
    },
    Profile:{
       PROFILE:'Profile',       

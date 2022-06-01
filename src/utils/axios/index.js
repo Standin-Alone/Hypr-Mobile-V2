@@ -16,7 +16,7 @@ const GET = async (
 url    
 )=>{
     const result = await axios.get(url);
-    console.warn(result);
+
     return result;
 }   
 

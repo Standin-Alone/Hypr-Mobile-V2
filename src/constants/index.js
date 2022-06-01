@@ -6,6 +6,7 @@ import Icons from './Icons';
 import EndPoints from  './EndPoints';
 import ScreenNames from './ScreenNames';
 import RegEx from './RegEx';
+import APIKeys from './APIKeys';
 
 export default {
     Colors,
@@ -15,6 +16,7 @@ export default {
     Icons,
     EndPoints,
     RegEx,
-    ScreenNames
+    ScreenNames,
+    APIKeys
 
 }

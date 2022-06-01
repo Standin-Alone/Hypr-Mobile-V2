@@ -10,7 +10,7 @@ import { GET_SESSION, SET_SESSION } from "../utils/async_storage";
 
 export const createAccount = (payload,setState,props)=>{
     setState({isLoading:true});
-    console.warn(payload)
+
     let countError = 0;
     let computeAge = 0;
     // Check Internet Connection
@@ -184,7 +184,7 @@ export const login = (payload,setState,props) => {
                 }
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
-                    console.warn(response.data);
+              
                     if(response.data.status == true){
                         Toast.show({
                                 type:'success',
@@ -192,7 +192,7 @@ export const login = (payload,setState,props) => {
                                 text2: response.data.message
                         });
 
-                        console.warn(response.data);
+                      
                         let params = {
                             userId: response.data.userId,
                             email:response.data.email
@@ -259,13 +259,14 @@ export const verifyOtp = (payload,setState,props)=>{
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.VERIFY_OTP}`,clean_payload).then((response)=>{                    
                     
                     if(response.data.status == true){
-                        Toast.show({
-                                type:'success',
-                                text1:'Success',                    
-                                text2: response.data.message
-                        });                     
+                        // Toast.show({
+                        //         type:'success',
+                        //         text1:'Success',                    
+                        //         text2: response.data.message
+                        // });                     
                         
                         SET_SESSION('USER_ID',payload.userId)
+                        
                         // NAVIGATE TO MARKET
                         props.navigation.navigate('Home');
                     }else{
@@ -330,7 +331,7 @@ export const resendOtp = (payload,setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.RESEND_OTP}`,cleanPayload).then((response)=>{                    
-                console.warn(response.data);
+         
                 if(response.data.status == true){
                                                                    
                  
@@ -398,7 +399,7 @@ export const getUserInfo = (setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
-                console.warn(response.data.data);
+             
                 if(response.data.status == true){
                                                                    
                  

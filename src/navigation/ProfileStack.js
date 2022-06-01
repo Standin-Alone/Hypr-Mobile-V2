@@ -6,7 +6,7 @@ import AccountSettings from '../screens/Profile/AccountSettings';
 import AddressBook from '../screens/Profile/AddressBook';
 import AddressEditForm from '../screens/Profile/AddressEditForm';
 import ToVerify from '../screens/Profile/Tracking/ToVerify';
-
+import OrderStatus from '../screens/Market/OrderStatus';
 
 const ProfileStack = createStackNavigator();
 
@@ -49,6 +49,13 @@ export const ProfileStackComponent= () => {
                 name={constants.ScreenNames.Profile.tracking.TO_VERIFY}             
                 options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
             />  
+
+            <ProfileStack.Screen
+                component={OrderStatus}
+                name={constants.ScreenNames.Market.ORDER_STATUS}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />           
+ 
 
 
          

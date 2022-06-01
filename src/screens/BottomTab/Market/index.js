@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View,Text } from 'react-native';
+import { FlatList, View,Text,ActivityIndicator} from 'react-native';
 import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../../actions/market';
 import Components from '../../../components';
 import constants from '../../../constants';
@@ -13,22 +13,29 @@ export default class Market extends React.Component {
     constructor(props) {
       super(props);
       this.state = {   
+          isLoadingPlaceholder:true,
           isLoading:false,
           notificationCount:0,
-          products:[]
-      };
-
-      
+          products:[],
+          newProducts:[],
+          currentPage:1
+          }    
+        
     }
     
     setMyState = (value)=>this.setState(value);
 
 
     componentDidMount(){        
-      
+        let parameter = {
+            currentPage:1,
+        }
+        getAllProducts(parameter,this.setMyState)        
+        getShippingAddress(this.setMyState);
+        getCartCount(this.setMyState)
 
         this.props.navigation.addListener('focus',()=>{
-            getAllProducts(this.setMyState)        
+            getAllProducts(parameter,this.setMyState)        
             getShippingAddress(this.setMyState);
             getCartCount(this.setMyState)
         })
@@ -57,6 +64,23 @@ export default class Market extends React.Component {
             />
     )
 
+
+ loadMore = async (allProducts) => { 
+        let parameter = {
+            currentPage : this.state.currentPage,
+            previousProductPage : this.state.products
+        }
+        getAllProducts(parameter,this.setMyState)  ;
+  }
+
+  renderFooter = ()=>(
+    this.state.products.length == 0 ?
+    null
+    :
+    <Components.FooterLoader/>
+)
+
+
     render(){
         return(
             <>
@@ -73,19 +97,34 @@ export default class Market extends React.Component {
                     <View style={styles.titleContainer}>
                         <Text style={styles.title}>Featured Products</Text>
                     </View>
-                    <MasonryList
-                        keyExtractor={(item)=>item.pid}   
-                        data = {this.state.products}
-                        renderItem = {this.renderAllProducts}
-                        style ={styles.allProductsContainer}                        
-                    /> 
 
-                    {/* <FlatList
-                        numColumns={2}
-                        data = {this.state.products}
-                        renderItem = {this.renderAllProducts}
-                        contentContainerStyle={styles.allProductsContainer}                        
-                    />                 */}
+                    {this.state.isLoadingPlaceholder ?
+                          <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                          :
+                          <FlatList
+                            keyExtractor={(item)=>item.pid}   
+                            data = {this.state.products}
+                            numColumns={2}
+                            renderItem = {this.renderAllProducts}
+                            style ={styles.allProductsContainer}                        
+                            contentContainerStyle={{paddingBottom:constants.Dimensions.vh(20)}}
+                            onEndReachedThreshold={0.1} // so when you are at 5 pixel from the bottom react run onEndReached function
+                            onEndReached={async ({distanceFromEnd}) => {                                                             
+                                
+                                if (distanceFromEnd > 0 ) 
+                                {   
+                                    
+                                    await this.setState( (prevState) => ({...prevState,currentPage:prevState.currentPage + 1}));
+                                    await this.setState( (prevState) => ({...prevState,refreshing:true}));
+                                    await this.loadMore();
+                                }
+                            }}   
+                            ListFooterComponent={this.renderFooter}
+                            /> 
+                    }
+                    
+
+                   
                 </View>
             </>
         )

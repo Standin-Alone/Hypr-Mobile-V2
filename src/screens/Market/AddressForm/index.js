@@ -112,7 +112,7 @@ export default class AddressForm extends React.Component {
 
         let selectedCity = value[0];
   
-       console.warn(selectedCity);
+     
         this.setState({city:{...this.state.city,value:selectedCity,error:false}})
         
     }  
@@ -130,7 +130,7 @@ export default class AddressForm extends React.Component {
 
     handleSaveAddress = async  ()=>{
 
-        console.warn(this.state.city);
+    
         let payload = {
             userId: await GET_SESSION('USER_ID'),            
             firstName:this.state.firstName.value,
@@ -223,7 +223,7 @@ export default class AddressForm extends React.Component {
                             <View>     
                                 <Components.PrimaryTextInput
                                         placeholder={"City"}
-                                        iconName="supervised-user-circle"
+                                        iconName="location-on"
                                         onFocus={()=>this.setState({city:{...this.state.city,focus:true}})}
                                         onBlur={()=>this.setState({city:{...this.state.city,focus:false}})}
                                         isFocus={this.state.city.focus}

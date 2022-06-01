@@ -42,9 +42,13 @@ const EndPoints = {
     FINAL_SUCCESS_PAYMENT:'/payment/final-success-payment',
     CONFIRM_ORDER:'/confirm-order',
 
+    // STRIPE
+    STRIPE_CHECKOUT_SESSION:'/payment/stripe-checkout-session',
+
     // TRACKING
     CHECK_ORDER_STATUS:'/fetch-order',
     GET_TO_VERIFY_ORDERS:'/tracking/get-to-verify-orders',
+    GET_ORDERED_PRODUCTS:'/tracking/get-ordered-products',
     GET_TRACKING_DETAILS:'/tracking-details',
 }
 

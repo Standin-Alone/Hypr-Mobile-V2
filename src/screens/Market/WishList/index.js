@@ -31,7 +31,7 @@ export default class WishList extends React.Component {
 
 
     handleRemoveProductFromWishList = async (item)=>{
-        console.warn(item);
+
         let payload = {
             wishListId:item._id,  
             reloadWishList:()=>getWishList(this.setMyState)
@@ -41,7 +41,7 @@ export default class WishList extends React.Component {
     }
 
     renderItem = ({item,index})=>{
-        console.warn(item);
+   
         return(
             <View>
                 <Components.SearchProductCard

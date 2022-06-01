@@ -8,7 +8,7 @@ import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
 import { setUserIdSession } from "../utils/async_storage";
 import { calculateFreight,groupBy } from "../utils/functions";
 
-export const getAllProducts = (setState)=>{
+export const getAllProducts = (payload,setState)=>{
 
   
     setState({isLoading:true});
@@ -20,12 +20,19 @@ export const getAllProducts = (setState)=>{
 
             
             // GET REQUEST
-            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}`).then((response)=>{                    
+            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}?pageNum=${payload.currentPage}`).then((response)=>{                    
                 console.warn(response.data.data.list[0]);
                 if(response.data.result == true){
                                                                    
+
+                    if(payload.currentPage > 1){
+                        setState({products:[...new Set(payload.previousProductPage),...response.data.data.list]})
+                    }else{
+                        setState({products:response.data.data.list})
+                    }
                     
-                    setState({products:response.data.data.list})
+
+                    
 
                 }else{
                     Toast.show({
@@ -36,7 +43,7 @@ export const getAllProducts = (setState)=>{
                 }
                
                  // turn off loading
-                 setState({isLoading:false});
+                 setState({isLoading:false,isLoadingPlaceholder:false});
             }).catch((error)=>{
                 console.warn(error)
                 Toast.show({
@@ -45,7 +52,7 @@ export const getAllProducts = (setState)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isLoading:false,isLoadingPlaceholder:false});
             });
 
          }else{
@@ -55,7 +62,7 @@ export const getAllProducts = (setState)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+            setState({isLoading:false,isLoadingPlaceholder:false});
          }
     });
 

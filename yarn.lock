@@ -5798,6 +5798,11 @@
   dependencies:
     "prop-types" "^15.5.8"
 
+"react-native-stripe-checkout-webview@^0.0.13":
+  "integrity" "sha512-kRQ04JhO9bERPOnuYKv4rv0qOdSYleN/b+Poby6fYd70OjW9OcbiXPcI4cPCoiMYy9ICuPd4QUY/PGURsxW2Ag=="
+  "resolved" "https://registry.npmjs.org/react-native-stripe-checkout-webview/-/react-native-stripe-checkout-webview-0.0.13.tgz"
+  "version" "0.0.13"
+
 "react-native-toast-message@^2.1.5":
   "integrity" "sha512-mk3rELtBEhrhWBCN6CTaw0gypgL9ZNauX3xx1LUs4uee9vc0pVsghrKxO57vroUCcNL2hDeZSLJWdQNMCkGeaQ=="
   "resolved" "https://registry.npmjs.org/react-native-toast-message/-/react-native-toast-message-2.1.5.tgz"
@@ -5811,7 +5816,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native-webview@^11.18.2":
+"react-native-webview@*", "react-native-webview@^11.18.2":
   "integrity" "sha512-EB2BzFi+soOp6GmZQrw6kpeFfoKMxw1vzZg68gWsBllAXfTpfJuxr5zsRoZSNyRRpIoaJ+N+Ok2BVJJiyUYx+g=="
   "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.18.2.tgz"
   "version" "11.18.2"

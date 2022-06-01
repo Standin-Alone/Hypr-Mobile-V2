@@ -24,8 +24,8 @@ export const checkout = (payload,setState,props)=>{
 
             let cart = payload.cart;
             let address = payload.cart[0].shipping_address[0];
-            console.warn(cart);
-             
+        
+             console.warn('fullnanme',);
              cleanPayload.zip = address.zip_code;      
              cleanPayload.sccode  = address.country_code;
              cleanPayload.country = address.country;
@@ -48,10 +48,10 @@ export const checkout = (payload,setState,props)=>{
              }))
 
             
-             console.warn(cleanPayload);
+         
             // POST REQUEST
             POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECKOUT}`,cleanPayload).then((response)=>{                    
-                console.warn(response);
+           
                 if(response.data.result == true){
                                                                    
                     
@@ -150,12 +150,47 @@ export const pay = (payload,setState,props)=>{
             // PAY WITH PAYPAL
             if(payload.paymentMethod == 'paypal'){
 
-
+                setState({isLoading:false});
                 props.navigation.navigate(constants.ScreenNames.Market.PAYMENT,payload)
             }
             // PAY WITH STRIPE
             else if(payload.paymentMethod == 'stripe'){
 
+
+            
+                setState({isLoading:false});
+                // add cart to line of items for stripe
+                payload.cart.map((item)=>{
+                    
+                    payload.lineItemsPayload.push({                                    
+                            price_data: {
+                              currency: 'USD',
+                              product_data: {
+                                name: item.variant_name,
+                              },
+                              unit_amount: parseInt((parseFloat(item.product_price) * 100)),
+                            },
+                            quantity: item.quantity,                          
+                    })
+                });
+        
+                
+
+                // GENERATE CHECKOUT SESSION ID             
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.STRIPE_CHECKOUT_SESSION}`,payload).then((result)=>{
+
+                    if(result.data.status == true){
+               
+                        payload.checkoutSessionId = result.data.checkoutSessionId;
+                        props.navigation.navigate(constants.ScreenNames.Market.PAYMENT,payload) 
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1:'Something went wrong!',
+                            text2:result.data.message
+                        });
+                    }
+                });
             }
          
          }else{
@@ -186,7 +221,7 @@ export const successPayment = (payload,setState,props)=>{
             let spliturl = url.split('?');     
             let splitotherhalf = spliturl[1].split('&');
          
-            
+            console.warn('URL',url);
             let paymentId = splitotherhalf[0].replace("paymentId=","");
             let payerId = splitotherhalf[2].replace("PayerID=","");
 
@@ -211,7 +246,7 @@ export const successPayment = (payload,setState,props)=>{
                         orderId:payload.orderId
                     }
                     // CONFIRM ORDER PAYMENT
-                    POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{                                                                  
+                    POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{
 
                         if(result.data.result == true){
                             Toast.show({

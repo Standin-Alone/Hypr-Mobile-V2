@@ -7,7 +7,7 @@ import constants from "../../constants";
 import Spinner from 'react-native-spinkit';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import  Ionicons from 'react-native-vector-icons/Ionicons';
-
+import FastImage from 'react-native-fast-image'
 
 export const PrimaryButton = ({
     onPress,
@@ -165,16 +165,8 @@ export const PrimaryButtonNoOutline = ({
 
 export const OrderCardButton = ({
     onPress,
-    fontSize,
     title,
-    width,
-    height,
-    isLoading,
-    loadingTitle,
     showIcon,
-    iconName,
-    iconSize,
-
 })=>(   
 
     <View
@@ -188,11 +180,14 @@ export const OrderCardButton = ({
             
             {showIcon &&
 
-                <constants.Icons.FontAwesome5 
-                    name={iconName}
-                    size={iconSize} 
-                    color={constants.Colors.primary}
-                />
+                // <constants.Icons.FontAwesome5 
+                //     name={iconName}
+                //     size={iconSize} 
+                //     color={constants.Colors.primary}
+                // />
+                <FastImage source={constants.Images.myOrder} 
+                resizeMode={FastImage.resizeMode.contain}
+                style={styles.myOrderImage}/>
             }
 
             <View style={{flexDirection:'column'}}>                             

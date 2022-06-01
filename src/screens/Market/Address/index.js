@@ -29,7 +29,12 @@ export default class Address extends React.Component {
 
      async componentDidMount(){          
        
-       getShippingAddress(this.setMyState);     
+       getShippingAddress(this.setMyState);  
+       
+       this.props.navigation.addListener('focus',()=>{
+        getShippingAddress(this.setMyState);  
+       
+       })
     }   
     
     handleSelectAddress = (item)=>{     
@@ -42,7 +47,7 @@ export default class Address extends React.Component {
                 shippingItem.is_selected = false
             }
         });
-        console.warn(newShipping);
+  
         this.setState({shippingAddress:newShipping});
     
        

@@ -17,13 +17,13 @@ export const ProductCard = ({
    <>          
       <TouchableOpacity onPress={addToCart} style={styles.productCardContainer}>
          <View style={{ flexDirection:'column'}}>
-            <View>
-               <Image source={{ uri:productImage}} resizeMode="contain" style={styles.productImage}/>         
+            <View>               
+               <FastImage source={{ uri:productImage}} resizeMode={FastImage.resizeMode.contain} style={styles.productImage}/>
             </View>   
             <View>
                   <Text style={styles.productName}>{productName}</Text>
             </View>         
-            <View>
+            <View style={{right:constants.Dimensions.vh(1.5)}}>
                   <Text style={styles.productPrice}> ${productPrice}</Text>
             </View>      
          </View>                        
@@ -83,8 +83,8 @@ export const VariantCard = ({
 })=> (
    <View style={[styles.variantCardContainer]}>  
       <View style={{ flex:1 }}>
-         <Image source={{ uri:data.variantImage}} style={styles.variantImage} resizeMode="contain" />         
-
+         
+         <FastImage source={{ uri:data.variantImage}} resizeMode={FastImage.resizeMode.contain} style={styles.variantImage}/>
          <View style={styles.variantInfo}>
          
          <View style={styles.variantNameContainer}>
@@ -191,4 +191,43 @@ export const CartCard = ({
        
       
    </TouchableOpacity>
+)
+
+
+
+
+
+
+export const OrderStatusProductCard = ({
+   image,  
+   productName,
+   quantity,
+   productPrice,
+   
+
+})=>(
+   <View  
+   style={styles.orderStatusCardContainer}
+   >
+      
+      <View style={styles.orderStatusFirstColumn}>
+         <FastImage source={{uri:image}} resizeMode={FastImage.resizeMode.contain} style={styles.orderStatusCartImage}/>
+      </View>
+
+      <View style={styles.orderStatusSecondColumn}>
+         <View style={{top:constants.Dimensions.vh(10)}}>
+            <Text style={styles.orderStatusVariantName} numberOfLines={2}>{productName}</Text>                     
+         </View>  
+         
+         <View style={{top:constants.Dimensions.vh(10),justifyContent:'flex-end', flexDirection:'row'}}>
+            <Text style={styles.orderStatusQuantity} numberOfLines={2}>{quantity} Items</Text>                     
+         </View>
+         <View style={{top:constants.Dimensions.vh(10),justifyContent:'flex-end', flexDirection:'row'}}>
+            <Text style={styles.orderStatusPrice} numberOfLines={2}> ${productPrice}</Text>                     
+         </View>
+         
+      </View>
+       
+      
+   </View>
 )
