@@ -28,10 +28,14 @@ import {
     VariantCard,
     AddressCard,
     CartCard,
-    SearchProductCard
+    SearchProductCard,
+    OrderStatusProductCard
     } from "./cards";
 import {
-    Loader
+    Loader,
+    LoadingScreen,
+    FooterLoader,
+    EmptyComponent
 } 
 from "./loader"
 
@@ -66,9 +70,13 @@ export default {
     AddressCard,
     CartCard,
     SearchProductCard,
-
+    OrderStatusProductCard,
+    
     Loader,
-
+    LoadingScreen,
+    FooterLoader,
+    EmptyComponent,
+    
     PaymentMethodModal
 
 

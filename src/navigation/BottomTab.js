@@ -49,7 +49,8 @@ export const BottomTabNavigator = ()=>(
             name ={constants.ScreenNames.BottomTab.SOCIAL_HOME} 
             component={SocialStackComponent}
             options={({route,navigation})=>({    
-                title:'Home',     
+                // title:'Home',     
+                tabBarShowLabel:false,
                 tabBarStyle:{display:getTabBarVisibility(route)},          
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Ionicons name="home" size={30} color={color}/>
@@ -61,7 +62,8 @@ export const BottomTabNavigator = ()=>(
             name ={constants.ScreenNames.BottomTab.MARKET_HOME} 
             component={MarketStackComponent}
             options={({route,navigation})=>({    
-                title:'Market',     
+                // title:'Market',     
+                tabBarShowLabel:false,
                 tabBarStyle:{display:getTabBarVisibility(route)},                          
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Ionicons name="cart" size={30} color={color}/>
@@ -73,7 +75,8 @@ export const BottomTabNavigator = ()=>(
             name ={constants.ScreenNames.BottomTab.USER_PROFILE} 
             component={ProfileStackComponent}
             options={({route,navigation})=>({    
-                title:"My Profile",
+                // title:"My Profile",
+                tabBarShowLabel:false,
                 tabBarStyle:{display:getTabBarVisibility(route)}, 
                 tabBarIcon: ({color})=>(
                     <constants.Icons.Octicons name="person-fill" size={30} color={color}/>

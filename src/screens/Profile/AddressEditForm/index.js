@@ -115,7 +115,6 @@ export default class AddressEditForm extends React.Component {
 
         let selectedCity = value[0];
   
-       console.warn(selectedCity);
         this.setState({city:{...this.state.city,value:selectedCity,error:false}})
         
     }  
@@ -133,7 +132,7 @@ export default class AddressEditForm extends React.Component {
 
     handleUpdateAddress = async  ()=>{
 
-        console.warn(this.state.city);
+    
         let payload = {
             userId: await GET_SESSION('USER_ID'),            
             addressId:this.props.route.params.id,

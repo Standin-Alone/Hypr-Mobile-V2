@@ -6,11 +6,92 @@ import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
 import { GET_SESSION, SET_SESSION } from "../utils/async_storage";
+import {
+    GoogleSignin,    
+  } from '@react-native-google-signin/google-signin';
+
+  GoogleSignin.configure({
+    offlineAccess: true,
+    scopes: ['https://www.googleapis.com/auth/userinfo.profile','https://www.googleapis.com/auth/user.birthday.read','https://www.googleapis.com/auth/user.phonenumbers.read'],
+    forceConsentPrompt: true,
+    webClientId:'1071366226336-epmk8r1vcqk4vjfg2oo521t1rbostmkr.apps.googleusercontent.com'
+  });
+
+
+  
+export const createAccountUsingGoogle = (payload,setState,props)=>{
+    setState({isLoading:true});
+    
+    let countError = 0;
+
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // validate payload        
+                let clean_payload = {
+                    first_name:payload.firstName,
+                    last_name:payload.lastName,
+                    email:payload.email,                   
+                }
+
+                console.warn(clean_payload)
+
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT_USING_GOOGLE}`,clean_payload).then((response)=>{                    
+                    console.warn('samnple',response)
+                    if(response.data.status == true){
+                        
+                        let params = {
+                            userId: response.data.userId,
+                            email:response.data.email
+                        }
+                        
+                        // NAVIGATE TO VERIFY OTP
+                        props.navigation.navigate('VerifyOtp',params);
+
+
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: 'Error!',
+                            text2:response.data.message,
+                        });
+                        setState({isLoading:false});
+                    }
+
+                }).catch((error)=>{
+                    
+                    console.warn(error.response);
+                    Toast.show({
+                        type:'error',
+                        text1:'Error!',
+                        text2:error.response,
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+
+          
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
 
 
 export const createAccount = (payload,setState,props)=>{
     setState({isLoading:true});
-    console.warn(payload)
+
     let countError = 0;
     let computeAge = 0;
     // Check Internet Connection
@@ -129,7 +210,7 @@ export const createAccount = (payload,setState,props)=>{
                     Toast.show({
                         type:'error',
                         text1:'Error!',
-                        text2:'Something went wrong!',
+                        text2:error.response,
                     });
                     
                     // turn off loading
@@ -156,16 +237,18 @@ export const createAccount = (payload,setState,props)=>{
 
 
 export const login = (payload,setState,props) => {     
-    //turn on loading
-    setState({isLoading:true});
+ 
     let countError = 0;
     // Check Internet Connection
-    NetInfo.fetch().then((state)=>{
+    NetInfo.fetch().then(async (state)=>{
             
         // if internet connected
         if(state.isConnected && state.isInternetReachable){
             
 
+            if(payload.loginType == 'hypr'){
+            //turn on loading
+            setState({isLoading:true});
              // validate payload
              Object.keys(payload).map((item,index)=>{                
                 if(payload[item] !== undefined || payload[item] != '' ){                      
@@ -180,11 +263,13 @@ export const login = (payload,setState,props) => {
                                       
                 let clean_payload = {
                     username : payload.username,
-                    password : payload.password
+                    password : payload.password,
+                    loginType:payload.loginType
                 }
+
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
-                    console.warn(response.data);
+              
                     if(response.data.status == true){
                         Toast.show({
                                 type:'success',
@@ -192,7 +277,7 @@ export const login = (payload,setState,props) => {
                                 text2: response.data.message
                         });
 
-                        console.warn(response.data);
+                      
                         let params = {
                             userId: response.data.userId,
                             email:response.data.email
@@ -221,11 +306,36 @@ export const login = (payload,setState,props) => {
                     // turn off loading
                     setState({isLoading:false});
                 });
-
-            }else{
-                setState({isLoading:false});
             }
-                        
+           
+            }else{
+                if (payload.loginType == 'google'){
+                    
+
+                   
+                      
+                        // let revoke = await GoogleSignin.revokeAccess();
+                        // await GoogleSignin.signOut();
+                        let logoutGoogle = await GoogleSignin.signOut();
+                 
+               
+
+                        // if(logoutGoogle){
+                            let checkUser = await GoogleSignin.signIn();
+                            if(checkUser){
+                                let googlePayload = {
+                                    firstName:checkUser.user.givenName,
+                                    lastName:checkUser.user.familyName,
+                                    email:checkUser.user.email,                                                                                    
+                                }
+                                console.warn(googlePayload);
+                                createAccountUsingGoogle(googlePayload,setState,props)
+                            }
+                        // }
+                }
+                
+                setState({isLoading:false});
+            }       
         }else{
             //  No internet Connection
             Toast.show({
@@ -235,6 +345,8 @@ export const login = (payload,setState,props) => {
              // turn off loading
             setState({isLoading:false});
         }
+
+        
     });
 
 }
@@ -259,13 +371,14 @@ export const verifyOtp = (payload,setState,props)=>{
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.VERIFY_OTP}`,clean_payload).then((response)=>{                    
                     
                     if(response.data.status == true){
-                        Toast.show({
-                                type:'success',
-                                text1:'Success',                    
-                                text2: response.data.message
-                        });                     
+                        // Toast.show({
+                        //         type:'success',
+                        //         text1:'Success',                    
+                        //         text2: response.data.message
+                        // });                     
                         
                         SET_SESSION('USER_ID',payload.userId)
+                        
                         // NAVIGATE TO MARKET
                         props.navigation.navigate('Home');
                     }else{
@@ -330,7 +443,7 @@ export const resendOtp = (payload,setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.RESEND_OTP}`,cleanPayload).then((response)=>{                    
-                console.warn(response.data);
+         
                 if(response.data.status == true){
                                                                    
                  
@@ -398,7 +511,7 @@ export const getUserInfo = (setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
-                console.warn(response.data.data);
+             
                 if(response.data.status == true){
                                                                    
                  

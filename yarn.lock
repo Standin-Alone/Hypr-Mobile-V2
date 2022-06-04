@@ -1209,6 +1209,11 @@
   "resolved" "https://registry.npmjs.org/@react-native-community/netinfo/-/netinfo-8.2.0.tgz"
   "version" "8.2.0"
 
+"@react-native-google-signin/google-signin@^7.2.2":
+  "integrity" "sha512-FqSJAEYz+SNeIOyokFX3e7nbBgK0js/Hye0YNY+cV0Qf1NxKw1vRt2MQB3kfuVWFCb+OSovgQCl6W8dhYvsblw=="
+  "resolved" "https://registry.npmjs.org/@react-native-google-signin/google-signin/-/google-signin-7.2.2.tgz"
+  "version" "7.2.2"
+
 "@react-native-seoul/masonry-list@^1.3.0":
   "integrity" "sha512-aKScZmVdWtfPsm2sRRMTU+WHxMfhEs4deyAxOf28kg9IDzoPKCE7+Tdl4RUnpbS27cZ9X9hoBWdZwerzhyGjhg=="
   "resolved" "https://registry.npmjs.org/@react-native-seoul/masonry-list/-/masonry-list-1.3.0.tgz"
@@ -3541,6 +3546,11 @@
   "resolved" "https://registry.npmjs.org/inherits/-/inherits-2.0.4.tgz"
   "version" "2.0.4"
 
+"install@^0.13.0":
+  "integrity" "sha512-zDml/jzr2PKU9I8J/xyZBQn8rPCAY//UOYNmR01XwNwyfhEWObo2SWfSl1+0tm1u6PhxLwDnfsT/6jB7OUxqFA=="
+  "resolved" "https://registry.npmjs.org/install/-/install-0.13.0.tgz"
+  "version" "0.13.0"
+
 "internal-slot@^1.0.3":
   "integrity" "sha512-O0DB1JC/sPyZl7cIo78n5dR7eUSwwpYPiXRhTzNxZVAMUuB8vlnRFyLxdrVToks6XPLVnFfbzaVd5WLjhgg+vA=="
   "resolved" "https://registry.npmjs.org/internal-slot/-/internal-slot-1.0.3.tgz"
@@ -5798,6 +5808,11 @@
   dependencies:
     "prop-types" "^15.5.8"
 
+"react-native-stripe-checkout-webview@^0.0.13":
+  "integrity" "sha512-kRQ04JhO9bERPOnuYKv4rv0qOdSYleN/b+Poby6fYd70OjW9OcbiXPcI4cPCoiMYy9ICuPd4QUY/PGURsxW2Ag=="
+  "resolved" "https://registry.npmjs.org/react-native-stripe-checkout-webview/-/react-native-stripe-checkout-webview-0.0.13.tgz"
+  "version" "0.0.13"
+
 "react-native-toast-message@^2.1.5":
   "integrity" "sha512-mk3rELtBEhrhWBCN6CTaw0gypgL9ZNauX3xx1LUs4uee9vc0pVsghrKxO57vroUCcNL2hDeZSLJWdQNMCkGeaQ=="
   "resolved" "https://registry.npmjs.org/react-native-toast-message/-/react-native-toast-message-2.1.5.tgz"
@@ -5811,7 +5826,7 @@
     "prop-types" "^15.7.2"
     "yargs" "^16.1.1"
 
-"react-native-webview@^11.18.2":
+"react-native-webview@*", "react-native-webview@^11.18.2":
   "integrity" "sha512-EB2BzFi+soOp6GmZQrw6kpeFfoKMxw1vzZg68gWsBllAXfTpfJuxr5zsRoZSNyRRpIoaJ+N+Ok2BVJJiyUYx+g=="
   "resolved" "https://registry.npmjs.org/react-native-webview/-/react-native-webview-11.18.2.tgz"
   "version" "11.18.2"

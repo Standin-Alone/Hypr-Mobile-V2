@@ -17,7 +17,8 @@ export default class Address extends React.Component {
       this.state = {        
           shippingAddress:[] ,
           variant:this.props.route.params.variant,
-          isLoading:false  
+          isLoading:false  ,
+          loadingData:true,
       };
     }
 
@@ -29,7 +30,12 @@ export default class Address extends React.Component {
 
      async componentDidMount(){          
        
-       getShippingAddress(this.setMyState);     
+       getShippingAddress(this.setMyState);  
+       
+       this.props.navigation.addListener('focus',()=>{
+        getShippingAddress(this.setMyState);  
+       
+       })
     }   
     
     handleSelectAddress = (item)=>{     
@@ -42,7 +48,7 @@ export default class Address extends React.Component {
                 shippingItem.is_selected = false
             }
         });
-        console.warn(newShipping);
+  
         this.setState({shippingAddress:newShipping});
     
        
@@ -69,7 +75,7 @@ export default class Address extends React.Component {
     }
 
     handleSaveSelectedAddress = async ()=>{
-
+        console.warn(this.state.shippingAddress.filter(item=>item.is_selected== true)[0]);
         let payload = {     
             screenName:'address',      
             variant:this.state.variant,
@@ -81,10 +87,15 @@ export default class Address extends React.Component {
 
     }
 
+
+    renderEmptyComponent = ()=>(
+        <Components.EmptyComponent />
+    )
     render(){
      
         return(
-            <>
+            <>  
+                <View style={{flex:1,backgroundColor:constants.Colors.light}}>
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
                     title={'Address'}
@@ -102,21 +113,28 @@ export default class Address extends React.Component {
                     />
 
                                  
-                </View>
-
-                <FlatList
-                        data={this.state.shippingAddress}
-                        renderItem={this.renderAddress}
-                        contentContainerStyle={{top:constants.Dimensions.vh(5)}}
-                        
-                    />   
-
-                <View style={styles.buttonContainer}>
-                        <Components.PrimaryButton                              
-                            title={"Save"}                              
-                            isLoading={this.state.isLoading}
-                            onPress={this.handleSaveSelectedAddress}
-                        />
+                </View> 
+                {this.state.loadingData ?
+                        <Components.LoadingScreen/>
+                          :
+                    <>
+                        <FlatList
+                                data={this.state.shippingAddress}
+                                renderItem={this.renderAddress}
+                                contentContainerStyle={{top:constants.Dimensions.vh(5)}}
+                                ListEmptyComponent={this.renderEmptyComponent}
+                                
+                            />   
+            
+                        <View style={styles.buttonContainer}>
+                                <Components.PrimaryButton                              
+                                    title={"Save"}                              
+                                    isLoading={this.state.isLoading}
+                                    onPress={this.handleSaveSelectedAddress}
+                                />
+                        </View>             
+                    </>
+                }
                 </View>
             </>
         )

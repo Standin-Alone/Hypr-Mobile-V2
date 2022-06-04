@@ -160,7 +160,7 @@ export const styles = StyleSheet.create({
     },
     
     cartSecondColumn:{     
-        flex:2
+        flex:3
     },
     cartVariantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
@@ -198,6 +198,45 @@ export const styles = StyleSheet.create({
     editButtonText:{
         fontSize:14,
         color:constants.Colors.primary
+    },
+
+
+
+    orderStatusCardContainer:{                             
+        backgroundColor:constants.Colors.light,        
+        width: constants.Dimensions.vw(80),
+        height: constants.Dimensions.vh(50),
+        flexDirection:'row',                
+        marginVertical:constants.Dimensions.vh(2),
+        marginHorizontal:constants.Dimensions.vw(2)
+    },
+
+    orderStatusVariantName:{                             
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:12,        
+    },
+    orderStatusQuantity:{                             
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:12,        
+    },
+    orderStatusPrice:{                             
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:14, 
+        color:constants.Colors.danger       
+    },
+    orderStatusFirstColumn:{        
+        flex:1.2,
+        paddingVertical:constants.Dimensions.vh(15),
+        paddingHorizontal:constants.Dimensions.vw(2)
+    },
+    
+    orderStatusSecondColumn:{     
+        flex:3
+    },
+    orderStatusCartImage:{
+        
+        width:constants.Dimensions.vw(10),
+        height:constants.Dimensions.vh(10)
     },
 });
 

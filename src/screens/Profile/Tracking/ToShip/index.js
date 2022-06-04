@@ -1,50 +1,81 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View,InteractionManager } from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
-import Components from '../../../components';
-import constants from '../../../constants';
+import { getToVerifyOrders,checkOrdersStatus } from '../../../../actions/tracking';
+import Components from '../../../../components';
+import constants from '../../../../constants';
+import { GET_SESSION } from '../../../../utils/async_storage';
 
 
-export default class AccountSettings extends React.Component {
+export default class ToShip extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {        
-          buttons:[{
-            name:'Address Book',
-            icon:'location-on',
-            navigateTo:constants.ScreenNames.Profile.ADDRESS_BOOK
-          },{
-            name:'Account Settings',
-            icon:'location-on' 
-          }]
+      this.state = {   
+        isReadyToRender:false,     
+        orders:[],
+        loadingData:true
       };
     }
 
+    setMyState = (value)=>this.setState(value);
 
-    renderButtons = ({item,index}) =>{
+    async componentDidMount(){
+
+        let payload = {
+            userId: await GET_SESSION('USER_ID'),
+            condition:'UNSHIPPED'
+        }
+
+          
+        checkOrdersStatus(payload,this.setMyState)
+     
+    }
+
+    renderItems = ({item,index}) =>{
+
+        console.warn('item',item);
         return (
-            <Components.PrimaryButtonNoOutline
-                title={item.name}
+            <Components.OrderCardButton
+                title={item?.orderNum}                
                 showIcon={true}
-                iconName={item.icon}
-                iconSize={20}
-                onPress={()=>this.props.navigation.navigate(item.navigateTo)}
+                iconName={'clipboard-list'}
+                iconSize={50}
+                onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Market.ORDER_STATUS,{orderInfo:item})}
             />
 
         )
     }
+
+    renderEmptyComponent = ()=>(
+        <Components.EmptyComponent />
+    )
+    
     render(){
         return(
-            <>  
+
+            <>
+            <View style={{flex:1,backgroundColor:constants.Colors.light}}>
                 <Components.PrimaryHeader
-                    title={"Account Settings"}
-                    onGoBack={()=>this.props.navigation.goBack()}
+                     title={"To Ship"}
+                     onGoBack={()=>this.props.navigation.goBack()}
                 />
-                <FlatList
-                    data={this.state.buttons}            
-                    renderItem={this.renderButtons}
-                /> 
-               
+              
+                {this.state.loadingData ?(
+                  <View>
+                    <Components.LoadingScreen />
+                    </View>
+                
+                ) : (
+                    <>                    
+                        <FlatList
+                            data={this.state.orders}            
+                            renderItem={this.renderItems}
+                            ListEmptyComponent={this.renderEmptyComponent}
+                        />                 
+                    </>
+                    
+                )}
+            </View>
             </>
         )
     }

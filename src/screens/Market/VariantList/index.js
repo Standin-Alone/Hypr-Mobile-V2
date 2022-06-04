@@ -30,7 +30,7 @@ export default class VariantList extends React.Component {
         getShippingAddress(this.setMyState);
 
         let cleanVariantList = [];
-        console.warn(this.state.params.variantList)
+  
         this.state.params.variantList.map((item)=>{
             cleanVariantList.push({
                 variantName:item.variantNameEn,

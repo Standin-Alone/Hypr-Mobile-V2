@@ -34,7 +34,7 @@ export const PaymentMethodModal = ({
                     </View>
                     <View style={{flexDirection:'column',top:constants.Dimensions.vh(10)}}>
                         <TouchableOpacity style={styles.button} onPress={()=>onPress('paypal')}>
-                            <View style={{flexDirection:'row',justifyContent:'flex-end',flex:1}}>
+                            <View style={{flexDirection:'row',justifyContent:'center',flex:1}}>
                                 <constants.Icons.FontAwesome 
                                     name="cc-paypal"
                                     size={40}
@@ -44,7 +44,7 @@ export const PaymentMethodModal = ({
                         </TouchableOpacity>
 
                         <TouchableOpacity style={styles.button} onPress={()=>onPress('stripe')}>
-                            <View style={{flexDirection:'row',justifyContent:'flex-end',flex:1}}>
+                            <View style={{flexDirection:'row',justifyContent:'center',flex:1}}>
                                 <constants.Icons.FontAwesome 
                                     name="cc-stripe"
                                     size={40}

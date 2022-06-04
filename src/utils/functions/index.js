@@ -22,8 +22,7 @@ export const calculateFreight = (payload,setState,props)=>{
                         }
                     ]
                 }
-    
-    console.warn(payload);
+
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -44,7 +43,7 @@ export const calculateFreight = (payload,setState,props)=>{
                             variant:payload.variant,
                             freightCalculation:response.data.data
                         }
-                        console.warn('params',parameters);
+                   
                         props.navigation.navigate(constants.ScreenNames.Market.PRODUCT_DETAIL,parameters)       
                     }
                   

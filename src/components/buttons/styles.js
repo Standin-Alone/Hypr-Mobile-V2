@@ -68,5 +68,9 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.OpenSansMedium,        
         top:5,
         color:constants.Colors.dark_tint
+    },
+    myOrderImage:{
+        width:constants.Dimensions.vw(20),
+        height:constants.Dimensions.vh(20)
     }
 });

@@ -18,7 +18,7 @@ export default class Order extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-          isReadyToRender:true,    
+          isReadyToRender:false,    
           cart:this.props.route.params.cart,
           orderId:this.props.route.params.orderId,           
           selectedPaymentMethod:'',
@@ -101,7 +101,8 @@ export default class Order extends React.Component {
             cart:this.state.cart,
             paymentMethod:this.state.selectedPaymentMethod,
             orderId:this.state.orderId,
-            userId: await GET_SESSION('USER_ID')
+            userId: await GET_SESSION('USER_ID'),
+            lineItemsPayload:[] // for stripe only
         }
 
         if(this.state.selectedPaymentMethod != ''){
