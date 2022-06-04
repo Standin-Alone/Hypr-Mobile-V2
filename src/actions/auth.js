@@ -310,28 +310,22 @@ export const login = (payload,setState,props) => {
            
             }else{
                 if (payload.loginType == 'google'){
+                
+                    let logoutGoogle = await GoogleSignin.signOut();                
+                    let checkUser = await GoogleSignin.signIn();
+                    if(checkUser){
+                        let googlePayload = {
+                            firstName:checkUser.user.givenName,
+                            lastName:checkUser.user.familyName,
+                            email:checkUser.user.email,                                                                                    
+                        }
+                        console.warn(googlePayload);
+                        createAccountUsingGoogle(googlePayload,setState,props)
+                    }
                     
+                }else if (payload.loginType == 'facebook'){
 
-                   
-                      
-                        // let revoke = await GoogleSignin.revokeAccess();
-                        // await GoogleSignin.signOut();
-                        let logoutGoogle = await GoogleSignin.signOut();
-                 
-               
-
-                        // if(logoutGoogle){
-                            let checkUser = await GoogleSignin.signIn();
-                            if(checkUser){
-                                let googlePayload = {
-                                    firstName:checkUser.user.givenName,
-                                    lastName:checkUser.user.familyName,
-                                    email:checkUser.user.email,                                                                                    
-                                }
-                                console.warn(googlePayload);
-                                createAccountUsingGoogle(googlePayload,setState,props)
-                            }
-                        // }
+                    alert('facebook')
                 }
                 
                 setState({isLoading:false});

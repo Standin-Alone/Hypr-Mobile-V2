@@ -4,13 +4,13 @@ import Components from '../../components';
 import constants from '../../constants';
 import { styles } from './styles';
 import { login } from '../../actions/auth';
-import {
-    
-    GoogleSigninButton,
-    
-  } from '@react-native-google-signin/google-signin';
+import {GoogleSigninButton,    } from '@react-native-google-signin/google-signin';
+import { LoginButton, AccessToken,Settings} from 'react-native-fbsdk-next';
+import FastImage from 'react-native-fast-image';
 
-import FastImage from 'react-native-fast-image'
+Settings.setAppID('701919164416993');
+Settings.initializeSDK();
+
 export default class Login extends React.Component {
     constructor(props) {
       super(props);
@@ -124,6 +124,34 @@ export default class Login extends React.Component {
                                         buttonText = 'Login'
                                         style={styles.googleButton} 
                                         onPress={()=>this.handleLogin('google')}   
+                                 />
+
+                                 <LoginButton                                        
+                                        style={styles.googleButton}                                         
+                                        // onLoginFinished={
+                                        //     (error, result)=>{
+                                        //         console.warn(error)
+                                        //         console.warn(result)
+                                        //         this.handleLogin('facebook')}
+                                        // }
+
+                                        onLoginFinished={
+                                            (error, result) => {
+                                                console.warn(error)
+                                              if (error) {
+                                                console.warn("login has error: " + result.error);
+                                              } else if (result.isCancelled) {
+                                                console.warn("login is cancelled.");
+                                              } else {
+                                                AccessToken.getCurrentAccessToken().then(
+                                                  (data) => {
+                                                    console.warn(data.accessToken.toString())
+                                                  }
+                                                )
+                                              }
+                                            }
+                                          }
+                                          onLogoutFinished={() => console.warn("logout.")}
                                  />
                             </Animated.View>
                         </View>                        

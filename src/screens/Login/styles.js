@@ -67,7 +67,7 @@ export const styles = StyleSheet.create({
         height:constants.Dimensions.vh(12),
         width:constants.Dimensions.vw(90),
         borderRadius:240,    
-        elevation:2 ,
+        elevation:1 ,
         marginVertical:constants.Dimensions.vh(2)     
     },
     orText:{
