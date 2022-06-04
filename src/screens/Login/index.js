@@ -4,6 +4,11 @@ import Components from '../../components';
 import constants from '../../constants';
 import { styles } from './styles';
 import { login } from '../../actions/auth';
+import {
+    
+    GoogleSigninButton,
+    
+  } from '@react-native-google-signin/google-signin';
 
 import FastImage from 'react-native-fast-image'
 export default class Login extends React.Component {
@@ -31,12 +36,13 @@ export default class Login extends React.Component {
     setMyState = (value)=>this.setState(value);
 
     // handleLogin
-    handleLogin = ()=>{
+    handleLogin = (loginType)=>{
                 
     
         let payload = {
             username    : this.state.username.value,
-            password : this.state.password.value
+            password : this.state.password.value,
+            loginType: loginType
         };
 
         
@@ -106,10 +112,19 @@ export default class Login extends React.Component {
                             
                             <Animated.View>
                                 <Components.PrimaryButton  
-                                    onPress={this.handleLogin}                      
+                                    onPress={()=>this.handleLogin('hypr')}                      
                                     title={"Log In"}                                
                                     isLoading={this.state.isLoading}
                                 />
+
+                                <Text style={styles.orText}>
+                                    Or
+                                </Text>
+                                <GoogleSigninButton     
+                                        buttonText = 'Login'
+                                        style={styles.googleButton} 
+                                        onPress={()=>this.handleLogin('google')}   
+                                 />
                             </Animated.View>
                         </View>                        
 

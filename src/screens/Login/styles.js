@@ -12,11 +12,11 @@ export const styles = StyleSheet.create({
         
     },
     bannerContainer:{
-        top:constants.Dimensions.vh(15),       
+        top:constants.Dimensions.vh(3),       
            
     },
     form:{
-        top:constants.Dimensions.vh(30),       
+        top:constants.Dimensions.vh(10),       
         
         alignSelf:'center',
         flexDirection:"column",        
@@ -62,6 +62,20 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.OpenSansBold,
         color:constants.Colors.primary,
         fontSize:18,
+    },
+    googleButton:{
+        height:constants.Dimensions.vh(12),
+        width:constants.Dimensions.vw(90),
+        borderRadius:240,    
+        elevation:2 ,
+        marginVertical:constants.Dimensions.vh(2)     
+    },
+    orText:{
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:14,        
+        color:constants.Colors.dark_tint,     
+        textAlign:'center',
+        marginVertical:constants.Dimensions.vh(2)     
     }
 });
 

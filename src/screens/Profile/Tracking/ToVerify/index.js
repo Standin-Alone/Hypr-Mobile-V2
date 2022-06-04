@@ -12,7 +12,8 @@ export default class ToVerify extends React.Component {
       super(props);
       this.state = {   
         isReadyToRender:false,     
-        orders:[]
+        orders:[],
+        loadingData:true
       };
     }
 
@@ -21,7 +22,8 @@ export default class ToVerify extends React.Component {
     async componentDidMount(){
 
         let payload = {
-            userId: await GET_SESSION('USER_ID')
+            userId: await GET_SESSION('USER_ID'),
+            condition:'UNPAID'
         }
 
           
@@ -43,7 +45,10 @@ export default class ToVerify extends React.Component {
 
         )
     }
-
+    renderEmptyComponent = ()=>(
+        <Components.EmptyComponent />
+    )
+    
     
     render(){
         return(
@@ -54,18 +59,20 @@ export default class ToVerify extends React.Component {
                      onGoBack={()=>this.props.navigation.goBack()}
                 />
               
-                {this.state.isReadyToRender ?(
+              {this.state.loadingData ?(
+                  <View>
+                    <Components.LoadingScreen />
+                    </View>
+                
+                ) : (
                     <>                    
                         <FlatList
                             data={this.state.orders}            
                             renderItem={this.renderItems}
+                            ListEmptyComponent={this.renderEmptyComponent}
                         />                 
                     </>
-                
-                ) : (
-                    <View>
-                        <Components.LoadingScreen />
-                    </View>
+                    
                 )}
 
             </>

@@ -21,12 +21,12 @@ export const getAllProducts = (payload,setState)=>{
             
             // GET REQUEST
             GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}?pageNum=${payload.currentPage}`).then((response)=>{                    
-                console.warn(response.data.data.list[0]);
+                console.warn(response.data);
                 if(response.data.result == true){
                                                                    
 
                     if(payload.currentPage > 1){
-                        setState({products:[...new Set(payload.previousProductPage),...response.data.data.list]})
+                        setState({products:[...new Set(payload.previousProductPage),...response.data.data.list],newProducts:response.data.data.list})
                     }else{
                         setState({products:response.data.data.list})
                     }
@@ -248,11 +248,11 @@ export const getShippingAddress = async (setState)=>{
     setState({isLoading:true});
     
     // Check Internet Connection
-    NetInfo.fetch().then((state)=>{
+    NetInfo.fetch().then(async (state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            let userId = '6266a22a45f2f2777ad5e4dc';
+            let userId = await GET_SESSION('USER_ID');
 
             let payload = {
                 userId:userId
@@ -264,19 +264,17 @@ export const getShippingAddress = async (setState)=>{
                 if(response.data.status == true){
                                                                    
                     SET_SESSION('USER_ID',userId) 
-                    setState({shippingAddress:response.data.data.length == 0 ? [] :  response.data.data});                                                          
-                                        
-                                        
+                    setState({shippingAddress:response.data.data.length == 0 ? [] :  response.data.data,loadingData:false,isLoading:false,});                                                          
+                                                                                
                 }else{
                     Toast.show({
                         type:'error',
                         text1: response.data.message
                     });
-
+                    setState({isLoading:false,loadingData:false});
                 }
                
-                 // turn off loading
-                 setState({isLoading:false});
+            
             }).catch((error)=>{
                 console.warn(error)                
                 
@@ -286,7 +284,7 @@ export const getShippingAddress = async (setState)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isLoading:false,loadingData:false});
             });
 
          }else{
@@ -296,7 +294,7 @@ export const getShippingAddress = async (setState)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+             setState({isLoading:false,loadingData:false});
          }
     });
 
@@ -862,7 +860,7 @@ export const addToWishList =  (payload,setState)=>{
 
 export const addToCart =  (payload,setState)=>{
     setState({isLoading:true});
-  
+    
     console.warn('payloads',payload)
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -880,18 +878,19 @@ export const addToCart =  (payload,setState)=>{
                                 text2: response.data.message
                         });
                         
-                 
+                        // turn off loading
+                        setState({isLoading:false});
 
                     }else{
                         Toast.show({
                             type:'error',
                             text1: response.data.message
                         });
-
+                        // turn off loading
+                        setState({isLoading:false});
                     }
                 
-                    // turn off loading
-                    setState({isLoading:false});
+                   
                 }).catch((error)=>{
                     console.warn('sample error ', error)
                     
@@ -981,7 +980,8 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){            
-
+       
+                if(payload.shippingAddress){
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.UPDATE_SELECTED_ADDRESS}`,payload).then((response)=>{                    
                     
@@ -1002,7 +1002,7 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
                     // turn off loading
                     setState({isLoading:false});
                 }).catch((error)=>{
-                    console.warn('sample error ', error)
+                   
                     
                     Toast.show({
                         type:'error',
@@ -1012,7 +1012,17 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
                     // turn off loading
                     setState({isLoading:false});
                 });
-           
+            }else{
+                Toast.show({
+                    type:'error',
+                    text1: 'Message',
+                    text2:'Please Select address first'
+                });
+
+                // turn off loading
+                setState({isLoading:false});
+
+            }
 
          }else{
              //  No internet Connection
@@ -1034,11 +1044,11 @@ export const updateSelectedAddress =  (payload,setState,props)=>{
 export const getCart = async (setState)=>{
 
     // Check Internet Connection
-    NetInfo.fetch().then((state)=>{
+    NetInfo.fetch().then(async (state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            let userId = '6266a22a45f2f2777ad5e4dc';
+            let userId =  await GET_SESSION('USER_ID');
 
             let payload = {
                 userId:userId
@@ -1061,7 +1071,7 @@ export const getCart = async (setState)=>{
 
                     let newCart = response.data.data.map((obj)=>({...obj,isSelected:false}));
 
-                    setState({cart:response.data.data.length == 0 ? [] :newCart,cartPerCountry:getCountry});
+                    setState({cart:response.data.data.length == 0 ? [] :newCart,cartPerCountry:getCountry,isLoadingData:false});
                                         
                                         
                 }else{
@@ -1069,7 +1079,7 @@ export const getCart = async (setState)=>{
                         type:'error',
                         text1: response.data.message
                     });
-
+                    setState({isLoadingData:false});
                 }
                
               
@@ -1080,6 +1090,7 @@ export const getCart = async (setState)=>{
                     type:'error',
                     text1:'Something went wrong!'
                 });
+                setState({isLoadingData:false});
                
             });
 
@@ -1089,6 +1100,7 @@ export const getCart = async (setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
+            setState({isLoadingData:false});
             
          }
     });

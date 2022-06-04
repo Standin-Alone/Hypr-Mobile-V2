@@ -86,7 +86,7 @@ export const checkOrdersStatus= (payload,setState)=>{
 
                             if(result.data.result == true){                                
                                 // LIST OF ORDERS FROM CJ                               
-                                if( result.data.data?.orderStatus == 'UNPAID'){  
+                                if( result.data.data?.orderStatus == payload.condition){  
                                   
                                  
                                     // result.data.data.shippingAddress = {
@@ -99,8 +99,6 @@ export const checkOrdersStatus= (payload,setState)=>{
                                     //         billing_zip_code: items.billing_zip_code
                                     //     }
                                  
-
-
                                     return result.data.data;
                                 }                                                                                                                                     
                             }
@@ -109,7 +107,24 @@ export const checkOrdersStatus= (payload,setState)=>{
                         
 
                             if(cleanOrders.length > 0 ){
-                                 setState({orders:cleanOrders,isReadyToRender:true})                   
+                                let countNull = 0 ;
+
+                                cleanOrders.map((item)=>{
+                                    
+                                    if(item === null || item === undefined){
+                                        
+                                        countNull++
+                                    }
+                                })
+
+
+                                if(countNull != cleanOrders.length){
+                                    setState({orders:cleanOrders,loadingData:false})         
+                                    
+                                }else{
+                                    setState({loadingData:false})          
+                                }
+                                 
                             }
                         });
                  
@@ -122,6 +137,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                         type:'error',
                         text1: response.data.message
                     });
+                    setState({loadingData:false})          
 
                 }
            
@@ -132,7 +148,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                     text1:'Something went wrong!'
                 });
                 
-         
+                setState({loadingData:false})          
             });
 
          }else{
@@ -141,6 +157,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
+            setState({loadingData:false})          
       
          }
     });

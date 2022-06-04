@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1071366226336",
+    "project_id": "onyx-sign-352304",
+    "storage_bucket": "onyx-sign-352304.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1071366226336:android:f1b5f66de3889bf5d6a4c5",
+        "android_client_info": {
+          "package_name": "com.hypr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1071366226336-epmk8r1vcqk4vjfg2oo521t1rbostmkr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD1plq6beGCOG8uAguMlISy39SddkpwqOs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1071366226336-epmk8r1vcqk4vjfg2oo521t1rbostmkr.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

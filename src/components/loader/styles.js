@@ -18,5 +18,11 @@ export const styles = StyleSheet.create({
         alignItems: 'center',
         elevation: 5,
         backgroundColor: 'rgba(52, 52, 52, 0.8)'
+    },
+    noData:{
+        width:constants.Dimensions.vw(100),
+        height:constants.Dimensions.vh(100),
+        alignSelf:'center',
+        resizeMode:'contain'
     }
 });

@@ -213,15 +213,15 @@ export const styles = StyleSheet.create({
 
     orderStatusVariantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:17,        
+        fontSize:12,        
     },
     orderStatusQuantity:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:14,        
+        fontSize:12,        
     },
     orderStatusPrice:{                             
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:18, 
+        fontSize:14, 
         color:constants.Colors.danger       
     },
     orderStatusFirstColumn:{        
@@ -235,8 +235,8 @@ export const styles = StyleSheet.create({
     },
     orderStatusCartImage:{
         
-        width:constants.Dimensions.vw(16),
-        height:constants.Dimensions.vh(16)
+        width:constants.Dimensions.vw(10),
+        height:constants.Dimensions.vh(10)
     },
 });
 

@@ -65,6 +65,8 @@ export default class Market extends React.Component {
     )
 
 
+    
+
  loadMore = async (allProducts) => { 
         let parameter = {
             currentPage : this.state.currentPage,

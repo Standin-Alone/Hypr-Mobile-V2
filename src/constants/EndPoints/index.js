@@ -1,6 +1,7 @@
 const EndPoints = {
     LOGIN:'/user/sign-in',
     CREATE_ACCOUNT:'/user/sign-up',
+    CREATE_ACCOUNT_USING_GOOGLE:'/user/sign-up-using-google',
     VERIFY_OTP:'/user/verify-otp',
     RESEND_OTP:'/user/resend-otp',
     GET_USER_INFO:'/user/get-user-info',

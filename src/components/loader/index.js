@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View,SafeAreaView,ActivityIndicator,Text} from "react-native";
+import { View,SafeAreaView,ActivityIndicator,Text,Image} from "react-native";
 import { styles } from "./styles";
 import constants from "../../constants";
 import Spinner from 'react-native-spinkit';
@@ -49,6 +49,18 @@ export const FooterLoader = ({
         <View style={{flex:1,alignContent:'center',alignSelf:'center',justifyContent:'center'}}>
               <ActivityIndicator size={'large'} color={constants.Colors.primary} />
               <Text style={{ fontSize: 20, fontWeight: '200',fontFamily:constants.Fonts.PoppinsRegular}}>Getting more products...</Text>
+        </View>
+    )
+}
+
+
+
+
+export const EmptyComponent = ({
+}) => {
+    return (
+        <View style={{flex:1}}>
+              <Image source={constants.Images.noDataBackground} style={styles.noData} resizeMode="contain"/>
         </View>
     )
 }

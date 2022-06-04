@@ -51,11 +51,13 @@ export default class UserProfile extends React.Component {
                                 <Components.ButtonWithTopIcon
                                     title="To Ship"
                                     iconName={"ship"}
+                                    onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_SHIP)}
                                 />
 
                                 <Components.ButtonWithTopIcon
                                     title="To Receive"
                                     iconName={"shipping-fast"}
+                                    onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_RECEIVE)}
                                 />
                             </View>    
                         </View>            

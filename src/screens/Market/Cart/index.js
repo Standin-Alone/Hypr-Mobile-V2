@@ -20,7 +20,8 @@ export default class Cart extends React.Component {
           cart:[],   
           cartPerCountry:[],
           isLoading:false,
-          selectedProducts:[]          
+          selectedProducts:[],
+          isLoadingData:true       
       };
     }
 
@@ -32,9 +33,7 @@ export default class Cart extends React.Component {
         
        getCart(this.setMyState);
        
-       InteractionManager.runAfterInteractions(()=>{
-         this.setState({isReadyToRender:true})
-       })
+     
  
     }   
 
@@ -152,40 +151,48 @@ export default class Cart extends React.Component {
 
     render(){
      
-        return this.state.isReadyToRender ? (
+        return  (
             <>
+            <View style={{flex:1,backgroundColor:constants.Colors.light}}>
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
                     title={'My Cart'}
-                />             
+                />          
 
-            <View>
-                <ScrollView>
-                    <FlatList
-                        scrollEnabled
-                        data={this.state.cartPerCountry}
-                        renderItem={this.renderCartCountry}
-                        contentContainerStyle={{top:constants.Dimensions.vh(5),paddingBottom:constants.Dimensions.vh(80)}}
-                        ListEmptyComponent={this.renderEmptyComponent}
-                    />   
-                </ScrollView>
+                {this.state.isLoadingData ? (
+                    <Components.LoadingScreen/>
+
+                ): (
+                    <>
+                    <View>
+                        <ScrollView>
+                            <FlatList
+                                scrollEnabled
+                                data={this.state.cartPerCountry}
+                                renderItem={this.renderCartCountry}
+                                contentContainerStyle={{top:constants.Dimensions.vh(5),paddingBottom:constants.Dimensions.vh(80)}}
+                                ListEmptyComponent={this.renderEmptyComponent}
+                            />   
+                        </ScrollView>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <Components.PrimaryButton                              
+                            title={`Checkout $${computeCart(this.state.cart.filter((item)=>item.isSelected == true))}`}  
+                            onPress={this.handleCheckout}                          
+                            isLoading={this.state.isLoading}
+                        />
+                    </View>
+                    </>
+
+
+                )
+                    }
+              
             </View>
-            <View style={styles.buttonContainer}>
-                <Components.PrimaryButton                              
-                    title={`Checkout $${computeCart(this.state.cart.filter((item)=>item.isSelected == true))}`}  
-                    onPress={this.handleCheckout}                          
-                    isLoading={this.state.isLoading}
-                />
-            </View>
-            
             </>
-        ) : (
-
-            <View>
-                <Text>Loading...</Text>
-            </View>
-        )
+        ) 
         
+     
     }
 
 }

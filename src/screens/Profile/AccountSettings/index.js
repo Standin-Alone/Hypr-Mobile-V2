@@ -4,7 +4,9 @@ import { FlatList } from 'react-native-gesture-handler';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { CLEAR_SESSION } from '../../../utils/async_storage';
-
+import {
+    GoogleSignin,    
+  } from '@react-native-google-signin/google-signin';
 
 export default class AccountSettings extends React.Component {
     constructor(props) {
@@ -38,7 +40,10 @@ export default class AccountSettings extends React.Component {
                 onPress={async ()=>{
                     
                     if(item.name == 'Log Out'){
+
+                        await GoogleSignin.signOut();
                         await CLEAR_SESSION();
+                        
                         this.props.navigation.reset(item.navigateTo)
                     }else{
                         this.props.navigation.navigate(item.navigateTo)

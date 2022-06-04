@@ -64,7 +64,7 @@ export default class OrderStatus extends React.Component {
                 <View style={{flexDirection:'column',alignContent:'space-between'}}>                
                         <View style={styles.orderStatusHeader}>
                             <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
-                                <Text style={styles.orderNumLabel}>Order Number:</Text>
+                                <Text style={styles.orderNumLabel}><constants.Icons.MaterialCommunityIcons name="clipboard-edit" size={20} color={constants.Colors.secondary}/>Order Number</Text>
                                 <Text style={styles.orderNumVal}>{this.state.parameters.orderInfo?.orderNum}</Text>
                             </View>                
                         </View>         
@@ -80,13 +80,27 @@ export default class OrderStatus extends React.Component {
                             </View>                
                         </View>     
 
-                        <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(20)}]}>
+                        <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(50)}]}>
                             <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
                                 <Text style={styles.orderLabel}>Shipping Details</Text>                            
-                                <Text>{this.state.orderInfo.shippingAddress}</Text>
-                                <Text>{this.state.orderInfo.shippingState}</Text>
-                                <Text>{this.state.orderInfo.shippingCity}</Text>
-                                <Text>{this.state.orderInfo.shippingCountry}</Text>
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                    <Text>Name:</Text>
+                                    <Text>{this.state.orderInfo.shippingCustomerName}</Text>
+                                </View>
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                    <Text>Address:</Text>
+                                    <Text>{this.state.orderInfo.shippingAddress}</Text>
+                                </View>
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                    <Text>State:</Text>
+                                    <Text>{this.state.orderInfo.shippingProvince}</Text>
+                                </View>                              
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                    <Text>Country:</Text>
+                                    <Text>{this.state.orderInfo.shippingCountryCode}</Text>
+                                </View>
+                                
+                                
                             </View>                
                         </View>      
                     </View>   )

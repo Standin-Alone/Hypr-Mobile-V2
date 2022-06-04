@@ -34,7 +34,8 @@ import {
 import {
     Loader,
     LoadingScreen,
-    FooterLoader
+    FooterLoader,
+    EmptyComponent
 } 
 from "./loader"
 
@@ -74,7 +75,8 @@ export default {
     Loader,
     LoadingScreen,
     FooterLoader,
-
+    EmptyComponent,
+    
     PaymentMethodModal
 
 

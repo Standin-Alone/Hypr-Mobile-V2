@@ -25,7 +25,7 @@ export const checkout = (payload,setState,props)=>{
             let cart = payload.cart;
             let address = payload.cart[0].shipping_address[0];
         
-             console.warn('fullnanme',);
+             console.warn('fullnanme',address);
              cleanPayload.zip = address.zip_code;      
              cleanPayload.sccode  = address.country_code;
              cleanPayload.country = address.country;
@@ -48,6 +48,8 @@ export const checkout = (payload,setState,props)=>{
              }))
 
             
+
+             console.warn(cleanPayload);
          
             // POST REQUEST
             POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECKOUT}`,cleanPayload).then((response)=>{                    
