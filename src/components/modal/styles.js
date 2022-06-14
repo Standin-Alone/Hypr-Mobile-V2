@@ -31,5 +31,41 @@ export const styles = StyleSheet.create({
         top:constants.Dimensions.vh(5),
         fontFamily:constants.Fonts.GothamMedium,
         fontSize:18,
+    },
+    referralModal:{
+        flex:1,
+        backgroundColor:'rgba(0,0,0,0.5)',
+    },
+    referralContent:{
+        alignSelf:'center',
+        height:constants.Dimensions.vh(40),
+        width:constants.Dimensions.vh(90),
+        top:constants.Dimensions.vh(50),
+        backgroundColor:constants.Colors.light,        
+    },
+    modalHeaderTitle:{    
+        fontFamily:constants.Fonts.GothamMedium,
+        fontSize:18,
+    },
+    primaryContainer:{  
+        flexDirection:'row',    
+        marginVertical:constants.Dimensions.vh(2)
+    },
+    primaryInput:{
+        left:constants.Dimensions.vw(5),
+        borderWidth:1,
+        width:constants.Dimensions.vw(80),
+        borderRadius:10,        
+        borderColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.GothamMedium,
+        paddingLeft:constants.Dimensions.vw(2),                
+        paddingVertical:   constants.Dimensions.vh(2),        
+        fontSize:14,
+        top:constants.Dimensions.vh(10),
+    },
+    icon:{
+        position:'absolute',        
+        left:constants.Dimensions.vw(75),
+        top:constants.Dimensions.vh(9),
     }
 });

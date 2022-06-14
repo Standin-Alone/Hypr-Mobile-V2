@@ -2,18 +2,26 @@ import React from 'react';
 
 const loginCover = require('./images/login-cover.jpg'); 
 const hyprLogo = require('./images/hypr-logo-v2.png'); 
+const hyprLogoNew = require('./images/LogoConcept.png'); 
 const addressIcon = require('./images/address-icon.png'); 
 const userProfile = require('./images/user-profile.jpg'); 
 const myOrder = require('./images/my-order.png'); 
-const noDataBackground = require('./images/no-data-bg.jpg'); 
+const noDataBackground = require('./images/no-data-bg.jpg');
+const socialPageBackground = require('./images/SocialPageBackground.png'); 
+const hype = require('./images/social-menu-card/hype.png'); 
+const unhype = require('./images/social-menu-card/unhype.png'); 
 export default {
 
-    loginCover : loginCover,
-    hyprLogo : hyprLogo,
-    addressIcon:addressIcon,
-    userProfile:userProfile,
-    myOrder:myOrder,
-    noDataBackground:noDataBackground
+    loginCover,
+    hyprLogo ,
+    addressIcon,
+    userProfile,
+    myOrder,
+    noDataBackground,
+    socialPageBackground,
+    hyprLogoNew,
+    hype,
+    unhype
     
     
 }

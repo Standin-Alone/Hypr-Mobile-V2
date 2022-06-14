@@ -1,16 +1,18 @@
 import React from 'react';
-import { View,Text} from 'react-native';
+import { View,Text,ToastAndroid} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { styles } from './styles';
 import FastImage from 'react-native-fast-image'
 import { getUserInfo } from '../../../actions/auth';
-
+import Clipboard from '@react-native-clipboard/clipboard';
 export default class UserProfile extends React.Component {
     constructor(props) {
       super(props);
       this.state = {    
-          userInfo:[]    
+          userInfo:[],
+          showReferralModal:false,
+          referralLink:'https://hypr.com/signup/1234567'
       };
     }
 
@@ -25,11 +27,26 @@ export default class UserProfile extends React.Component {
         })
     }
 
+    handleCopyLink = ()=>{
+        
+        Clipboard.setString(this.state.referralLink);       
+        ToastAndroid.show("Successfully copied the link", ToastAndroid.SHORT);
+       
+    }
+
     render(){
         return(
             <>  
                 <Components.ProfileHeader
                     goToProfileSettings={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.ACCOUNT_SETTINGS)}
+                    onShareReferralLink={()=>this.setState({showReferralModal: this.state.showReferralModal ? false :true})}
+                    
+                />
+                <Components.ShareReferralLinkModal 
+                    openModal={this.state.showReferralModal}
+                    onCloseModal={()=>this.setState({showReferralModal: false})}
+                    onCopy={this.handleCopyLink}
+                    referralLink={this.state.referralLink}
                 />
                 <View style={styles.container}>                   
                         <View style={[styles.profileContainer,{height:constants.Dimensions.vh(70)}]}>

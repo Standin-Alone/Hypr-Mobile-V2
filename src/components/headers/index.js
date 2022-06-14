@@ -1,21 +1,66 @@
 
 import React from "react";
-import { View,TouchableOpacity,TextInput,Text } from "react-native";
+import { View,TouchableOpacity,TextInput,Text,ImageBackground } from "react-native";
 import { styles } from "./styles";
 import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import FastImage from 'react-native-fast-image'
+
+export const SocialHeader = ({
+    goToProfileSettings,
+    onShareReferralLink
+ })=>(   
+    <>   
+        
+            <View style={styles.socialContainer}>     
+                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}} blurRadius={2}>
+                    <View style={{flexDirection:'row'}}>                    
+                        <View >
+                            <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
+                        </View>    
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>        
+                            <TouchableOpacity onPress={onShareReferralLink}  style={{ padding:15 }}>
+                                    <constants.Icons.Ionicons 
+                                        name="camera" 
+                                        size={30} 
+                                        color={constants.Colors.secondary}
+                                    />
+                            </TouchableOpacity>                
+                            <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
+                                <constants.Icons.Ionicons 
+                                    name="chatbubble-ellipses" 
+                                    size={30} 
+                                    color={constants.Colors.secondary}
+                                />
+                            </TouchableOpacity>                       
+                        </View>                   
+                    </View>
+                </ImageBackground>               
+            </View>    
+        
+    </>
+);
+
 
 
 export const ProfileHeader = ({
-    goToProfileSettings
+    goToProfileSettings,
+    onShareReferralLink
  })=>(   
     <>   
         
         <View style={styles.marketContainer}>     
 
-            <View style={styles.buttonContainer}>                     
+            <View style={styles.buttonContainer}>        
+                <TouchableOpacity onPress={onShareReferralLink}  style={{ padding:15 }}>
+                        <MaterialCommunityIcons 
+                            name="share" 
+                            size={30} 
+                            color={constants.Colors.primary}
+                        />
+                </TouchableOpacity>                
                 <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
                     <MaterialCommunityIcons 
                         name="cog" 
@@ -26,7 +71,7 @@ export const ProfileHeader = ({
             </View>                       
          </View>    
     </>
- );
+);
 
 
 

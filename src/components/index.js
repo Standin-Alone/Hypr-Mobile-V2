@@ -19,7 +19,8 @@ import {
 import { 
     PrimaryHeader,
     MarketHeader,
-    ProfileHeader
+    ProfileHeader,
+    SocialHeader
     } from "./headers";
 
 
@@ -29,7 +30,8 @@ import {
     AddressCard,
     CartCard,
     SearchProductCard,
-    OrderStatusProductCard
+    OrderStatusProductCard,
+    SocialPostCard
     } from "./cards";
 import {
     Loader,
@@ -40,7 +42,8 @@ import {
 from "./loader"
 
 import {
-    PaymentMethodModal
+    PaymentMethodModal,
+    ShareReferralLinkModal
 } from "./modal"
 
 export default {
@@ -63,6 +66,7 @@ export default {
     PrimaryHeader,
     MarketHeader,
     ProfileHeader,
+    SocialHeader,
 
 
     ProductCard,
@@ -71,13 +75,15 @@ export default {
     CartCard,
     SearchProductCard,
     OrderStatusProductCard,
-    
+    SocialPostCard,
+
     Loader,
     LoadingScreen,
     FooterLoader,
     EmptyComponent,
     
-    PaymentMethodModal
+    PaymentMethodModal,
+    ShareReferralLinkModal
 
 
 }

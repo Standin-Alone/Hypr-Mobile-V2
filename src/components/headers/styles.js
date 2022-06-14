@@ -64,6 +64,16 @@ export const styles = StyleSheet.create({
         alignItems: "center",
         borderRadius: 20,
         backgroundColor: constants.Colors.danger
+    },
+    logo:{
+        height:constants.Dimensions.vh(15),
+        width:constants.Dimensions.vw(20),  
+   
+    },
+    socialContainer:{
+        flexDirection:'row',
+        justifyContent:"flex-start",
+        backgroundColor:constants.Colors.light
     }
   
 });

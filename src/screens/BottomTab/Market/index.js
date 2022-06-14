@@ -1,11 +1,12 @@
 import React from 'react';
-import { FlatList, View,Text,ActivityIndicator} from 'react-native';
+import { FlatList, View,Text,ActivityIndicator,ImageBackground} from 'react-native';
 import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../../actions/market';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { SET_SESSION } from '../../../utils/async_storage/model';
 import { styles } from './styles';
 import MasonryList from '@react-native-seoul/masonry-list';
+
 
 
 
@@ -86,8 +87,11 @@ export default class Market extends React.Component {
     render(){
         return(
             <>
-                <View  style={{flex:1}}>
-                    <Components.Loader isLoading={this.state.isLoading}/>
+                
+                    <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>
+
+                   
+                    {/* <Components.Loader isLoading={this.state.isLoading}/> */}
                     <Components.MarketHeader
                         showSearch={true}
                         goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
@@ -126,8 +130,8 @@ export default class Market extends React.Component {
                     }
                     
 
-                   
-                </View>
+                    </ImageBackground>
+                
             </>
         )
     }

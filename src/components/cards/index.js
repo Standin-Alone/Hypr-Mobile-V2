@@ -231,3 +231,65 @@ export const OrderStatusProductCard = ({
       
    </View>
 )
+
+
+
+
+export const SocialPostCard = ({
+   onViewProfile,
+   onHype,
+   onComment,
+   post,
+   isHype,
+   profilePicture,
+   postImage,
+   hypesCount,
+   fullName,
+   shortName
+})=>(
+   <View style={styles.socialPostContainer}>
+      <TouchableOpacity style={styles.socialPostImage}>
+         <FastImage source={{ uri:postImage}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+         
+         <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
+            <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPres={onViewProfile}>
+               <FastImage source={{ uri:profilePicture}} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+            </TouchableOpacity>            
+            <View style={{left:constants.Dimensions.vw(4)}}>
+               <Text style={styles.username}> 
+                     {fullName}
+               </Text>
+            </View>
+         </View>      
+
+         <View style={{flexDirection:'row',bottom:constants.Dimensions.vh(20),justifyContent:'center'}}>
+            <View style={styles.socialPostMenu}>
+               
+               <TouchableOpacity onPress={onComment}>
+                  <constants.Icons.Ionicons name="chatbubble-outline" size={35} adjustsFontSizeToFit color={constants.Colors.dark}/>
+               </TouchableOpacity>
+
+               
+               <TouchableOpacity onPress={onHype}>
+                  {isHype ? 
+                     <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                     :
+                     <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                  }
+                  
+               </TouchableOpacity>
+            </View>
+         </View>
+
+      
+      </TouchableOpacity>     
+      <View style={{bottom:constants.Dimensions.vw(10),left:constants.Dimensions.vw(2)}}>
+         <Text style={styles.hypeCount}>{hypesCount ? hypesCount : 0} Hypes</Text>
+      </View> 
+      <View style={{bottom:constants.Dimensions.vw(10),left:constants.Dimensions.vw(2),flexDirection:'row',width:constants.Dimensions.vw(90)}}>
+         <Text style={styles.name}>{shortName} <Text style={styles.postMessage} numberOfLines={1} >{post}</Text></Text>         
+      </View> 
+   </View>
+)
+
+

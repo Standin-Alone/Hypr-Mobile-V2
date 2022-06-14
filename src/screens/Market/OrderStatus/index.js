@@ -83,19 +83,19 @@ export default class OrderStatus extends React.Component {
                         <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(50)}]}>
                             <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
                                 <Text style={styles.orderLabel}>Shipping Details</Text>                            
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Name:</Text>
                                     <Text>{this.state.orderInfo.shippingCustomerName}</Text>
                                 </View>
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Address:</Text>
                                     <Text>{this.state.orderInfo.shippingAddress}</Text>
                                 </View>
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>State:</Text>
                                     <Text>{this.state.orderInfo.shippingProvince}</Text>
                                 </View>                              
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+                                <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Country:</Text>
                                     <Text>{this.state.orderInfo.shippingCountryCode}</Text>
                                 </View>

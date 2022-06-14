@@ -58,34 +58,31 @@ export const getToVerifyOrders = (payload,setState)=>{
 
 
 export const checkOrdersStatus= (payload,setState)=>{
-
     
+ 
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_TO_VERIFY_ORDERS}`,payload).then(async (response)=>{                    
-                
+           
                 if(response.data.status == true){
                     
                     
                     let orders = response.data.data;
-                    
-
-                    
-          
-          
+            
             
               
                     Promise.all(orders.map(  (items,index)=>{
+                        console.warn(items )  
                         // GET TRACKING DETAILS IN CJ
                          return  GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`).then( (result)=>{                    
-
+                                                
                             if(result.data.result == true){                                
-                                // LIST OF ORDERS FROM CJ                               
+                                // LIST OF ORDERS FROM CJ   
+                                
                                 if( result.data.data?.orderStatus == payload.condition){  
                                   
                                  
@@ -105,24 +102,24 @@ export const checkOrdersStatus= (payload,setState)=>{
                                 })                    
                         })).then((cleanOrders)=>{
                         
-
                             if(cleanOrders.length > 0 ){
                                 let countNull = 0 ;
 
                                 cleanOrders.map((item)=>{
-                                    
+                                    console.warn(item)
                                     if(item === null || item === undefined){
                                         
                                         countNull++
                                     }
                                 })
 
-
-                                if(countNull != cleanOrders.length){
-                                    setState({orders:cleanOrders,loadingData:false})         
+                                
+                                if(countNull > 0){
+                                    setState({loadingData:false})          
                                     
                                 }else{
-                                    setState({loadingData:false})          
+                                    setState({orders:cleanOrders,loadingData:false})         
+                                    
                                 }
                                  
                             }
@@ -137,7 +134,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({loadingData:false})          
+                    setState({orders:[],loadingData:false})          
 
                 }
            

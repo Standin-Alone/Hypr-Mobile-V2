@@ -32,18 +32,18 @@ export const getAllProducts = (payload,setState)=>{
                     }
                     
 
-                    
+                    setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }else{
                     Toast.show({
                         type:'error',
                         text1: response.data.message
                     });
+                    setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }
-               
-                 // turn off loading
-                 setState({isLoading:false,isLoadingPlaceholder:false});
+        
+                 
             }).catch((error)=>{
                 console.warn(error)
                 Toast.show({

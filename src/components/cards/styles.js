@@ -160,7 +160,7 @@ export const styles = StyleSheet.create({
     },
     
     cartSecondColumn:{     
-        flex:3
+        flex:1.5
     },
     cartVariantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
@@ -238,5 +238,59 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(10),
         height:constants.Dimensions.vh(10)
     },
+    socialPostContainer:{
+        borderRadius:20,
+        left:constants.Dimensions.vw(3),
+        top:constants.Dimensions.vw(5),
+        width:constants.Dimensions.vw(95),
+        height:constants.Dimensions.vh(100),     
+        flexDirection:'column',
+        backgroundColor:'rgba(255,255,255,0.5)'
+    },
+    socialImage:{
+        borderRadius:20,
+        width:constants.Dimensions.vw(95),
+        height:constants.Dimensions.vh(80),    
+    },
+    profile:{
+        borderRadius:200,
+        width:constants.Dimensions.vw(10),
+        height:constants.Dimensions.vh(10),    
+        borderColor:constants.Colors.secondary,
+        borderWidth:0.8
+    },
+    socialPostMenu:{
+        backgroundColor:'rgba(255,255,255,0.3)',
+        justifyContent:'space-around',
+        borderRadius:20,
+        paddingVertical:constants.Dimensions.vh(2),
+        paddingHorizontal:constants.Dimensions.vw(4),
+        flexDirection:'row'
+        
+    },
+    username:{
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:12,  
+        color:constants.Colors.light
+    },
+    socialMenuIcon:{
+        width:constants.Dimensions.vw(10),
+        height:constants.Dimensions.vh(10), 
+    },
+    hypeCount:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.dark_tint
+    },
+    postMessage:{
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:12,  
+        color:constants.Colors.dark_tint
+    },
+    name:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.dark
+    }
 });
 

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View,Text,Modal,TouchableOpacity} from "react-native";
+import { View,Text,Modal,TouchableOpacity,TextInput} from "react-native";
 import { styles } from "./styles";
 import constants from "../../constants";
 
@@ -56,6 +56,61 @@ export const PaymentMethodModal = ({
                     </View>
                    
                 </View>
+            </Modal>
+                 
+    );
+}
+
+
+
+
+export const ShareReferralLinkModal = ({
+    openModal,
+    onCloseModal,    
+    referralLink,
+    onCopy
+}) => {
+
+    return (
+        
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={openModal}
+                onRequestClose={onCloseModal}                
+                
+            >
+                  <View style={styles.referralModal}>
+                        <View style={styles.referralContent}>
+                            <View style={{flexDirection:'row',justifyContent:'space-between',marginHorizontal:constants.Dimensions.vw(4)}}>
+                                <View style={{top:constants.Dimensions.vw(2),}}>
+                                    <Text style={styles.modalHeaderTitle}>Share Referral Link</Text>
+                                </View>
+                                <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vw(2),}}>
+                                    <constants.Icons.Ionicons name="close" size={20} onPress={onCloseModal}/>
+                                </View>
+                            </View>
+                            <View style={styles.primaryContainer}>                              
+                                <View>                
+                                    <TextInput 
+                                        editable = {false}                                                               
+                                        style={[styles.primaryInput,]}                                         
+                                        value={referralLink}
+                                        adjustsFontSizeToFit
+                                        />
+                                </View>                                
+                                <TouchableOpacity style={styles.icon}     onPress={onCopy}>
+                                    <constants.Icons.Ionicons 
+                                            name={'copy'} 
+                                            size={30} 
+                                            color={ constants.Colors.primary }                                                                        
+                                            style={{ top:10 }} 
+                                       
+                                        />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                  </View>            
             </Modal>
                  
     );

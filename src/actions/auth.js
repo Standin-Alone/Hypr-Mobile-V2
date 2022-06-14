@@ -46,7 +46,7 @@ export const createAccountUsingGoogle = (payload,setState,props)=>{
                             userId: response.data.userId,
                             email:response.data.email
                         }
-                        
+                       
                         // NAVIGATE TO VERIFY OTP
                         props.navigation.navigate('VerifyOtp',params);
 
@@ -319,7 +319,12 @@ export const login = (payload,setState,props) => {
                             lastName:checkUser.user.familyName,
                             email:checkUser.user.email,                                                                                    
                         }
-                        console.warn(googlePayload);
+                        
+                        Toast.show({
+                            type:'success',
+                            text1: 'Success',
+                            text2:'Signing in...',
+                        });
                         createAccountUsingGoogle(googlePayload,setState,props)
                     }
                     
