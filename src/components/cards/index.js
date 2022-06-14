@@ -287,7 +287,7 @@ export const SocialPostCard = ({
          <Text style={styles.hypeCount}>{hypesCount ? hypesCount : 0} Hypes</Text>
       </View> 
       <View style={{bottom:constants.Dimensions.vw(10),left:constants.Dimensions.vw(2),flexDirection:'row',width:constants.Dimensions.vw(90)}}>
-         <Text style={styles.name}>{shortName} <Text style={styles.postMessage} numberOfLines={1} >{post}</Text></Text>         
+         <Text style={styles.name}>{shortName} -<Text style={styles.postMessage} numberOfLines={1} >{post}</Text></Text>         
       </View> 
    </View>
 )

@@ -239,9 +239,7 @@ export const styles = StyleSheet.create({
         height:constants.Dimensions.vh(10)
     },
     socialPostContainer:{
-        borderRadius:20,
-        left:constants.Dimensions.vw(3),
-        top:constants.Dimensions.vw(5),
+        borderRadius:20,                
         width:constants.Dimensions.vw(95),
         height:constants.Dimensions.vh(100),     
         flexDirection:'column',

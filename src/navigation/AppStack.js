@@ -18,7 +18,7 @@ import constants from "../constants";
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
 
-LogBox.ignoreAllLogs();
+// LogBox.ignoreAllLogs();
 
   
 const Stack  = createStackNavigator();

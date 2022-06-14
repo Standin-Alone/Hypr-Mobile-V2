@@ -18,15 +18,15 @@ export const getAllFriendsPost = (payload,setState)=>{
 
             
             // GET REQUEST
-            GET(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`).then((response)=>{                    
-              
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`,payload).then((response)=>{                    
+                         
                 if(response.data.status == true){
-                                                                   
+                    
 
                     if(payload.currentPage > 1){
-                        setState({posts:[...new Set(payload.previousProductPage),...response.data.data.list],newProducts:response.data.data.list})
+                        setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
-                        setState({posts:response.data.data.list})
+                        setState({posts:response.data.data})
                     }
                     
 

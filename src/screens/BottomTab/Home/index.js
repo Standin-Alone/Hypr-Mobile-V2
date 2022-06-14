@@ -10,7 +10,8 @@ export default class Home extends React.Component {
       super(props);
       this.state = {        
         posts:[],
-        isLoading:true
+        isLoading:true,
+        newPosts:[]
       };
     }
 
@@ -19,6 +20,7 @@ export default class Home extends React.Component {
     componentDidMount(){
 
         let parameter = {
+            previousPost:this.state.posts,
             currentPage:1,
         }
         getAllFriendsPost(parameter,this.setMyState)        
@@ -26,10 +28,16 @@ export default class Home extends React.Component {
     }
 
     renderItem = ({item})=>{
-
+        console.warn(item);
         return(
             
-            <Components.SocialPostCard/>
+            <Components.SocialPostCard
+                fullName={item.full_name}
+                profilePicture={item.user_picture}
+                postImage={item.post_images[0]}
+                shortName={item.full_name.split(' ')[0]}
+                post={item.post}
+            />
         )
 
     }
@@ -45,10 +53,13 @@ export default class Home extends React.Component {
                 {this.state.isLoading ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
                     :
-                    <FlatList
-                        data={this.state.post}
-                        renderItem = {this.renderItem}
-                    />
+                    <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vh(2)}}>
+                        <FlatList
+                            data={this.state.posts}
+                            extraData={this.state.newPosts}
+                            renderItem = {this.renderItem}                        
+                        />
+                    </View>  
                 }
 
                     {/* <View style={styles.createPostContainer}>
