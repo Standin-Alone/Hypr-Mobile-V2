@@ -12,7 +12,7 @@ export default class UserProfile extends React.Component {
       this.state = {    
           userInfo:[],
           showReferralModal:false,
-          referralLink:'https://hypr.com/signup/1234567'
+          
       };
     }
 
@@ -27,9 +27,9 @@ export default class UserProfile extends React.Component {
         })
     }
 
-    handleCopyLink = ()=>{
+    handleCopyLink = (referral_link)=>{
         
-        Clipboard.setString(this.state.referralLink);       
+        Clipboard.setString(referral_link);       
         ToastAndroid.show("Successfully copied the link", ToastAndroid.SHORT);
        
     }
@@ -45,8 +45,8 @@ export default class UserProfile extends React.Component {
                 <Components.ShareReferralLinkModal 
                     openModal={this.state.showReferralModal}
                     onCloseModal={()=>this.setState({showReferralModal: false})}
-                    onCopy={this.handleCopyLink}
-                    referralLink={this.state.referralLink}
+                    onCopy={this.handleCopyLink(this.state.userInfo?.referral_link)}
+                    referralLink={this.state.userInfo?.referral_link}
                 />
                 <View style={styles.container}>                   
                         <View style={[styles.profileContainer,{height:constants.Dimensions.vh(70)}]}>

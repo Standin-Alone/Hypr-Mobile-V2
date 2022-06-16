@@ -92,12 +92,16 @@ export const ShareReferralLinkModal = ({
                             </View>
                             <View style={styles.primaryContainer}>                              
                                 <View>                
-                                    <TextInput 
-                                        editable = {false}                                                               
-                                        style={[styles.primaryInput,]}                                         
-                                        value={referralLink}
-                                        adjustsFontSizeToFit
-                                        />
+                                    <View                                                                                              
+                                        style={[styles.shareLinkTextInput,]}                                                                                 
+                                    
+                                        numberOfLines={1}
+                                        >
+                                        <Text style={[styles.referralLink]} numberOfLines={1} ellipsizeMode='middle'  >
+                                            {referralLink}
+                                        </Text>
+                                   </View>
+                                    
                                 </View>                                
                                 <TouchableOpacity style={styles.icon}     onPress={onCopy}>
                                     <constants.Icons.Ionicons 

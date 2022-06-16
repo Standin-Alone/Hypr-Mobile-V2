@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,ActivityIndicator,Text } from 'react-native';
+import { View,ActivityIndicator,Text,ImageBackground } from 'react-native';
 import constants from '../../constants';
 import { GET_SESSION } from '../../utils/async_storage';
 import FastImage from 'react-native-fast-image'
@@ -52,15 +52,17 @@ export default class Authentication extends React.Component {
 
     render(){
         return(
-            <>
-                <View style={styles.container}>
-                
-                    <FastImage source={constants.Images.hyprLogo} style={styles.hyprLogo} resizeMode="contain"/>
-                    <View style={{top:constants.Dimensions.vh(80)}}>
-                    <ActivityIndicator animating={true} size="large" color={constants.Colors.primary}/>
-                    <Text style={styles.loadingText}>{this.state.loadingText}</Text>
-                    </View>
-                </View>
+            <>  
+                <ImageBackground source={constants.Images.socialPageBackground} style={styles.container}>                                 
+                    
+                    
+                        <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
+                        <View style={{top:constants.Dimensions.vh(80)}}>
+                        <ActivityIndicator animating={true} size="large" color={constants.Colors.primary}/>
+                        <Text style={styles.loadingText}>{this.state.loadingText}</Text>
+                        </View>
+                    
+                </ImageBackground>
             </>
         )
     }

@@ -67,5 +67,23 @@ export const styles = StyleSheet.create({
         position:'absolute',        
         left:constants.Dimensions.vw(75),
         top:constants.Dimensions.vh(9),
+    },
+    shareLinkTextInput:{
+        left:constants.Dimensions.vw(5),
+        borderWidth:1,
+        height:constants.Dimensions.vh(10),
+        width:constants.Dimensions.vw(80),
+        borderRadius:10,        
+        borderColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.GothamMedium,
+        paddingLeft:constants.Dimensions.vw(2),                
+        paddingVertical:   constants.Dimensions.vh(2),        
+        fontSize:14,
+        top:constants.Dimensions.vh(10),
+    },
+    referralLink:{
+        fontFamily:constants.Fonts.GothamMedium,    
+        fontSize:14,            
+        width:constants.Dimensions.vw(65),
     }
 });

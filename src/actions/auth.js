@@ -370,13 +370,10 @@ export const verifyOtp = (payload,setState,props)=>{
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.VERIFY_OTP}`,clean_payload).then((response)=>{                    
                     
                     if(response.data.status == true){
-                        // Toast.show({
-                        //         type:'success',
-                        //         text1:'Success',                    
-                        //         text2: response.data.message
-                        // });                     
+                            
                         
                         SET_SESSION('USER_ID',payload.userId)
+                        SET_SESSION('REFERRAL_LINK',response.referralLink)
                         
                         // NAVIGATE TO MARKET
                         props.navigation.navigate('Home');

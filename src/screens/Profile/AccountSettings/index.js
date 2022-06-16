@@ -41,7 +41,7 @@ export default class AccountSettings extends React.Component {
                     
                     if(item.name == 'Log Out'){
 
-                        await GoogleSignin.signOut();
+                        // await GoogleSignin.signOut();
                         await CLEAR_SESSION();
                         
                         this.props.navigation.reset(item.navigateTo)
