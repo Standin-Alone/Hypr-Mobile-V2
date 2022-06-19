@@ -62,6 +62,7 @@ const EndPoints = {
     // SOCIAL
 
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',
+    CREATE_POST:'/social/create-post',
 
 }
 

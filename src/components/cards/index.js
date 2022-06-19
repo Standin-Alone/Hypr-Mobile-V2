@@ -249,7 +249,7 @@ export const SocialPostCard = ({
 })=>(
    <View style={styles.socialPostContainer}>
       <TouchableOpacity style={styles.socialPostImage}>
-         <FastImage source={{ uri:postImage}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+         <FastImage source={{ uri:`data:image/jpeg;base64,${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
             <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPres={onViewProfile}>

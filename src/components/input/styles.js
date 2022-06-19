@@ -62,6 +62,11 @@ export const styles = StyleSheet.create({
         paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
         fontSize:18
+    },
+    primaryInputNoBorder:{
+        borderWidth:0,
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:12
     }
   
 });

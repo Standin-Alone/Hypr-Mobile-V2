@@ -1,9 +1,9 @@
 // const API_DEV_HOST = `http://172.17.150.188:9002/hypr-mobile`;
 // const CJ_API_HOST = `http://172.17.150.188:9002/hypr-mobile/cj/api/market`;
 
-const API_DEV_HOST_PLAIN = `http://192.168.1.3:9002`;
-const API_DEV_HOST = `http://192.168.1.3:9002/hypr-mobile`;
-const CJ_API_HOST = `http://192.168.1.3:9002/hypr-mobile/cj/api/market`;
+const API_DEV_HOST_PLAIN = `http://192.168.1.4:9002`;
+const API_DEV_HOST = `http://192.168.1.4:9002/hypr-mobile`;
+const CJ_API_HOST = `http://192.168.1.4:9002/hypr-mobile/cj/api/market`;
 const API_PRO_HOST = ``;
 const Config = {
     // 0 => Devlopment env, 1 => Production env

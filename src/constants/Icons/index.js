@@ -5,6 +5,8 @@ import Fontisto from 'react-native-vector-icons/Fontisto';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import Feather from 'react-native-vector-icons/Feather';
+import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 export default Icons = {
 
@@ -16,5 +18,8 @@ export default Icons = {
     FontAwesome:FontAwesome,
     Feather:Feather,
     FontAwesome5:FontAwesome5,
+    SimpleLineIcons:SimpleLineIcons,
+    MaterialIcons:MaterialIcons,
     Loader: require("./animated-icons/loading-spinner.json"),
+    
 }

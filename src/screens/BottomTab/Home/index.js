@@ -5,6 +5,7 @@ import { styles } from './styles';
 
 import Components from '../../../components';
 import { getAllFriendsPost } from '../../../actions/social';
+import { GET_SESSION } from '../../../utils/async_storage';
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
@@ -17,9 +18,10 @@ export default class Home extends React.Component {
 
     setMyState = (value)=>this.setState(value);
 
-    componentDidMount(){
+    async  componentDidMount(){
 
         let parameter = {
+            userId:await GET_SESSION('USER_ID'),
             previousPost:this.state.posts,
             currentPage:1,
         }
@@ -36,7 +38,7 @@ export default class Home extends React.Component {
                 profilePicture={item.user_picture}
                 postImage={item.post_images[0]}
                 shortName={item.full_name.split(' ')[0]}
-                post={item.post}
+                post={item.caption}
             />
         )
 
@@ -45,6 +47,7 @@ export default class Home extends React.Component {
         return(
             <>  
                 <Components.SocialHeader
+                        onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA)}                
                 />
 
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
@@ -57,8 +60,10 @@ export default class Home extends React.Component {
                         <FlatList
                             data={this.state.posts}
                             extraData={this.state.newPosts}
-                            renderItem = {this.renderItem}                        
-                        />
+                            renderItem = {this.renderItem}   
+                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(10)}}                     
+                            
+                            />
                     </View>  
                 }
 

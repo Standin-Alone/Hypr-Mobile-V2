@@ -348,3 +348,27 @@ export const PrimaryStateSelect = ({
     </View>
         )
 }
+
+
+
+
+
+export const PrimaryInputNoBorder = ({
+    onChangeText,
+    value,
+    placeholder
+    })=>{
+        return (
+            
+        <View>
+            <TextInput
+              onChangeText={onChangeText}
+              value={value}
+              placeholder={placeholder}
+              style={styles.primaryInputNoBorder}
+              numberOfLines={5}
+              multiline
+            />
+        </View>
+        )
+}

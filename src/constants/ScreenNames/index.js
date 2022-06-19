@@ -39,6 +39,8 @@ export default {
    Social:{
       SOCIAL:'Social',
       CREATE_POST:'CreatePost',         
+      CAMERA:'Camera', 
+      CAPTURED_PHOTO:'CapturedPhoto', 
   }
     
 }

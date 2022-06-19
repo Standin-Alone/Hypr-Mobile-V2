@@ -68,3 +68,73 @@ export const getAllFriendsPost = (payload,setState)=>{
 
 
 
+
+
+
+
+export const createPost = (payload,setState,props)=>{
+
+
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+             // validate payload
+             Object.keys(payload).map((item,index)=>{                
+                if(payload[item] !== undefined || payload[item] != '' ){  
+                    
+                    if(payload[item] == ''){
+                        setState({[item]:{...payload[item],error:true,errorMessage:`Please enter this required field.`}})                                                
+                        countError++;
+                    }
+                }
+            })
+            
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
+                         
+                if(response.data.status == true){
+                    
+
+                    
+                    
+
+                    setState({isLoading:false});
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isLoading:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}
+
+
+

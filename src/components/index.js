@@ -13,7 +13,8 @@ import {
         PrimaryPhoneInput ,
         PrimaryCountrySelect,
         PrimaryCitySelect,
-        PrimaryStateSelect
+        PrimaryStateSelect,
+        PrimaryInputNoBorder
     } from "./input";
 
 import { 
@@ -57,6 +58,7 @@ export default {
 
 
     PrimaryTextInput,
+    PrimaryInputNoBorder,
     PrimaryPhoneInput,
     PrimaryCountrySelect,
     PrimaryCitySelect,

@@ -49,7 +49,7 @@ export const styles = StyleSheet.create({
         left:constants.Dimensions.vw(8),
     },
     primaryTitle:{
-        fontFamily:constants.Fonts.GothamBold,
+        fontFamily:constants.Fonts.GothamMedium,
         fontSize:20,
         top:constants.Dimensions.vh(2),
         color:constants.Colors.primary
@@ -74,7 +74,16 @@ export const styles = StyleSheet.create({
         flexDirection:'row',
         justifyContent:"flex-start",
         backgroundColor:constants.Colors.light
-    }
+    },
+    postButtonContainer:{
+
+    },
+    postText:{
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:12,
+        alignSelf:'center',        
+        color:constants.Colors.secondary
+    },
   
 });
 

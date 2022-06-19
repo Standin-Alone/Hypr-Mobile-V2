@@ -6,20 +6,22 @@ import {Dimensions, StyleSheet} from 'react-native';
 
 import constants from '../../../constants';
 export const styles = StyleSheet.create({  
-container:{
-    flex:1,
+allProductsContainer:{
+
+    top:constants.Dimensions.vh(2),
+    paddingBottom:constants.Dimensions.vh(30),
+    left:20        
 },
 createPost  :{
 
     borderBottomColor:constants.Colors.dark_tint,  
     borderBottomWidth:0.5   
 },
-image:{
-    left:constants.Dimensions.vw(2),
-    top:constants.Dimensions.vw(2),
-    
-    height:constants.Dimensions.vh(15),
-    width:constants.Dimensions.vw(15),
+bottom:{
+    bottom:0,
+    left:0,
+    right:0,
+    position:"absolute"
 }
   
 });

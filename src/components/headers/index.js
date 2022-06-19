@@ -10,7 +10,7 @@ import FastImage from 'react-native-fast-image'
 
 export const SocialHeader = ({
     goToProfileSettings,
-    onShareReferralLink
+    onCreatePost
  })=>(   
     <>   
         
@@ -21,7 +21,7 @@ export const SocialHeader = ({
                             <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
                         </View>    
                         <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>        
-                            <TouchableOpacity onPress={onShareReferralLink}  style={{ padding:15 }}>
+                            <TouchableOpacity onPress={onCreatePost}  style={{ padding:15 }}>
                                     <constants.Icons.Ionicons 
                                         name="camera" 
                                         size={30} 
@@ -169,10 +169,17 @@ export const PrimaryHeader = ({
    onFocus,
    isFocus,
    value,
-   
+   customStyle,
+
+// CREATE POST FUNCTIONS
+   showPostButton,
+   onCreatePost,
+// NEXT FUNCTION
+showNextButton,
+onNext
 })=>(   
    <>  
-        <View style={styles.primaryContainer}>
+        <View style={[styles.primaryContainer,customStyle]}>
             <TouchableOpacity onPress={onGoBack}>
                 <MaterialIcons 
                     name="chevron-left" 
@@ -248,7 +255,47 @@ export const PrimaryHeader = ({
             </View>
             }
 
-        
+            
+            {showPostButton &&
+
+                <View style={{  justifyContent:'flex-end',
+                    flexDirection:'row',
+                    left:constants.Dimensions.vw(40)
+                }}>
+            
+                    <View style={styles.postButtonContainer}>                     
+                        <TouchableOpacity onPress={onCreatePost} style={{ paddingVertical:constants.Dimensions.vh(2),flexDirection:'row' }} >
+                            <constants.Icons.SimpleLineIcons 
+                                name="note" 
+                                size={25} 
+                                color={constants.Colors.secondary}
+                            />
+                            <View style={{top:constants.Dimensions.vh(1.5) }}>                        
+                                <Text style={styles.postText}>
+                                    POST
+                                </Text>
+                            </View>
+                        </TouchableOpacity>                       
+                    </View>               
+                </View>
+            }
+
+            {showNextButton &&
+
+                <View style={{  justifyContent:'flex-end',
+                    flexDirection:'row',
+                    left:constants.Dimensions.vw(80)
+                }}>
+            
+                    <TouchableOpacity onPress={onNext}>
+                        <MaterialIcons 
+                            name="chevron-right" 
+                            size={40} 
+                            color={constants.Colors.secondary}
+                        />
+                    </TouchableOpacity>              
+                </View>
+            }
         </View>             
    </>
 );
