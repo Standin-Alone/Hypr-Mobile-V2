@@ -4,7 +4,7 @@ import constants from '../../../constants';
 import { styles } from './styles';
 
 import Components from '../../../components';
-import { getAllFriendsPost } from '../../../actions/social';
+import { getAllFriendsPost,hypePost } from '../../../actions/social';
 import { GET_SESSION } from '../../../utils/async_storage';
 export default class Home extends React.Component {
     constructor(props) {
@@ -12,7 +12,8 @@ export default class Home extends React.Component {
       this.state = {        
         posts:[],
         isLoading:true,
-        newPosts:[]
+        newPosts:[],
+        newHypeCount:0
       };
     }
 
@@ -29,19 +30,30 @@ export default class Home extends React.Component {
 
     }
 
+    onHype = async (item)=>{
+
+        let parameter = {
+            post:item,            
+            userId:await GET_SESSION('USER_ID'),            
+        }
+
+        hypePost(parameter,this.setMyState,this.props,this.state)   
+    }
+
     renderItem = ({item})=>{
-        console.warn(item);
-        return(
-            
+       
+        return(            
             <Components.SocialPostCard
                 fullName={item.full_name}
                 profilePicture={item.user_picture}
                 postImage={item.post_images[0]}
                 shortName={item.full_name.split(' ')[0]}
                 post={item.caption}
+                hypesCount={item.hypes.length}
+                isHype={item.hypes.filter(async(item)=>item.user_Id ==await GET_SESSION('USER_ID')).length > 0 ? true : false}
+                onHype={()=>this.onHype(item)}
             />
         )
-
     }
     render(){
         return(

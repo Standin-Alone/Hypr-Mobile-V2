@@ -63,6 +63,7 @@ const EndPoints = {
 
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',
     CREATE_POST:'/social/create-post',
+    HYPE_POST:'/social/hype-post',
 
 }
 
