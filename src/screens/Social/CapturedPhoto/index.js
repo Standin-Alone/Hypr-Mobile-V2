@@ -1,12 +1,11 @@
 import React from 'react';
 
-import { View,Text,InteractionManager} from 'react-native';
+import { View,Text,SafeAreaView} from 'react-native';
 import Components from '../../../components';
-import { searchProducts} from '../../../actions/market';
-import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
+import Carousel from 'react-native-snap-carousel';
 
 export default class CapturedPhoto extends React.Component {
     constructor(props) {
@@ -29,6 +28,13 @@ export default class CapturedPhoto extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.CREATE_POST,parameter);
     }
     
+    renderItem = ({item,index})=>(
+        <View  >
+                <FastImage source={{uri:`data:image/jpeg;base64,${item}`}} 
+                resizeMode={FastImage.resizeMode.cover}
+                style={styles.image}/>
+        </View>
+    )
 
 
     render(){
@@ -41,10 +47,21 @@ export default class CapturedPhoto extends React.Component {
                     showNextButton                               
                 />      
 
-                <FastImage source={{uri:`data:image/jpeg;base64,${this.state.capturedImageBase4}`}} 
-                resizeMode={FastImage.resizeMode.cover}
-                style={styles.image}/>
-                         
+           
+
+        
+                <Carousel
+                    ref={(c) => { this._carousel = c; }}
+                    data={this.state.capturedImageBase4}
+                    renderItem={this.renderItem}
+                    sliderWidth={constants.Dimensions.vw(100)}
+                    itemWidth={constants.Dimensions.vw(100)}
+                    lockScrollWhileSnapping={true}
+                    inactiveSlideOpacity={1}
+                    inactiveSlideScale={1}
+                    slideStyle={{flex:1}}
+                />
+              
             </>
         ) 
     }

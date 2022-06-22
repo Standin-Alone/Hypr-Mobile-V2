@@ -7,8 +7,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 import constants from '../../../constants';
 export const styles = StyleSheet.create({  
 image:{
-
-  flex:1      
+  widht:constants.Dimensions.vw(100),
+  height:constants.Dimensions.vh(190),
+  
 },
 
   

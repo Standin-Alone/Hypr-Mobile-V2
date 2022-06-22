@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { View,Text,StyleSheet, Touchable} from 'react-native';
+import { View,Text,StyleSheet, TouchableOpacity} from 'react-native';
 import { RNCamera } from 'react-native-camera';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 import constants from '../../../constants';
 import {styles} from './styles';
-
+import {launchImageLibrary} from 'react-native-image-picker';
 export default class Camera extends React.Component {
     constructor(props) {
       super(props);
@@ -30,10 +30,37 @@ export default class Camera extends React.Component {
             const options = { quality: 1, base64: true };
             const data = await this.camera.takePictureAsync(options);
             let parameter = {
-                image:data.base64
+                image:[data.base64],
+                multiple:false
             }
             this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
           }
+    }
+
+    handleTakeFromGallery = async ()=>{
+        
+        let getImage = await launchImageLibrary({
+            mediaType: 'photo',
+            includeBase64: true, 
+            quality:0.5,
+            selectionLimit:5           
+        });
+
+        let {assets} = getImage;
+
+
+    
+        
+        assets.map((gallery)=>{
+            let parameter = {
+                image:gallery.base64,
+                multiple:true
+            }
+            
+            // this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
+        })
+        
+          
     }
 
     handelSwitchCameraType = ()=>{
@@ -71,7 +98,7 @@ export default class Camera extends React.Component {
                         <TouchableOpacity onPress={this.handleTakeAPhoto.bind(this)}>
                             <constants.Icons.FontAwesome name="dot-circle-o" size={90} color={constants.Colors.light}/>
                         </TouchableOpacity>   
-                        <TouchableOpacity style={{alignSelf:'center',top:constants.Dimensions.vh(10)}}>
+                        <TouchableOpacity style={{alignSelf:'center',top:constants.Dimensions.vh(10)}} onPress={this.handleTakeFromGallery.bind(this)}>
                             <constants.Icons.MaterialIcons name="add-photo-alternate" size={40} color={constants.Colors.light}/>
                         </TouchableOpacity>   
                     </View>
