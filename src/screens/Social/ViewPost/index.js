@@ -7,7 +7,7 @@ import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
 import Carousel from 'react-native-snap-carousel';
 
-export default class CapturedPhoto extends React.Component {
+export default class ViewPost extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      

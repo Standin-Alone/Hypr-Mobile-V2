@@ -3,9 +3,7 @@ import getBaseUrl from '../utils/config';
 import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
-import moment from 'moment';
-import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
-
+import { Buffer } from 'buffer'
 
 export const getAllFriendsPost = (payload,setState)=>{
 
@@ -22,7 +20,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-
+                    console.warn(response.data.data);
                     if(payload.currentPage > 1){
                         setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
@@ -155,16 +153,27 @@ export const createPost = (payload,setState,props)=>{
                 }
             })
             
-            // GET REQUEST
+
+     
+            
+          
+            // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
                          
                 if(response.data.status == true){
                     
-
+                    Toast.show({
+                        type:'success',
+                        text1:'Successfully posted.'
+                    });
                     
-                    
-
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                    });  
                     setState({isLoading:false});
+
+                    
 
                 }else{
                     Toast.show({

@@ -508,9 +508,8 @@ export const getUserInfo = (setState)=>{
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
              
-                if(response.data.status == true){
-                                                                   
-                 
+                if(response.data.status == true){          
+                    console.warn(response.data.data);
                     setState({userInfo:response.data.data})
 
                 }else{

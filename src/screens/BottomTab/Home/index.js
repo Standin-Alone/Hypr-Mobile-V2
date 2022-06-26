@@ -41,12 +41,12 @@ export default class Home extends React.Component {
     }
 
     renderItem = ({item})=>{
-       
+       console.warn(item.full_name);
         return(            
             <Components.SocialPostCard
                 fullName={item.full_name}
                 profilePicture={item.user_picture}
-                postImage={item.post_images[0]}
+                postImage={item.filenames[0]}
                 shortName={item.full_name.split(' ')[0]}
                 post={item.caption}
                 hypesCount={item.hypes.length}

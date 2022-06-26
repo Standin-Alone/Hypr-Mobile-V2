@@ -38,13 +38,24 @@ export const styles = StyleSheet.create({
    marginVertical:constants.Dimensions.vw(2),   
    marginHorizontal:constants.Dimensions.vw(2),
    borderRadius:20,
-   backgroundColor:constants.Colors.light
+   backgroundColor:'rgba(255,255,255,0.5)'
  },
  fullName:{
     textAlign:'center',
     fontFamily:constants.Fonts.PoppinsExtraBold,
     fontSize:14,
     color:constants.Colors.dark
+ },
+ edit:{
+   alignSelf:'center',
+   bottom:constants.Dimensions.vh(10),
+   left:constants.Dimensions.vh(10)
+ },
+ cover_pic:{
+   position:'absolute',
+   width:constants.Dimensions.vw(100),
+   height:constants.Dimensions.vh(100),
+   bottom:constants.Dimensions.vh(90)
  }
 });
 

@@ -4,10 +4,11 @@ import axios from "axios";
 
 const POST = async (
     url,
-    data
+    data,
+    headers
 )=>{
     
-    const result = await axios.post(url,data);
+    const result = await axios.post(url,data,headers);
     return result;
 }   
 

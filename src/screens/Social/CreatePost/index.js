@@ -35,11 +35,11 @@ export default class CreatePost extends React.Component {
         
         let parameter ={
             userId:await GET_SESSION('USER_ID'),
-            image:this.state.capturedImageBase4,
+            file:this.state.capturedImageBase4,
             caption:this.state.caption.value
 
         }
-
+        
         return createPost(parameter,this.setMyState,this.props)
     }
 
@@ -52,7 +52,7 @@ export default class CreatePost extends React.Component {
                     title={'New Post'}
                     customStyle={styles.createPost}
                     showPostButton
-                    onCreatePost={this.handleCreatePost}
+                    onCreatePost={this.handleCreatePost}    
                 />      
 
                 <View style={styles.container}>
@@ -60,7 +60,7 @@ export default class CreatePost extends React.Component {
                         
                         <View style={{flex:0.2}}>
                             <TouchableOpacity onPress={this.handlePreview}>
-                                <FastImage source={{uri:`data:image/jpeg;base64,${this.state.capturedImageBase4}`}} 
+                                <FastImage source={{uri:`data:image/jpeg;base64,${this.state.capturedImageBase4[0].fileBase64}`}} 
                                 resizeMode={FastImage.resizeMode.cover}
                                 style={styles.image}/>
                             </TouchableOpacity>
