@@ -1,17 +1,20 @@
 import React from 'react';
 
-import { View,Text,SafeAreaView} from 'react-native';
+import {View,Text,TouchableOpacity} from 'react-native';
 import Components from '../../../components';
-import constants from '../../../constants';
-import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
+import FastImage from 'react-native-fast-image';
 import Carousel from 'react-native-snap-carousel';
+import { SharedElement } from 'react-navigation-shared-element';
+import constants from '../../../constants';
+import { GET_SESSION } from '../../../utils/async_storage';
 
 export default class ViewPost extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-        capturedImageBase4:this.props.route.params.image,
+        parameters:this.props.route.params,
+        isHype:false
     
       };
     }
@@ -19,23 +22,19 @@ export default class ViewPost extends React.Component {
      
     setMyState = (value)=>this.setState(value)
 
-
-
-    handleGoToCreatePost = ()=>{
-        let parameter = {
-            image:this.state.capturedImageBase4
-        }
-        this.props.navigation.navigate(constants.ScreenNames.Social.CREATE_POST,parameter);
+    async componentDidMount(){
+        this.setState({isHype:this.props.route.params.hypes.some(async (item)=>item.user_id ==  await GET_SESSION('USER_ID'))});
     }
-    
-    renderItem = ({item,index})=>(
-        <View  >
-                <FastImage source={{uri:`data:image/jpeg;base64,${item.fileBase64}`}} 
-                resizeMode={FastImage.resizeMode.cover}
-                style={styles.image}/>
-        </View>
-    )
 
+    renderItem = ({item,index})=>(
+    
+
+            <FastImage source={{uri:`data:image/jpg;base64,${item}`}} 
+            resizeMode={FastImage.resizeMode.contain}
+            style={styles.image}/>
+
+      
+    )
 
     render(){
      
@@ -43,24 +42,62 @@ export default class ViewPost extends React.Component {
             <>
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
-                    onNext={this.handleGoToCreatePost}
-                    showNextButton                               
+       
+                    customStyle={{backgroundColor:'black'}}                   
                 />      
+            <View style={styles.container}>
+                <SharedElement id={`item.${this.state.parameters._id}.photo`} style={{top:constants.Dimensions.vh(5)}}>
+                    <Carousel
+                        ref={(c) => { this._carousel = c; }}
+                        data={this.state.parameters.filenames}
+                        renderItem={this.renderItem}
+                        sliderWidth={constants.Dimensions.vw(100)}
+                        itemWidth={constants.Dimensions.vw(100)}
+                        lockScrollWhileSnapping={true}
+                        inactiveSlideOpacity={1}
+                        inactiveSlideScale={1}
+                        slideStyle={{flex:1,backgroundColor:constants.Colors.dark}}
+                    />
+                </SharedElement>
 
-           
 
+              
+
+            </View>
+                
+            
+            <View style={styles.footer}>
+                <View style={styles.mainInfo}>
+                    <Text style={styles.mainInfoTextBold}>{this.state.parameters?.full_name}</Text>
+                    <Text style={styles.mainInfoText}>{this.state.parameters?.caption}</Text>                    
+
+                    <View style={{flexDirection:'row'}}>
+                        <Text style={styles.mainInfoTextBold}>{this.state.parameters?.hypes.length} Hypes</Text>  
+                    </View>
+                </View>
+                <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                    <TouchableOpacity  style={{ padding:15 }}>                        
+                          
+                                {this.state.isHype ? 
+                                    <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                                    :
+                                    <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>                                    
+                                }
+                             
+                    </TouchableOpacity>                
+                    <TouchableOpacity style={{ padding:15 }}>
+                        <constants.Icons.Ionicons 
+                            name="chatbubble-ellipses" 
+                            size={30} 
+                            color={constants.Colors.secondary}
+                        />
+                    </TouchableOpacity>   
+                </View>
+            </View>
+              
+       
         
-                <Carousel
-                    ref={(c) => { this._carousel = c; }}
-                    data={this.state.capturedImageBase4}
-                    renderItem={this.renderItem}
-                    sliderWidth={constants.Dimensions.vw(100)}
-                    itemWidth={constants.Dimensions.vw(100)}
-                    lockScrollWhileSnapping={true}
-                    inactiveSlideOpacity={1}
-                    inactiveSlideScale={1}
-                    slideStyle={{flex:1}}
-                />
+               
               
             </>
         ) 

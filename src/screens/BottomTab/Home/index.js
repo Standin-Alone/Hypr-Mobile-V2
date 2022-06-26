@@ -2,10 +2,11 @@ import React from 'react';
 import { View,Text,FlatList,ImageBackground,ActivityIndicator} from 'react-native';
 import constants from '../../../constants';
 import { styles } from './styles';
-
 import Components from '../../../components';
 import { getAllFriendsPost,hypePost } from '../../../actions/social';
 import { GET_SESSION } from '../../../utils/async_storage';
+import { SharedElement } from 'react-navigation-shared-element';
+
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
@@ -40,19 +41,28 @@ export default class Home extends React.Component {
         hypePost(parameter,this.setMyState,this.props,this.state)   
     }
 
+
+    viewPost = (item)=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_POST,item)
+    }
+
     renderItem = ({item})=>{
        console.warn(item.full_name);
         return(            
-            <Components.SocialPostCard
-                fullName={item.full_name}
-                profilePicture={item.user_picture}
-                postImage={item.filenames[0]}
-                shortName={item.full_name.split(' ')[0]}
-                post={item.caption}
-                hypesCount={item.hypes.length}
-                isHype={item.hypes.filter(async(item)=>item.user_Id ==await GET_SESSION('USER_ID')).length > 0 ? true : false}
-                onHype={()=>this.onHype(item)}
-            />
+
+            <SharedElement id={`item.${item._id}.photo`}>
+                <Components.SocialPostCard
+                    fullName={item.full_name}
+                    profilePicture={item.user_picture}
+                    postImage={item.filenames[0]}
+                    shortName={item.full_name.split(' ')[0]}
+                    post={item.caption}
+                    hypesCount={item.hypes.length}
+                    isHype={item.hypes.filter(async(item)=>item.user_Id ==await GET_SESSION('USER_ID')).length > 0 ? true : false}
+                    onHype={()=>this.onHype(item)}
+                    onViewPost={()=>this.viewPost(item)}
+                />
+            </SharedElement>
         )
     }
     render(){

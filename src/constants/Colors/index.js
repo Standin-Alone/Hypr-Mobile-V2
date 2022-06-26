@@ -15,6 +15,8 @@ export default Colors = {
     gray_tint:'#ececec',
     danger:'#D9534F',
     dark_tint:'#545a64',
+    transparent_white:'rgba(255,255,255,0.2)',
+    transparent_black:'rgba(0,0,0,0.5)'
     
     
 }

@@ -5,8 +5,10 @@ import Home from '../screens/BottomTab/Home';
 import Camera from '../screens/Social/Camera';
 import CapturedPhoto from '../screens/Social/CapturedPhoto';
 import CreatePost from '../screens/Social/CreatePost';
+import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
+import ViewPost from '../screens/Social/ViewPost';
 
-const SocialStack = createStackNavigator();
+const SocialStack = createSharedElementStackNavigator();
 
 export const SocialStackComponent= () => {
     return (
@@ -37,6 +39,16 @@ export const SocialStackComponent= () => {
                 component={CapturedPhoto}
                 name={constants.ScreenNames.Social.CAPTURED_PHOTO}      
                 options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
+            />  
+
+            <SocialStack.Screen
+                component={ViewPost}
+                name={constants.ScreenNames.Social.VIEW_POST}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}
+                sharedElements={(route, otherRoute, showing) => {
+                    const parameters = route.params;
+                    return [`item.${parameters._id}.photo`];
+                }}
             />  
                                                                    
             </SocialStack.Navigator>

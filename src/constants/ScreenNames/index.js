@@ -41,6 +41,7 @@ export default {
       CREATE_POST:'CreatePost',         
       CAMERA:'Camera', 
       CAPTURED_PHOTO:'CapturedPhoto', 
+      VIEW_POST:'ViewPost'
   }
     
 }

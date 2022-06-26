@@ -245,10 +245,11 @@ export const SocialPostCard = ({
    postImage,
    hypesCount,
    fullName,
-   shortName
+   shortName,
+   onViewPost
 })=>(
    <View style={styles.socialPostContainer}>
-      <TouchableOpacity style={styles.socialPostImage}>
+      <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>
          <FastImage source={{ uri:`data:image/jpeg;base64,${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
