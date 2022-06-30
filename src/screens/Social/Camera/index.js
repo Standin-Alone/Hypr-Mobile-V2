@@ -29,6 +29,8 @@ export default class Camera extends React.Component {
         if (this.camera) {
             const options = { quality: 1, base64: true };
             const data = await this.camera.takePictureAsync(options);
+
+            
             let parameter = {
                 image:[{fileBase64:data.base64,fileName:data.fileName}],
                 multiple:false
