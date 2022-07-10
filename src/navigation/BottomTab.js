@@ -10,6 +10,7 @@ import { useNavigation } from '@react-navigation/native';
 import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { SocialStackComponent } from './SocialStack';
 import { ProfileStackComponent } from './ProfileStack';
+import { FriendStackComponent } from './FriendStack';
 
 
 const BottomTab = createBottomTabNavigator();
@@ -18,7 +19,7 @@ export function getTabBarVisibility(route) {
     
     const routeName = getFocusedRouteNameFromRoute(route);
         
-    if (( routeName != 'Market' && routeName != 'Profile' && routeName != 'Social') && routeName !== undefined) {        
+    if (( routeName != 'Market' && routeName != 'Profile' && routeName != 'Social'  && routeName != 'Friend') && routeName !== undefined) {        
       return 'none';
     }else{
         return 'flex';
@@ -46,17 +47,32 @@ export const BottomTabNavigator = ()=>(
      >
 
         <BottomTab.Screen 
-            name ={constants.ScreenNames.BottomTab.SOCIAL_HOME} 
-            component={SocialStackComponent}
-            options={({route,navigation})=>({    
-                // title:'Home',     
-                tabBarShowLabel:false,
-                tabBarStyle:{display:getTabBarVisibility(route)},          
-                tabBarIcon: ({color})=>(
-                    <constants.Icons.Ionicons name="home" size={30} color={color}/>
-                )
-             })}
-        />
+                    name ={constants.ScreenNames.BottomTab.SOCIAL_HOME} 
+                    component={SocialStackComponent}
+                    options={({route,navigation})=>({    
+                        // title:'Home',     
+                        tabBarShowLabel:false,
+                        tabBarStyle:{display:getTabBarVisibility(route)},          
+                        tabBarIcon: ({color})=>(
+                            <constants.Icons.Ionicons name="home" size={30} color={color}/>
+                        )
+                    })}
+                />
+
+        <BottomTab.Screen 
+                name ={constants.ScreenNames.BottomTab.FRIEND_HOME} 
+                component={FriendStackComponent}
+                options={({route,navigation})=>({    
+                    // title:'Home',     
+                    tabBarShowLabel:false,
+                    tabBarStyle:{display:getTabBarVisibility(route)},          
+                    tabBarIcon: ({color})=>(
+                        <constants.Icons.Feather name="users" size={30} color={color}/>
+                    )
+                })}
+            />
+
+        
 
         <BottomTab.Screen 
             name ={constants.ScreenNames.BottomTab.MARKET_HOME} 

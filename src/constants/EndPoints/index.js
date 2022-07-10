@@ -64,7 +64,15 @@ const EndPoints = {
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',
     CREATE_POST:'/social/create-post',
     HYPE_POST:'/social/hype-post',
+    COMMENT:'/social/comment',
 
+
+    // FRIEND
+    GET_ALL_FRIENDS_SUGGESTION:'/friend/get-all-friends-suggestion',
+    GET_ALL_FRIENDS_REQUESTS:'/friend/get-all-friends-requests',
+    SEND_FRIEND_REQUEST:'/friend/send-friend-request',
+    ACCEPT_FRIEND_REQUEST:'/friend/accept-friend-request',
+    DECLINE_FRIEND_REQUEST:'/friend/decline-friend-request'
 }
 
 

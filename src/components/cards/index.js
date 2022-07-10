@@ -254,7 +254,7 @@ export const SocialPostCard = ({
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
             <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPres={onViewProfile}>
-               <FastImage source={{ uri:profilePicture}} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+               <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
             </TouchableOpacity>            
             <View style={{left:constants.Dimensions.vw(4)}}>
                <Text style={styles.username}> 
@@ -269,15 +269,13 @@ export const SocialPostCard = ({
                <TouchableOpacity onPress={onComment}>
                   <constants.Icons.Ionicons name="chatbubble-outline" size={35} adjustsFontSizeToFit color={constants.Colors.dark}/>
                </TouchableOpacity>
-
-               
+                              
                <TouchableOpacity onPress={onHype}>
                   {isHype ? 
                      <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
                      :
                      <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
-                  }
-                  
+                  }                  
                </TouchableOpacity>
             </View>
          </View>
@@ -292,5 +290,123 @@ export const SocialPostCard = ({
       </View> 
    </View>
 )
+
+
+
+
+export const FriendSuggestionCard = ({
+   fullName,
+   onAddFriend,
+   profilePicture,
+   isSent
+})=>(
+   <View  
+      style={styles.friendSuggestionCard}
+   >  
+      <View style={{flexDirection:'row'}}>         
+         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+
+         <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
+            <Text style={styles.suggestionFullName}>{fullName}</Text>
+            {!isSent ? 
+                  <View style={{top:constants.Dimensions.vh(2)}}>
+                     <TouchableOpacity onPress={onAddFriend} style={styles.addFriendButton}>
+                           <Text style={styles.addFriendText}>Add Friend</Text>
+                     </TouchableOpacity>               
+                  </View>  
+
+               :
+               <View>
+                  <Text>Friend Request Sent</Text>
+               </View> 
+            }
+         
+         </View>
+         
+
+      </View>
+
+      
+   </View>
+)
+
+export const FriendRequestsCard = ({
+   fullName,
+   onAcceptFriendRequest,
+   profilePicture,
+   onDeclineFriendrequest,
+   isAdded,
+   isDeclined
+})=>(
+   <View  
+      style={styles.friendRequestCard}
+   >  
+      <View style={{flexDirection:'row'}}>         
+         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+
+         <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
+            <Text style={styles.acceptFullName}>{fullName} <constants.Icons.AntDesign name="exclamationcircle" size={20} color={constants.Colors.danger}/> {isAdded}</Text>         
+
+            {!isAdded && !isDeclined ?
+               <View style={{top:constants.Dimensions.vh(2),flexDirection:'row'}}>
+                  <TouchableOpacity onPress={onAcceptFriendRequest} style={styles.acceptFriendButton}>
+                        <Text style={styles.acceptFriendText}>Accept </Text>
+                  </TouchableOpacity>               
+                  <TouchableOpacity onPress={onDeclineFriendrequest} style={styles.declineFriendButton}>
+                        <Text style={styles.declineFriendText}>Decline </Text>
+                  </TouchableOpacity>               
+               </View>  
+
+               : isAdded ? 
+               <View>
+                  <Text>Friend Request Accepted</Text>
+               </View> 
+               :  isDeclined &&
+               <View>
+                  <Text>Friend Request Declined</Text>
+               </View> 
+
+
+                         
+            }
+            
+         </View>
+         
+
+     
+      </View>
+
+      
+   </View>
+)
+
+
+export const CommentCard = ({
+   fullName,
+   onAddFriend,
+   profilePicture,
+   comment
+})=>(
+   <View  
+      style={styles.friendSuggestionCard}
+   >  
+      <View style={{flexDirection:'row'}}>         
+         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+         <View style={styles.commentContent}>
+            <Text style={styles.suggestionFullName}>{fullName}</Text>     
+                  <View style={{top:constants.Dimensions.vh(2)}}>
+                     <Text>
+                        {comment}
+                     </Text>   
+                  </View>        
+         </View>
+         
+
+      </View>
+
+      
+   </View>
+)
+
 
 

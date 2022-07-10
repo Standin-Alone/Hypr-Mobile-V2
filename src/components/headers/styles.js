@@ -84,6 +84,11 @@ export const styles = StyleSheet.create({
         alignSelf:'center',        
         color:constants.Colors.secondary
     },
+
+    commentHypes:{
+        height:constants.Dimensions.vh(10),
+        width:constants.Dimensions.vw(10),  
+    }
   
 });
 

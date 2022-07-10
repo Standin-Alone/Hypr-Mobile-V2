@@ -9,8 +9,10 @@ export default {
    },
    BottomTab:{
       SOCIAL_HOME:'SocialHome',
+      FRIEND_HOME:'FriendHome',
       MARKET_HOME:"MarketHome",
-      USER_PROFILE:"UserProfile"
+      USER_PROFILE:"UserProfile",
+      
    },
    Market:{
        MARKET:'Market',
@@ -41,7 +43,12 @@ export default {
       CREATE_POST:'CreatePost',         
       CAMERA:'Camera', 
       CAPTURED_PHOTO:'CapturedPhoto', 
-      VIEW_POST:'ViewPost'
-  }
+      VIEW_POST:'ViewPost',
+      FRIENDS:'Friends',
+      COMMENTS:'comments'
+  },
+  Friend:{
+   FRIEND:'Friend'
+}
     
 }

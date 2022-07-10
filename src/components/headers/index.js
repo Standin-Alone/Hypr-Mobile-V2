@@ -8,6 +8,65 @@ import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import FastImage from 'react-native-fast-image'
 
+
+
+export const FriendHeader = ({
+    goToProfileSettings,
+    onCreatePost
+ })=>(   
+    <>   
+        
+            <View style={styles.socialContainer}>     
+                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}} blurRadius={2}>
+                    <View style={{flexDirection:'row'}}>                    
+                        <View >
+                            <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
+                        </View>    
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>                                        
+                        
+                        </View>                   
+                    </View>
+                </ImageBackground>               
+            </View>    
+        
+    </>
+);
+
+
+export const CommentHeader = ({
+    hypesCount
+ })=>(   
+    <>           
+            <View style={styles.socialContainer}>     
+                <View style={{flexDirection:'row'}}>
+                        <View >
+                            <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.contain} style={styles.commentHypes}/>                            
+                        </View> 
+                        <View style={{flexDirection:'row',top:constants.Dimensions.vh(2)}}>
+                                <Text style={{ fontSize: 16, color: constants.Colors.dark_tint}}>{hypesCount}</Text>
+                                <constants.Icons.Ionicons 
+                                        name="md-chevron-forward" 
+                                        size={18} 
+                                        color={constants.Colors.secondary}
+                                    />
+                        </View>
+
+
+                        <View>
+                            <View  style={{left:constants.Dimensions.vw(70)}}>
+                                <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.contain} style={styles.commentHypes}/>                            
+                            </View>
+                        </View>
+ 
+                                
+                
+                </View>     
+            </View>    
+        
+    </>
+);
+
+
 export const SocialHeader = ({
     goToProfileSettings,
     onCreatePost
@@ -20,7 +79,7 @@ export const SocialHeader = ({
                         <View >
                             <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
                         </View>    
-                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>        
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>        
                             <TouchableOpacity onPress={onCreatePost}  style={{ padding:15 }}>
                                     <constants.Icons.Ionicons 
                                         name="camera" 
@@ -28,13 +87,13 @@ export const SocialHeader = ({
                                         color={constants.Colors.secondary}
                                     />
                             </TouchableOpacity>                
-                            <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
+                            {/* <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
                                 <constants.Icons.Ionicons 
                                     name="chatbubble-ellipses" 
                                     size={30} 
                                     color={constants.Colors.secondary}
                                 />
-                            </TouchableOpacity>                       
+                            </TouchableOpacity>                        */}
                         </View>                   
                     </View>
                 </ImageBackground>               

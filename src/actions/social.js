@@ -20,7 +20,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-                    console.warn(response.data.data);
+                    
                     if(payload.currentPage > 1){
                         setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
@@ -31,10 +31,10 @@ export const getAllFriendsPost = (payload,setState)=>{
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }else{
-                    Toast.show({
-                        type:'error',
-                        text1: response.data.message
-                    });
+                    // Toast.show({
+                    //     type:'error',
+                    //     text1: response.data.message
+                    // });
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }
@@ -210,4 +210,67 @@ export const createPost = (payload,setState,props)=>{
 }
 
 
+
+
+
+
+
+export const comment = (payload,setState,props,state)=>{
+
+
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+      
+            
+
+         
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.COMMENT}`,payload).then((response)=>{                    
+            
+            
+          
+                if(response.data.status == true){
+                    
+               
+                    setState({comments:[...new Set(state.comments),...response.data.newComment],})
+                    setState({isLoading:false});
+
+                    
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isLoading:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}
 

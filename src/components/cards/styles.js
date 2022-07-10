@@ -290,6 +290,92 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsBold,
         fontSize:12,  
         color:constants.Colors.dark
+    },
+
+
+    friendSuggestionCard:{
+          marginVertical:constants.Dimensions.vh(1)
+    },
+    suggestionFriendProfile:{
+        height:constants.Dimensions.vh(20),
+        width:constants.Dimensions.vh(20),
+        borderRadius:40
+    },
+    suggestionFullName:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.dark
+    },
+    addFriendText:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.light,
+        textAlign:'center'
+    },
+    addFriendButton:{
+        backgroundColor:constants.Colors.primary,
+        borderRadius:12,
+        width:constants.Dimensions.vw(50),
+        height:constants.Dimensions.vw(10),
+    
+        justifyContent: "center",
+        alignItems: "center"
+        
+    },
+
+
+    friendRequestCard:{
+        marginVertical:constants.Dimensions.vh(1)
+    },
+    acceptFriendProfile:{
+        height:constants.Dimensions.vh(20),
+        width:constants.Dimensions.vh(20)
+    },
+    acceptFullName:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.dark
+    },
+    acceptFriendText:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.light,
+        textAlign:'center'
+    },
+    acceptFriendButton:{
+        backgroundColor:constants.Colors.primary,
+        borderRadius:12,
+        width:constants.Dimensions.vw(30),
+        height:constants.Dimensions.vw(10),
+        marginRight:constants.Dimensions.vw(2),
+        justifyContent: "center",
+        alignItems: "center"
+        
+    },
+    declineFriendText:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:12,  
+        color:constants.Colors.light,
+        textAlign:'center'
+    },
+    declineFriendButton:{
+        backgroundColor:constants.Colors.gray,
+        borderRadius:12,
+        width:constants.Dimensions.vw(30),
+        height:constants.Dimensions.vw(10),
+    
+        justifyContent: "center",
+        alignItems: "center"
+        
+    },
+    commentContent:{
+        top:constants.Dimensions.vh(2),
+        left:constants.Dimensions.vw(2),
+        backgroundColor:constants.Colors.gray_tint,
+        width:constants.Dimensions.vw(75),
+        borderRadius:20,
+        paddingHorizontal:constants.Dimensions.vh(2),
+        paddingVertical:constants.Dimensions.vh(2)
     }
 });
 

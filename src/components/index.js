@@ -14,6 +14,7 @@ import {
         PrimaryCountrySelect,
         PrimaryCitySelect,
         PrimaryStateSelect,
+        CommentInput,
         PrimaryInputNoBorder
     } from "./input";
 
@@ -21,7 +22,9 @@ import {
     PrimaryHeader,
     MarketHeader,
     ProfileHeader,
-    SocialHeader
+    SocialHeader,
+    FriendHeader,
+    CommentHeader
     } from "./headers";
 
 
@@ -32,7 +35,10 @@ import {
     CartCard,
     SearchProductCard,
     OrderStatusProductCard,
-    SocialPostCard
+    SocialPostCard,
+    FriendSuggestionCard,
+    FriendRequestsCard,
+    CommentCard
     } from "./cards";
 import {
     Loader,
@@ -59,6 +65,7 @@ export default {
 
     PrimaryTextInput,
     PrimaryInputNoBorder,
+    CommentInput,
     PrimaryPhoneInput,
     PrimaryCountrySelect,
     PrimaryCitySelect,
@@ -69,6 +76,8 @@ export default {
     MarketHeader,
     ProfileHeader,
     SocialHeader,
+    FriendHeader,
+    CommentHeader,
 
 
     ProductCard,
@@ -78,6 +87,9 @@ export default {
     SearchProductCard,
     OrderStatusProductCard,
     SocialPostCard,
+    FriendSuggestionCard,
+    FriendRequestsCard,
+    CommentCard,
 
     Loader,
     LoadingScreen,

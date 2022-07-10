@@ -7,6 +7,7 @@ import CapturedPhoto from '../screens/Social/CapturedPhoto';
 import CreatePost from '../screens/Social/CreatePost';
 import { createSharedElementStackNavigator } from 'react-navigation-shared-element';
 import ViewPost from '../screens/Social/ViewPost';
+import Comments from '../screens/Social/Comments';
 
 const SocialStack = createSharedElementStackNavigator();
 
@@ -49,6 +50,12 @@ export const SocialStackComponent= () => {
                     const parameters = route.params;
                     return [`item.${parameters._id}.photo`];
                 }}
+            />  
+
+            <SocialStack.Screen
+                component={Comments}
+                name={constants.ScreenNames.Social.COMMENTS}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
             />  
                                                                    
             </SocialStack.Navigator>

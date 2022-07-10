@@ -67,6 +67,14 @@ export const styles = StyleSheet.create({
         borderWidth:0,
         fontFamily:constants.Fonts.PoppinsMedium,
         fontSize:12
+    },
+    commentInput:{
+        borderWidth:0.5,
+        borderRadius:20,
+        height:constants.Dimensions.vh(12),
+        width:constants.Dimensions.vw(95),     
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:12
     }
   
 });

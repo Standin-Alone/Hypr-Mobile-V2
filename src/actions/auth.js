@@ -374,9 +374,11 @@ export const verifyOtp = (payload,setState,props)=>{
                         
                         SET_SESSION('USER_ID',payload.userId)
                         SET_SESSION('REFERRAL_LINK',response.referralLink)
-                        
-                        // NAVIGATE TO MARKET
-                        props.navigation.navigate('Home');
+                                            
+                        props.navigation.reset({
+                            index: 0,
+                            routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                        });    
                     }else{
                         Toast.show({
                             type:'error',

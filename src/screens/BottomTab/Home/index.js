@@ -14,7 +14,8 @@ export default class Home extends React.Component {
         posts:[],
         isLoading:true,
         newPosts:[],
-        newHypeCount:0
+        newHypeCount:0,
+        userId:''
       };
     }
 
@@ -27,6 +28,8 @@ export default class Home extends React.Component {
             previousPost:this.state.posts,
             currentPage:1,
         }
+
+        this.setState({userId:await GET_SESSION('USER_ID')})
         getAllFriendsPost(parameter,this.setMyState)        
 
     }
@@ -46,10 +49,14 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_POST,item)
     }
 
-    renderItem = ({item})=>{
-       console.warn(item.full_name);
-        return(            
 
+    handleGoToComments = (item)=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
+    }
+    renderItem = ({item})=>{
+           
+     
+        return(          
             <SharedElement id={`item.${item._id}.photo`}>
                 <Components.SocialPostCard
                     fullName={item.full_name}
@@ -58,10 +65,13 @@ export default class Home extends React.Component {
                     shortName={item.full_name.split(' ')[0]}
                     post={item.caption}
                     hypesCount={item.hypes.length}
-                    isHype={item.hypes.filter(async(item)=>item.user_Id ==await GET_SESSION('USER_ID')).length > 0 ? true : false}
+                    isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
                     onHype={()=>this.onHype(item)}
                     onViewPost={()=>this.viewPost(item)}
+                    onComment={()=>this.handleGoToComments(item)}
                 />
+
+
             </SharedElement>
         )
     }

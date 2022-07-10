@@ -372,3 +372,32 @@ export const PrimaryInputNoBorder = ({
         </View>
         )
 }
+
+
+
+export const CommentInput = ({
+    onChangeText,
+    value,
+    placeholder,
+    onFocus,
+    onBlur
+    })=>{
+        return (
+            
+        <View>
+            <View style={{marginVertical:constants.Dimensions.vh(4),marginHorizontal:constants.Dimensions.vw(2)}}>
+            <TextInput
+              onChangeText={onChangeText}
+              value={value}
+              placeholder={placeholder}
+              style={styles.commentInput}
+              numberOfLines={5}
+              onFocus={onFocus}
+              onBlur={onBlur}              
+              multiline
+              
+            />
+            </View>
+        </View>
+        )
+}
