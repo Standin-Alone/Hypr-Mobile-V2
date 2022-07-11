@@ -48,10 +48,13 @@ export default class Comments extends React.Component {
     }
 
     renderItem = ({item,index})=>{
+    
         return(
             <Components.CommentCard
                 comment={item.comment}
                 fullName={item.comment_by_name}
+                profilePicture={item.profile_image}
+
             />
         )
     } 
@@ -61,7 +64,7 @@ export default class Comments extends React.Component {
         return(
             <>
                 <Components.CommentHeader
-                    hypesCount={20}              
+                    hypesCount={this.state.parameter.hypes.length}              
                 />      
 
                 <View>
@@ -69,7 +72,8 @@ export default class Comments extends React.Component {
                             data={this.state.comments}
                             extraData={this.state.newComments}
                             renderItem = {this.renderItem}   
-                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(10)}}                     
+                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(40)}}                     
+                            style={{height:constants.Dimensions.vh(165)}}
                         />
                 </View>
             
