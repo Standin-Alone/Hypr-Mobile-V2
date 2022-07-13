@@ -5880,6 +5880,11 @@
     "prop-types" "15.7.2"
     "react-async-hook" "3.6.1"
 
+"react-native-draggable-panel@^1.2.3":
+  "integrity" "sha512-t7fbleUswHcad4dgD18q/DCXZFkvv48qLTspjrhhpWEzOcc5oGGNX9Pg3BvpjALA/t6n+xPdZcuY8g/ZbJurlQ=="
+  "resolved" "https://registry.npmjs.org/react-native-draggable-panel/-/react-native-draggable-panel-1.2.3.tgz"
+  "version" "1.2.3"
+
 "react-native-fast-image@^8.5.11":
   "integrity" "sha512-cNW4bIJg3nvKaheG8vGMfqCt5LMWX9MS5+wMudgKIHbGO51spRr4sgnlhVgwHLcZ5aeNOVJ8CPRxDIWKRq/0QA=="
   "resolved" "https://registry.npmjs.org/react-native-fast-image/-/react-native-fast-image-8.5.11.tgz"
