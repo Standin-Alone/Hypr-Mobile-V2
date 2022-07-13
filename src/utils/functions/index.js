@@ -4,7 +4,7 @@ import constants from '../../constants';
 import Toast from 'react-native-toast-message';
 import {POST} from '../axios';
 import {SET_SESSION,GET_SESSION} from '../async_storage';
-
+import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
 
 export const calculateFreight = (payload,setState,props)=>{
     setState({isLoading:true});
@@ -88,3 +88,138 @@ export const computeCart = (cart)=>{
     return cart.reduce((itemA,itemB)=> itemA = itemA + parseFloat(itemB.total_amount),0).toFixed(2);
 }
 
+
+
+
+export const openCamera = (payload,setState)=>{
+    
+    setState({showProgress:true,loadingTitle:'Opening the camera'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){
+  
+
+
+                    let openUpCamera = await launchCamera({
+                        mediaType: 'photo',
+                        includeBase64: true, 
+                        saveToPhotos:true,
+                        quality:0.5                   
+                    });
+                      
+
+                    // camera function
+                    if (!openUpCamera.didCancel) {
+
+                        
+                        let {assets} = openUpCamera;
+
+                        assets.map(async(cameraResponse)=>{
+                            
+                            // set latitude longitude
+                            setState({latitude:checkLocation.latitude,longitude:checkLocation.longitude,loadingTitle:'Loading'})
+                            
+                            // check if image is jpeg format
+                            if(cameraResponse.type == 'image/jpeg' || cameraResponse.type == 'image/jpg') {
+                                // rotate image
+                           
+
+                                setState({showProgress:false,showSelection:false});
+                            }else{
+                                
+                                Toast.show({
+                                    type:'error',
+                                    text1:'Warning!',
+                                    text1:'Your captured image is not in jpeg format'
+                                })                        
+                                setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                            }
+
+                        })
+                       
+                    }else{
+                        setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                    }
+
+             
+           
+                        
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+        }
+    });
+}
+
+
+export const openGallery = (payload,setState)=>{
+    
+    setState({showProgress:true,loadingTitle:'Opening the gallery'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){
+       
+            
+  
+
+           
+                
+                    let openUpCamera = await launchImageLibrary({
+                        mediaType: 'photo',
+                        includeBase64: true, 
+                        quality:0.5                   
+                    });
+                      
+
+                    // camera function
+                    if (!openUpCamera.didCancel) {
+                
+                        
+                        let {assets} = openUpCamera;
+
+                        assets.map(async(cameraResponse)=>{
+                                                     
+                            // check if image is jpeg format
+                            if(cameraResponse.type == 'image/jpeg' || cameraResponse.type == 'image/jpg' || cameraResponse.type == 'image/png') {
+                                
+                               
+                                setState({showProgress:false,showSelection:false});
+                            }else{
+                                
+                                Toast.show({
+                                    type:'error',
+                                    text1:'Warning!',
+                                    text1:'Your captured image is not in jpeg format'
+                                })                        
+                                setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                            }
+
+                        })
+                       
+                    }else{
+                        setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                    }
+
+            
+          
+                        
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+        }
+    });
+}

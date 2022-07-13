@@ -77,7 +77,9 @@ export default class Comments extends React.Component {
                         />
                 </View>
             
-                <KeyboardAvoidingView  style={styles.bottom}  >
+                <View  style={styles.bottom}  >
+
+                    <View style={{flex:1}}>
                     <Components.CommentInput
                         placeholder={"Write a comment"}
                         focus={this.state.focus}
@@ -85,9 +87,9 @@ export default class Comments extends React.Component {
                         onFocus={()=>this.setState({comment:{...this.state.comment,focus:true}})}
                         onBlur={()=>this.setState({comment:{...this.state.comment,focus:false}})}
                         value={this.state.comment}
+                    />             
 
-                    />                    
-                    <View style={{flexDirection:'row', bottom:constants.Dimensions.vh(2), display: this.state.comment.focus ? 'flex':'none'}}>
+                    <View style={{flexDirection:'row', display: this.state.comment.focus ? 'flex':'none'}}>
                         <View style={{left:constants.Dimensions.vw(90)}} >                        
                             <TouchableOpacity onPress={this.handleComment}>
                                     <constants.Icons.Ionicons 
@@ -98,8 +100,8 @@ export default class Comments extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View>
-
-                </KeyboardAvoidingView>              
+                    </View>
+                </View>              
             </>
         ) 
     }

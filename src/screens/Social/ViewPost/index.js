@@ -8,13 +8,16 @@ import Carousel from 'react-native-snap-carousel';
 import { SharedElement } from 'react-navigation-shared-element';
 import constants from '../../../constants';
 import { GET_SESSION } from '../../../utils/async_storage';
+import { hypePost } from '../../../actions/social';
+
 
 export default class ViewPost extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-        parameters:this.props.route.params,
-        isHype:false
+        parameters:this.props.route.params.post,
+        isHype:false,
+        posts:this.props.route.params.posts
     
       };
     }
@@ -23,7 +26,9 @@ export default class ViewPost extends React.Component {
     setMyState = (value)=>this.setState(value)
 
     async componentDidMount(){
-        this.setState({isHype:this.props.route.params.hypes.some(async (item)=>item.user_id ==  await GET_SESSION('USER_ID'))});
+        this.setState({isHype:this.props.route.params.post.hypes.some(async (item)=>item.user_id ==  await GET_SESSION('USER_ID'))});
+
+
     }
 
     renderItem = ({item,index})=>(
@@ -31,10 +36,25 @@ export default class ViewPost extends React.Component {
 
             <FastImage source={{uri:`data:image/jpg;base64,${item}`}} 
             resizeMode={FastImage.resizeMode.contain}
-            style={styles.image}/>
-
-      
+            style={styles.image}/>      
     )
+
+
+    onHype = async (item)=>{
+
+        let parameter = {
+            post:item,            
+            userId:await GET_SESSION('USER_ID'),            
+        }
+
+        hypePost(parameter,this.setMyState,this.props,this.state)   
+
+        
+    }
+
+    handleGoToComments = (item)=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
+    }
 
     render(){
      
@@ -76,7 +96,7 @@ export default class ViewPost extends React.Component {
                     </View>
                 </View>
                 <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
-                    <TouchableOpacity  style={{ padding:15 }}>                        
+                    <TouchableOpacity  style={{ padding:15 }} onPress={()=>this.onHype(this.state.parameters)}>                        
                           
                                 {this.state.isHype ? 
                                     <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
@@ -85,7 +105,7 @@ export default class ViewPost extends React.Component {
                                 }
                              
                     </TouchableOpacity>                
-                    <TouchableOpacity style={{ padding:15 }}>
+                    <TouchableOpacity style={{ padding:15 }} onPress={()=>this.handleGoToComments(this.state.parameters)}>
                         <constants.Icons.Ionicons 
                             name="chatbubble-ellipses" 
                             size={30} 

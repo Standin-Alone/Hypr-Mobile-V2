@@ -376,6 +376,15 @@ export const styles = StyleSheet.create({
         borderRadius:20,
         paddingHorizontal:constants.Dimensions.vh(2),
         paddingVertical:constants.Dimensions.vh(2)
+    },
+    uploadSelectionButton:{
+        paddingVertical:constants.Dimensions.vh(5)
+    },  
+    uploadSelectionText:{        
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:20, 
+        color:constants.Colors.primary,
+        paddingHorizontal:constants.Dimensions.vw(2)
     }
 });
 

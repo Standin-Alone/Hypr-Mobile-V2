@@ -11,13 +11,7 @@ image:{
   height:constants.Dimensions.vh(190),
   
 },
-bottom:{
-  bottom:1,
-  left:0,
-  right:0,  
-  position:"absolute",
-  backgroundColor:constants.Colors.gray_tint
-}
+
   
 });
 

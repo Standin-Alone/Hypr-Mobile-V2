@@ -45,7 +45,8 @@ export default {
       CAPTURED_PHOTO:'CapturedPhoto', 
       VIEW_POST:'ViewPost',
       FRIENDS:'Friends',
-      COMMENTS:'comments'
+      COMMENTS:'comments',
+      VIEW_PROFILE:'ViewProfile'
   },
   Friend:{
    FRIEND:'Friend'

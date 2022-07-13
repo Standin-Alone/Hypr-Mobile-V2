@@ -46,15 +46,18 @@ export default class Home extends React.Component {
 
 
     viewPost = (item)=>{
-        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_POST,item)
+        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_POST,{post:item,posts:this.state.posts})
     }
 
+    viewProfile = (item)=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_PROFILE,item)
+    }
 
     handleGoToComments = (item)=>{
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-           
+        
      
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -68,6 +71,7 @@ export default class Home extends React.Component {
                     isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
                     onHype={()=>this.onHype(item)}
                     onViewPost={()=>this.viewPost(item)}
+                    onViewProfile={()=>this.viewProfile(item)}
                     onComment={()=>this.handleGoToComments(item)}
                 />
 

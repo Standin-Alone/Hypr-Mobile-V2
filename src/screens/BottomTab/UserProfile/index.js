@@ -7,12 +7,16 @@ import FastImage from 'react-native-fast-image'
 import { getUserInfo } from '../../../actions/auth';
 import Clipboard from '@react-native-clipboard/clipboard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { changeProfilePicture } from '../../../actions/profile';
+import { openCamera, openGallery } from '../../../utils/functions';
+
 export default class UserProfile extends React.Component {
     constructor(props) {
       super(props);
       this.state = {    
           userInfo:[],
           showReferralModal:false,
+          showSelection:false
           
       };
     }
@@ -34,6 +38,21 @@ export default class UserProfile extends React.Component {
         ToastAndroid.show("Successfully copied the link", ToastAndroid.SHORT);       
     }
 
+    handleChangeProfilePicture = ()=>{
+       let  parameter  ={
+            userId:this.state.userInfo?.user_id
+       }
+
+
+       changeProfilePicture(parameter,this.setMyState(),this.props,this.state)
+    }
+
+    openUploadSelection = ()=>{
+        
+        this.setState({showSelection:true});
+    }
+
+
     render(){
         return(
             <>  
@@ -43,6 +62,25 @@ export default class UserProfile extends React.Component {
                     
                 />
 
+            <Components.UploadingSelectionCard
+                    showPanel={this.state.showSelection}
+                    onDismiss = {()=>this.setState({showSelection:false})}
+                    onPressTakePhoto={()=>{
+                        let parameter = {
+
+                        }
+
+                        return openCamera({},this.setMyState)                 
+                    }}
+
+                    onPressOpenGallery={()=>{
+                            let parameter = {
+
+                            }
+
+                            return openGallery({},this.setMyState)              
+                    }}
+                />
 
                 <Components.ShareReferralLinkModal 
                     openModal={this.state.showReferralModal}
@@ -58,7 +96,7 @@ export default class UserProfile extends React.Component {
                     <View style={styles.container}>                             
 
                             <View style={[styles.profileContainer,{height:constants.Dimensions.vh(70)}]}>
-                                <TouchableOpacity>                            
+                                <TouchableOpacity onPress={()=>this.openUploadSelection()}>                            
                                     <FastImage source={{uri: `data:image/jpeg;base64,${this.state.userInfo?.profile_image}`}} style={styles.userProfile} resizeMode="contain"/>
                                     <constants.Icons.FontAwesome5 name="edit" size={20} color={constants.Colors.secondary} style={styles.edit}/>
                                 </TouchableOpacity>

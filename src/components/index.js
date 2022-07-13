@@ -38,7 +38,8 @@ import {
     SocialPostCard,
     FriendSuggestionCard,
     FriendRequestsCard,
-    CommentCard
+    CommentCard,
+    UploadingSelectionCard
     } from "./cards";
 import {
     Loader,
@@ -90,6 +91,7 @@ export default {
     FriendSuggestionCard,
     FriendRequestsCard,
     CommentCard,
+    UploadingSelectionCard,
 
     Loader,
     LoadingScreen,

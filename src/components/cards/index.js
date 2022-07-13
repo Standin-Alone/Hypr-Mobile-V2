@@ -5,7 +5,7 @@ import { styles } from "./styles";
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image'
-
+import DraggablePanel from 'react-native-draggable-panel';
 
 
 export const ProductCard = ({
@@ -253,7 +253,7 @@ export const SocialPostCard = ({
          <FastImage source={{ uri:`data:image/jpeg;base64,${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
-            <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPres={onViewProfile}>
+            <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPress={onViewProfile}>
                <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
             </TouchableOpacity>            
             <View style={{left:constants.Dimensions.vw(4)}}>
@@ -409,4 +409,33 @@ export const CommentCard = ({
 )
 
 
+
+
+export const UploadingSelectionCard = ({
+   showPanel,
+   onDismiss,
+   onPressTakePhoto,
+   onPressOpenGallery
+   })=>(   
+       <DraggablePanel
+           visible={showPanel}
+           initialHeight={constants.Dimensions.vh(45)}            
+           onDismiss={onDismiss}
+       >
+           <TouchableOpacity style={styles.uploadSelectionButton} onPress={onPressTakePhoto}>
+               <View style={{ flexDirection:'row' ,justifyContent:'center'}}>
+                   <constants.Icons.MaterialIcons  name="add-a-photo" size={20} color={constants.Colors.primary}/>
+                   <Text style={styles.uploadSelectionText} adjustsFontSizeToFit>Take a Photo</Text>
+               </View>
+           </TouchableOpacity>
+
+           <TouchableOpacity style={styles.uploadSelectionButton}  onPress={onPressOpenGallery}>
+               <View style={{ flexDirection:'row',justifyContent:'center'}}>
+                   <constants.Icons.MaterialIcons  name="add-photo-alternate" size={20} color={constants.Colors.primary}/>
+                   <Text style={styles.uploadSelectionText} adjustsFontSizeToFit>Open Gallery</Text>
+               </View>
+               
+           </TouchableOpacity>
+       </DraggablePanel>
+   );
 

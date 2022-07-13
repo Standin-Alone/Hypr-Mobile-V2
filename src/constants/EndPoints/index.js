@@ -5,7 +5,7 @@ const EndPoints = {
     VERIFY_OTP:'/user/verify-otp',
     RESEND_OTP:'/user/resend-otp',
     GET_USER_INFO:'/user/get-user-info',
-
+    CHANGE_PROFILE_PICTURE:'/user/change-profile-picture',
 
 
     GET_ALL_PRODUCTS:'/get-products',
@@ -65,7 +65,7 @@ const EndPoints = {
     CREATE_POST:'/social/create-post',
     HYPE_POST:'/social/hype-post',
     COMMENT:'/social/comment',
-
+  
 
     // FRIEND
     GET_ALL_FRIENDS_SUGGESTION:'/friend/get-all-friends-suggestion',
