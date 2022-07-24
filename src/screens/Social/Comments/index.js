@@ -4,7 +4,7 @@ import { View,FlatList, TouchableOpacity,KeyboardAvoidingView} from 'react-nativ
 import Components from '../../../components';
 import constants from '../../../constants';
 import {styles} from './styles';
-import { comment } from '../../../actions/social';
+import { comment, hypePost } from '../../../actions/social';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { getUserInfo } from '../../../actions/auth';
 
@@ -20,7 +20,8 @@ export default class Comments extends React.Component {
             value:''
         },
         comments:this.props.route.params.post_comment,
-        newComments:[]
+        newComments:[],
+        newPosts:[]
       };
     }
 
@@ -34,7 +35,7 @@ export default class Comments extends React.Component {
  
     
     handleComment = async  ()=>{
-        console.warn(this.state.userInfo)
+      
         let parameter = {
             comment:this.state.comment.value,  
             postId: this.state.parameter._id,       
@@ -48,7 +49,7 @@ export default class Comments extends React.Component {
     }
 
     renderItem = ({item,index})=>{
-    
+
         return(
             <Components.CommentCard
                 comment={item.comment}
@@ -59,12 +60,26 @@ export default class Comments extends React.Component {
         )
     } 
 
+    onHype = async (item)=>{
+
+        let parameter = {
+            post:item,            
+            userId:await GET_SESSION('USER_ID'),    
+            viewType:'Comments'        
+        }
+
+        hypePost(parameter,this.setMyState,this.props,this.state)   
+
+        
+    }
     render(){
      
         return(
             <>
                 <Components.CommentHeader
-                    hypesCount={this.state.parameter.hypes.length}              
+                    hypesCount={this.state.parameter.hypes.length}       
+                    onHype={()=>this.onHype(this.props.route.params)}
+                    isHype={this.state.parameter.hypes.some(async (hypeItem)=>hypeItem.user_id == await GET_SESSION('USER_ID'))}
                 />      
 
                 <View>

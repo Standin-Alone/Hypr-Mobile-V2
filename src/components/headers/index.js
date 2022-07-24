@@ -34,7 +34,9 @@ export const FriendHeader = ({
 
 
 export const CommentHeader = ({
-    hypesCount
+    hypesCount,
+    onHype,
+    isHype
  })=>(   
     <>           
             <View style={styles.socialContainer}>     
@@ -42,19 +44,26 @@ export const CommentHeader = ({
                         <View >
                             <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.contain} style={styles.commentHypes}/>                            
                         </View> 
-                        <View style={{flexDirection:'row',top:constants.Dimensions.vh(2)}}>
+                        <TouchableOpacity style={{flexDirection:'row',top:constants.Dimensions.vh(2)}}>
                                 <Text style={{ fontSize: 16, color: constants.Colors.dark_tint}}>{hypesCount}</Text>
                                 <constants.Icons.Ionicons 
                                         name="md-chevron-forward" 
                                         size={18} 
                                         color={constants.Colors.secondary}
                                     />
-                        </View>
+                        </TouchableOpacity>
 
 
                         <View>
                             <View  style={{left:constants.Dimensions.vw(70)}}>
-                                <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.contain} style={styles.commentHypes}/>                            
+                                <TouchableOpacity onPress={onHype}>                           
+                                    
+                                    {isHype ? 
+                                        <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.commentHypes}/>   
+                                        :
+                                        <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.commentHypes}/>   
+                                    }     
+                                </TouchableOpacity>                         
                             </View>
                         </View>
  

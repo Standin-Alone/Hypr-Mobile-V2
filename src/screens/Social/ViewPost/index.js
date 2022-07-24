@@ -22,13 +22,13 @@ export default class ViewPost extends React.Component {
       };
     }
 
-     
+  
     setMyState = (value)=>this.setState(value)
 
     async componentDidMount(){
         this.setState({isHype:this.props.route.params.post.hypes.some(async (item)=>item.user_id ==  await GET_SESSION('USER_ID'))});
 
-
+        console.warn('VIEW POST',this.state.parameters.filenames.map((item)=>`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`))
     }
 
     renderItem = ({item,index})=>(
@@ -44,7 +44,8 @@ export default class ViewPost extends React.Component {
 
         let parameter = {
             post:item,            
-            userId:await GET_SESSION('USER_ID'),            
+            userId:await GET_SESSION('USER_ID'),  
+            viewType:'ViewPost'          
         }
 
         hypePost(parameter,this.setMyState,this.props,this.state)   
@@ -65,11 +66,13 @@ export default class ViewPost extends React.Component {
        
                     customStyle={{backgroundColor:'black'}}                   
                 />      
+
+
             <View style={styles.container}>
                 <SharedElement id={`item.${this.state.parameters._id}.photo`} style={{top:constants.Dimensions.vh(5)}}>
                     <Carousel
                         ref={(c) => { this._carousel = c; }}
-                        data={this.state.parameters.filenames}
+                        data={this.state.parameters.filenames.map((item)=>`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`)}
                         renderItem={this.renderItem}
                         sliderWidth={constants.Dimensions.vw(100)}
                         itemWidth={constants.Dimensions.vw(100)}

@@ -86,15 +86,26 @@ export const hypePost = (payload,setState,props,myState)=>{
 
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
-                    let newPosts = myState.posts.map((item)=>{
-                        if(item._id == payload.post._id){
-                            item.hypes = response.data.hypes
-                        }  
-                        return item;
-                    })
 
-                    setState({newPosts:newPosts});
+                    if(payload.viewType == 'Comments'){
+                        let newComments = myState.parameter
 
+                        newComments.hypes = response.data.hypes;
+                        
+                   
+                        setState({parameter:newComments});
+                    }else{
+                        let newPosts = myState.posts.map((item)=>{
+                            if(item._id == payload.post._id){
+                                item.hypes = response.data.hypes
+                            }  
+                            return item;
+                        })
+    
+                        setState({newPosts:newPosts});
+    
+                    }
+           
 
                 }else{
                     Toast.show({
@@ -233,9 +244,9 @@ export const comment = (payload,setState,props,state)=>{
             
           
                 if(response.data.status == true){
-                    
-               
-                    setState({comments:[...new Set(state.comments),...response.data.newComment],})
+                 
+                    setState({comments:[...new Set(state.comments),...response.data.newComment]})
+                   
                     setState({isLoading:false});
 
                     

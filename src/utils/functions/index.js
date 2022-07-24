@@ -118,7 +118,7 @@ export const openCamera = (payload,setState,props)=>{
                             includeBase64:true,
                             freeStyleCropEnabled:true,
                             cropperCircleOverlay:true,
-                            croppping:true
+                            cropping:true
                                         
                         }).then((croppedImage)=>{     
                             croppedImage.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
@@ -176,7 +176,7 @@ export const openGallery = (payload,setState,props)=>{
                             includeBase64:true,       
                             freeStyleCropEnabled:true, 
                             cropperCircleOverlay:true,
-                            croppping:true
+                            cropping:true
                                         
                         }).then((croppedImage)=>{
                             croppedImage.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
