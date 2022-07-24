@@ -7,7 +7,7 @@ import EndPoints from  './EndPoints';
 import ScreenNames from './ScreenNames';
 import RegEx from './RegEx';
 import APIKeys from './APIKeys';
-
+import Directories from './Directories';
 export default {
     Colors,
     Fonts,
@@ -17,6 +17,7 @@ export default {
     EndPoints,
     RegEx,
     ScreenNames,
-    APIKeys
+    APIKeys,
+    Directories
 
 }

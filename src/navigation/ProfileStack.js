@@ -9,7 +9,7 @@ import ToVerify from '../screens/Profile/Tracking/ToVerify';
 import OrderStatus from '../screens/Market/OrderStatus';
 import ToShip from '../screens/Profile/Tracking/ToShip';
 import ToReceive from '../screens/Profile/Tracking/ToReceive';
-
+import ViewNewProfilePic from '../screens/Profile/ViewNewProfilePic';
 const ProfileStack = createStackNavigator();
 
 export const ProfileStackComponent= () => {
@@ -68,6 +68,13 @@ export const ProfileStackComponent= () => {
             <ProfileStack.Screen
                 component={OrderStatus}
                 name={constants.ScreenNames.Market.ORDER_STATUS}
+                options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
+            />      
+
+            
+            <ProfileStack.Screen
+                component={ViewNewProfilePic}
+                name={constants.ScreenNames.Profile.VIEW_NEW_PROFILE_PIC}
                 options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
             />           
 

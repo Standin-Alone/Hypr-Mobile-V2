@@ -7,7 +7,7 @@ import { Buffer } from 'buffer'
 
 
 
-export const changeProfilePicture = (payload,setState,props,state)=>{
+export const changeProfilePicture = (payload,setState,props)=>{
 
 
     let countError = 0;
@@ -26,10 +26,13 @@ export const changeProfilePicture = (payload,setState,props,state)=>{
           
                 if(response.data.status == true){
                     
-               
+                    Toast.show({
+                        type:'success',
+                        text1: response.data.message
+                    });
               
                     
-
+                    props.navigation.goBack();
                 }else{
                     Toast.show({
                         type:'error',

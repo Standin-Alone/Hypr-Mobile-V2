@@ -20,7 +20,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-                    
+                 
                     if(payload.currentPage > 1){
                         setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
@@ -273,4 +273,62 @@ export const comment = (payload,setState,props,state)=>{
     });
 
 }
+
+
+
+
+
+
+export const getProfileInfo = (payload,setState)=>{
+    setState({isLoading:true});
+  
+
+    
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+
+            // console.warn(payload);
+            // POST REQUEST
+            GET(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_PROFILE_INFO}/${payload.userId}`,payload).then((response)=>{                    
+             
+                if(response.data.status == true){          
+
+                    setState({profileInfo:response.data.data,isLoading:false})
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: 'Error',
+                        text2:response.data.errorMessage
+                    });
+                    // turn off loading
+                 setState({isLoading:false});
+                }
+               
+          
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1: 'Error',
+                    text2:error
+                });
+                setState({isLoading:false});         
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+            setState({isLoading:false});
+         }
+    });
+
+}
+
 

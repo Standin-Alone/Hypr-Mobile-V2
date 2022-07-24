@@ -54,6 +54,7 @@ import {
     ShareReferralLinkModal
 } from "./modal"
 
+
 export default {
     // Buttons
     PrimaryButton,
@@ -99,7 +100,10 @@ export default {
     EmptyComponent,
     
     PaymentMethodModal,
-    ShareReferralLinkModal
+    ShareReferralLinkModal,
+
+
+
 
 
 }

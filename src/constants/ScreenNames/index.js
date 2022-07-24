@@ -36,7 +36,8 @@ export default {
          TO_VERIFY:'ToVerify',
          TO_SHIP:'ToShip',
          TO_RECEIVE:'ToReceive',
-      }
+      },
+      VIEW_NEW_PROFILE_PIC:'ViewNewProfilePic'
    },
    Social:{
       SOCIAL:'Social',

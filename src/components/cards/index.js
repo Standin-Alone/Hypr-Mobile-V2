@@ -250,11 +250,11 @@ export const SocialPostCard = ({
 })=>(
    <View style={styles.socialPostContainer}>
       <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>
-         <FastImage source={{ uri:`data:image/jpeg;base64,${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+         <FastImage source={{ uri:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
             <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPress={onViewProfile}>
-               <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+               <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
             </TouchableOpacity>            
             <View style={{left:constants.Dimensions.vw(4)}}>
                <Text style={styles.username}> 
@@ -304,7 +304,7 @@ export const FriendSuggestionCard = ({
       style={styles.friendSuggestionCard}
    >  
       <View style={{flexDirection:'row'}}>         
-         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+         <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
 
          <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
             <Text style={styles.suggestionFullName}>{fullName}</Text>
@@ -342,7 +342,7 @@ export const FriendRequestsCard = ({
       style={styles.friendRequestCard}
    >  
       <View style={{flexDirection:'row'}}>         
-         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+         <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
 
          <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
             <Text style={styles.acceptFullName}>{fullName} <constants.Icons.AntDesign name="exclamationcircle" size={20} color={constants.Colors.danger}/> {isAdded}</Text>         
@@ -391,7 +391,7 @@ export const CommentCard = ({
       style={styles.friendSuggestionCard}
    >  
       <View style={{flexDirection:'row'}}>         
-         <FastImage source={{ uri:`data:image/jpeg;base64,${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+         <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
          <View style={styles.commentContent}>
             <Text style={styles.suggestionFullName}>{fullName}</Text>     
                   <View style={{top:constants.Dimensions.vh(2)}}>

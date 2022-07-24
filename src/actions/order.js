@@ -251,15 +251,11 @@ export const successPayment = (payload,setState,props)=>{
                     POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{
 
                         if(result.data.result == true){
-                            Toast.show({
-                                type:'success',
-                                text1:'Success',
-                                text2:'Successfully paid your order. Please wait for your order to verify.'
-                            });
-                            props.navigation.reset({
-                                index: 0,
-                                routes: [{ name: constants.ScreenNames.AppStack.HOME }]
-                            });        
+
+                            // MLM REWARDS
+                            disseminateRewards(payload,setState,props);
+
+                               
                         }else{
                             Toast.show({
                                 type:'error',
@@ -294,6 +290,79 @@ export const successPayment = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+
+
+
+export const disseminateRewards = (payload,setState,props)=>{
+
+  
+
+
+
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let userId = await GET_SESSION('USER_ID');
+            
+            let payload = {                 
+                markUp: 12.50,
+                orderId: payload.orderId,
+                userId: userId             
+            }
+
+            // POST REQUEST
+            POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,payload).then((response)=>{                    
+             
+                if(response.data.status == true){          
+                    
+                    Toast.show({
+                        type:'success',
+                        text1:'Success',
+                        text2:'Successfully paid your order. Please wait for your order to verify.'
+                    });
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                    }); 
+                    
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: 'Error',
+                        text2:response.data.errorMessage
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1: 'Error',
+                    text2:error
+                });
+                setState({isLoading:false});   
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
             setState({isLoading:false});
          }
     });

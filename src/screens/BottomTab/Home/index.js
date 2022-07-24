@@ -15,22 +15,27 @@ export default class Home extends React.Component {
         isLoading:true,
         newPosts:[],
         newHypeCount:0,
-        userId:''
+        userId:'',
+        refresing:false,
       };
     }
 
     setMyState = (value)=>this.setState(value);
 
-    async  componentDidMount(){
-
+    handleLoadPosts = async ()=>{
+        
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
             previousPost:this.state.posts,
             currentPage:1,
         }
+        getAllFriendsPost(parameter,this.setMyState)     
+    }
+    async  componentDidMount(){
 
+        this.handleLoadPosts();
         this.setState({userId:await GET_SESSION('USER_ID')})
-        getAllFriendsPost(parameter,this.setMyState)        
+   
 
     }
 
@@ -57,7 +62,7 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-        
+        console.warn(`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${item.user_picture}`);
      
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -79,6 +84,14 @@ export default class Home extends React.Component {
             </SharedElement>
         )
     }
+
+    renderEmptyComponent = ()=>(
+        <View>
+            <Text style={styles.textEmptyComponent}>No latest posts</Text>
+        </View>
+        
+    )
+
     render(){
         return(
             <>  
@@ -96,9 +109,11 @@ export default class Home extends React.Component {
                         <FlatList
                             data={this.state.posts}
                             extraData={this.state.newPosts}
+                            refreshing={this.state.refresing}
+                            onRefresh={this.handleLoadPosts}
                             renderItem = {this.renderItem}   
                             contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(10)}}                     
-                            
+                            ListEmptyComponent={this.renderEmptyComponent}
                             />
                     </View>  
                 }

@@ -11,7 +11,7 @@ const Config = {
     APP_MODE: 0,
     DEVELOPMENT: {
         API_HOST: `${API_DEV_HOST}`,
-        API_ACCESS_POINT_PLAIN: `${API_DEV_HOST}`,
+        API_ACCESS_POINT_PLAIN: `${API_DEV_HOST_PLAIN}`,
         API_ACCESS_POINT: `${API_DEV_HOST}`,
         CJ_ACCESS_POINT: `${CJ_API_HOST}`,
         MLM_ACCESS_POINT: `${MLM_API_HOST}`,

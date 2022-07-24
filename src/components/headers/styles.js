@@ -84,6 +84,12 @@ export const styles = StyleSheet.create({
         alignSelf:'center',        
         color:constants.Colors.secondary
     },
+    saveText:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:14,
+        alignSelf:'center',        
+        color:constants.Colors.secondary
+    },
 
     commentHypes:{
         height:constants.Dimensions.vh(10),

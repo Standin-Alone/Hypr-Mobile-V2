@@ -43,6 +43,12 @@ const EndPoints = {
     FINAL_SUCCESS_PAYMENT:'/payment/final-success-payment',
     CONFIRM_ORDER:'/confirm-order',
 
+
+    // MLM
+    DISSEMINATE_REWARDS:'/mlm-disseminate-rewards',
+
+
+
     // STRIPE
     STRIPE_CHECKOUT_SESSION:'/payment/stripe-checkout-session',
 
@@ -65,6 +71,7 @@ const EndPoints = {
     CREATE_POST:'/social/create-post',
     HYPE_POST:'/social/hype-post',
     COMMENT:'/social/comment',
+    GET_PROFILE_INFO:'/social/get-profile-info',
   
 
     // FRIEND

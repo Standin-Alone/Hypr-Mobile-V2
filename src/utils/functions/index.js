@@ -4,8 +4,8 @@ import constants from '../../constants';
 import Toast from 'react-native-toast-message';
 import {POST} from '../axios';
 import {SET_SESSION,GET_SESSION} from '../async_storage';
-import {launchCamera,launchImageLibrary} from 'react-native-image-picker';
-
+import {launchCamera,launchImageLibrary,openCropper} from 'react-native-image-picker';
+import ImagePicker from 'react-native-image-crop-picker';
 export const calculateFreight = (payload,setState,props)=>{
     setState({isLoading:true});
     
@@ -91,7 +91,7 @@ export const computeCart = (cart)=>{
 
 
 
-export const openCamera = (payload,setState)=>{
+export const openCamera = (payload,setState,props)=>{
     
     setState({showProgress:true,loadingTitle:'Opening the camera'});
     // Check Internet Connection
@@ -102,48 +102,36 @@ export const openCamera = (payload,setState)=>{
   
 
 
-                    let openUpCamera = await launchCamera({
+                    let openUpCamera = await ImagePicker.openCamera({
                         mediaType: 'photo',
                         includeBase64: true, 
-                        saveToPhotos:true,
-                        quality:0.5                   
+                        compressImageQuality:1,                
+                        includeExif:true,
+                
                     });
-                      
+     
 
-                    // camera function
-                    if (!openUpCamera.didCancel) {
+                    if(payload.changeImageType == 'profile'){
 
+                        ImagePicker.openCropper({
+                            path: openUpCamera.path, 
+                            includeBase64:true,
+                            freeStyleCropEnabled:true,
+                            cropperCircleOverlay:true,
+                            croppping:true
+                                        
+                        }).then((croppedImage)=>{     
+                            croppedImage.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
+                            props.navigation.navigate(payload.redirectTo,{image:croppedImage.data,imageInfo:croppedImage,changeImageType:payload.changeImageType})
                         
-                        let {assets} = openUpCamera;
-
-                        assets.map(async(cameraResponse)=>{
-                            
-                            // set latitude longitude
-                            setState({latitude:checkLocation.latitude,longitude:checkLocation.longitude,loadingTitle:'Loading'})
-                            
-                            // check if image is jpeg format
-                            if(cameraResponse.type == 'image/jpeg' || cameraResponse.type == 'image/jpg') {
-                                // rotate image
-                           
-
-                                setState({showProgress:false,showSelection:false});
-                            }else{
-                                
-                                Toast.show({
-                                    type:'error',
-                                    text1:'Warning!',
-                                    text1:'Your captured image is not in jpeg format'
-                                })                        
-                                setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
-                            }
-
+                            setState({showProgress:false,showSelection:false});
                         })
-                       
+                  
                     }else{
-                        setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                        openUpCamera.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
+                        props.navigation.navigate(payload.redirectTo,{image:openUpCamera.data,imageInfo:openUpCamera,changeImageType:payload.changeImageType})
                     }
-
-             
+                
            
                         
         }else{
@@ -159,7 +147,7 @@ export const openCamera = (payload,setState)=>{
 }
 
 
-export const openGallery = (payload,setState)=>{
+export const openGallery = (payload,setState,props)=>{
     
     setState({showProgress:true,loadingTitle:'Opening the gallery'});
     // Check Internet Connection
@@ -173,41 +161,34 @@ export const openGallery = (payload,setState)=>{
 
            
                 
-                    let openUpCamera = await launchImageLibrary({
+                    let openUpCamera = await ImagePicker.openPicker({
                         mediaType: 'photo',
-                        includeBase64: true, 
-                        quality:0.5                   
+                        quality:0.5,
+                        includeBase64:true           
                     });
                       
 
-                    // camera function
-                    if (!openUpCamera.didCancel) {
-                
+
+                    if(payload.changeImageType == 'profile'){
+    
+                        ImagePicker.openCropper({
+                            path: openUpCamera.path, 
+                            includeBase64:true,       
+                            freeStyleCropEnabled:true, 
+                            cropperCircleOverlay:true,
+                            croppping:true
+                                        
+                        }).then((croppedImage)=>{
+                            croppedImage.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
+                            props.navigation.navigate(payload.redirectTo,{image:croppedImage.data,imageInfo:croppedImage,changeImageType:payload.changeImageType})
                         
-                        let {assets} = openUpCamera;
-
-                        assets.map(async(cameraResponse)=>{
-                                                     
-                            // check if image is jpeg format
-                            if(cameraResponse.type == 'image/jpeg' || cameraResponse.type == 'image/jpg' || cameraResponse.type == 'image/png') {
-                                
-                               
-                                setState({showProgress:false,showSelection:false});
-                            }else{
-                                
-                                Toast.show({
-                                    type:'error',
-                                    text1:'Warning!',
-                                    text1:'Your captured image is not in jpeg format'
-                                })                        
-                                setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
-                            }
-
-                        })
-                       
+                            setState({showProgress:false,showSelection:false});
+                        })                    
                     }else{
-                        setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
+                        openUpCamera.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
+                        props.navigation.navigate(payload.redirectTo,{image:openUpCamera.data,imageInfo:openUpCamera,changeImageType:payload.changeImageType})
                     }
+                  
 
             
           
@@ -222,4 +203,28 @@ export const openGallery = (payload,setState)=>{
             setState({showProgress:false,loadingTitle:'Loading',showSelection:false});
         }
     });
+}
+
+
+
+// GEO TAGGING
+export const geotagging = (response,param_loc)=>{
+
+    let zeroth = {};
+    let gps = {};
+    let exif = {};
+    zeroth[ImageIFD.Make] = "Make";
+    exif[ExifIFD.LensMake] = "LensMake";     
+    gps[GPSIFD.GPSLatitude] = GPSHelper.degToDmsRational(param_loc.latitude);
+    gps[GPSIFD.GPSLongitude] = GPSHelper.degToDmsRational(param_loc.longitude);
+    gps[GPSIFD.GPSAltitude] = param_loc.altitude;
+    gps[GPSIFD.GPSLatitudeRef] = param_loc.latitude < 0 ? 'S' : 'N';
+    gps[GPSIFD.GPSLongitudeRef] = param_loc.longitude < 0 ? 'W' : 'E';
+
+    let exifObj = { "0th":zeroth,"Exif":exif, "GPS":gps};
+    let exifBtyes = dump(exifObj);
+    let newBase64 = insert(exifBtyes,'data:image/jpeg;base64,'+response);    
+
+    return newBase64.replace('data:image/jpeg;base64,','');
+            
 }

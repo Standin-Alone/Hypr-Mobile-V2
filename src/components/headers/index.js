@@ -106,12 +106,21 @@ export const SocialHeader = ({
 
 export const ProfileHeader = ({
     goToProfileSettings,
-    onShareReferralLink
+    onShareReferralLink,
+    onChangeCoverPhoto
  })=>(   
     <>   
         
         <View style={styles.marketContainer}>     
-
+            <View style={{ justifyContent:'flex-start',flexDirection:'row',right:constants.Dimensions.vw(55)}}>  
+                <TouchableOpacity onPress={onChangeCoverPhoto}  style={{ padding:15 }}>
+                        <MaterialCommunityIcons 
+                            name="image-edit" 
+                            size={30} 
+                            color={constants.Colors.primary}
+                        />
+                </TouchableOpacity>  
+            </View>
             <View style={styles.buttonContainer}>        
                 <TouchableOpacity onPress={onShareReferralLink}  style={{ padding:15 }}>
                         <MaterialCommunityIcons 
@@ -235,7 +244,10 @@ export const PrimaryHeader = ({
    onCreatePost,
 // NEXT FUNCTION
 showNextButton,
-onNext
+onNext,
+// SAVE BUTTON
+showSaveButton,
+onSave
 })=>(   
    <>  
         <View style={[styles.primaryContainer,customStyle]}>
@@ -352,6 +364,23 @@ onNext
                             size={40} 
                             color={constants.Colors.secondary}
                         />
+                    </TouchableOpacity>              
+                </View>
+            }
+
+            {showSaveButton &&
+
+                <View style={{  justifyContent:'flex-end',
+                    flexDirection:'row',
+                    left:constants.Dimensions.vw(75)
+                }}>
+            
+                    <TouchableOpacity onPress={onSave}>
+                        <View style={{top:constants.Dimensions.vh(1.5) }}>                        
+                            <Text style={styles.saveText}>
+                                Save
+                            </Text>
+                        </View>
                     </TouchableOpacity>              
                 </View>
             }

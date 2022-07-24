@@ -511,7 +511,7 @@ export const getUserInfo = (setState)=>{
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
              
                 if(response.data.status == true){          
-                    console.warn(response.data.data);
+                 
                     setState({userInfo:response.data.data})
 
                 }else{
@@ -532,7 +532,7 @@ export const getUserInfo = (setState)=>{
                     text1: 'Error',
                     text2:error
                 });
-                              
+                setState({isLoading:false});   
             });
 
          }else{
@@ -541,9 +541,12 @@ export const getUserInfo = (setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
-         
+            setState({isLoading:false});
          }
     });
 
 }
+
+
+
 

@@ -7,7 +7,7 @@ import { Buffer } from 'buffer'
 
 export const getAllFriendSuggestion = (payload,setState)=>{
 
-
+    setState({isLoading:true,isLoadingPlaceholder:false});
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -66,7 +66,7 @@ export const getAllFriendSuggestion = (payload,setState)=>{
 
 
 export const getAllFriendRequests = (payload,setState)=>{
-    
+    setState({isLoading:true,isLoadingPlaceholder:false});
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected

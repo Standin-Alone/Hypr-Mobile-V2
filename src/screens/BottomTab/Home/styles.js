@@ -34,6 +34,12 @@ export const styles = StyleSheet.create({
    createPostTextContainer:{
      left:constants.Dimensions.vw(2),
      top:constants.Dimensions.vh(2)
+   },
+   textEmptyComponent:{
+    fontFamily:constants.Fonts.PoppinsBold,
+    fontSize:18,
+    textAlign:'center'
+
    }
 });
 

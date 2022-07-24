@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View,Text,ImageBackground} from 'react-native';
+import { View,Text,ImageBackground,ActivityIndicator} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Components from '../../../components';
 import constants from '../../../constants';
@@ -15,6 +15,7 @@ export default class Friend extends React.Component {
             extraFriendSuggestion:[],
             friendRequests:[],
             extrafriendRequests:[],
+            isLoading:false
     
       };
     }
@@ -115,12 +116,18 @@ export default class Friend extends React.Component {
                             <View  style={{left:constants.Dimensions.vw(1)}}>
                                 <Text style={styles.headerText1}>Friends Suggestion</Text>
                             </View>
+                            
+
+                            {this.state.isLoading ?
+                                <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                            :
                             <FlatList
                                 data={this.state.friendSuggestion}
                                 extraData={this.state.extraFriendSuggestion}
                                 renderItem={this.renderItem}
                                 contentContainerStyle={{paddingBottom:constants.Dimensions.vh(100)}}
                             />
+                            }
                         </View>
                     </View>
                 </ImageBackground>

@@ -24,7 +24,6 @@ export const styles = StyleSheet.create({
     marginVertical:constants.Dimensions.vh(4),
     height:constants.Dimensions.vh(35),
     width:constants.Dimensions.vw(35),
-    borderRadius:900,
     alignSelf:'center',
  },
  orderTitleText:{
