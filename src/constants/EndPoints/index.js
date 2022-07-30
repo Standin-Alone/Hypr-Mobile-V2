@@ -72,6 +72,7 @@ const EndPoints = {
     HYPE_POST:'/social/hype-post',
     COMMENT:'/social/comment',
     GET_PROFILE_INFO:'/social/get-profile-info',
+    GET_ALL_FRIENDS_STORIES:'/social/get-all-friends-stories',
   
 
     // FRIEND

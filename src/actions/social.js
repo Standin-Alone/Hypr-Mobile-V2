@@ -67,6 +67,70 @@ export const getAllFriendsPost = (payload,setState)=>{
 
 
 
+
+export const getAllFriendStories = (payload,setState)=>{
+
+
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_STORIES}`,payload).then((response)=>{                    
+                         
+                if(response.data.status == true){
+                    
+                 
+                    if(payload.currentPage > 1){
+                        setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
+                    }else{
+                        setState({posts:response.data.data})
+                    }
+                    
+
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }else{
+                    // Toast.show({
+                    //     type:'error',
+                    //     text1: response.data.message
+                    // });
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false,isLoadingPlaceholder:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}
+
+
+
+
+
 export const hypePost = (payload,setState,props,myState)=>{
 
 
@@ -306,7 +370,7 @@ export const getProfileInfo = (payload,setState)=>{
             GET(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_PROFILE_INFO}/${payload.userId}`,payload).then((response)=>{                    
              
                 if(response.data.status == true){          
-
+                  
                     setState({profileInfo:response.data.data,isLoading:false})
 
                 }else{

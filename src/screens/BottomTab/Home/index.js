@@ -12,6 +12,7 @@ export default class Home extends React.Component {
       super(props);
       this.state = {        
         posts:[],
+        stories:[],
         isLoading:true,
         newPosts:[],
         newHypeCount:0,
@@ -92,6 +93,13 @@ export default class Home extends React.Component {
         
     )
 
+    renderStories = ()=>(
+        <View>
+            <Text style={styles.textEmptyComponent}>No latest posts</Text>
+        </View>
+        
+    )
+
     render(){
         return(
             <>  
@@ -101,6 +109,12 @@ export default class Home extends React.Component {
 
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
                  
+
+                <FlatList                
+                    data={this.state.stories}            
+                    renderItem = {this.renderStories}                               
+                 />
+
                     
                 {this.state.isLoading ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>

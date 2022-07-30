@@ -46,7 +46,7 @@ export default class ViewProfile extends React.Component {
                     :
                 <View style={{flex:1}}>                      
                     <View style={{flexDirection:'row',justifyContent:'space-evenly',marginRight:constants.Dimensions.vw(30)}}>                                   
-                        <FastImage source={{ uri:`data:image/jpeg;base64,${this.state.profileInfo.profile_image}` }} resizeMode={FastImage.resizeMode.center} style={styles.image} />                                                                       
+                        <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.profileInfo?.profile_image}` }} resizeMode={FastImage.resizeMode.center} style={styles.image} />                                                                       
                         <View style={{textAlign:'center'}}>
                             <Text style={styles.textBold}> {this.state.profileInfo?.total_posts} </Text>
                             <Text style={{textAlign:'center'}}> Posts</Text>

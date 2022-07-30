@@ -125,7 +125,7 @@ export default class Login extends React.Component {
                                         style={styles.googleButton} 
                                         onPress={()=>this.handleLogin('google')}   
                                  />
-
+{/* 
                                  <LoginButton                                        
                                         style={styles.googleButton}                                         
                                         // onLoginFinished={
@@ -152,7 +152,7 @@ export default class Login extends React.Component {
                                             }
                                           }
                                           onLogoutFinished={() => console.warn("logout.")}
-                                 />
+                                 /> */}
                             </Animated.View>
                         </View>                        
 
