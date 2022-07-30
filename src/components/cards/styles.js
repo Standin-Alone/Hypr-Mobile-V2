@@ -385,6 +385,12 @@ export const styles = StyleSheet.create({
         fontSize:20, 
         color:constants.Colors.primary,
         paddingHorizontal:constants.Dimensions.vw(2)
-    }
+    },
+
+    storyUsername:{
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:10,  
+        color:constants.Colors.dark_tint
+    },
 });
 

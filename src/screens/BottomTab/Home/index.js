@@ -1,12 +1,12 @@
 import React from 'react';
-import { View,Text,FlatList,ImageBackground,ActivityIndicator} from 'react-native';
+import { View,Text,FlatList,ImageBackground,ActivityIndicator,TouchableOpacity} from 'react-native';
 import constants from '../../../constants';
 import { styles } from './styles';
 import Components from '../../../components';
-import { getAllFriendsPost,hypePost } from '../../../actions/social';
+import { getAllFriendsPost,hypePost,getAllFriendsStories } from '../../../actions/social';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { SharedElement } from 'react-navigation-shared-element';
-
+import InstaStory from 'react-native-insta-story';
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
@@ -32,10 +32,24 @@ export default class Home extends React.Component {
         }
         getAllFriendsPost(parameter,this.setMyState)     
     }
-    async  componentDidMount(){
 
+    handleLoadStories = async ()=>{
+                
+        let parameter = {
+            userId:await GET_SESSION('USER_ID'),
+
+        }
+
+      
+        getAllFriendsStories(parameter,this.setMyState)     
+    }
+
+
+      componentDidMount(){
+        console.warn('PROPS',this.props.route)
         this.handleLoadPosts();
-        this.setState({userId:await GET_SESSION('USER_ID')})
+         this.handleLoadStories();
+        // this.setState({userId:await GET_SESSION('USER_ID')})
    
 
     }
@@ -92,28 +106,57 @@ export default class Home extends React.Component {
         </View>
         
     )
-
-    renderStories = ()=>(
-        <View>
-            <Text style={styles.textEmptyComponent}>No latest posts</Text>
-        </View>
+    
+    handleViewStory = (item)=>{
+        
+        this.props.navigation.navigate(constants.ScreenNames.Social.STORIES,item)
+    }
+    renderStories = ({item,index})=>(
+        <Components.UserProfilePicture
+            profilePicture={item.user_image}
+            fullName={item.user_name}
+            onViewStory={()=>this.handleViewStory(item)}
+        />
         
     )
+
+    handleOpenAddStories = ()=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:'stories'})
+    }
+
+    
 
     render(){
         return(
             <>  
                 <Components.SocialHeader
-                        onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA)}                
+                        onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}                
                 />
 
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
-                 
+                
+                <View style={{flexDirection:'row'}}>
+                    <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
+                        <constants.Icons.Ionicons 
+                            name="add-circle" 
+                            size={40} 
+                            color={constants.Colors.secondary}
+                        />
+                    </TouchableOpacity> 
+                    <View style={{top:constants.Dimensions.vh(2)}}>
 
-                <FlatList                
-                    data={this.state.stories}            
-                    renderItem = {this.renderStories}                               
-                 />
+                    
+                    <FlatList
+                        data={this.state.stories}
+           
+                        horizontal={true}
+                        contentContainerStyle ={{paddingRight:constants.Dimensions.vw(10)}}   
+                        renderItem = {this.renderStories}   
+               
+                        />
+                    </View>
+                </View>
+                
 
                     
                 {this.state.isLoading ?

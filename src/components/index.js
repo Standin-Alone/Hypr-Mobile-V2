@@ -39,7 +39,8 @@ import {
     FriendSuggestionCard,
     FriendRequestsCard,
     CommentCard,
-    UploadingSelectionCard
+    UploadingSelectionCard,
+    UserProfilePicture
     } from "./cards";
 import {
     Loader,
@@ -93,6 +94,7 @@ export default {
     FriendRequestsCard,
     CommentCard,
     UploadingSelectionCard,
+    UserProfilePicture,
 
     Loader,
     LoadingScreen,

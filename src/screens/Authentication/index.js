@@ -28,7 +28,37 @@ export default class Authentication extends React.Component {
 
                 setTimeout(()=>{
                     if(checkSession){            
-                        this.props.navigation.replace(constants.ScreenNames.AppStack.HOME);
+                        let stories = [
+                            {
+                                "_id": "62e51f1d615541b53d44330d",
+                                "user_id": "62dd2221789599e81dc1172e",
+                                "username": "",
+                                "full_name": "Jack Snyder",
+                                "user_picture": "IMG_20220720_055206.jpg",
+                                "user_name": "Jack Snyder",
+                                "user_image": "http://192.168.1.8:9002//uploads/profile_pictures//IMG_20220720_055206.jpg",
+                                "files": [
+                                    "rn_image_picker_lib_temp_08597ea1-c62c-4954-b268-266242179ae8.jpg"
+                                ],
+                                "stories": [
+                                    {
+                                        "story_id": 1,
+                                        "story_image": "http://192.168.1.8:9002//uploads//stories//rn_image_picker_lib_temp_08597ea1-c62c-4954-b268-266242179ae8.jpg"
+                                    }
+                                ],
+                                "date_created": "2022-07-30T12:07:44.970Z",
+                                "status": true,
+                                "__v": 0
+                            }
+                        ]   
+                        
+                    
+                        // this.props.navigation.replace(constants.ScreenNames.AppStack.HOME,{stories:stories});
+                        this.props.navigation.replace(constants.ScreenNames.AppStack.HOME, {
+                            screen: constants.ScreenNames.BottomTab.SOCIAL_HOME,
+                            params: { screen: constants.ScreenNames.Social.SOCIAL,
+                            params:{stories:stories} },
+                          });
                     }else{
                         this.props.navigation.replace(constants.ScreenNames.AppStack.LOGIN);
                     }

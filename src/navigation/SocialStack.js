@@ -9,10 +9,11 @@ import { createSharedElementStackNavigator } from 'react-navigation-shared-eleme
 import ViewPost from '../screens/Social/ViewPost';
 import Comments from '../screens/Social/Comments';
 import ViewProfile from '../screens/Social/ViewProfile';
+import SocialStories from '../screens/Social/Stories';
 
 const SocialStack = createSharedElementStackNavigator();
 
-export const SocialStackComponent= () => {
+export const SocialStackComponent= (props) => {
     return (
         <SocialStack.Navigator            
             screenOptions={{
@@ -21,6 +22,7 @@ export const SocialStackComponent= () => {
         >       
 
             <SocialStack.Screen
+                {...props}
                 component={Home}
                 name={constants.ScreenNames.Social.SOCIAL}             
             />  
@@ -64,7 +66,12 @@ export const SocialStackComponent= () => {
                 name={constants.ScreenNames.Social.VIEW_PROFILE}      
                 options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
             />  
-                                                                   
+
+            <SocialStack.Screen
+                component={SocialStories}
+                name={constants.ScreenNames.Social.STORIES}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
+            />                                                  
             </SocialStack.Navigator>
     )
 }

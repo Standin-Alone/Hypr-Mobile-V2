@@ -73,6 +73,7 @@ const EndPoints = {
     COMMENT:'/social/comment',
     GET_PROFILE_INFO:'/social/get-profile-info',
     GET_ALL_FRIENDS_STORIES:'/social/get-all-friends-stories',
+    CREATE_STORY:'/social/create-story',
   
 
     // FRIEND

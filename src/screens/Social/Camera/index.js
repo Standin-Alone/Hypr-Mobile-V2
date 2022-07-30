@@ -6,11 +6,13 @@ import { RNCamera } from 'react-native-camera';
 import constants from '../../../constants';
 import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
+import InstaStory from 'react-native-insta-story';
 export default class Camera extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-        cameraType:'back'
+        cameraType:'back',
+        addType:this.props.route.params.addType
     
       };
     }
@@ -33,7 +35,8 @@ export default class Camera extends React.Component {
             
             let parameter = {
                 image:[{fileBase64:data.base64,fileName:data.fileName}],
-                multiple:false
+                multiple:false,
+                addType:this.state.addType
             }
             this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
           }
@@ -57,7 +60,8 @@ export default class Camera extends React.Component {
         
         let parameter = {
             image:imageGallery,
-            multiple:true
+            multiple:true,
+            addType:this.state.addType
         }
         
         this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);  

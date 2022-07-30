@@ -6,13 +6,15 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image';
 import {styles} from './styles';
 import Carousel from 'react-native-snap-carousel';
+import { createStory } from '../../../actions/social';
+import { GET_SESSION } from '../../../utils/async_storage';
 
 export default class CapturedPhoto extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
         capturedImageBase4:this.props.route.params.image,
-    
+        addType:this.props.route.params.addType
       };
     }
 
@@ -23,9 +25,18 @@ export default class CapturedPhoto extends React.Component {
 
     handleGoToCreatePost = ()=>{
         let parameter = {
-            image:this.state.capturedImageBase4
+            image:this.state.capturedImageBase4,        
         }
         this.props.navigation.navigate(constants.ScreenNames.Social.CREATE_POST,parameter);
+    }
+    
+    handleCreateStory = async ()=>{
+        let parameter = {         
+            userId:await GET_SESSION('USER_ID'),
+            file:this.state.capturedImageBase4,     
+        }
+        
+        createStory(parameter,this.setMyState,this.props)
     }
     
     renderItem = ({item,index})=>(
@@ -43,7 +54,7 @@ export default class CapturedPhoto extends React.Component {
             <>
                 <Components.PrimaryHeader
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
-                    onNext={this.handleGoToCreatePost}
+                    onNext={this.state.addType == 'post' ? this.handleGoToCreatePost : this.handleCreateStory }
                     showNextButton                               
                 />      
 

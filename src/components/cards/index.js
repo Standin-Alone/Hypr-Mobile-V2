@@ -292,6 +292,22 @@ export const SocialPostCard = ({
 )
 
 
+export const UserProfilePicture = ({
+profilePicture,
+onViewStory,
+fullName
+})=>(
+   <View style={{flexDirection:'column',alignItems:'center',marginHorizontal:constants.Dimensions.vw(2)}}>
+      <TouchableOpacity onPress={onViewStory}>
+         <FastImage source={{ uri:profilePicture}} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+      </TouchableOpacity>            
+      <View style={{top:constants.Dimensions.vh(2)}}>
+         <Text style={styles.storyUsername}> 
+               {fullName}
+         </Text>
+      </View>
+   </View>      
+)
 
 
 export const FriendSuggestionCard = ({

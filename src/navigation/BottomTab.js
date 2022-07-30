@@ -27,7 +27,10 @@ export function getTabBarVisibility(route) {
     
 }
 
-export const BottomTabNavigator = ()=>(
+export const BottomTabNavigator = (props)=>{
+    
+    console.warn('BOTTOM TAB',props)
+    return(
 
     <BottomTab.Navigator            
         screenOptions={(navigation)=>({
@@ -47,6 +50,7 @@ export const BottomTabNavigator = ()=>(
      >
 
         <BottomTab.Screen 
+            {...props}
                     name ={constants.ScreenNames.BottomTab.SOCIAL_HOME} 
                     component={SocialStackComponent}
                     options={({route,navigation})=>({    
@@ -100,7 +104,7 @@ export const BottomTabNavigator = ()=>(
              })}
         />
     </BottomTab.Navigator>
-)
+    )}
 
 
 

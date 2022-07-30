@@ -47,7 +47,8 @@ export default {
       VIEW_POST:'ViewPost',
       FRIENDS:'Friends',
       COMMENTS:'comments',
-      VIEW_PROFILE:'ViewProfile'
+      VIEW_PROFILE:'ViewProfile',
+      STORIES:'Stories'
   },
   Friend:{
    FRIEND:'Friend'
