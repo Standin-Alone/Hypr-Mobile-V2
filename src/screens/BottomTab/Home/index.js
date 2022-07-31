@@ -45,11 +45,11 @@ export default class Home extends React.Component {
     }
 
 
-      componentDidMount(){
+    async componentDidMount(){
         console.warn('PROPS',this.props.route)
         this.handleLoadPosts();
-         this.handleLoadStories();
-        // this.setState({userId:await GET_SESSION('USER_ID')})
+        this.handleLoadStories();
+        this.setState({userId:await GET_SESSION('USER_ID')})
    
 
     }
@@ -60,7 +60,7 @@ export default class Home extends React.Component {
             post:item,            
             userId:await GET_SESSION('USER_ID'),            
         }
-
+        
         hypePost(parameter,this.setMyState,this.props,this.state)   
     }
 
@@ -77,7 +77,7 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-        console.warn(`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${item.user_picture}`);
+        console.warn(item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId));
      
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -169,7 +169,7 @@ export default class Home extends React.Component {
                             refreshing={this.state.refresing}
                             onRefresh={this.handleLoadPosts}
                             renderItem = {this.renderItem}   
-                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(10)}}                     
+                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(22)}}                     
                             ListEmptyComponent={this.renderEmptyComponent}
                             />
                     </View>  

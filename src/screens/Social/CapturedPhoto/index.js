@@ -21,6 +21,9 @@ export default class CapturedPhoto extends React.Component {
      
     setMyState = (value)=>this.setState(value)
 
+    componentDidMount(){
+        console.warn(this.props.route.params.addType)
+    }
 
 
     handleGoToCreatePost = ()=>{

@@ -20,7 +20,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-                 
+                    console.warn(response.data.data)
                     if(payload.currentPage > 1){
                         setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
@@ -144,7 +144,7 @@ export const hypePost = (payload,setState,props,myState)=>{
                 if(response.data.status == true){
                     
 
-
+                    console.warn('HYPES',response.data)
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
 

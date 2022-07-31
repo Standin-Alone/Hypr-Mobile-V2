@@ -34,7 +34,7 @@ export default class ViewPost extends React.Component {
     renderItem = ({item,index})=>(
     
 
-            <FastImage source={{uri:`data:image/jpg;base64,${item}`}} 
+            <FastImage source={{uri:item}} 
             resizeMode={FastImage.resizeMode.contain}
             style={styles.image}/>      
     )

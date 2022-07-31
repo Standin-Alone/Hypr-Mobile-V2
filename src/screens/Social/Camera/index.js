@@ -22,7 +22,7 @@ export default class Camera extends React.Component {
 
 
     async componentDidMount(){          
- 
+        console.warn(this.props.route.params.addType)
     }   
 
 
