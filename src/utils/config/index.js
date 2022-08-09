@@ -1,5 +1,5 @@
 
-const ipAddress = '192.168.1.8';
+const ipAddress = '192.168.1.11';
 
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
 const API_DEV_HOST = `http://${ipAddress}:9002/hypr-mobile`;

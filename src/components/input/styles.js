@@ -19,7 +19,7 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamMedium,
         paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
-        fontSize:18
+        fontSize:constants.Dimensions.normalize(6)
     },
     primaryErrorMessage:{
         color:constants.Colors.danger,

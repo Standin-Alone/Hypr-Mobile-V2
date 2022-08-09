@@ -31,13 +31,16 @@ export default class Camera extends React.Component {
         if (this.camera) {
             const options = { quality: 1, base64: true };
             const data = await this.camera.takePictureAsync(options);
-
-            
+        
+            let  fileParts = data.uri.split('/');
+            let filename = fileParts[fileParts.length - 1];
+      
             let parameter = {
-                image:[{fileBase64:data.base64,fileName:data.fileName}],
+                image:[{fileBase64:data.base64,fileName:filename}],
                 multiple:false,
                 addType:this.state.addType
             }
+          
             this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
           }
     }
@@ -86,7 +89,8 @@ export default class Camera extends React.Component {
                     defaultTouchToFocus                    
                     style={[StyleSheet.absoluteFillObject]}
                     permissionDialogTitle={'Permission to use camera'}
-                    permissionDialogMessage={'We need your permission to use your camera phone'}                                                             
+                    permissionDialogMessage={'We need your permission to use your camera phone'}  
+                                                                           
                 >
                 <View style={{paddingVertical:constants.Dimensions.vh(2),paddingHorizontal:constants.Dimensions.vw(2)}}>
                     <TouchableOpacity onPress={()=>this.props.navigation.goBack()}>

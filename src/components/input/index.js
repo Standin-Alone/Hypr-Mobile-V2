@@ -34,7 +34,7 @@ export const PrimaryTextInput = ({
             <View style={styles.icon}>
                 <MaterialIcons 
                     name={iconName} 
-                    size={40} 
+                    size={constants.Dimensions.normalize(14)} 
                     color={isError ? constants.Colors.danger :
                                                 isFocus ||  value != '' ? 
                                                         constants.Colors.primary                                                                                                           

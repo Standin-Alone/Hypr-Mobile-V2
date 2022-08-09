@@ -40,7 +40,8 @@ import {
     FriendRequestsCard,
     CommentCard,
     UploadingSelectionCard,
-    UserProfilePicture
+    UserProfilePicture,
+    MemberCard
     } from "./cards";
 import {
     Loader,
@@ -55,6 +56,11 @@ import {
     ShareReferralLinkModal
 } from "./modal"
 
+import {
+    PostSkeletonHolder,
+    FriendSkeletonHolder
+    
+} from "./placeholder"
 
 export default {
     // Buttons
@@ -95,6 +101,7 @@ export default {
     CommentCard,
     UploadingSelectionCard,
     UserProfilePicture,
+    MemberCard,
 
     Loader,
     LoadingScreen,
@@ -106,6 +113,7 @@ export default {
 
 
 
-
+    PostSkeletonHolder,
+    FriendSkeletonHolder
 
 }

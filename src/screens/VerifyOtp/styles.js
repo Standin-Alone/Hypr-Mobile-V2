@@ -11,7 +11,7 @@ export const styles = StyleSheet.create({
         backgroundColor:constants.Colors.light        
     },
     otpVerificationTitleContainer:{
-        top: constants.Dimensions.vw(50),  
+        top: constants.Dimensions.vw(10),  
         justifyContent:'center'
     },
     otpVerificationTitle:{  
@@ -30,63 +30,63 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold
     },  
     codeFieldContainer:{
-        top: constants.Dimensions.vw(70),                
+        top: constants.Dimensions.vw(20),                
     },  
     cell: {
-        width: constants.Dimensions.vw(16),
+        width: constants.Dimensions.vw(14),
         height: constants.Dimensions.vh(18),                        
         paddingTop:constants.Dimensions.vh(2),  
         borderWidth: 2,
         borderRadius:20,   
         borderColor: constants.Colors.gray,        
-        fontSize:50,
+        fontSize:constants.Dimensions.normalize(20),
         color:constants.Colors.primary,
-        fontSize:50,
+        
         textAlign: 'center',        
     }
     ,codeFieldRoot:{        
-        paddingHorizontal:constants.Dimensions.vw(10),
+        paddingHorizontal:constants.Dimensions.vw(5),
 
     },
     buttonContainer:{
-        top:constants.Dimensions.vh(80),    
+        top:constants.Dimensions.vh(25),    
         left:constants.Dimensions.vw(5),  
         flexDirection:'column',
         flex:0.25
         
     },
     focusCell:{
-        width: constants.Dimensions.vw(16),
+        width: constants.Dimensions.vw(14),
         height: constants.Dimensions.vh(18),                        
-        paddingTop:constants.Dimensions.vh(2),  
+        paddingTop:constants.Dimensions.vh(1),  
         borderWidth: 2,
         borderRadius:20,   
         borderColor: constants.Colors.primary,        
-        fontSize:50,
+        fontSize:constants.Dimensions.normalize(20),
         color:constants.Colors.primary,
         textAlign: 'center',        
     },
     cellHasValue:{
-        width: constants.Dimensions.vw(16),
+        width: constants.Dimensions.vw(14),
         height: constants.Dimensions.vh(18),                        
         paddingTop:constants.Dimensions.vh(2),  
         borderWidth: 2,
         borderRadius:20,   
         borderColor: constants.Colors.primary,        
-        fontSize:50,
+        fontSize:constants.Dimensions.normalize(20),
         color:constants.Colors.primary,
         textAlign: 'center',        
     },
     errorCell:{
-        width: constants.Dimensions.vw(16),
+        width: constants.Dimensions.vw(14),
         height: constants.Dimensions.vh(18),                        
         paddingTop:constants.Dimensions.vh(2),  
         borderWidth: 2,
         borderRadius:20,   
-        borderColor: constants.Colors.danger,        
-        fontSize:50,
-        color:constants.Colors.danger,
-        textAlign: 'center',        
+        borderColor: constants.Colors.primary,        
+        fontSize:constants.Dimensions.normalize(20),
+        color:constants.Colors.primary,
+        textAlign: 'center',      
     }
 });
 

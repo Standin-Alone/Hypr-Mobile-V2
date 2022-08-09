@@ -297,8 +297,8 @@ export const styles = StyleSheet.create({
           marginVertical:constants.Dimensions.vh(1)
     },
     suggestionFriendProfile:{
-        height:constants.Dimensions.vh(20),
-        width:constants.Dimensions.vh(20),
+        height:constants.Dimensions.vh(15),
+        width:constants.Dimensions.vh(15),
         borderRadius:40
     },
     suggestionFullName:{
@@ -392,5 +392,11 @@ export const styles = StyleSheet.create({
         fontSize:10,  
         color:constants.Colors.dark_tint
     },
+    countText:{
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:10,  
+        fontWeight:'bold',
+        color:constants.Colors.dark_tint
+    }
 });
 

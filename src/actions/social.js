@@ -5,6 +5,65 @@ import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import { Buffer } from 'buffer'
 
+
+export const getAllMyPosts = (payload,setState)=>{
+
+
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_MY_POST}`,payload).then((response)=>{                    
+                         
+                if(response.data.status == true){
+                    
+              
+                    if(payload.currentPage > 1){
+                        setState({myPosts:[...new Set(payload.previousPost),...response.data.data],myNewPosts:response.data.data})
+                    }else{
+                        setState({myPosts:response.data.data})
+                    }
+                    
+
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }else{
+    
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false,isLoadingPlaceholder:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}
+
+
+
 export const getAllFriendsPost = (payload,setState)=>{
 
 
@@ -20,7 +79,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-                    console.warn(response.data.data)
+              
                     if(payload.currentPage > 1){
                         setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
                     }else{
@@ -31,10 +90,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }else{
-                    // Toast.show({
-                    //     type:'error',
-                    //     text1: response.data.message
-                    // });
+    
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }
@@ -68,7 +124,7 @@ export const getAllFriendsPost = (payload,setState)=>{
 
 export const getAllFriendsStories = async (payload,setState)=>{
 
-    console.warn('PAYLOAD',payload)
+
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -81,7 +137,7 @@ export const getAllFriendsStories = async (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-                    console.warn('STORIES',response.data.data);
+        
                   
                     setState({stories:response.data.data})
                 
@@ -89,10 +145,7 @@ export const getAllFriendsStories = async (payload,setState)=>{
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }else{
-                    // Toast.show({
-                    //     type:'error',
-                    //     text1: response.data.message
-                    // });
+         
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
                 }
@@ -144,17 +197,23 @@ export const hypePost = (payload,setState,props,myState)=>{
                 if(response.data.status == true){
                     
 
-                    console.warn('HYPES',response.data)
                     setState({isLoading:false,isLoadingPlaceholder:false});
 
 
                     if(payload.viewType == 'Comments'){
                         let newComments = myState.parameter
-
+                        console.warn(`comments`,response.data.hypes)
                         newComments.hypes = response.data.hypes;
                         
                    
                         setState({parameter:newComments});
+                    }else if(payload.viewType == 'ViewPost'){
+                        let newHypes = myState.parameters
+                 
+                        newHypes.hypes = response.data.hypes;
+                   
+                   
+                        setState({parameters:newHypes,isHype:newHypes.hypes.some( (item)=>item.user_id ==  payload.userId)});
                     }else{
                         let newPosts = myState.posts.map((item)=>{
                             if(item._id == payload.post._id){

@@ -397,6 +397,30 @@ export const FriendRequestsCard = ({
 )
 
 
+
+export const MemberCard = ({
+   fullName,
+   number,
+   profilePicture,
+})=>(
+   <View  
+      style={styles.friendRequestCard}
+   >  
+      <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>  
+         <Text style={styles.countText}>{number}.</Text>       
+         <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+
+         <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
+            <Text style={styles.acceptFullName}>{fullName}</Text>         
+
+            
+         </View>
+
+      </View>
+
+      
+   </View>
+)
 export const CommentCard = ({
    fullName,
    onAddFriend,

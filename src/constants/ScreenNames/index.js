@@ -11,7 +11,9 @@ export default {
       SOCIAL_HOME:'SocialHome',
       FRIEND_HOME:'FriendHome',
       MARKET_HOME:"MarketHome",
+      
       USER_PROFILE:"UserProfile",
+      MLM_HOME:'MlmHome',
       
    },
    Market:{
@@ -52,6 +54,9 @@ export default {
   },
   Friend:{
    FRIEND:'Friend'
-}
+ },
+ Mlm:{
+   MLM:'Mlm'
+ }
     
 }

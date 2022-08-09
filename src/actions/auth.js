@@ -36,10 +36,10 @@ export const createAccountUsingGoogle = (payload,setState,props)=>{
                     email:payload.email,                   
                 }
 
-                console.warn(clean_payload)
+            
 
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT_USING_GOOGLE}`,clean_payload).then((response)=>{                    
-                    console.warn('samnple',response)
+          
                     if(response.data.status == true){
                         
                         let params = {
@@ -306,6 +306,8 @@ export const login = (payload,setState,props) => {
                     // turn off loading
                     setState({isLoading:false});
                 });
+            }else{
+                setState({isLoading:false});
             }
            
             }else{
@@ -343,8 +345,9 @@ export const login = (payload,setState,props) => {
             })
              // turn off loading
             setState({isLoading:false});
+            
         }
-
+     
         
     });
 
@@ -359,7 +362,7 @@ export const verifyOtp = (payload,setState,props)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
 
-            if(payload.otp.length == 4){
+            if(payload.otp.length == 6){
 
 
                 let clean_payload = {
@@ -509,7 +512,7 @@ export const getUserInfo = (setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
-             
+                console.warn(`TEAMN`,response.data.data)
                 if(response.data.status == true){          
                  
                     setState({userInfo:response.data.data})

@@ -22,8 +22,11 @@ export const styles = StyleSheet.create({
  },
  userProfile:{
     marginVertical:constants.Dimensions.vh(4),
-    height:constants.Dimensions.vh(35),
-    width:constants.Dimensions.vw(35),
+    height:constants.Dimensions.vh(55),
+    width:constants.Dimensions.vw(55),
+    borderRadius:2000,
+    borderWidth:10,
+    borderColor:'rgba(255,255,255,1)',
     alignSelf:'center',
  },
  orderTitleText:{
@@ -34,10 +37,11 @@ export const styles = StyleSheet.create({
    color:constants.Colors.dark_tint
  },
  profileContainer:{
+   top:constants.Dimensions.vh(10),
    marginVertical:constants.Dimensions.vw(2),   
    marginHorizontal:constants.Dimensions.vw(2),
    borderRadius:20,
-   backgroundColor:'rgba(255,255,255,0.5)'
+
  },
  fullName:{
     textAlign:'center',
@@ -51,10 +55,12 @@ export const styles = StyleSheet.create({
    left:constants.Dimensions.vh(10)
  },
  cover_pic:{
+   borderRadius:20,
    position:'absolute',
-   width:constants.Dimensions.vw(100),
-   height:constants.Dimensions.vh(100),
-   bottom:constants.Dimensions.vh(90)
+   left:constants.Dimensions.vw(2),
+   width:constants.Dimensions.vw(95),
+   height:constants.Dimensions.vh(60),
+   bottom:constants.Dimensions.vh(95)
  }
 });
 

@@ -26,9 +26,11 @@ export default class ViewPost extends React.Component {
     setMyState = (value)=>this.setState(value)
 
     async componentDidMount(){
-        this.setState({isHype:this.props.route.params.post.hypes.some(async (item)=>item.user_id ==  await GET_SESSION('USER_ID'))});
+        let userId = await GET_SESSION('USER_ID');
+      
+        this.setState({isHype:this.props.route.params.post.hypes.some( (item)=>item.user_id ==  userId)});
 
-        console.warn('VIEW POST',this.state.parameters.filenames.map((item)=>`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`))
+       
     }
 
     renderItem = ({item,index})=>(
@@ -91,6 +93,7 @@ export default class ViewPost extends React.Component {
             
             <View style={styles.footer}>
                 <View style={styles.mainInfo}>
+                    
                     <Text style={styles.mainInfoTextBold}>{this.state.parameters?.full_name}</Text>
                     <Text style={styles.mainInfoText}>{this.state.parameters?.caption}</Text>                    
 

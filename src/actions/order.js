@@ -253,7 +253,7 @@ export const successPayment = (payload,setState,props)=>{
                         if(result.data.result == true){
 
                             // MLM REWARDS
-                            disseminateRewards(payload,setState,props);
+                            disseminateRewards(cleanPayload,setState,props);
 
                                
                         }else{
@@ -314,16 +314,16 @@ export const disseminateRewards = (payload,setState,props)=>{
 
             let userId = await GET_SESSION('USER_ID');
             
-            let payload = {                 
+            let myPayload = {                 
                 markUp: 12.50,
                 orderId: payload.orderId,
                 userId: userId             
             }
 
             // POST REQUEST
-            POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,payload).then((response)=>{                    
+            POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,myPayload).then((response)=>{                    
              
-                if(response.data.status == true){          
+                if(response.data.response == 'success'){          
                     
                     Toast.show({
                         type:'success',

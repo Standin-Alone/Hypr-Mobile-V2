@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View,Text,ImageBackground,ActivityIndicator} from 'react-native';
+import { View,Text,ImageBackground} from 'react-native';
 import { FlatList } from 'react-native-gesture-handler';
 import Components from '../../../components';
 import constants from '../../../constants';
@@ -119,7 +119,16 @@ export default class Friend extends React.Component {
                             
 
                             {this.state.isLoading ?
-                                <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                                <>
+                                  <Components.PostSkeletonHolder/>
+
+                                    <Components.PostSkeletonHolder/>
+                                    <Components.PostSkeletonHolder/>
+                                    <Components.PostSkeletonHolder/>
+                                    <Components.PostSkeletonHolder/>
+                                    <Components.PostSkeletonHolder/>
+                                    <Components.PostSkeletonHolder/>
+                                </>
                             :
                             <FlatList
                                 data={this.state.friendSuggestion}

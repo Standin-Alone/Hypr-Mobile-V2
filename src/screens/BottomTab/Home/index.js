@@ -1,12 +1,12 @@
 import React from 'react';
-import { View,Text,FlatList,ImageBackground,ActivityIndicator,TouchableOpacity} from 'react-native';
+import { View,Text,FlatList,ImageBackground,Image,TouchableOpacity} from 'react-native';
 import constants from '../../../constants';
 import { styles } from './styles';
 import Components from '../../../components';
 import { getAllFriendsPost,hypePost,getAllFriendsStories } from '../../../actions/social';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { SharedElement } from 'react-navigation-shared-element';
-import InstaStory from 'react-native-insta-story';
+
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
@@ -17,7 +17,7 @@ export default class Home extends React.Component {
         newPosts:[],
         newHypeCount:0,
         userId:'',
-        refresing:false,
+        refreshing:false,
       };
     }
 
@@ -46,7 +46,7 @@ export default class Home extends React.Component {
 
 
     async componentDidMount(){
-        console.warn('PROPS',this.props.route)
+   
         this.handleLoadPosts();
         this.handleLoadStories();
         this.setState({userId:await GET_SESSION('USER_ID')})
@@ -77,7 +77,7 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-        console.warn(item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId));
+
      
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -160,17 +160,49 @@ export default class Home extends React.Component {
 
                     
                 {this.state.isLoading ?
-                        <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                        // <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                        <>
+                   
+                    
+                        <Components.PostSkeletonHolder/>
+
+                        <Components.PostSkeletonHolder/>
+                        <Components.PostSkeletonHolder/>
+                        <Components.PostSkeletonHolder/>
+                        <Components.PostSkeletonHolder/>
+                        <Components.PostSkeletonHolder/>
+                        <Components.PostSkeletonHolder/>
+                        </>
                     :
                     <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vh(2)}}>
                         <FlatList
                             data={this.state.posts}
                             extraData={this.state.newPosts}
-                            refreshing={this.state.refresing}
+                            refreshing={this.state.refreshing}
                             onRefresh={this.handleLoadPosts}
                             renderItem = {this.renderItem}   
                             contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(22)}}                     
                             ListEmptyComponent={this.renderEmptyComponent}
+                            
+                            onEndReachedThreshold={0.1} // so when you are at 5 pixel from the bottom react run onEndReached function
+                            onEndReached={async ({distanceFromEnd}) => {     
+                                 
+                               if (distanceFromEnd > 0   ) 
+                                {                               
+                                         
+                                    await this.setState((prevState) => ({currentPage:prevState.currentPage + 2}));
+                                
+                           
+                                    let parameter = {
+                                        userId:await GET_SESSION('USER_ID'),
+                                        previousPost:this.state.posts,
+                                        currentPage:this.state.currentPage,
+                                    }
+                                    getAllFriendsPost(parameter,this.setMyState)     
+
+                                }                              
+                            }}
+                            
                             />
                     </View>  
                 }

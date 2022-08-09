@@ -31,6 +31,8 @@ export default class Comments extends React.Component {
     componentDidMount(){
         
         getUserInfo(this.setMyState)
+
+        console.warn(this.state.parameter.hypes.some(async (hypeItem)=>hypeItem.user_id == await GET_SESSION('USER_ID')))
     }
  
     
@@ -69,7 +71,7 @@ export default class Comments extends React.Component {
         }
 
         hypePost(parameter,this.setMyState,this.props,this.state)   
-
+        
         
     }
     render(){

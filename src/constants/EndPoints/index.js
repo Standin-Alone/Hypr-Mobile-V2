@@ -46,6 +46,7 @@ const EndPoints = {
 
     // MLM
     DISSEMINATE_REWARDS:'/mlm-disseminate-rewards',
+    GET_MEMBERS:'/get-members',
 
 
 
@@ -68,6 +69,7 @@ const EndPoints = {
     // SOCIAL
 
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',
+    GET_ALL_MY_POST:'/social/get-all-my-post',
     CREATE_POST:'/social/create-post',
     HYPE_POST:'/social/hype-post',
     COMMENT:'/social/comment',

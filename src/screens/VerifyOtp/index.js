@@ -40,7 +40,9 @@ export default class VerifyOtp extends React.Component {
         let payload = {
             otp    : this.state.otp.value,  
             userId : this.props.route.params.userId       
-        };
+        };  
+
+        console.warn(this.state.otp.value)
                     
         return verifyOtp(payload,this.setMyState,this.props);
     }
@@ -73,7 +75,7 @@ export default class VerifyOtp extends React.Component {
                 <View style={styles.codeFieldContainer}>
                  
                     <CodeField                                        
-                        cellCount={4}
+                        cellCount={6}
                         value={this.state.otp.value}
                         onChangeText={this.handleChangeOtp}
                         rootStyle={styles.codeFieldRoot}                    
@@ -101,7 +103,7 @@ export default class VerifyOtp extends React.Component {
                     </View>
                             
 
-                    <View style={{ flex:3 }}>
+                    <View style={{ flex:2 }}>
                         <Components.PrimaryButtonOutline
                             title="Resend OTP"    
                             onPress={this.handleResendOtp}                                            

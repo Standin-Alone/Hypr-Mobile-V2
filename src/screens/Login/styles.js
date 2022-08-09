@@ -39,7 +39,7 @@ export const styles = StyleSheet.create({
     },
     subtitleText:{
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:20,        
+        fontSize:constants.Dimensions.normalize(10),        
         color:constants.Colors.dark_tint,                
     },
     forgotPassword:{
@@ -56,12 +56,12 @@ export const styles = StyleSheet.create({
     },
     signUpTitle:{
         fontFamily:constants.Fonts.OpenSansRegular,
-        fontSize:18,
+        fontSize:constants.Dimensions.normalize(7),
     },
     signUpText:{
         fontFamily:constants.Fonts.OpenSansBold,
         color:constants.Colors.primary,
-        fontSize:18,
+        fontSize:constants.Dimensions.normalize(7),
     },
     googleButton:{
         height:constants.Dimensions.vh(12),

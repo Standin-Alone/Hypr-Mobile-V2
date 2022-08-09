@@ -89,7 +89,7 @@ export const SocialHeader = ({
                             <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
                         </View>    
                         <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>        
-                            <TouchableOpacity onPress={onCreatePost}  style={{ padding:15 }}>
+                            <TouchableOpacity onPress={onCreatePost}   style={{ padding:15,borderRadius:20 }}>
                                     <constants.Icons.Ionicons 
                                         name="camera" 
                                         size={30} 
@@ -260,7 +260,7 @@ onSave
 })=>(   
    <>  
         <View style={[styles.primaryContainer,customStyle]}>
-            <TouchableOpacity onPress={onGoBack}>
+            <TouchableOpacity onPress={onGoBack} delayPressIn={20}>
                 <MaterialIcons 
                     name="chevron-left" 
                     size={40} 

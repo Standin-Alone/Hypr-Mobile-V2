@@ -159,7 +159,7 @@ export default class Login extends React.Component {
                         
                         <View style={styles.signUpContainer}>
                             <Text style={styles.signUpTitle}>Don't have an account?</Text>
-                            <Text  style={styles.signUpText} onPress={this.goToSignUp} > Sign Up here.</Text>
+                            <Text  style={styles.signUpText} onPress={this.goToSignUp} > Sign Up here...</Text>
                         </View>
                         
                     </View>

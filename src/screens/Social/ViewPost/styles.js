@@ -24,6 +24,7 @@ footer:{
   backgroundColor:constants.Colors.transparent_black
 },
 mainInfo:{
+  top:constants.Dimensions.vh(2),
   flexDirection:'column',
   left:constants.Dimensions.vw(2)
 },

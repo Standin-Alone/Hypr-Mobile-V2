@@ -27,11 +27,11 @@ export default class UserProfile extends React.Component {
 
 
     async componentDidMount(){
-        // getUserInfo(this.setMyState)
+        getUserInfo(this.setMyState)
 
-        this.props.navigation.addListener('focus',()=>{
-            getUserInfo(this.setMyState)
-        })
+        // this.props.navigation.addListener('focus',()=>{
+        //     getUserInfo(this.setMyState)
+        // })
     }
 
     handleCopyLink = (referral_link)=>{
@@ -101,21 +101,21 @@ export default class UserProfile extends React.Component {
                     :
 
                 <>
-                <Image source={{uri: `${constants.Directories.COVER_PICTURE_DIRECTORY}/${this.state.userInfo?.cover_pic}`}} style={styles.cover_pic} resizeMode="cover"/>
+                <Image source={{uri: `${constants.Directories.COVER_PICTURE_DIRECTORY}/${this.state.userInfo?.cover_pic}`}} style={styles.cover_pic} />
 
                 
 
                     <View style={styles.container}>                             
 
                             <View style={[styles.profileContainer,{height:constants.Dimensions.vh(70)}]}>
-                                <TouchableOpacity onPress={()=>this.openUploadSelection('profile')}>                            
-                                    <FastImage source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile} resizeMode="contain"/>
+                                <TouchableOpacity onPress={()=>this.openUploadSelection('profile')} >                            
+                                    <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
                                     <constants.Icons.FontAwesome5 name="edit" size={20} color={constants.Colors.secondary} style={styles.edit}/>
                                 </TouchableOpacity>
                                 <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name} `}</Text>
                             </View>
 
-                            <View style={styles.profileContainer}>
+                            <View style={[styles.profileContainer,{top:constants.Dimensions.vh(15), backgroundColor:'rgba(255,255,255,0.5)'}]}>
                                 <Text style={styles.orderTitleText}>My Orders</Text>
                                 <View style={styles.myOrdersContainer}>
                                     

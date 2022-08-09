@@ -107,6 +107,7 @@ export const openCamera = (payload,setState,props)=>{
                         includeBase64: true, 
                         compressImageQuality:1,                
                         includeExif:true,
+                        cropping:true
                 
                     });
      
@@ -116,11 +117,12 @@ export const openCamera = (payload,setState,props)=>{
                         ImagePicker.openCropper({
                             path: openUpCamera.path, 
                             includeBase64:true,
-                            freeStyleCropEnabled:true,
+                            freeStyleCropEnabled:true,                  
                             cropperCircleOverlay:true,
                             cropping:true
                                         
                         }).then((croppedImage)=>{     
+                        
                             croppedImage.filename = openUpCamera.path.substring(openUpCamera.path.lastIndexOf('/') + 1, openUpCamera.path.length)
                             props.navigation.navigate(payload.redirectTo,{image:croppedImage.data,imageInfo:croppedImage,changeImageType:payload.changeImageType})
                         
