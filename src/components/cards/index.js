@@ -88,7 +88,7 @@ export const VariantCard = ({
          <View style={styles.variantInfo}>
          
          <View style={styles.variantNameContainer}>
-            <Text style={styles.variantName} numberOfLines={3}  adjustsFontSizeToFit>{data.variantName}</Text>         
+            <Text style={styles.variantName} numberOfLines={3} >{data.variantName}</Text>         
          </View>
 
          <View style={{ flexDirection:'row',position:'absolute',top:constants.Dimensions.vh(30),left:0,right:0}}>
@@ -302,7 +302,7 @@ fullName
          <FastImage source={{ uri:profilePicture}} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
       </TouchableOpacity>            
       <View style={{top:constants.Dimensions.vh(2)}}>
-         <Text style={styles.storyUsername}> 
+         <Text style={styles.storyUsername} numberOfLines={1} > 
                {fullName}
          </Text>
       </View>

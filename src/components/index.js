@@ -24,7 +24,8 @@ import {
     ProfileHeader,
     SocialHeader,
     FriendHeader,
-    CommentHeader
+    CommentHeader,
+    MessengerHeader
     } from "./headers";
 
 
@@ -87,6 +88,7 @@ export default {
     SocialHeader,
     FriendHeader,
     CommentHeader,
+    MessengerHeader,
 
 
     ProductCard,

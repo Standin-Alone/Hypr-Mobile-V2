@@ -17,17 +17,18 @@ export const styles = StyleSheet.create({
     otpVerificationTitle:{  
         textAlign:'center',
         fontFamily:constants.Fonts.OpenSansBold,        
-        fontSize:28,
+        fontSize:constants.Dimensions.normalize(14),
         color:constants.Colors.dark
     },
     otpSubtitle:{
         textAlign:'center',
         fontFamily:constants.Fonts.NexaRegular,
-        fontSize:18,     
+        fontSize:constants.Dimensions.normalize(8)
     },  
     email:{ 
         color:constants.Colors.primary,
-        fontFamily:constants.Fonts.GothamBold
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:constants.Dimensions.normalize(10)
     },  
     codeFieldContainer:{
         top: constants.Dimensions.vw(20),                

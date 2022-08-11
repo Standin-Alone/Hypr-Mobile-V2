@@ -66,7 +66,7 @@ export const getAllMyPosts = (payload,setState)=>{
 
 export const getAllFriendsPost = (payload,setState)=>{
 
-
+    console.warn(payload.currentPage);
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -79,19 +79,19 @@ export const getAllFriendsPost = (payload,setState)=>{
                          
                 if(response.data.status == true){
                     
-              
-                    if(payload.currentPage > 1){
-                        setState({posts:[...new Set(payload.previousPost),...response.data.data],newPosts:response.data.data})
+                    console.warn(`lengtb`,response.data.data.length);
+                    if(payload.currentPage > 0){
+                        setState({posts:[...new Set(payload.previousPost),...response.data.data],showFooter:false,isLoading:false,})
                     }else{
-                        setState({posts:response.data.data})
+                        setState({posts:response.data.data,showFooter:false,isLoading:false,})
                     }
                     
 
-                    setState({isLoading:false,isLoadingPlaceholder:false});
+                    
 
                 }else{
     
-                    setState({isLoading:false,isLoadingPlaceholder:false});
+                    setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false});
 
                 }
         
@@ -104,7 +104,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false,isLoadingPlaceholder:false});
+                setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false});
             });
 
          }else{
@@ -114,7 +114,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false,isLoadingPlaceholder:false});
+            setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false});
          }
     });
 

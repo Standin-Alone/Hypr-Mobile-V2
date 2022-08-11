@@ -37,9 +37,14 @@ export const styles = StyleSheet.create({
    },
    textEmptyComponent:{
     fontFamily:constants.Fonts.PoppinsBold,
-    fontSize:18,
+    fontSize:constants.Dimensions.normalize(8),
     textAlign:'center'
 
+   },
+   emptyFooter:{
+    fontFamily:constants.Fonts.PoppinsBold,
+    fontSize:constants.Dimensions.normalize(10),
+    textAlign:'center'
    }
 });
 

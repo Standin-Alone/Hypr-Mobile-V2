@@ -53,12 +53,12 @@ export const styles = StyleSheet.create({
     productName:{        
         flexWrap: 'wrap',
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:14,
+        fontSize:constants.Dimensions.normalize(6),
         top:constants.Dimensions.vh(2),        
     },
     productPrice:{
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:20,
+        fontSize:constants.Dimensions.normalize(9),
         color:constants.Colors.dark,
         top:constants.Dimensions.vh(2),        
     },
@@ -88,7 +88,7 @@ export const styles = StyleSheet.create({
     },
     variantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:25,
+        fontSize:constants.Dimensions.normalize(8),
         
     },
     variantNameContainer:{
@@ -103,7 +103,7 @@ export const styles = StyleSheet.create({
     variantPrice:{
         flexWrap: 'wrap',
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:30,
+        fontSize:constants.Dimensions.normalize(15),
         color:constants.Colors.dark_tint,        
     },
     checkVariant:{
@@ -390,7 +390,8 @@ export const styles = StyleSheet.create({
     storyUsername:{
         fontFamily:constants.Fonts.OpenSansMedium,
         fontSize:10,  
-        color:constants.Colors.dark_tint
+        color:constants.Colors.dark_tint,
+        width:constants.Dimensions.vw(14)
     },
     countText:{
         fontFamily:constants.Fonts.GothamBold,

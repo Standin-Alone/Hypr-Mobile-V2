@@ -16,7 +16,7 @@ export const styles = StyleSheet.create({
     primaryButtonText:{        
         textAlign:'center',
         
-        fontSize:constants.Dimensions.normalize(12),
+        fontSize:constants.Dimensions.normalize(11),
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.light
     },
@@ -32,7 +32,7 @@ export const styles = StyleSheet.create({
     },
     primaryButtonOutlineText:{        
         textAlign:'center',
-        fontSize:20,
+        fontSize:constants.Dimensions.normalize(11),
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.primary
     },

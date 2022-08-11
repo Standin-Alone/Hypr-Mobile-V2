@@ -25,7 +25,7 @@ export const styles = StyleSheet.create({
     height:constants.Dimensions.vh(55),
     width:constants.Dimensions.vw(55),
     borderRadius:2000,
-    borderWidth:10,
+    borderWidth:5,
     borderColor:'rgba(255,255,255,1)',
     alignSelf:'center',
  },
@@ -59,7 +59,7 @@ export const styles = StyleSheet.create({
    position:'absolute',
    left:constants.Dimensions.vw(2),
    width:constants.Dimensions.vw(95),
-   height:constants.Dimensions.vh(60),
+   height:constants.Dimensions.vh(70),
    bottom:constants.Dimensions.vh(95)
  }
 });

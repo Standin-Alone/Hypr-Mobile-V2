@@ -50,7 +50,8 @@ export default {
       FRIENDS:'Friends',
       COMMENTS:'comments',
       VIEW_PROFILE:'ViewProfile',
-      STORIES:'Stories'
+      STORIES:'Stories',
+      MESSENGER:'Messenger'
   },
   Friend:{
    FRIEND:'Friend'

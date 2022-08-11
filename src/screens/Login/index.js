@@ -116,7 +116,7 @@ export default class Login extends React.Component {
                                     title={"Log In"}                                
                                     isLoading={this.state.isLoading}
                                 />
-
+{/* 
                                 <Text style={styles.orText}>
                                     Or
                                 </Text>
@@ -124,7 +124,7 @@ export default class Login extends React.Component {
                                         buttonText = 'Login'
                                         style={styles.googleButton} 
                                         onPress={()=>this.handleLogin('google')}   
-                                 />
+                                 /> */}
 {/* 
                                  <LoginButton                                        
                                         style={styles.googleButton}                                         

@@ -10,7 +10,7 @@ import ViewPost from '../screens/Social/ViewPost';
 import Comments from '../screens/Social/Comments';
 import ViewProfile from '../screens/Social/ViewProfile';
 import SocialStories from '../screens/Social/Stories';
-
+import Messenger from '../screens/Social/Messenger';
 const SocialStack = createSharedElementStackNavigator();
 
 export const SocialStackComponent= (props) => {
@@ -71,7 +71,13 @@ export const SocialStackComponent= (props) => {
                 component={SocialStories}
                 name={constants.ScreenNames.Social.STORIES}      
                 options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
-            />                                                  
+            />         
+
+              <SocialStack.Screen
+                component={Messenger}
+                name={constants.ScreenNames.Social.MESSENGER}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
+            />                                               
             </SocialStack.Navigator>
     )
 }

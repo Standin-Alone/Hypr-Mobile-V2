@@ -10,14 +10,17 @@ import { SharedElement } from 'react-navigation-shared-element';
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {        
+      this.state = {     
+        showFooter:true,   
         posts:[],
         stories:[],
         isLoading:true,
         newPosts:[],
         newHypeCount:0,
         userId:'',
+        currentPage:0,
         refreshing:false,
+     
       };
     }
 
@@ -28,7 +31,7 @@ export default class Home extends React.Component {
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
             previousPost:this.state.posts,
-            currentPage:1,
+            currentPage:0,
         }
         getAllFriendsPost(parameter,this.setMyState)     
     }
@@ -124,13 +127,24 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:'stories'})
     }
 
+    renderFooterComponent = () =>(
+
+    
+            this.state.showFooter ?
+            <Components.FooterLoader message={"Getting more posts..."}/> 
+            :
+            <View > 
+                <Text style={styles.emptyFooter}>No more posts...</Text>
+            </View>                
+    )
     
 
     render(){
         return(
             <>  
                 <Components.SocialHeader
-                        onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}                
+                    onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}          
+                    goToMessenger={()=>this.props.navigation.navigate(constants.ScreenNames.Social.MESSENGER)}        
                 />
 
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
@@ -177,29 +191,30 @@ export default class Home extends React.Component {
                     <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vh(2)}}>
                         <FlatList
                             data={this.state.posts}
-                            extraData={this.state.newPosts}
+                            extraData={this.state.posts}
                             refreshing={this.state.refreshing}
-                            onRefresh={this.handleLoadPosts}
+                            onRefresh={()=>this.handleLoadPosts}
                             renderItem = {this.renderItem}   
-                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(22)}}                     
+                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(28)}}                     
                             ListEmptyComponent={this.renderEmptyComponent}
-                            
-                            onEndReachedThreshold={0.1} // so when you are at 5 pixel from the bottom react run onEndReached function
-                            onEndReached={async ({distanceFromEnd}) => {     
+                            ListFooterComponent={this.renderFooterComponent}
+                            onEndReachedThreshold={0.1} // so when you are at 1 pixel from the bottom react run onEndReached function
+                            onEndReached={ ({distanceFromEnd}) => {     
                                  
                                if (distanceFromEnd > 0   ) 
                                 {                               
-                                         
-                                    await this.setState((prevState) => ({currentPage:prevState.currentPage + 2}));
-                                
-                           
-                                    let parameter = {
-                                        userId:await GET_SESSION('USER_ID'),
-                                        previousPost:this.state.posts,
-                                        currentPage:this.state.currentPage,
+                                    console.warn(this.state.currentPage);
+                                    if(this.state.posts.length == this.state.currentPage || this.state.posts.length  == 2 ){
+                                        this.setState((prevState) => ({currentPage:prevState.currentPage + 2,showFooter:true}));
+                                    
+                            
+                                        let parameter = {
+                                            userId:this.state.userId,
+                                            previousPost:this.state.posts,
+                                            currentPage:this.state.currentPage,
+                                        }
+                                        getAllFriendsPost(parameter,this.setMyState)     
                                     }
-                                    getAllFriendsPost(parameter,this.setMyState)     
-
                                 }                              
                             }}
                             

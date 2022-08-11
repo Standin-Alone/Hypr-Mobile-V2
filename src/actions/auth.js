@@ -382,16 +382,19 @@ export const verifyOtp = (payload,setState,props)=>{
                             index: 0,
                             routes: [{ name: constants.ScreenNames.AppStack.HOME }]
                         });    
+                        
+                     // turn off loading
+                     setState({isLoading:false});
                     }else{
                         Toast.show({
                             type:'error',
                             text1: response.data.message
                         });
 
-                    }
-
                      // turn off loading
                      setState({isLoading:false});
+                    }
+
                 }).catch((error)=>{
                     
                     console.log(error);

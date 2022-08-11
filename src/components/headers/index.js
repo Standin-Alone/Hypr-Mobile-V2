@@ -77,7 +77,7 @@ export const CommentHeader = ({
 
 
 export const SocialHeader = ({
-    goToProfileSettings,
+    goToMessenger,
     onCreatePost
  })=>(   
     <>   
@@ -88,7 +88,7 @@ export const SocialHeader = ({
                         <View >
                             <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
                         </View>    
-                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>        
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>        
                             <TouchableOpacity onPress={onCreatePost}   style={{ padding:15,borderRadius:20 }}>
                                     <constants.Icons.Ionicons 
                                         name="camera" 
@@ -96,13 +96,13 @@ export const SocialHeader = ({
                                         color={constants.Colors.secondary}
                                     />
                             </TouchableOpacity>                
-                            {/* <TouchableOpacity onPress={goToProfileSettings}  style={{ padding:15 }}>
+                            <TouchableOpacity onPress={goToMessenger}  style={{ padding:15 }}>
                                 <constants.Icons.Ionicons 
                                     name="chatbubble-ellipses" 
                                     size={30} 
                                     color={constants.Colors.secondary}
                                 />
-                            </TouchableOpacity>                        */}
+                            </TouchableOpacity>                       
                         </View>                   
                     </View>
                 </ImageBackground>               
@@ -396,3 +396,28 @@ onSave
         </View>             
    </>
 );
+
+
+
+export const MessengerHeader = ({
+    onGoBack,
+ })=>(   
+    <>   
+        
+        <View style={[styles.primaryContainer]}>
+            <TouchableOpacity onPress={onGoBack} delayPressIn={20}>
+                <MaterialIcons 
+                    name="chevron-left" 
+                    size={40} 
+                    color={constants.Colors.primary}
+                />
+            </TouchableOpacity>
+            <View>
+                <Text style={styles.primaryTitle}>
+                    Messenger
+                </Text>
+            </View>
+        </View>  
+    </>
+);
+

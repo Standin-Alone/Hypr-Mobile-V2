@@ -44,11 +44,12 @@ export const LoadingScreen = ({
     
 }
 export const FooterLoader = ({
+    message
 }) => {
     return (
         <View style={{flex:1,alignContent:'center',alignSelf:'center',justifyContent:'center'}}>
               <ActivityIndicator size={'large'} color={constants.Colors.primary} />
-              <Text style={{ fontSize: 20, fontWeight: '200',fontFamily:constants.Fonts.PoppinsRegular}}>Getting more products...</Text>
+              <Text style={{ fontSize: 20, fontWeight: '200',fontFamily:constants.Fonts.PoppinsRegular}}> {message ? message : 'Getting more products...'}</Text>
         </View>
     )
 }
