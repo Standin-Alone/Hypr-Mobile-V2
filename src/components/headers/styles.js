@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
     },
     primaryTitle:{
         fontFamily:constants.Fonts.GothamMedium,
-        fontSize:20,
+        fontSize:constants.Dimensions.normalize(10),
         top:constants.Dimensions.vh(2),
         color:constants.Colors.primary
     },

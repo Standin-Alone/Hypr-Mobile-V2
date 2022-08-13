@@ -401,6 +401,7 @@ onSave
 
 export const MessengerHeader = ({
     onGoBack,
+    title
  })=>(   
     <>   
         
@@ -414,7 +415,7 @@ export const MessengerHeader = ({
             </TouchableOpacity>
             <View>
                 <Text style={styles.primaryTitle}>
-                    Messenger
+                    {title ? title : 'Messenger'}
                 </Text>
             </View>
         </View>  

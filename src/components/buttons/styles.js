@@ -72,5 +72,23 @@ export const styles = StyleSheet.create({
     myOrderImage:{
         width:constants.Dimensions.vw(20),
         height:constants.Dimensions.vh(20)
-    }
+    },
+    userProfile:{
+        width:constants.Dimensions.vw(12),
+        height:constants.Dimensions.vh(12),
+        borderRadius:200
+    },
+    primaryButtonWithPicture:{
+        height:constants.Dimensions.vh(20),
+        width:constants.Dimensions.vw(100),  
+        backgroundColor:'transparent',
+       
+                
+    },
+    primaryButtonWithPictureText:{        
+        textAlign:'center',
+        fontSize:constants.Dimensions.normalize(8),
+        fontFamily:constants.Fonts.GothamBold,        
+        color:constants.Colors.dark
+    },
 });

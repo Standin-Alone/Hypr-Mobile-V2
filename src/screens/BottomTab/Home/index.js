@@ -19,7 +19,7 @@ export default class Home extends React.Component {
         newHypeCount:0,
         userId:'',
         currentPage:0,
-        refreshing:false,
+        refreshing:true,
      
       };
     }
@@ -27,7 +27,7 @@ export default class Home extends React.Component {
     setMyState = (value)=>this.setState(value);
 
     handleLoadPosts = async ()=>{
-        
+   
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
             previousPost:this.state.posts,

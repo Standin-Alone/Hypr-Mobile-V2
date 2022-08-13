@@ -515,7 +515,7 @@ export const getUserInfo = (setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
-                console.warn(`TEAMN`,response.data.data)
+            
                 if(response.data.status == true){          
                  
                     setState({userInfo:response.data.data})

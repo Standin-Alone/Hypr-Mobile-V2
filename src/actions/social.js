@@ -81,9 +81,9 @@ export const getAllFriendsPost = (payload,setState)=>{
                     
                     console.warn(`lengtb`,response.data.data.length);
                     if(payload.currentPage > 0){
-                        setState({posts:[...new Set(payload.previousPost),...response.data.data],showFooter:false,isLoading:false,})
+                        setState({posts:[...new Set(payload.previousPost),...response.data.data],showFooter:false,isLoading:false,refreshing:false})
                     }else{
-                        setState({posts:response.data.data,showFooter:false,isLoading:false,})
+                        setState({posts:response.data.data,showFooter:false,isLoading:false,refreshing:false})
                     }
                     
 
@@ -91,7 +91,7 @@ export const getAllFriendsPost = (payload,setState)=>{
 
                 }else{
     
-                    setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false});
+                    setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false,refreshing:false});
 
                 }
         
@@ -104,7 +104,7 @@ export const getAllFriendsPost = (payload,setState)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false});
+                setState({isLoading:false,isLoadingPlaceholder:false,showFooter:false,refreshing:false});
             });
 
          }else{

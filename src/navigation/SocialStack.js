@@ -11,6 +11,8 @@ import Comments from '../screens/Social/Comments';
 import ViewProfile from '../screens/Social/ViewProfile';
 import SocialStories from '../screens/Social/Stories';
 import Messenger from '../screens/Social/Messenger';
+import Chat from '../screens/Social/Chat';
+import ChooseFriendToChat from '../screens/Social/ChooseFriendToChat';
 const SocialStack = createSharedElementStackNavigator();
 
 export const SocialStackComponent= (props) => {
@@ -76,7 +78,19 @@ export const SocialStackComponent= (props) => {
               <SocialStack.Screen
                 component={Messenger}
                 name={constants.ScreenNames.Social.MESSENGER}      
-                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forVerticalIOS}}
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
+            />      
+
+            
+            <SocialStack.Screen
+                component={Chat}
+                name={constants.ScreenNames.Social.CHAT}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
+            />  
+              <SocialStack.Screen
+                component={ChooseFriendToChat}
+                name={constants.ScreenNames.Social.CHOOSE_FRIEND_TO_CHAT}      
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
             />                                               
             </SocialStack.Navigator>
     )

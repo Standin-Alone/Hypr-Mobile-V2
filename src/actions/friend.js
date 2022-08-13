@@ -73,7 +73,7 @@ export const getAllFriendRequests = (payload,setState)=>{
          if(state.isConnected && state.isInternetReachable){
 
             
-            // GET REQUEST
+            // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_REQUESTS}`,payload).then((response)=>{                    
                          
                 if(response.data.status == true){
@@ -83,6 +83,66 @@ export const getAllFriendRequests = (payload,setState)=>{
                         setState({friendRequests:[...new Set(payload.previousPost),...response.data.data],newFriendRequests:response.data.data})
                     }else{
                         setState({friendRequests:response.data.data})
+                    }
+                    
+
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isLoading:false,isLoadingPlaceholder:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false,isLoadingPlaceholder:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}
+
+
+
+
+export const getAllMyFriends = (payload,setState)=>{
+    setState({isLoading:true,isLoadingPlaceholder:false});
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_MY_FRIENDS}`,payload).then((response)=>{                    
+                         
+                if(response.data.status == true){
+                    
+                  
+                    if(payload.currentPage > 1){
+                        setState({myFriends:[...new Set(payload.previousPost),...response.data.data]})
+                    }else{
+                        setState({myFriends:response.data.data})
                     }
                     
 

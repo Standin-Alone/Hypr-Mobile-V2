@@ -51,7 +51,9 @@ export default {
       COMMENTS:'comments',
       VIEW_PROFILE:'ViewProfile',
       STORIES:'Stories',
-      MESSENGER:'Messenger'
+      MESSENGER:'Messenger',
+      CHAT:'chat',
+      CHOOSE_FRIEND_TO_CHAT:'ChooseFriendToChat'
   },
   Friend:{
    FRIEND:'Friend'

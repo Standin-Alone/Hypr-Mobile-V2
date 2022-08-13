@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View,TouchableOpacity,Text } from "react-native";
+import { View,TouchableOpacity,Text,Image} from "react-native";
 import { styles } from "./styles";
 import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
@@ -161,6 +161,46 @@ export const PrimaryButtonNoOutline = ({
 );
 
 
+
+
+
+
+export const PrimaryButtonWithPicture = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    picture,
+    isLoading,
+    loadingTitle,
+
+})=>(   
+
+    <View
+   
+    style={[styles.primaryButtonWithPicture]}
+    >
+        <TouchableOpacity  onPress={onPress}  style={{ justifyContent: "flex-start",padding:10}} >
+            <View style={{ flexDirection:'row' }}>
+
+         
+                <Image 
+                    source={{uri:picture}}
+                    style={styles.userProfile}
+                />
+          
+
+
+
+                <Text style={[styles.primaryButtonWithPictureText]}>
+                    { isLoading ? loadingTitle : title}
+                </Text>
+
+            </View>
+        </TouchableOpacity>
+    </View>
+);
 
 
 export const OrderCardButton = ({

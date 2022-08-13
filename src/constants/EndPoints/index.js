@@ -81,9 +81,14 @@ const EndPoints = {
     // FRIEND
     GET_ALL_FRIENDS_SUGGESTION:'/friend/get-all-friends-suggestion',
     GET_ALL_FRIENDS_REQUESTS:'/friend/get-all-friends-requests',
+    GET_ALL_MY_FRIENDS:'/friend/get-all-my-friends',
     SEND_FRIEND_REQUEST:'/friend/send-friend-request',
     ACCEPT_FRIEND_REQUEST:'/friend/accept-friend-request',
-    DECLINE_FRIEND_REQUEST:'/friend/decline-friend-request'
+    DECLINE_FRIEND_REQUEST:'/friend/decline-friend-request',
+
+
+    // CHAT
+    SEND_MESSAGE:'/chat/send-message',
 }
 
 
