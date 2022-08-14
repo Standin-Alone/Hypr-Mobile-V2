@@ -56,6 +56,7 @@
     "react-native-stories-view": "^1.0.9",
     "react-native-stripe-checkout-webview": "^0.0.13",
     "react-native-toast-message": "^2.1.5",
+    "react-native-uuid": "^2.0.1",
     "react-native-vector-icons": "^9.1.0",
     "react-native-webview": "^11.18.2",
     "react-navigation-shared-element": "^3.1.3",
