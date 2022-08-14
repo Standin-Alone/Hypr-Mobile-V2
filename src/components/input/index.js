@@ -25,7 +25,9 @@ export const PrimaryTextInput = ({
     openDatePicker,
     onPressIn,
     onChangeDate,
-    multiline
+    multiline,
+    showSecureTextEntry,
+    onShowPassword
 
 })=>(   
 
@@ -76,7 +78,7 @@ export const PrimaryTextInput = ({
                     />
                 }
 
-
+                
                 {isError && 
                     <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>
                         <MaterialIcons 
@@ -88,6 +90,29 @@ export const PrimaryTextInput = ({
                     </View>
                 }
             </View>
+
+            {
+                showSecureTextEntry &&
+                <View  style={styles.secureTextEntry}>
+                    <TouchableOpacity onPress={onShowPassword}>
+                        { secureTextEntry ? 
+                         <constants.Icons.Ionicons
+                              name="eye"
+                               size={constants.Dimensions.normalize(14)}
+                                color={constants.Colors.primary}
+                            />
+                            :
+                            <constants.Icons.Ionicons
+                                name="eye-off"
+                                size={constants.Dimensions.normalize(14)}
+                                color={constants.Colors.primary}
+                            />
+                        }
+                        
+                    </TouchableOpacity>
+                </View>
+
+            }
        </View>
        
    </View>

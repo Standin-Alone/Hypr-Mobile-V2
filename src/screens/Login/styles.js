@@ -16,11 +16,9 @@ export const styles = StyleSheet.create({
            
     },
     form:{
-        top:constants.Dimensions.vh(10),       
-        
-        alignSelf:'center',
+        top:constants.Dimensions.vh(5),       
         flexDirection:"column",        
-        
+        left:constants.Dimensions.vw(5)
     },
     buttonContainer:{
         top:20

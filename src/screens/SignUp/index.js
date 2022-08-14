@@ -6,7 +6,7 @@ import { styles } from './styles';
 import { PrimaryHeader } from '../../components/headers';
 import { createAccount } from '../../actions/auth';
 import moment from 'moment';
-
+import { showPassword } from '../../utils/functions';
 
 export default class SignUp extends React.Component {
     constructor(props) {
@@ -61,7 +61,9 @@ export default class SignUp extends React.Component {
             errorMessage:'',
             value:''
           },      
-          isLoading:false          
+          isLoading:false,
+          showPassword1:true,
+          showPassword2:true      
       };
       
     }
@@ -169,7 +171,9 @@ export default class SignUp extends React.Component {
                                     errorMessage={this.state.password.errorMessage}
                                     value={this.state.password.value}
                                     onChangeText={(value)=>this.setState({password:{...this.state.password,value:value,error:false}})}                                
-                                    secureTextEntry={true}
+                                    secureTextEntry={this.state.showPassword1}
+                                    showSecureTextEntry={true}
+                                    onShowPassword={()=>showPassword(this.state,this.setMyState,'showPassword1')}
                             />                        
                         </View>
 
@@ -186,7 +190,9 @@ export default class SignUp extends React.Component {
                                     errorMessage={this.state.confirmPassword.errorMessage}
                                     value={this.state.confirmPassword.value}
                                     onChangeText={(value)=>this.setState({confirmPassword:{...this.state.confirmPassword,value:value,error:false}})}                                
-                                    secureTextEntry={true}
+                                    secureTextEntry={this.state.showPassword2}
+                                    showSecureTextEntry={true}
+                                    onShowPassword={()=>showPassword(this.state,this.setMyState,'showPassword2')}
                             />                        
                         </View>
                     </View>                                                 

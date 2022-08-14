@@ -89,6 +89,7 @@ const EndPoints = {
 
     // CHAT
     SEND_MESSAGE:'/chat/send-message',
+    CHECK_ROOM:'/chat/check-room',
 }
 
 

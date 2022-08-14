@@ -7,6 +7,7 @@ import { login } from '../../actions/auth';
 import {GoogleSigninButton,    } from '@react-native-google-signin/google-signin';
 import { LoginButton, AccessToken,Settings} from 'react-native-fbsdk-next';
 import FastImage from 'react-native-fast-image';
+import { showPassword } from '../../utils/functions';
 
 Settings.setAppID('701919164416993');
 Settings.initializeSDK();
@@ -28,7 +29,8 @@ export default class Login extends React.Component {
             errorMessage:'',
             value:''
           },  
-          isLoading:false
+          isLoading:false,
+          showPassword:true
       };
      
     }
@@ -101,12 +103,14 @@ export default class Login extends React.Component {
                                 errorMessage={this.state.password.errorMessage}
                                 value={this.state.password.value}
                                 onChangeText={(value)=>this.setState({password:{...this.state.password,value:value,error:false}})}
-                                secureTextEntry={true}
+                                secureTextEntry={this.state.showPassword}
+                                showSecureTextEntry={true}
+                                onShowPassword={()=>showPassword(this.state,this.setMyState,'showPassword')}
                             />                        
                         </View>
 
                         <View style={styles.buttonContainer}> 
-                            <View style={{ flexDirection:'row',justifyContent:'flex-end',marginBottom:20 }}>
+                            <View style={{ flexDirection:'row',justifyContent:'flex-end',marginBottom:20,right:constants.Dimensions.vw(10)}}>
                                 <Text style={styles.forgotPassword}>Forgot Password?</Text>
                             </View>
                             

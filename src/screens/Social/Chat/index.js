@@ -8,9 +8,10 @@ import {styles} from './styles';
 import { GiftedChat } from 'react-native-gifted-chat';
 import io from "socket.io-client/dist/socket.io";
 import getBaseUrl from '../../../utils/config';
-import { sendMessage } from '../../../actions/chat';
+import { checkRoom, sendMessage } from '../../../actions/chat';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { getUserInfo } from '../../../actions/auth';
+import { generateUuid } from '../../../utils/functions';
 
 
 
@@ -26,7 +27,8 @@ export default class Chat extends React.Component {
         parameters:this.props.route?.params,
         messages:[],
         socketIo:'',
-        isTyping:true
+        isTyping:true,
+        room:''
       };
     }
 
@@ -39,45 +41,50 @@ export default class Chat extends React.Component {
         getUserInfo(this.setMyState)
 
         this.setState({socketIo:socket});
+       
+        const mySocket = io(getBaseUrl().SOCKET_IO, {
+            transports: ['websocket'] // you need to explicitly tell it to use websockets
+        });
 
-        let room = 'room';
+      
+            mySocket.on('connect', ()=>{
+             
+                checkRoom(this.props.route.params,this.setMyState,this.state,mySocket)
+                
+                mySocket.on('message-from-server',  async (data)=>{
+                    let userId  = await GET_SESSION('USER_ID');
+                  
+                    if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId)                             
+                    )
+                    {
+                       this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
+                           
+                    }
+    
+    
+                   
+                });
+            })
 
-        socket.emit('join-room',room)
-        socket.on('connect', ()=>{
-            console.warn('connected')
-          
-            socket.on('message-from-server',  async (data)=>{
-                let userId  = await GET_SESSION('USER_ID');
-
-                if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId) 
-        
-                    
-                )
-                {
-                   this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
-                       
-                }
-
-
-               
-            });
-        })
+       
+     
 
     }
 
  
     handleSendMessage = async (message)=>{
 
-     
+        
         let parameters={
             userId:await GET_SESSION('USER_ID'),
             friendUserId:this.state.parameters.friendUserId,
             message:message,
-            socket:this.state.socketIo
+            socket:this.state.socketIo,
+            room: this.state.room
         }
 
-
-        sendMessage(parameters,this.setMyState,this.state)
+     
+        return sendMessage(parameters,this.setMyState,this.state)
         
     }
 

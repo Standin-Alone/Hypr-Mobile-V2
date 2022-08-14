@@ -72,7 +72,7 @@ export const getAllFriendsPost = (payload,setState)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-
+            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`);
             
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`,payload).then((response)=>{                    
@@ -97,7 +97,7 @@ export const getAllFriendsPost = (payload,setState)=>{
         
                  
             }).catch((error)=>{
-                console.warn(error)
+                console.warn(error.response)
                 Toast.show({
                     type:'error',
                     text1:'Something went wrong!'

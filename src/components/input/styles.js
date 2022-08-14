@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 
     primaryContainer:{
         flexDirection:'row',    
-        marginVertical:constants.Dimensions.vh(2)
+        marginVertical:constants.Dimensions.vh(1)
     },
     primaryInput:{
         borderWidth:1,
@@ -75,6 +75,11 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(95),     
         fontFamily:constants.Fonts.PoppinsMedium,
         fontSize:12
+    },
+    secureTextEntry:{
+        position:'absolute',
+        top:constants.Dimensions.vh(5),
+        right:50
     }
   
 });
