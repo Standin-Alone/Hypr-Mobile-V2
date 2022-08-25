@@ -127,3 +127,52 @@ export const checkRoom = (payload,setState,state,socket)=>{
 }
 
 
+
+
+
+export const getFriendsMessages = (payload,setState,state,socket)=>{
+
+  
+  
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_FRIENDS_MESSAGES}`,payload).then((response)=>{                    
+                
+                if(response.data.status == true){
+                    
+                    setState({friendsMessages:response.data.data});
+                }else{
+                
+                    setState({isLoading:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false,isLoadingPlaceholder:false});
+         }
+    });
+
+}

@@ -167,13 +167,9 @@ export const PrimaryButtonNoOutline = ({
 
 export const PrimaryButtonWithPicture = ({
     onPress,
-    fontSize,
     title,
-    width,
-    height,
     picture,
-    isLoading,
-    loadingTitle,
+    subTitle
 
 })=>(   
 
@@ -190,12 +186,16 @@ export const PrimaryButtonWithPicture = ({
                     style={styles.userProfile}
                 />
           
+                <View style={{flexDirection:'column',left:constants.Dimensions.vw(2)}}>
+                    <Text style={[styles.primaryButtonWithPictureText]}>
+                        { title}
+                    </Text>
 
-
-
-                <Text style={[styles.primaryButtonWithPictureText]}>
-                    { isLoading ? loadingTitle : title}
-                </Text>
+                    <Text style={[styles.primaryButtonWithPictureSubTitle]}>
+                        { subTitle}
+                    </Text>
+                </View>
+                
 
             </View>
         </TouchableOpacity>

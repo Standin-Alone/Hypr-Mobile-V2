@@ -15,8 +15,8 @@ export const styles = StyleSheet.create({
     },
     primaryButtonText:{        
         textAlign:'center',
-        
-        fontSize:constants.Dimensions.normalize(11),
+        top:constants.Dimensions.vh(2),
+        fontSize:constants.Dimensions.normalize(9),
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.light
     },
@@ -91,4 +91,10 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,        
         color:constants.Colors.dark
     },
+    primaryButtonWithPictureSubTitle:{
+ 
+        fontSize:constants.Dimensions.normalize(6),
+        fontFamily:constants.Fonts.PoppinsLight,        
+        color:constants.Colors.dark_tint
+    }
 });

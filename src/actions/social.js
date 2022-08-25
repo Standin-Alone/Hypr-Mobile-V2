@@ -287,7 +287,7 @@ export const createPost = (payload,setState,props)=>{
 
      
             
-          
+            if(payload.caption){
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
                          
@@ -326,7 +326,13 @@ export const createPost = (payload,setState,props)=>{
                 // turn off loading
                 setState({isLoading:false});
             });
+        }else{
+            Toast.show({
+                type:'error',
+                text1:'Please write something to post.'
+            });
 
+        }
          }else{
              //  No internet Connection
             Toast.show({

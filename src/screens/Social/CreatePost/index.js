@@ -28,7 +28,7 @@ export default class CreatePost extends React.Component {
 
     handlePreview = ()=>{
 
-
+        this.props.navigation.goBack()
     }
 
     handleCreatePost =  async ()=>{

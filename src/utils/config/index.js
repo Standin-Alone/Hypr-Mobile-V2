@@ -1,5 +1,5 @@
 
-const ipAddress = '192.168.1.11';
+const ipAddress = '192.168.1.2';
 const SOCKET_IO = `http://${ipAddress}:9090`;
 
 

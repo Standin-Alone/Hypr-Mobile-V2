@@ -25,7 +25,7 @@ export const checkout = (payload,setState,props)=>{
             let cart = payload.cart;
             let address = payload.cart[0].shipping_address[0];
         
-             console.warn('fullnanme',address);
+       
              cleanPayload.zip = address.zip_code;      
              cleanPayload.sccode  = address.country_code;
              cleanPayload.country = address.country;
@@ -44,7 +44,7 @@ export const checkout = (payload,setState,props)=>{
                      quantity: product.quantity,
                      shippingName: `${product.variant_name}`,
                      sellPrice: product.product_price,
-                 })
+                 });
              }))
 
             
