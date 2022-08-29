@@ -27,11 +27,11 @@ export default class Payment extends React.Component {
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
        }) 
-       console.warn('SUCCESS',this.props.route.params.checkoutSessionId );
+       
     }   
 
     handleNavigationStateChange = (navState)=>{
-        console.warn('SUCCESS',this.props.route.params.checkoutSessionId );
+        
 
         if(navState?.title == 'Payment Success | Paypal' ){            
             

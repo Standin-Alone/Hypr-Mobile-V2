@@ -190,7 +190,7 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.OpenSansMedium
     },
     cartTotalAmount:{
-        fontSize:25,
+        fontSize:constants.Dimensions.normalize(12),
         left:constants.Dimensions.vw(10),
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.danger

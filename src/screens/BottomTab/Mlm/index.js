@@ -42,7 +42,9 @@ export default class Mlm extends React.Component {
         
     }
 
-    
+    viewProfile = (item)=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_PROFILE,item)
+    }
     renderMembers =  ({item,index})=>{
      
         console.warn(this.state.userInfo );
@@ -50,6 +52,7 @@ export default class Mlm extends React.Component {
                     fullName={`${item.first_name} ${item.last_name} ${item._id == this.state.userInfo?._id ? '(Me)' : ''}`}         
                     profilePicture={item.profile_image}
                     number= {index+1}
+                    onViewProfile={()=>this.viewProfile(item)}
                 />)
     }
 

@@ -5,6 +5,7 @@ import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
 import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
+import { computeCart } from "../utils/functions";
 
 export const checkout = (payload,setState,props)=>{
 
@@ -105,8 +106,60 @@ export const checkout = (payload,setState,props)=>{
 }
 
 
-// STRIPE FUNCTION
-export const payWithStripe = ()=>{
+ // PAY WITH REWARD FUNCTION
+export const paywithReward = (payload,setState,props)=>{
+
+     
+    let cleanPayload = {
+        cart:payload.cart,
+        orderId:payload.orderId,
+        userId:payload.userId,
+        paymentMethod:'hypr',
+        paymentId:payload.orderId,
+        payerId:payload.userId,
+    }
+
+    // POST REQUEST
+    POST(`${getBaseUrl().accesspoint}${constants.EndPoints.FINAL_SUCCESS_PAYMENT}`,cleanPayload).then((response)=>{                    
+                        
+        if(response.data.status == true){
+
+            let confirmOrderPayload = {
+                orderId:payload.orderId
+            }
+            // CONFIRM ORDER PAYMENT
+            POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{
+
+                if(result.data.result == true){
+
+                    // MLM REWARDS
+                    disseminateRewards(cleanPayload,setState,props);
+
+                  
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!',
+                        text2:result.data.message
+                    });
+                }
+            });
+                             
+        }else{
+
+        }
+     
+    }).catch((error)=>{
+        console.warn(error)
+        Toast.show({
+            type:'error',
+            text1:'Something went wrong!'
+        });
+        
+        // turn off loading
+        setState({isLoading:false});
+    });
 
 }
 
@@ -142,7 +195,7 @@ export const payWithPaypal = (payload,setState) =>{
 export const pay = (payload,setState,props)=>{
 
   
-    setState({isLoading:true});
+    setState({isProgress:true});
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -152,7 +205,7 @@ export const pay = (payload,setState,props)=>{
             // PAY WITH PAYPAL
             if(payload.paymentMethod == 'paypal'){
 
-                setState({isLoading:false});
+                setState({isProgress:false});
                 props.navigation.navigate(constants.ScreenNames.Market.PAYMENT,payload)
             }
             // PAY WITH STRIPE
@@ -160,7 +213,7 @@ export const pay = (payload,setState,props)=>{
 
 
             
-                setState({isLoading:false});
+                setState({isProgress:false});
                 // add cart to line of items for stripe
                 payload.cart.map((item)=>{
                     
@@ -185,6 +238,7 @@ export const pay = (payload,setState,props)=>{
                
                         payload.checkoutSessionId = result.data.checkoutSessionId;
                         props.navigation.navigate(constants.ScreenNames.Market.PAYMENT,payload) 
+                        setState({isProgress:false});
                     }else{
                         Toast.show({
                             type:'error',
@@ -194,7 +248,23 @@ export const pay = (payload,setState,props)=>{
                     }
                 });
             }
-         
+            // PAY WITH HYPR REWARD
+            else if(payload.paymentMethod == 'hypr'){
+
+             
+                if(computeCart(payload.cart) <= payload.points){
+                    
+                    paywithReward(payload,setState,props);
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1:'Message',
+                        text2: "Not enough ba lance"
+                    });
+                }
+
+              
+            }         
          }else{
              //  No internet Connection
             Toast.show({
@@ -202,7 +272,7 @@ export const pay = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+            setState({isProgress:false});
          }
     });
 
@@ -324,12 +394,15 @@ export const disseminateRewards = (payload,setState,props)=>{
             POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,myPayload).then((response)=>{                    
              
                 if(response.data.response == 'success'){          
+
+                    setState({isProgress:false});
                     
                     Toast.show({
                         type:'success',
                         text1:'Success',
                         text2:'Successfully paid your order. Please wait for your order to verify.'
                     });
+
                     props.navigation.reset({
                         index: 0,
                         routes: [{ name: constants.ScreenNames.AppStack.HOME }]

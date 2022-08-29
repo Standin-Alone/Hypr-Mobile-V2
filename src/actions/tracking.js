@@ -70,13 +70,13 @@ export const checkOrdersStatus= (payload,setState)=>{
            
                 if(response.data.status == true){
                     
-                    
+                    console.warn('ORDERS',response.data.data[6]);
                     let orders = response.data.data;
             
             
               
                     Promise.all(orders.map(  (items,index)=>{
-                        console.warn(items )  
+                
                         // GET TRACKING DETAILS IN CJ
                          return  GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`).then( (result)=>{                    
                                                 
@@ -101,26 +101,24 @@ export const checkOrdersStatus= (payload,setState)=>{
                             }
                                 })                    
                         })).then((cleanOrders)=>{
-                        
+                            
                             if(cleanOrders.length > 0 ){
                                 let countNull = 0 ;
-
+                                let cleanOrdersFiltered = [];
                                 cleanOrders.map((item)=>{
                                     console.warn(item)
-                                    if(item === null || item === undefined){
+                                    if(!(item === null || item === undefined)){
                                         
-                                        countNull++
+                                        cleanOrdersFiltered.push(item)
                                     }
                                 })
 
                                 
-                                if(countNull > 0){
-                                    setState({loadingData:false})          
+                          
+
+                                    setState({loadingData:false,orders:cleanOrdersFiltered})          
                                     
-                                }else{
-                                    setState({orders:cleanOrders,loadingData:false})         
-                                    
-                                }
+                             
                                  
                             }
                         });

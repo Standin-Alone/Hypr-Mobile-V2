@@ -11,7 +11,7 @@ import Search from '../screens/Market/Search';
 import WishList from '../screens/Market/WishList';
 import Order from '../screens/Market/Order';
 import Payment from '../screens/Market/Payment';
-
+import MarketAddressEditForm from '../screens/Market/MarketAddressEditForm';
 const MarketStack = createStackNavigator();
 
 export const MarketStackComponent= () => {
@@ -61,6 +61,12 @@ export const MarketStackComponent= () => {
                 name={constants.ScreenNames.Market.ADDRESS}
                 options={{ gestureEnabled: false , headerShown: false,cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS }}                
             />           
+
+        <MarketStack.Screen
+                component={MarketAddressEditForm}
+                name={constants.ScreenNames.Market.ADDRESS_EDIT_FORM}             
+                options={{ gestureEnabled: false , headerShown: false, cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}
+            />  
 
             <MarketStack.Screen
                 component={AddressForm}

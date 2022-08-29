@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
     orderStatusHeader:{
 
         backgroundColor:constants.Colors.light,
-       
+        
         marginVertical:constants.Dimensions.vw(2),
    
         height:constants.Dimensions.vh(30),

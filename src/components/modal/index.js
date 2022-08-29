@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View,Text,Modal,TouchableOpacity,TextInput} from "react-native";
+import { View,Text,Modal,TouchableOpacity,TextInput, ActivityIndicator} from "react-native";
 import { styles } from "./styles";
 import constants from "../../constants";
 
@@ -9,7 +9,8 @@ import constants from "../../constants";
 export const PaymentMethodModal = ({
     openModal,
     onCloseModal,
-    onPress
+    onPress,
+    points
 }) => {
 
     return (
@@ -50,6 +51,12 @@ export const PaymentMethodModal = ({
                                     size={40}
                                     color={constants.Colors.primary}
                                 />                            
+                            </View>
+                        </TouchableOpacity>
+
+                        <TouchableOpacity style={styles.button} onPress={()=>onPress('hypr')}>
+                            <View style={{flexDirection:'row',justifyContent:'center',flex:1}}>
+                                    <Text style={styles.hyprPoints}> {points} Hypr Points</Text>
                             </View>
                         </TouchableOpacity>
 
@@ -115,6 +122,38 @@ export const ShareReferralLinkModal = ({
                             </View>
                         </View>
                   </View>            
+            </Modal>
+                 
+    );
+}
+
+
+
+
+export const ProgressLoadingModal = ({
+    openModal,
+    onCloseModal,    
+    title
+}) => {
+
+    return (
+        
+            <Modal
+                animationType="fade"
+                transparent={true}
+                visible={openModal}
+                onRequestClose={onCloseModal}                                
+            >
+                <View style={{backgroundColor:constants.Colors.transparent_black,flex:1}}> 
+                    <View style={styles.dialogContainer}>
+                        <View style={{flexDirection:'row',justifyContent:'space-evenly',marginHorizontal:constants.Dimensions.vw(20),top:constants.Dimensions.vh(5)}}>                            
+                            <ActivityIndicator size={constants.Dimensions.normalize(20)} style={{right:constants.Dimensions.vw(20)}} color={constants.Colors.primary}/>
+                            <View style={{right:constants.Dimensions.vw(20),top:constants.Dimensions.vh(2)}}>
+                                <Text style={styles.processingText}>{title ? title: 'Processing...'}</Text>
+                            </View>                            
+                        </View>
+                    </View>
+                </View>       
             </Modal>
                  
     );

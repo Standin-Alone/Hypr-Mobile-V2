@@ -50,15 +50,21 @@ subTotalValue:{
     fontFamily:constants.Fonts.OpenSansMedium,
     fontSize:16,
 },
+subTotalContainer:{    
+    paddingVertical:constants.Dimensions.vh(2),
+    top:constants.Dimensions.vh(-5),
+    backgroundColor:constants.Colors.light,
+    flexDirection:'column',
+},
 totalContainer:{    
     paddingVertical:constants.Dimensions.vh(2),
-    top:constants.Dimensions.vh(18),
+    top:constants.Dimensions.vh(-4),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
 },
 paymentMethodContainer:{    
     paddingVertical:constants.Dimensions.vh(5),
-    top:constants.Dimensions.vh(20),
+    top:constants.Dimensions.vh(-3),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
 },
@@ -68,6 +74,12 @@ itemCountContainer:{
 itemCountText:{
     fontFamily:constants.Fonts.OpenSansMedium,
     fontSize:16,
+},
+hyprPoints:{
+    fontFamily:constants.Fonts.PoppinsBold,    
+    fontSize:constants.Dimensions.normalize(6),            
+    color:constants.Colors.primary
+ 
 }
   
 });

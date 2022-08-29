@@ -53,7 +53,9 @@ export default class Address extends React.Component {
     
        
     }
-
+    handleGoToEditAddressForm = (address)=>{        
+        this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS_EDIT_FORM,address);
+    }
     renderAddress =  ({item,index})=>{
       
 
@@ -62,7 +64,7 @@ export default class Address extends React.Component {
                         data={item}
                         isSelected={item.is_selected}
                         onSelect = {()=>this.handleSelectAddress(item)}
-                  
+                        goToEditAddress={()=>this.handleGoToEditAddressForm(item)}                                                
                     />
                 </View>
         )

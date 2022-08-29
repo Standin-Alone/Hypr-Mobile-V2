@@ -55,7 +55,8 @@ from "./loader"
 
 import {
     PaymentMethodModal,
-    ShareReferralLinkModal
+    ShareReferralLinkModal,
+    ProgressLoadingModal
 } from "./modal"
 
 import {
@@ -113,6 +114,7 @@ export default {
     
     PaymentMethodModal,
     ShareReferralLinkModal,
+    ProgressLoadingModal,
 
 
 

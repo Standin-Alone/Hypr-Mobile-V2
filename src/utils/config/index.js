@@ -5,7 +5,7 @@ const SOCKET_IO = `http://${ipAddress}:9090`;
 
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
 const API_DEV_HOST = `http://${ipAddress}:9002/hypr-mobile`;
-const CJ_API_HOST = `http://${ipAddress}:9002/hypr-mobile/cj/api/market`;
+const CJ_API_HOST = `http://${ipAddress}:9002/cj/api/market`;
 const MLM_API_HOST = `http://${ipAddress}:9002/mlm/api/v1`;
 const API_PRO_HOST = ``;
 const Config = {

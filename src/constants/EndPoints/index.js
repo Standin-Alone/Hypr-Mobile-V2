@@ -40,6 +40,7 @@ const EndPoints = {
 
     CHECKOUT:'/create-order',
     PAY_WITH_PAYPAL:'/payment/pay-with-paypal',
+    PAY_WITH_REWARD:'/payment/pay-with-reward',
     FINAL_SUCCESS_PAYMENT:'/payment/final-success-payment',
     CONFIRM_ORDER:'/confirm-order',
 

@@ -85,19 +85,19 @@ export default class OrderStatus extends React.Component {
                                 <Text style={styles.orderLabel}>Shipping Details</Text>                            
                                 <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Name:</Text>
-                                    <Text>{this.state.orderInfo.shippingCustomerName}</Text>
+                                    <Text > {this.state.orderInfo.shippingCustomerName}</Text>
                                 </View>
                                 <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Address:</Text>
-                                    <Text>{this.state.orderInfo.shippingAddress}</Text>
+                                    <Text numberOfLines={3} style={{width:constants.Dimensions.vw(80)}}> {this.state.orderInfo.shippingAddress}</Text>
                                 </View>
                                 <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>State:</Text>
-                                    <Text>{this.state.orderInfo.shippingProvince}</Text>
+                                    <Text> {this.state.orderInfo.shippingProvince}</Text>
                                 </View>                              
                                 <View style={{flexDirection:'row',justifyContent:'flex-start',marginHorizontal:constants.Dimensions.vw(2)}}>
                                     <Text>Country:</Text>
-                                    <Text>{this.state.orderInfo.shippingCountryCode}</Text>
+                                    <Text> {this.state.orderInfo.shippingCountryCode}</Text>
                                 </View>
                                 
                                 

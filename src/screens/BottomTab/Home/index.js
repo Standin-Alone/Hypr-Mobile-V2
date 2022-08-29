@@ -146,7 +146,7 @@ export default class Home extends React.Component {
                     onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}          
                     goToMessenger={()=>this.props.navigation.navigate(constants.ScreenNames.Social.MESSENGER)}        
                 />
-
+                
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
                 
                 <View style={{flexDirection:'row'}}>

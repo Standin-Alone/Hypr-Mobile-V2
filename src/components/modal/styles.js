@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
     container:{        
         backgroundColor:constants.Colors.light,
         height:constants.Dimensions.vh(90),
-        top:constants.Dimensions.vh(140),
+        top:constants.Dimensions.vh(110),
         borderRadius:20,
         
         
@@ -85,5 +85,26 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamMedium,    
         fontSize:14,            
         width:constants.Dimensions.vw(65),
+    },
+    hyprPoints:{
+        fontFamily:constants.Fonts.PoppinsBold,    
+        fontSize:constants.Dimensions.normalize(8),            
+        color:constants.Colors.primary
+     
+    },
+    dialogContainer:{
+        width:constants.Dimensions.vw(95),
+        height:constants.Dimensions.vh(20),
+        borderRadius:10,
+        top:constants.Dimensions.vh(70),
+        marginHorizontal:constants.Dimensions.vw(3),
+        backgroundColor:'white'
+    },
+    processingText: {
+        fontFamily:constants.Fonts.PoppinsBold,    
+        fontSize:constants.Dimensions.normalize(8),            
+        color:constants.Colors.dark,
     }
+
+  
 });

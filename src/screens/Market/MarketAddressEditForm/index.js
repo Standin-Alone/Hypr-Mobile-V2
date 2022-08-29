@@ -11,7 +11,7 @@ import { GET_SESSION} from '../../../utils/async_storage/index';
 
 import { updateAddress,deleteAddress,getState,getShippingAddress} from '../../../actions/market';
 
-export default class AddressEditForm extends React.Component {
+export default class MarketAddressEditForm extends React.Component {
      constructor(props) {
       super(props);
       this.state = {  

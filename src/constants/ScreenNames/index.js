@@ -28,6 +28,7 @@ export default {
        ORDER:'Order',
        PAYMENT:'Payment',
        ORDER_STATUS:'OrderStatus',
+       ADDRESS_EDIT_FORM:'MarketAddressEditForm'
    },
    Profile:{
       PROFILE:'Profile',       

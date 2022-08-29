@@ -573,7 +573,7 @@ export const saveAddress = (payload,setState,props)=>{
 
 
 export const deleteAddress = (payload,setState,props)=>{
-    setState({isLoading:true});
+    setState({deleteLoading:true});
   
 
     // Check Internet Connection
@@ -609,7 +609,7 @@ export const deleteAddress = (payload,setState,props)=>{
                     }
                 
                     // turn off loading
-                    setState({isLoading:false});
+                    setState({deleteLoading:false});
                 }).catch((error)=>{
                     console.warn('sample error ', error)
                     
@@ -619,7 +619,7 @@ export const deleteAddress = (payload,setState,props)=>{
                     });
                     
                     // turn off loading
-                    setState({isLoading:false});
+                    setState({deleteLoading:false});
                 });
            
 
@@ -630,7 +630,7 @@ export const deleteAddress = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+            setState({deleteLoading:false});
          }
     });
 

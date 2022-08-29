@@ -13,16 +13,19 @@ import { pay} from '../../../actions/order';
 import Toast from 'react-native-toast-message';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { GET_SESSION } from '../../../utils/async_storage';
+import { getUserInfo } from '../../../actions/auth';
 
 export default class Order extends React.Component {
     constructor(props) {
       super(props);
-      this.state = {      
+      this.state = {     
+          userInfo:[], 
           isReadyToRender:false,    
           cart:this.props.route.params.cart,
           orderId:this.props.route.params.orderId,           
           selectedPaymentMethod:'',
-          openPaymentMethodModal:false
+          openPaymentMethodModal:false,
+          isProgress:false
       };
     }
 
@@ -30,9 +33,10 @@ export default class Order extends React.Component {
     setMyState = (value)=>this.setState(value)
 
 
-    async componentDidMount(){          
+    componentDidMount(){          
         
-
+        getUserInfo(this.setMyState);
+        console.warn(this.props.route.params.cart)
        
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
@@ -102,17 +106,28 @@ export default class Order extends React.Component {
             paymentMethod:this.state.selectedPaymentMethod,
             orderId:this.state.orderId,
             userId: await GET_SESSION('USER_ID'),
-            lineItemsPayload:[] // for stripe only
+            points:this.state.userInfo?.reward,
+            lineItemsPayload:[] // for stripe only.
         }
 
+        this.setState({isProgress:true});
+
+
         if(this.state.selectedPaymentMethod != ''){
+            
+          
             return pay(payload,this.setMyState,this.props)
+         
+            
         }else{
             Toast.show({
                 type:'error',
                 text1: 'Error',
                 text2:'Please select payment method first'
             });
+            
+            this.setState({isProgress:false});
+
         }
 
         
@@ -131,11 +146,15 @@ export default class Order extends React.Component {
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
                     title={'My Orders'}
                 />             
+            <Components.ProgressLoadingModal
+                    openModal={this.state.isProgress}
+                />
 
             <Components.PaymentMethodModal
                 openModal={this.state.openPaymentMethodModal}
                 onCloseModal={()=> this.setState({openPaymentMethodModal:false})}
                 onPress={(paymentMethod)=>this.handleSelectPaymentMethod(paymentMethod)}
+                points={this.state.userInfo?.reward}
             />
             <View>
               
@@ -160,18 +179,35 @@ export default class Order extends React.Component {
             </View>
             
             
-            <View style={styles.totalContainer}>
+            <View style={styles.subTotalContainer}>
 
                 <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
                    <View style={{flex:1,justifyContent:'flex-start'}}>
-                        <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}>Total:</Text>
+                        <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}> Sub Total:</Text>
                    </View>
                    <View style={{flex:0,justifyContent:'flex-end'}}>
                         <Text style={[styles.subTotalValue,{color:constants.Colors.dark}]} >${computeCart(this.state.cart)}</Text>
                    </View>                                  
                </View>
             </View>
+            
 
+                        
+            <View style={styles.totalContainer}>
+
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+                   <View style={{flex:1,justifyContent:'flex-start'}}>
+                        <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}> Total:</Text>
+                   </View>
+                   <View style={{flex:0,justifyContent:'flex-end',flexDirection:'row'}}>
+                        <Text style={[styles.subTotalValue,{color:constants.Colors.dark}]} >${(parseFloat(computeCart(this.state.cart))  + parseFloat(this.state.cart[0].freight_calculation[0].logisticPrice)).toFixed(2)} </Text>
+                        <Text>
+                            (+<constants.Icons.FontAwesome name='truck'  color={constants.Colors.dark_tint}/>)
+                        </Text>
+                        
+                   </View>                                  
+               </View>
+            </View>
             
             <View style={styles.paymentMethodContainer}>
 
@@ -186,6 +222,10 @@ export default class Order extends React.Component {
                             {  this.state.selectedPaymentMethod == '' ?
                                  'Select Payment...' 
                                  : 
+
+                                 this.state.selectedPaymentMethod == 'hypr' ? 
+                                     <Text style={styles.hyprPoints}> use {this.state.userInfo?.reward} Hypr Points</Text>
+                                 :
                                  <constants.Icons.FontAwesome 
                                     name={'cc-'+this.state.selectedPaymentMethod}
                                     size={30}

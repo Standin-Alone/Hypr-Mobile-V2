@@ -183,7 +183,7 @@ export const CartCard = ({
                <TouchableOpacity onPress={onIncreaseQuantity}>
                   <MaterialIcons name="add-circle-outline" size={30} color={constants.Colors.dark_tint}/>
                </TouchableOpacity>
-               <Text style={styles.cartTotalAmount} numberOfLines={2}>${data.total_amount}</Text>
+               <Text style={styles.cartTotalAmount} numberOfLines={1}>${parseFloat(data.total_amount).toFixed(2)}</Text>
             </View>
             
          </View>
@@ -402,14 +402,16 @@ export const MemberCard = ({
    fullName,
    number,
    profilePicture,
+   onViewProfile
 })=>(
    <View  
       style={styles.friendRequestCard}
    >  
       <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>  
-         <Text style={styles.countText}>{number}.</Text>       
-         <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
-
+         <Text style={styles.countText}>{number}.</Text>  
+         <TouchableOpacity onPress={onViewProfile}>
+            <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.cover} style={styles.suggestionFriendProfile}/>
+         </TouchableOpacity>     
          <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(2)}}>
             <Text style={styles.acceptFullName}>{fullName}</Text>         
 
