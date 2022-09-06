@@ -24,6 +24,7 @@ export default class VerifyOtp extends React.Component {
               errorMessage:'',
               value:''
           },  
+          isSigning:false,
           email:'',        
           isLoading:false,  
           isLoadingResendButton:false
@@ -42,7 +43,7 @@ export default class VerifyOtp extends React.Component {
             userId : this.props.route.params.userId       
         };  
 
-        console.warn(this.state.otp.value)
+ 
                     
         return verifyOtp(payload,this.setMyState,this.props);
     }
@@ -66,6 +67,11 @@ export default class VerifyOtp extends React.Component {
                 <Components.PrimaryHeader                    
                     onGoBack = {()=>this.props.navigation.goBack()}
                 />
+                  <Components.ProgressLoadingModal
+                    openModal={this.state.isSigning}
+                    title={"Signing in..."}
+                />
+
                 <View style={styles.otpVerificationTitleContainer}>
                     <Text style={styles.otpVerificationTitle} adjustsFontSizeToFit>OTP Verification</Text>
                     <Text style={styles.otpSubtitle} adjustsFontSizeToFit numberOfLines={3}>Enter the OTP has sent to
@@ -94,7 +100,7 @@ export default class VerifyOtp extends React.Component {
                     />
                 </View>
                 <View style={styles.buttonContainer}>
-                    <View style={{ flex:2 }}>
+                    <View style={{ top:constants.Dimensions.vh(2) }}>
                         <Components.PrimaryButton
                             title="Verify"
                             onPress={this.handleVerifyOtp}
@@ -103,7 +109,7 @@ export default class VerifyOtp extends React.Component {
                     </View>
                             
 
-                    <View style={{ flex:2 }}>
+                    <View style={{ top:constants.Dimensions.vh(5) }}>
                         <Components.PrimaryButtonOutline
                             title="Resend OTP"    
                             onPress={this.handleResendOtp}                                            

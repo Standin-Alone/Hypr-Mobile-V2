@@ -6,7 +6,17 @@ import { View,Text,InteractionManager,FlatList} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { styles } from './styles';
-import { getOrderedProducts } from '../../../actions/tracking';
+import { getOrderedProducts,getTrackOrder } from '../../../actions/tracking';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import DraggablePanel from 'react-native-draggable-panel';
+import Timeline from 'react-native-timeline-flatlist';
+const data = [
+    {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
+    {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
+    {time: '12:00', title: 'Event 3', description: 'Event 3 Description'},
+    {time: '14:00', title: 'Event 4', description: 'Event 4 Description'},
+    {time: '16:30', title: 'Event 5', description: 'Event 5 Description'}
+  ]
 export default class OrderStatus extends React.Component {
     constructor(props) {
       super(props);
@@ -14,7 +24,11 @@ export default class OrderStatus extends React.Component {
           isReadyToRender:false,   
           parameters:this.props.route.params,
           orderInfo:this.props.route.params.orderInfo,
-          orderedProducts: this.props.route.params.orderInfo.productList  
+          orderedProducts: this.props.route.params.orderInfo.productList,
+          openTrackingPanel:false,
+          isTracking:false,
+          tracking:[],
+          routes:[]
       };
     }
 
@@ -28,7 +42,7 @@ export default class OrderStatus extends React.Component {
         }
         
         getOrderedProducts(payload,this.setMyState)
-        console.warn(this.state.orderInfo)
+   
         InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
         })
@@ -47,7 +61,13 @@ export default class OrderStatus extends React.Component {
         )
     }
 
-
+    handleOpenTracking = ()=>{
+       
+        let payload = {
+            trackNumber:this.state.orderInfo.trackNumber
+        }
+        getTrackOrder(payload,this.setMyState)
+    }
 
     render(){
      
@@ -58,7 +78,10 @@ export default class OrderStatus extends React.Component {
                     title={'Order Status'}
                 />             
 
-
+                <Components.ProgressLoadingModal
+                    openModal={this.state.isTracking}
+                    title={"Tracking...."}
+                />
 
                 {this.state.isReadyToRender == true ? (
                 <View style={{flexDirection:'column',alignContent:'space-between'}}>                
@@ -69,7 +92,7 @@ export default class OrderStatus extends React.Component {
                             </View>                
                         </View>         
 
-                        <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(80)}]}>
+                        <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(70)}]}>
                             <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
                             <Text style={styles.orderLabel}>My Orders</Text>
                                 <FlatList
@@ -103,6 +126,33 @@ export default class OrderStatus extends React.Component {
                                 
                             </View>                
                         </View>      
+
+                        {this.state.orderInfo.trackNumber && 
+                           <Components.PrimaryButtonOutline
+                                title={`Track ${this.state.orderInfo.trackNumber}`}
+                                onPress={this.handleOpenTracking}
+                                moreStyle={{width:constants.Dimensions.vw(95),left:constants.Dimensions.vw(2)}}
+                           />
+                        
+                        }
+
+
+                    <DraggablePanel
+                        visible={this.state.openTrackingPanel}
+                        initialHeight={constants.Dimensions.vh(250)}
+                      >
+                        <Text style={styles.trackingStatusLabel}>Tracking Status</Text>
+                        <View>
+                            <View style={{flexDirection:'row'}}>
+                                <Text>Logistic:</Text>
+                                <Text>{this.state.trackingInfo?.logisticName}</Text>
+                            </View>
+                        </View>
+                        <Timeline data={this.state.routes} 
+                            listViewStyle={{marginHorizontal:constants.Dimensions.vw(2)}}
+                            timeStyle={{backgroundColor:constants.Colors.warning,borderRadius:20,paddingHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2)}}                            
+                        />
+                    </DraggablePanel>
                     </View>   )
                     :(
                         <Components.LoadingScreen/>

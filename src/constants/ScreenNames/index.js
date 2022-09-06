@@ -60,7 +60,8 @@ export default {
    FRIEND:'Friend'
  },
  Mlm:{
-   MLM:'Mlm'
+   MLM:'Mlm',
+   REWARD_HISTORY:'RewardHistory'
  }
     
 }

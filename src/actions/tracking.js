@@ -6,7 +6,7 @@ import {POST,GET} from '../utils/axios';
 import moment from 'moment';
 import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
 import { getProductVariants } from "./market";
-
+import DraggablePanel from 'react-native-draggable-panel';
 export const getToVerifyOrders = (payload,setState)=>{
 
     
@@ -70,13 +70,13 @@ export const checkOrdersStatus= (payload,setState)=>{
            
                 if(response.data.status == true){
                     
-                    console.warn('ORDERS',response.data.data[6]);
+                   
                     let orders = response.data.data;
             
             
               
                     Promise.all(orders.map(  (items,index)=>{
-                
+                        
                         // GET TRACKING DETAILS IN CJ
                          return  GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`).then( (result)=>{                    
                                                 
@@ -181,8 +181,7 @@ export const getOrderedProducts= (payload,setState)=>{
                     
                     let orderedProducts = response.data.data;
                     
-                    
-                    console.warn(orderedProducts)
+        
                     
                     
                     setState({orderedProducts:orderedProducts})  
@@ -212,6 +211,71 @@ export const getOrderedProducts= (payload,setState)=>{
                 text1:'No internet Connection!'
             })
       
+         }
+    });
+
+}
+
+
+
+export const getTrackOrder= (payload,setState)=>{
+
+    setState({isTracking:true});
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            
+            // GET REQUEST
+            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_TRACKING_DETAILS}?trackNumber=${payload.trackNumber}`).then(async (response)=>{                    
+            
+                if(response.data.result == true){
+                    
+                    
+                    setState({openTrackingPanel:true,trackingInfo:response.data.data[0],isTracking:false});
+
+                    
+
+                    let routes = response.data.data[0].routes;
+
+
+
+                    let cleanRoutes = routes.map((item)=>
+                        ({time:item.acceptTime,title:response.data.data[0].trackingStatus,description:item.remark})
+                    )
+
+                    setState({routes:cleanRoutes});
+                 
+                    
+                    
+                    
+                  
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isTracking:false});
+                }
+           
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                setState({isTracking:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+            setState({isTracking:false});
          }
     });
 

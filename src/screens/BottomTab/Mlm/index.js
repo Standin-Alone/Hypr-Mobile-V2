@@ -62,7 +62,9 @@ export default class Mlm extends React.Component {
      
         return(
             <>
-                <Components.FriendHeader/>                                 
+                <Components.MlmHeader
+                    goToRewardHistory = {()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.REWARD_HISTORY)}
+                />                                 
                 <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
                     <View style={styles.pointsCard}>
                         <View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
@@ -72,7 +74,7 @@ export default class Mlm extends React.Component {
                             </View>
                             <View style={{flexDirection:'column',justifyContent:'center',marginVertical:constants.Dimensions.vh(10)}}>
                                 <Text style={styles.rewardValueText}>
-                                    {this.state.userInfo?.reward}
+                                    {this.state.userInfo.reward ? this.state.userInfo.reward  : 'Processing' }
                                 </Text>
 
                                 <Text style={styles.rewardTitleText     }>

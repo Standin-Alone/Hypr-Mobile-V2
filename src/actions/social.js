@@ -483,11 +483,11 @@ export const createStory = (payload,setState,props,state)=>{
       
             
 
-         
+            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`);
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`,payload).then((response)=>{                    
             
-            
+
           
                 if(response.data.status == true){
                  
@@ -516,7 +516,7 @@ export const createStory = (payload,setState,props,state)=>{
         
                  
             }).catch((error)=>{
-                console.warn(error)
+                console.warn(error.response)
                 Toast.show({
                     type:'error',
                     text1:'Something went wrong!'

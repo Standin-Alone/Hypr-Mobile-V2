@@ -219,8 +219,7 @@ export default class ProductDetail extends React.Component {
                         <Components.PrimaryButton
                             title="Add To Cart"
                             moreStyle={styles.addToCartButton}
-                            onPress={this.handleAddToCart}
-                            isLoading={this.state.isLoading}
+                            onPress={this.handleAddToCart}                        
                         />   
 
                         <Components.PrimaryButton

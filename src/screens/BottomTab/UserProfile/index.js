@@ -32,6 +32,7 @@ export default class UserProfile extends React.Component {
         // this.props.navigation.addListener('focus',()=>{
         //     getUserInfo(this.setMyState)
         // })
+
     }
 
     handleCopyLink = (referral_link)=>{
@@ -112,7 +113,7 @@ export default class UserProfile extends React.Component {
                                     <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
                                     <constants.Icons.FontAwesome5 name="edit" size={20} color={constants.Colors.secondary} style={styles.edit}/>
                                 </TouchableOpacity>
-                                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name} `}</Text>
+                                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}  `}</Text>
                             </View>
 
                             <View style={[styles.profileContainer,{top:constants.Dimensions.vh(15), backgroundColor:'rgba(255,255,255,0.5)'}]}>

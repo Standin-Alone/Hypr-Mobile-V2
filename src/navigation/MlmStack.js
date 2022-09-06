@@ -2,6 +2,7 @@ import { createStackNavigator,CardStyleInterpolators} from '@react-navigation/st
 import React from 'react';
 import constants from '../constants';
 import Mlm from '../screens/BottomTab/Mlm';
+import RewardHistory from '../screens/MLM/RewardHistory';
 
 
 
@@ -22,6 +23,11 @@ export const MlmStackComponent= () => {
             />  
 
     
+            <MlmStack.Screen
+                component={RewardHistory}
+                name={constants.ScreenNames.Mlm.REWARD_HISTORY}             
+            />  
+
                                                                    
             </MlmStack.Navigator>
     )

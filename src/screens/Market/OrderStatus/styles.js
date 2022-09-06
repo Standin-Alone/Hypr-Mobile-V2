@@ -36,6 +36,11 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsBold,
         fontSize:14,
         color:constants.Colors.secondary
+    },
+    trackingStatusLabel:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:constants.Dimensions.normalize(9),
+        color:constants.Colors.dark
     }
 });
 

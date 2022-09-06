@@ -398,6 +398,34 @@ export const styles = StyleSheet.create({
         fontSize:10,  
         fontWeight:'bold',
         color:constants.Colors.dark_tint
+    },
+
+
+
+
+    // REWARD HISTORY 
+    rewardHistoryContainer:{
+        flex:1,
+        backgroundColor:constants.Colors.light,
+        borderBottomWidth:0.2,
+    },
+    rHOrderId:{
+       
+        fontFamily:constants.Fonts.GothamBold,
+        fontSize:constants.Dimensions.normalize(8),  
+        fontWeight:'bold',
+    },
+    rHOldReward:{
+        left:constants.Dimensions.vw(20),
+        fontFamily:constants.Fonts.PoppinsLight,
+        fontSize:constants.Dimensions.normalize(6),  
+
+    },
+    rHNewReward:{
+        fontFamily:constants.Fonts.PoppinsLight,
+        fontSize:constants.Dimensions.normalize(6),  
+        
+        color:constants.Colors.green
     }
 });
 

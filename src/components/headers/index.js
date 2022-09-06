@@ -11,8 +11,6 @@ import FastImage from 'react-native-fast-image'
 
 
 export const FriendHeader = ({
-    goToProfileSettings,
-    onCreatePost
  })=>(   
     <>   
         
@@ -24,6 +22,35 @@ export const FriendHeader = ({
                         </View>    
                         <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>                                        
                         
+                        </View>                   
+                    </View>
+                </ImageBackground>               
+            </View>    
+        
+    </>
+);
+
+
+
+export const MlmHeader = ({
+    goToRewardHistory
+ })=>(   
+    <>   
+        
+            <View style={styles.socialContainer}>     
+                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}} blurRadius={2}>
+                    <View style={{flexDirection:'row'}}>                    
+                        <View >
+                            <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
+                        </View>    
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>                                        
+                                <TouchableOpacity style={{flexDirection:'row',top:constants.Dimensions.vh(5)}} onPress={goToRewardHistory}>                              
+                                        <constants.Icons.FontAwesome5 
+                                                name="history" 
+                                                size={constants.Dimensions.normalize(10)} 
+                                                color={constants.Colors.secondary}
+                                            />
+                                </TouchableOpacity>
                         </View>                   
                     </View>
                 </ImageBackground>               

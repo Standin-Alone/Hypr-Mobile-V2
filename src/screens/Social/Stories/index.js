@@ -15,7 +15,7 @@ export default class SocialStories extends React.Component {
       super(props);
       this.state = {      
         stories:[],
-        userInfo:this.props.route.params
+        userInfo:this.props.route.params.story
        
       };
     }
@@ -24,8 +24,8 @@ export default class SocialStories extends React.Component {
     setMyState = (value)=>this.setState(value)
 
   componentDidMount(){
-    console.warn(this.state.userInfo.user_image)
-    this.setState({stories:this.props.route.params.stories.map((item,index)=>(item.story_image))})
+    console.warn(this.props.route.params.story.stories.map((item,index)=>(item.story_image)));
+    this.setState({stories:this.props.route.params.story.stories.map((item,index)=>(item.story_image))})
   }
 
 
@@ -46,7 +46,17 @@ export default class SocialStories extends React.Component {
                     this.props.navigation.goBack()
                  },
               }}
-              
+              onComplete={()=>{ 
+
+                  let stories = this.props.route.params.stories.filter((storyFilter)=>storyFilter._id != this.state.userInfo._id);
+
+                  this.props.route.params.stories.map((storyItem)=>{
+                    if(storyItem._id != this.props.route.params.story._id){
+                      this.props.navigation.replace(constants.ScreenNames.Social.STORIES,{story:storyItem,stories:stories})
+                    }
+                  });
+                  
+              }}
               barStyle={{
                 barActiveColor: constants.Colors.primary,                
           

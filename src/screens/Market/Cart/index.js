@@ -6,7 +6,7 @@ import Components from '../../../components';
 import constants from '../../../constants';
 import {styles} from './styles';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { getCart,increaseQuantity,decreaseQuantity } from '../../../actions/market';
+import { getCart,increaseQuantity,decreaseQuantity,removeInCart} from '../../../actions/market';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { computeCart } from "../../../utils/functions";
 import { checkout} from '../../../actions/order';
@@ -76,6 +76,13 @@ export default class Cart extends React.Component {
         return increaseQuantity(payload,this.setMyState,this.props)
     }
 
+    handleRemoveInCart = (item)=>{
+        let payload = {
+            item:item
+        }
+        return removeInCart(payload,this.setMyState,this.props)
+    }
+
     renderCart  = ({item,index})=>{        
         return(
             <>
@@ -85,7 +92,8 @@ export default class Cart extends React.Component {
                     onDecreaseQuantity={()=>this.handleDecreaseQuantity(item)}
                     onIncreaseQuantity={()=>this.handleIncreaseQuantity(item)}
                     isSelected={item.isSelected}
-                    quantity={item.quantity}               
+                    quantity={item.quantity}         
+                    onRemoveItemInCart={()=>this.handleRemoveInCart(item)}    
                 />
             </>
         )

@@ -146,8 +146,8 @@ export const ProgressLoadingModal = ({
             >
                 <View style={{backgroundColor:constants.Colors.transparent_black,flex:1}}> 
                     <View style={styles.dialogContainer}>
-                        <View style={{flexDirection:'row',justifyContent:'space-evenly',marginHorizontal:constants.Dimensions.vw(20),top:constants.Dimensions.vh(5)}}>                            
-                            <ActivityIndicator size={constants.Dimensions.normalize(20)} style={{right:constants.Dimensions.vw(20)}} color={constants.Colors.primary}/>
+                        <View style={{flexDirection:'row',justifyContent:'space-evenly',marginHorizontal:constants.Dimensions.vw(5),top:constants.Dimensions.vh(5),left:constants.Dimensions.vw(15)}}>                            
+                            <ActivityIndicator size={constants.Dimensions.normalize(16)} style={{right:constants.Dimensions.vw(20)}} color={constants.Colors.primary}/>
                             <View style={{right:constants.Dimensions.vw(20),top:constants.Dimensions.vh(2)}}>
                                 <Text style={styles.processingText}>{title ? title: 'Processing...'}</Text>
                             </View>                            

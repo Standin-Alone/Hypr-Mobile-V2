@@ -156,7 +156,8 @@ export const CartCard = ({
    onSelect,
    quantity,
    onIncreaseQuantity,
-   onDecreaseQuantity
+   onDecreaseQuantity,
+   onRemoveItemInCart
 })=>(
    <TouchableOpacity style={[styles.cartCardContainer,{
       borderColor: isSelected ? constants.Colors.primary : constants.Colors.gray,
@@ -172,7 +173,7 @@ export const CartCard = ({
       <View style={styles.cartSecondColumn}>
          <View style={{top:constants.Dimensions.vh(10)}}>
             <Text style={styles.cartVariantName} numberOfLines={2}>{data.variant_name}</Text>
-
+        
             <View style={{flexDirection:'row',top:constants.Dimensions.vh(10),justifyContent:'flex-start'}}>
                <TouchableOpacity onPress={onDecreaseQuantity}>
                   <MaterialIcons name="remove-circle-outline" size={30}  color={constants.Colors.dark_tint}/>
@@ -185,7 +186,11 @@ export const CartCard = ({
                </TouchableOpacity>
                <Text style={styles.cartTotalAmount} numberOfLines={1}>${parseFloat(data.total_amount).toFixed(2)}</Text>
             </View>
-            
+            <View  style={{flexDirection:'row',top:constants.Dimensions.vh(13),justifyContent:'flex-start',left:constants.Dimensions.vw(40)}}>
+               <TouchableOpacity onPress={onRemoveItemInCart}>
+                     <constants.Icons.Ionicons name="trash" size={constants.Dimensions.normalize(8)}  color={constants.Colors.primary}/>
+               </TouchableOpacity>     
+            </View>
          </View>
       </View>
        
@@ -423,6 +428,8 @@ export const MemberCard = ({
       
    </View>
 )
+
+
 export const CommentCard = ({
    fullName,
    onAddFriend,
@@ -481,3 +488,34 @@ export const UploadingSelectionCard = ({
        </DraggablePanel>
    );
 
+
+
+   export const RewardHistoryCard = ({
+      orderID,
+      dateCreated,
+      oldReward,
+      newReward
+   })=>
+   (
+      <View style={styles.rewardHistoryContainer}>
+         <View style={{marginHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2)}}>
+            <View style={{flexDirection:'row'}}>
+               <Text style={styles.rHOrderId}>#{orderID}</Text>
+            </View>
+
+            <View style={{flexDirection:'row',justifyContent:'space-between'}}>
+               <Text style={styles.rHDateCreated}>{dateCreated}</Text>
+
+               <Text  style={styles.rHOldReward}>{oldReward.toFixed(2)}</Text>
+               <constants.Icons.Ionicons
+                  name="arrow-forward-sharp"
+                  size={constants.Dimensions.normalize(8)}
+                  style={{left:constants.Dimensions.vw(10),}}
+               />
+               <Text style={styles.rHNewReward}>{newReward.toFixed(2)}</Text>
+              
+            </View>
+         </View>
+
+      </View>
+   )

@@ -36,7 +36,7 @@ export const styles = StyleSheet.create({
         borderColor:constants.Colors.gray,        
         fontFamily:constants.Fonts.GothamMedium,        
         paddingVertical:   constants.Dimensions.vh(1),        
-        fontSize:18
+        fontSize:constants.Dimensions.normalize(6)
     },
     phoneInputContainer:{        
         height:constants.Dimensions.vh(15),        
@@ -50,7 +50,7 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamMedium,
         paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
-        fontSize:18
+        fontSize:constants.Dimensions.normalize(6)
     },
     citySelect:{
         backgroundColor:'transparent',
@@ -61,12 +61,12 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamMedium,
         paddingLeft:constants.Dimensions.vw(12),                
         paddingVertical:   constants.Dimensions.vh(4),        
-        fontSize:18
+        fontSize:constants.Dimensions.normalize(6)
     },
     primaryInputNoBorder:{
         borderWidth:0,
         fontFamily:constants.Fonts.PoppinsMedium,
-        fontSize:12
+        fontSize:constants.Dimensions.normalize(9)
     },
     commentInput:{
         borderWidth:0.5,
@@ -74,7 +74,7 @@ export const styles = StyleSheet.create({
         height:constants.Dimensions.vh(12),
         width:constants.Dimensions.vw(95),     
         fontFamily:constants.Fonts.PoppinsMedium,
-        fontSize:12
+        fontSize:constants.Dimensions.normalize(9)
     },
     secureTextEntry:{
         position:'absolute',

@@ -26,7 +26,8 @@ import {
     SocialHeader,
     FriendHeader,
     CommentHeader,
-    MessengerHeader
+    MessengerHeader,
+    MlmHeader
     } from "./headers";
 
 
@@ -43,7 +44,8 @@ import {
     CommentCard,
     UploadingSelectionCard,
     UserProfilePicture,
-    MemberCard
+    MemberCard,
+    RewardHistoryCard
     } from "./cards";
 import {
     Loader,
@@ -91,6 +93,7 @@ export default {
     FriendHeader,
     CommentHeader,
     MessengerHeader,
+    MlmHeader,
 
 
     ProductCard,
@@ -106,7 +109,7 @@ export default {
     UploadingSelectionCard,
     UserProfilePicture,
     MemberCard,
-
+    RewardHistoryCard,
     Loader,
     LoadingScreen,
     FooterLoader,

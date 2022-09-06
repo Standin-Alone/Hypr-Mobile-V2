@@ -183,7 +183,7 @@ export const createAccount = (payload,setState,props)=>{
                 }
 
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT}`,clean_payload).then((response)=>{                    
-                    
+                    console.warn(clean_payload);
                     if(response.data.status == true){
                         
                         Toast.show({
@@ -196,6 +196,8 @@ export const createAccount = (payload,setState,props)=>{
                         setState({isLoading:false});
 
                     }else{
+
+                        console.warn(response.data.error);
                         Toast.show({
                             type:'error',
                             text1: 'Error!',
@@ -206,7 +208,7 @@ export const createAccount = (payload,setState,props)=>{
 
                 }).catch((error)=>{
                     
-                    console.warn(error.response);
+                    console.warn(error);
                     Toast.show({
                         type:'error',
                         text1:'Error!',
@@ -355,7 +357,7 @@ export const login = (payload,setState,props) => {
 
 
 export const verifyOtp = (payload,setState,props)=>{
-    setState({isLoading:true});
+    setState({isLoading:true,isSigning:true});
 
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -384,7 +386,7 @@ export const verifyOtp = (payload,setState,props)=>{
                         });    
                         
                      // turn off loading
-                     setState({isLoading:false});
+                     setState({isLoading:false,isSigning:false});
                     }else{
                         Toast.show({
                             type:'error',
@@ -392,7 +394,7 @@ export const verifyOtp = (payload,setState,props)=>{
                         });
 
                      // turn off loading
-                     setState({isLoading:false});
+                     setState({otp:{...payload.otp,error:false},isLoading:false,isSigning:false});
                     }
 
                 }).catch((error)=>{
@@ -404,16 +406,15 @@ export const verifyOtp = (payload,setState,props)=>{
                     });
                     
                     // turn off loading
-                    setState({isLoading:false});
+                    setState({otp:{...payload.otp,error:false},isLoading:false,isSigning:false});
                 });
 
 
 
-                
-                setState({otp:{...payload.otp,error:false},isLoading:false})
+             
                 
             }else{          
-                setState({otp:{...payload.otp,error:true},isLoading:false})
+                setState({otp:{...payload.otp,error:false},isLoading:false,isSigning:false});
                 Toast.show({
                     type:'error',
                     text1:'Please put your one time pin.',                
@@ -427,7 +428,7 @@ export const verifyOtp = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+             setState({otp:{...payload.otp,error:false},isLoading:false,isSigning:false});
          }
     });
 
@@ -515,9 +516,9 @@ export const getUserInfo = (setState)=>{
             }
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
-            
+     
                 if(response.data.status == true){          
-                 
+                    console.warn(`${constants.Directories.COVER_PICTURE_DIRECTORY}/${response.data.data?.cover_pic}`)
                     setState({userInfo:response.data.data})
 
                 }else{

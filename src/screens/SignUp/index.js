@@ -16,50 +16,50 @@ export default class SignUp extends React.Component {
               focus:false,
               error:false,
               errorMessage:'',
-              value:''
+              value:'John Edcel'
           },
           lastName:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'Zenarosa'
           },
           email:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'standinalone01000@gmail.com'
           },
           contact:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'9106120892'
           },
           birthday:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'',
+            value:'04/27/1992',
             openDatePicker:false
           },
           username:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'standinalone01000@gmail.com'
           },
           password:{
                 focus:false,
                 error:false,
                 errorMessage:'',
-                value:''
+                value:'Hypr01000!'
           },      
           confirmPassword:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'Hypr01000!'
           },      
           isLoading:false,
           showPassword1:true,
@@ -81,7 +81,7 @@ export default class SignUp extends React.Component {
             password:this.state.password.value,
             confirmPassword:this.state.confirmPassword.value,
         }
-        
+    
         return createAccount(payload,this.setMyState,this.props)
         
     }

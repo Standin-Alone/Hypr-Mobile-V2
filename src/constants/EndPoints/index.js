@@ -25,6 +25,7 @@ const EndPoints = {
     CALCULATE_FREIGHT:'/freight-calculate',
     INCREASE_QUANTITY:'/market/increase-quantity',
     DECREASE_QUANTITY:'/market/decrease-quantity',
+    REMOVE_ITEM_IN_CART:'/market/remove-item-in-cart',
 
 
 
@@ -92,6 +93,9 @@ const EndPoints = {
     SEND_MESSAGE:'/chat/send-message',
     CHECK_ROOM:'/chat/check-room',
     GET_FRIENDS_MESSAGES:'/chat/get-friends-messages',
+
+    // MLM
+    GET_REWARDS_HISTORY:'/mlm/reward-history',
 }
 
 

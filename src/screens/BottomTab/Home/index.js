@@ -104,21 +104,23 @@ export default class Home extends React.Component {
     }
 
     renderEmptyComponent = ()=>(
+
+
         <View>
             <Text style={styles.textEmptyComponent}>No latest posts</Text>
         </View>
         
     )
     
-    handleViewStory = (item)=>{
+    handleViewStory = (item,stories)=>{
         
-        this.props.navigation.navigate(constants.ScreenNames.Social.STORIES,item)
+        this.props.navigation.navigate(constants.ScreenNames.Social.STORIES,{story:item,stories:stories})
     }
     renderStories = ({item,index})=>(
         <Components.UserProfilePicture
             profilePicture={item.user_image}
             fullName={item.user_name}
-            onViewStory={()=>this.handleViewStory(item)}
+            onViewStory={()=>this.handleViewStory(item,this.state.stories)}
         />
         
     )
@@ -133,9 +135,12 @@ export default class Home extends React.Component {
             this.state.showFooter ?
             <Components.FooterLoader message={"Getting more posts..."}/> 
             :
+
+            this.state.posts.length != 0 && (
             <View > 
                 <Text style={styles.emptyFooter}>No more posts...</Text>
             </View>                
+            )
     )
     
 

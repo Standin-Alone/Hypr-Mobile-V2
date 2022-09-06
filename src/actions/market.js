@@ -21,7 +21,7 @@ export const getAllProducts = (payload,setState)=>{
             
             // GET REQUEST
             GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}?pageNum=${payload.currentPage}`).then((response)=>{                    
-                console.warn(response.data);
+                
                 if(response.data.result == true){
                                                                    
 
@@ -305,7 +305,7 @@ export const getShippingAddress = async (setState)=>{
 
 
 export const getProductVariants = async (payload,setState,props)=>{
-    setState({isLoading:true});
+    setState({isProgress:true});
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -335,10 +335,13 @@ export const getProductVariants = async (payload,setState,props)=>{
                         
                     }
 
-
+                    // turn off loading
+                    setState({isProgress:false});
                     props.navigation.navigate(constants.ScreenNames.Market.VARIANT_LIST,parameters);
 
                 }else{
+                    // turn off loading
+                    setState({isProgress:false});
                     Toast.show({
                         type:'error',
                         text1: response.data.message
@@ -346,8 +349,7 @@ export const getProductVariants = async (payload,setState,props)=>{
 
                 }
                
-                 // turn off loading
-                 setState({isLoading:false});
+             
             }).catch((error)=>{
                 console.warn(error)
                 
@@ -357,7 +359,7 @@ export const getProductVariants = async (payload,setState,props)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isProgress:false});
             });
 
          }else{
@@ -367,7 +369,7 @@ export const getProductVariants = async (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false});
+            setState({isProgress:false});
          }
     });
 
@@ -871,6 +873,7 @@ export const addToCart =  (payload,setState)=>{
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.ADD_TO_CART}`,payload).then((response)=>{                    
                     
                     if(response.data.status == true){
+                        getCartCount(setState)
 
                         Toast.show({
                                 type:'success',
@@ -1183,6 +1186,66 @@ export const decreaseQuantity = async (payload,setState,props)=>{
         
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.DECREASE_QUANTITY}`,cleanPayload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                          
+                    getCart(setState);
+                               
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+
+
+export const removeInCart = async (payload,setState,props)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            let cleanPayload ={
+                item:payload.item,
+                userId: await GET_SESSION('USER_ID')
+
+            }
+        
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.REMOVE_ITEM_IN_CART}`,cleanPayload).then((response)=>{                    
                
                 if(response.data.status == true){
                                           

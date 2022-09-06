@@ -1,13 +1,29 @@
 
+
 const ipAddress = '192.168.1.2';
+const ipAddressProd = '54.149.146.24';
+// const ipAddressProd = '192.168.1.2:8080';
 const SOCKET_IO = `http://${ipAddress}:9090`;
-
-
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
 const API_DEV_HOST = `http://${ipAddress}:9002/hypr-mobile`;
-const CJ_API_HOST = `http://${ipAddress}:9002/cj/api/market`;
+const CJ_API_HOST = `http://${ipAddress}:9002/cj/api/v1`;
 const MLM_API_HOST = `http://${ipAddress}:9002/mlm/api/v1`;
-const API_PRO_HOST = ``;
+
+// const SOCKET_IO = `http://${ipAddress}:9090`;
+// const API_DEV_HOST_PLAIN = `http://${ipAddress}`;
+// const API_DEV_HOST = `http://${ipAddress}/hypr-mobile`;
+// const CJ_API_HOST = `http://${ipAddress}/cj/api/market`;
+// const MLM_API_HOST = `http://${ipAddress}/mlm/api/v1`;
+
+
+
+const API_PRO_HOST_PLAIN = `http://${ipAddressProd}`;
+const API_PRO_HOST = `http://${ipAddressProd}/hypr-mobile`;
+const CJ_API_PRO_HOST = `http://${ipAddressProd}/cj/api/v1`;
+const MLM_API_PRO_HOST = `http://${ipAddressProd}/mlm/api/v1`;
+
+
+
 const Config = {
     // 0 => Devlopment env, 1 => Production env
     APP_MODE: 0,
@@ -18,11 +34,13 @@ const Config = {
         CJ_ACCESS_POINT: `${CJ_API_HOST}`,
         MLM_ACCESS_POINT: `${MLM_API_HOST}`,
     },
-    PRODUCTION: {
+    PRODUCTION: {  
+
         API_HOST: `${API_PRO_HOST}`,
-        API_ACCESS_POINT_PLAIN: `${API_DEV_HOST_PLAIN}`,
+        API_ACCESS_POINT_PLAIN: `${API_PRO_HOST_PLAIN}`,
         API_ACCESS_POINT: `${API_PRO_HOST}`,
-        MLM_ACCESS_POINT: `${CJ_API_HOST}`,
+        CJ_ACCESS_POINT: `${CJ_API_PRO_HOST}`,
+        MLM_ACCESS_POINT: `${MLM_API_PRO_HOST}`,
     },
 };
 
@@ -50,10 +68,10 @@ export default function getBaseUrl() {
         config = {
             ...config,
             apihost: Config.PRODUCTION.API_HOST,
-            CJ_ACCESS_POINT: Config.DEVELOPMENT.CJ_ACCESS_POINT,
-            MLM_ACCESS_POINT: Config.DEVELOPMENT.MLM_ACCESS_POINT,
+            CJ_ACCESS_POINT: Config.PRODUCTION.CJ_ACCESS_POINT,
+            MLM_ACCESS_POINT: Config.PRODUCTION.MLM_ACCESS_POINT,
             accesspoint: Config.PRODUCTION.API_ACCESS_POINT,
-            accesspointPlain: Config.DEVELOPMENT.API_ACCESS_POINT_PLAIN,
+            accesspointPlain: Config.PRODUCTION.API_ACCESS_POINT_PLAIN,
             SOCKET_IO:SOCKET_IO
         };
     }

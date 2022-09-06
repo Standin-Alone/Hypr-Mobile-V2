@@ -16,6 +16,7 @@ export default class Market extends React.Component {
       this.state = {   
           isLoadingPlaceholder:true,
           isLoading:false,
+          isProgress:false,
           notificationCount:0,
           products:[],
           newProducts:[],
@@ -51,7 +52,7 @@ export default class Market extends React.Component {
             pid:item.pid,
             productName:item.productNameEn
         }    
-
+   
         return getProductVariants(parameters,this.setMyState,this.props)
     }
 
@@ -91,7 +92,7 @@ export default class Market extends React.Component {
                     <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>
 
                    
-                    {/* <Components.Loader isLoading={this.state.isLoading}/> */}
+                    <Components.Loader isLoading={this.state.isProgress}/>
                     <Components.MarketHeader
                         showSearch={true}
                         goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}

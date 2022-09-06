@@ -93,10 +93,11 @@ export const styles = StyleSheet.create({
      
     },
     dialogContainer:{
-        width:constants.Dimensions.vw(95),
+        width:constants.Dimensions.vw(60),
         height:constants.Dimensions.vh(20),
         borderRadius:10,
         top:constants.Dimensions.vh(70),
+        left:constants.Dimensions.vw(20),
         marginHorizontal:constants.Dimensions.vw(3),
         backgroundColor:'white'
     },

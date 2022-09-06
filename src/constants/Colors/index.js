@@ -10,13 +10,14 @@ export default Colors = {
         tertiary:'#2787FA'
     }, 
     danger:'',
-    warning:'',
+    warning:'#ffba3b',
     gray:'#ACB1C1',
     gray_tint:'#ececec',
     danger:'#D9534F',
     dark_tint:'#545a64',
     transparent_white:'rgba(255,255,255,0.2)',
-    transparent_black:'rgba(0,0,0,0.5)'
+    transparent_black:'rgba(0,0,0,0.5)',
+    green:'#008000'
     
     
 }

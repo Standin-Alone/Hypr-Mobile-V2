@@ -7,6 +7,9 @@ import constants from '../../../constants';
 import {styles} from './styles';
 import {launchImageLibrary} from 'react-native-image-picker';
 import InstaStory from 'react-native-insta-story';
+import { getFileData } from '../../../utils/functions';
+import Toast from 'react-native-toast-message';
+
 export default class Camera extends React.Component {
     constructor(props) {
       super(props);
@@ -29,19 +32,36 @@ export default class Camera extends React.Component {
 
     handleTakeAPhoto = async ()=>{
         if (this.camera) {
-            const options = { quality: 1, base64: true };
+            const options = { quality: 0.5, base64: true ,exif :true};
             const data = await this.camera.takePictureAsync(options);
-        
-            let  fileParts = data.uri.split('/');
-            let filename = fileParts[fileParts.length - 1];
-      
-            let parameter = {
-                image:[{fileBase64:data.base64,fileName:filename}],
-                multiple:false,
-                addType:this.state.addType
+            
+
+            const metadata = await getFileData(data.uri);
+
+
+            let fileSize = (metadata.size /1000) / 1000;
+
+
+            if(fileSize < 1){
+
+                let  fileParts = data.uri.split('/');
+                let filename = fileParts[fileParts.length - 1];
+                
+                let parameter = {
+                    image:[{fileBase64:data.base64,fileName:filename}],
+                    multiple:false,
+                    addType:this.state.addType
+                }
+
+                this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
+            }else{
+                Toast.show({
+                    type:'error',
+                    text1: 'Message',
+                    text2:'Your  file limit is 1mb only',
+                });
             }
-          
-            this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);
+            
           }
     }
 
@@ -57,17 +77,41 @@ export default class Camera extends React.Component {
         let {assets} = getImage;
     
         let imageGallery = [];
-        assets.map((gallery)=>{
-            imageGallery.push({fileBase64:gallery.base64,fileName:gallery.fileName});                        
+
+        let countError = 0 ;
+        assets.map(async (gallery)=>{
+
+            const metadata = await getFileData(gallery.uri);
+
+
+            let fileSize = (metadata.size /1000) / 1000;
+
+            if(fileSize < 1){
+                imageGallery.push({fileBase64:gallery.base64,fileName:gallery.fileName});                        
+            }else{
+                countError++;
+               
+            }
+            
         })
-        
-        let parameter = {
-            image:imageGallery,
-            multiple:true,
-            addType:this.state.addType
+
+
+        if(countError > 0){
+            let parameter = {
+                image:imageGallery,
+                multiple:true,
+                addType:this.state.addType
+            }
+            
+            this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);  
+        }else{
+            Toast.show({
+                type:'error',
+                text1: 'Message!',
+                text2:'Your file limit is 1MB only.',
+            });
         }
-        
-        this.props.navigation.navigate(constants.ScreenNames.Social.CAPTURED_PHOTO,parameter);  
+       
     }   
 
     handelSwitchCameraType = ()=>{

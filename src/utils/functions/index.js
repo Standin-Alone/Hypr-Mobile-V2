@@ -7,7 +7,7 @@ import {SET_SESSION,GET_SESSION} from '../async_storage';
 import {launchCamera,launchImageLibrary,openCropper} from 'react-native-image-picker';
 import ImagePicker from 'react-native-image-crop-picker';
 import uuid from 'react-native-uuid';
-
+import RNFetchBlob from 'react-native-fetch-blob';
 export const calculateFreight = (payload,setState,props)=>{
     setState({isLoading:true});
     
@@ -242,4 +242,13 @@ export const showPassword = (state,setState,stateElement)=>{
 
 export const generateUuid = ()=>{
     return uuid.v4(); 
+}
+
+
+export const getFileData = async (file)=>{
+
+    const fileResult = await RNFetchBlob.fs.stat(file);
+        
+
+    return fileResult;
 }

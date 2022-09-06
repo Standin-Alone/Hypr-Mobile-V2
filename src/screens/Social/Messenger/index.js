@@ -74,11 +74,9 @@ export default class Messenger extends React.Component {
                 />
 
 
-              <FloatingAction
- 
+              <FloatingAction 
                 onPressMain={name => {
                     let parameters = {
-
                     }
 
                     this.props.navigation.navigate(constants.ScreenNames.Social.CHOOSE_FRIEND_TO_CHAT,parameters)
