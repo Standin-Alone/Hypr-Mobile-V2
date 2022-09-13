@@ -411,6 +411,7 @@ export const CommentInput = ({
             
         <View>
             <View style={{marginVertical:constants.Dimensions.vh(4),marginHorizontal:constants.Dimensions.vw(2)}}>
+            
             <TextInput
               onChangeText={onChangeText}
               value={value}
@@ -425,4 +426,41 @@ export const CommentInput = ({
             </View>
         </View>
         )
+}
+
+
+export const SearchInput =  ({
+    onChangeText,
+    value,
+    placeholder,
+    onFocus,
+    onBlur
+})=>{
+    return(
+
+        <View style={{marginVertical:constants.Dimensions.vh(10),marginHorizontal:constants.Dimensions.vw(2)}}>
+            <View style={{flexDirection:'row',flex:1,justifyContent:'center',alignItems:'center'}}>    
+
+            <View  style={styles.searchInputIcon}  >     
+                <constants.Icons.Ionicons
+                name="ios-search-outline"  
+                size={constants.Dimensions.normalize(10)} 
+                
+                color={constants.Colors.gray_tint}
+                />
+            </View>
+     
+            <TextInput
+                onChangeText={onChangeText}
+                value={value}
+                placeholder={placeholder}
+                style={styles.searchInput}     
+                onFocus={onFocus}
+                onBlur={onBlur}              
+            />
+            
+            </View>
+        </View>
+     
+    )
 }

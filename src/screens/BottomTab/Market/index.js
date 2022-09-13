@@ -75,6 +75,8 @@ export default class Market extends React.Component {
             previousProductPage : this.state.products
         }
         getAllProducts(parameter,this.setMyState)  ;
+
+
   }
 
   renderFooter = ()=>(

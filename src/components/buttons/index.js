@@ -207,6 +207,7 @@ export const OrderCardButton = ({
     onPress,
     title,
     showIcon,
+    image
 })=>(   
 
     <View
@@ -225,7 +226,7 @@ export const OrderCardButton = ({
                 //     size={iconSize} 
                 //     color={constants.Colors.primary}
                 // />
-                <FastImage source={constants.Images.myOrder} 
+                <FastImage source={{uri:image}} 
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.myOrderImage}/>
             }

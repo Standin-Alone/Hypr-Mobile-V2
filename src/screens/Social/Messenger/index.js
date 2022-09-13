@@ -1,18 +1,21 @@
 import React from 'react';
 
-import { View,Text,FlatList} from 'react-native';
+import { View,ActivityIndicator,FlatList} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import {styles} from './styles';
 import { FloatingAction } from "react-native-floating-action";
-import { getFriendsMessages } from '../../../actions/chat';
+import { getFriendsMessages,searchFriend } from '../../../actions/chat';
 import { GET_SESSION } from '../../../utils/async_storage';
 
 export default class Messenger extends React.Component {
     constructor(props) {
       super(props);
       this.state = {      
-        friendsMessages:[]
+        friendsMessages:[],
+        searchedFriends:[],
+        searchValue:'',
+        isSearching:false
       };
     }
 
@@ -29,6 +32,7 @@ export default class Messenger extends React.Component {
         getFriendsMessages(parameter,this.setMyState,this.props)
     }
 
+
     handleViewChat = async (item)=>{
 
         let parameters = {
@@ -41,16 +45,51 @@ export default class Messenger extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.CHAT,parameters)
     }
 
+
+
     renderItem = ({item,index})=>{
       
         return(
             <Components.PrimaryButtonWithPicture
                 title={item.name}
-                subTitle={item.lastMessage}
+                subTitle={item?.lastMessage}
                 picture={`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${item.profileImage}`}
                 onPress={()=>this.handleViewChat(item)}
             />
         )
+    }
+
+
+    handleGoToChat = async (item)=>{
+
+        console.warn(item)
+        let parameters = {
+            userId:await GET_SESSION('USER_ID'),
+            friendUserId:item._id,
+            username:`${item.first_name} ${item.middle_name ? item.middle_name : ''} ${item.last_name}`,          
+        }
+
+        this.props.navigation.navigate(constants.ScreenNames.Social.CHAT,parameters)
+    }
+
+    renderSearchedFriends = ({item,index})=>{
+      
+        return(
+            <Components.PrimaryButtonWithPicture
+                title={`${item.first_name} ${item.middle_name ? item.middle_name : ''} ${item.last_name}`}
+                picture={`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${item.picture}`}
+                onPress={()=>this.handleGoToChat(item)}
+            />
+        )
+    }
+
+    handleSearchFriend = async (value)=>{
+        let parameter={
+            searchValue:value,
+            userId: await GET_SESSION('USER_ID')
+        }
+
+        searchFriend(parameter,this.setMyState,this.props)
     }
 
 
@@ -63,15 +102,45 @@ export default class Messenger extends React.Component {
                     onNext={this.state.addType == 'post' ? this.handleGoToCreatePost : this.handleCreateStory }
                     showNextButton                               
                 />      
-                
 
-                <FlatList
-                    
-                    data={this.state.friendsMessages}
-                   
-                    renderItem={this.renderItem}
-                    contentContainerStyle={styles.allProductsContainer}                  
+                <View>
+                <Components.SearchInput
+                    onChangeText={this.handleSearchFriend}
+                    placeholder="Search"
+                    onBlur={()=>{
+                        this.setState({stopSearching:true})
+                    }}
                 />
+                </View>
+
+
+                {this.state.isSearching ? 
+                 <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                :
+   
+                ( !this.state.isSearching  && this.state.searchedFriends.length == 0 ?
+                        <FlatList                    
+                            data={this.state.friendsMessages}                   
+                            renderItem={this.renderItem}
+                            contentContainerStyle={styles.allProductsContainer}                  
+                        />
+                        :
+                    
+                    <FlatList                    
+                        data={this.state.searchedFriends}                   
+                        renderItem={this.renderSearchedFriends}
+                        contentContainerStyle={styles.allProductsContainer}                  
+                    />
+                )
+
+                
+                }
+                
+             
+                
+             
+               
+                   
 
 
               <FloatingAction 

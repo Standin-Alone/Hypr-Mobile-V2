@@ -1,7 +1,7 @@
 
 
-const ipAddress = '192.168.1.2';
-const ipAddressProd = '54.149.146.24';
+const ipAddress = '192.168.1.8';
+const ipAddressProd = '54.149.9.125';
 // const ipAddressProd = '192.168.1.2:8080';
 const SOCKET_IO = `http://${ipAddress}:9090`;
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
@@ -26,7 +26,7 @@ const MLM_API_PRO_HOST = `http://${ipAddressProd}/mlm/api/v1`;
 
 const Config = {
     // 0 => Devlopment env, 1 => Production env
-    APP_MODE: 0,
+    APP_MODE: 1,
     DEVELOPMENT: {
         API_HOST: `${API_DEV_HOST}`,
         API_ACCESS_POINT_PLAIN: `${API_DEV_HOST_PLAIN}`,

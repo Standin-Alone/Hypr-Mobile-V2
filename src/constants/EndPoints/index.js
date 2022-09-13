@@ -57,6 +57,7 @@ const EndPoints = {
 
     // TRACKING
     CHECK_ORDER_STATUS:'/fetch-order',
+    UPDATE_TRACKING:'/tracking/update-tracking',
     GET_TO_VERIFY_ORDERS:'/tracking/get-to-verify-orders',
     GET_ORDERED_PRODUCTS:'/tracking/get-ordered-products',
     GET_TRACKING_DETAILS:'/tracking-details',
@@ -93,6 +94,7 @@ const EndPoints = {
     SEND_MESSAGE:'/chat/send-message',
     CHECK_ROOM:'/chat/check-room',
     GET_FRIENDS_MESSAGES:'/chat/get-friends-messages',
+    SEARCH_FRIEND:'/chat/search-friend',
 
     // MLM
     GET_REWARDS_HISTORY:'/mlm/reward-history',

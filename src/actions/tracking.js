@@ -55,7 +55,9 @@ export const getToVerifyOrders = (payload,setState)=>{
 }
 
 
+const orderedProductsCallBack = ()=>{
 
+}
 
 export const checkOrdersStatus= (payload,setState)=>{
     
@@ -76,8 +78,7 @@ export const checkOrdersStatus= (payload,setState)=>{
             
               
                     Promise.all(orders.map(  (items,index)=>{
-                        
-                        // GET TRACKING DETAILS IN CJ
+                         // GET TRACKING DETAILS IN CJ
                          return  GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`).then( (result)=>{                    
                                                 
                             if(result.data.result == true){                                
@@ -85,40 +86,46 @@ export const checkOrdersStatus= (payload,setState)=>{
                                 
                                 if( result.data.data?.orderStatus == payload.condition){  
                                   
-                                 
-                                    // result.data.data.shippingAddress = {
-                                    //         billing_address: items.billing_address,
-                                    //         billing_state: items.billing_state,
-                                    //         billing_city: items.billing_city,
-                                    //         billing_country: items.billing_country,
-                                    //         billing_country_code: items.country_code,
-                                    //         billing_contact: items.billing_contact,
-                                    //         billing_zip_code: items.billing_zip_code
-                                    //     }
-                                 
+                                // result.data.data.shippingAddress = {
+                                //         billing_address: items.billing_address,
+                                //         billing_state: items.billing_state,
+                                //         billing_city: items.billing_city,
+                                //         billing_country: items.billing_country,
+                                //         billing_country_code: items.country_code,
+                                //         billing_contact: items.billing_contact,
+                                //         billing_zip_code: items.billing_zip_code
+                                //     }
                                     return result.data.data;
                                 }                                                                                                                                     
                             }
-                                })                    
+                            })                    
                         })).then((cleanOrders)=>{
                             
-                            if(cleanOrders.length > 0 ){
-                                let countNull = 0 ;
-                                let cleanOrdersFiltered = [];
-                                cleanOrders.map((item)=>{
-                                    console.warn(item)
+                            if(cleanOrders.length > 0 ){                          
+                              
+                                Promise.all(cleanOrders.map(async function(item){
+                                    
                                     if(!(item === null || item === undefined)){
                                         
-                                        cleanOrdersFiltered.push(item)
-                                    }
+                                        let orderedProductsPayload = {
+                                            orderNumber:item.orderNum
+                                        }
+
+                                    // ORDER PRODUCTS
+                                    // POST REQUEST
+                                    let  orderedProducts = await POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ORDERED_PRODUCTS}`,orderedProductsPayload);
+                               
+                                        if(orderedProducts.data.status == true){
+                                            item.orderedProducts = orderedProducts.data.data[0];
+                                        }
+                                       
+                                    }                                  
+                                    return item;                                 
+                                })).then((data)=>
+                                {                       
+                               
+                                    setState({loadingData:false,orders:data.filter(item=>item != undefined)}) 
                                 })
-
-                                
-                          
-
-                                    setState({loadingData:false,orders:cleanOrdersFiltered})          
-                                    
-                             
                                  
                             }
                         });
@@ -173,7 +180,7 @@ export const getOrderedProducts= (payload,setState)=>{
          if(state.isConnected && state.isInternetReachable){
 
             
-            // GET REQUEST
+            // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ORDERED_PRODUCTS}`,payload).then(async (response)=>{                    
                 
                 if(response.data.status == true){
@@ -233,20 +240,56 @@ export const getTrackOrder= (payload,setState)=>{
                 if(response.data.result == true){
                     
                     
-                    setState({openTrackingPanel:true,trackingInfo:response.data.data[0],isTracking:false});
+                    let updateTrackingPayload = {
+                        trackNumber:payload.trackNumber,
+                        orderNumber:payload.orderNumber,
+                        userId:payload.userId,
+                        tracks:response.data.data[0].routes
+                    };
+
+                    POST(`${getBaseUrl().accesspoint}${constants.EndPoints.UPDATE_TRACKING}`,updateTrackingPayload).then(async (updateTrackingResponse)=>{   
+                        if(updateTrackingResponse.data.status == true){
+
+                            setState({openTrackingPanel:true,trackingInfo:response.data.data[0],isTracking:false});
 
                     
 
-                    let routes = response.data.data[0].routes;
+                            let routes = response.data.data[0].routes;
+        
+                            routes.sort((a,b)=>{
+                                 
+                                    
+                                return moment(b.acceptTime) - moment(a.acceptTime);
+                            })
+        
+                        
+                            let cleanRoutes = routes.map((item)=>
+                                ({time:item.acceptTime,title:response.data.data[0].trackingStatus,description:item.remark})
+                            )
+        
+                            setState({routes:cleanRoutes});
+                         
+                        }else{
+                            Toast.show({
+                                type:'error',
+                                text1: response.data.message
+                            });
+                            setState({isTracking:false});
+                        }           
 
+                    }).catch((error)=>{
+                        console.warn(error)
+                        Toast.show({
+                            type:'error',
+                            text1:'Something went wrong!'
+                        });
+                        
+                        setState({isTracking:false});
+                    });
+        
+            
+             
 
-
-                    let cleanRoutes = routes.map((item)=>
-                        ({time:item.acceptTime,title:response.data.data[0].trackingStatus,description:item.remark})
-                    )
-
-                    setState({routes:cleanRoutes});
-                 
                     
                     
                     

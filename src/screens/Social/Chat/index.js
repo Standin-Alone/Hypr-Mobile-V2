@@ -105,6 +105,7 @@ export default class Chat extends React.Component {
                         avatar:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`,
                     }}
                     isTyping={true}
+                    shouldUpdateMessage={()=>{return true}}
                     />
       
               

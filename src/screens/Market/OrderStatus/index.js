@@ -10,6 +10,7 @@ import { getOrderedProducts,getTrackOrder } from '../../../actions/tracking';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DraggablePanel from 'react-native-draggable-panel';
 import Timeline from 'react-native-timeline-flatlist';
+import { GET_SESSION } from '../../../utils/async_storage';
 const data = [
     {time: '09:00', title: 'Event 1', description: 'Event 1 Description'},
     {time: '10:45', title: 'Event 2', description: 'Event 2 Description'},
@@ -41,6 +42,7 @@ export default class OrderStatus extends React.Component {
             orderNumber :this.state.parameters.orderInfo?.orderNum 
         }
         
+
         getOrderedProducts(payload,this.setMyState)
    
         InteractionManager.runAfterInteractions(()=>{
@@ -61,10 +63,12 @@ export default class OrderStatus extends React.Component {
         )
     }
 
-    handleOpenTracking = ()=>{
+    handleOpenTracking =async ()=>{
        
         let payload = {
-            trackNumber:this.state.orderInfo.trackNumber
+            trackNumber:this.state.orderInfo.trackNumber,
+            orderNumber :this.state.parameters.orderInfo?.orderNum,
+            userId: await GET_SESSION('USER_ID')
         }
         getTrackOrder(payload,this.setMyState)
     }
@@ -90,6 +94,10 @@ export default class OrderStatus extends React.Component {
                                 <Text style={styles.orderNumLabel}><constants.Icons.MaterialCommunityIcons name="clipboard-edit" size={20} color={constants.Colors.secondary}/>Order Number</Text>
                                 <Text style={styles.orderNumVal}>{this.state.parameters.orderInfo?.orderNum}</Text>
                             </View>                
+                            <View style={{flexDirection:'row',left:constants.Dimensions.vw(5), top:constants.Dimensions.vh(4)}}>
+                                <Text>Order Date: </Text>
+                                <Text> {this.state.parameters.orderInfo?.createDate}</Text>
+                            </View>
                         </View>         
 
                         <View style={[styles.orderStatusHeader,{height:constants.Dimensions.vh(70)}]}>
@@ -141,11 +149,13 @@ export default class OrderStatus extends React.Component {
                         visible={this.state.openTrackingPanel}
                         initialHeight={constants.Dimensions.vh(250)}
                       >
-                        <Text style={styles.trackingStatusLabel}>Tracking Status</Text>
-                        <View>
+                        <View>                                                    
+                            <Text style={styles.trackingStatusLabel}>Tracking Status</Text>
+                        </View>
+                        <View style={{marginVertical:constants.Dimensions.vh(5),marginHorizontal:constants.Dimensions.vw(2)}}>
                             <View style={{flexDirection:'row'}}>
                                 <Text>Logistic:</Text>
-                                <Text>{this.state.trackingInfo?.logisticName}</Text>
+                                <Text> {this.state.trackingInfo?.logisticName}</Text>
                             </View>
                         </View>
                         <Timeline data={this.state.routes} 

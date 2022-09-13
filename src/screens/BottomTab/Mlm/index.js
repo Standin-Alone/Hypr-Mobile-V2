@@ -43,8 +43,14 @@ export default class Mlm extends React.Component {
     }
 
     viewProfile = (item)=>{
-        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_PROFILE,item)
+        let cleanItem = {
+            user_id:item._id,
+            full_name:`${item.first_name} ${item.last_name}`
+        }
+
+        this.props.navigation.navigate(constants.ScreenNames.Social.VIEW_PROFILE,cleanItem)
     }
+
     renderMembers =  ({item,index})=>{
      
         console.warn(this.state.userInfo );

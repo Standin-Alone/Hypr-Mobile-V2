@@ -176,3 +176,54 @@ export const getFriendsMessages = (payload,setState,state,socket)=>{
     });
 
 }
+
+
+
+
+export const searchFriend = (payload,setState,state)=>{
+
+  
+    setState({isSearching:true,searchValue:payload.searchValue});
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.SEARCH_FRIEND}`,payload).then((response)=>{                    
+                
+                if(response.data.status == true){
+                    
+                    setState({searchedFriends:response.data.data});
+                    setState({isSearching:false});
+                }else{
+                
+                    setState({isSearching:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isSearching:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isSearching:false});
+         }
+    });
+
+}

@@ -80,6 +80,27 @@ export const styles = StyleSheet.create({
         position:'absolute',
         top:constants.Dimensions.vh(5),
         right:50
+    },
+    searchInput:{
+        backgroundColor:constants.Colors.gray,        
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:constants.Dimensions.normalize(8),
+        borderRadius:20,
+        height:constants.Dimensions.vh(10),
+        paddingHorizontal:constants.Dimensions.vw(10),
+        paddingVertical:constants.Dimensions.vh(1),
+        flex: 1,
+
+    },
+    searchInputIcon:{
+   
+        position: "absolute",
+        zIndex: 1,
+        left: 10,
+  
+    
+           
+
     }
   
 });

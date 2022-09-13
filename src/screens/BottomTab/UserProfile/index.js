@@ -9,6 +9,7 @@ import Clipboard from '@react-native-clipboard/clipboard';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { changeProfilePicture } from '../../../actions/profile';
 import { openCamera, openGallery } from '../../../utils/functions';
+import getBaseUrl from '../../../utils/config';
 
 export default class UserProfile extends React.Component {
     constructor(props) {
@@ -91,7 +92,7 @@ export default class UserProfile extends React.Component {
                     openModal={this.state.showReferralModal}
                     onCloseModal={()=>this.setState({showReferralModal: false})}
                     onCopy={()=>this.handleCopyLink(this.state.userInfo?.referral_link)}
-                    referralLink={this.state.userInfo?.referral_link}
+                    referralLink={`${getBaseUrl().accesspointPlain}this.state.userInfo?.referral_link`}
                 />
 
 

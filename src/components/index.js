@@ -16,7 +16,9 @@ import {
         PrimaryCitySelect,
         PrimaryStateSelect,
         CommentInput,
-        PrimaryInputNoBorder
+        PrimaryInputNoBorder,
+        SearchInput
+        
     } from "./input";
 
 import { 
@@ -84,7 +86,7 @@ export default {
     PrimaryCountrySelect,
     PrimaryCitySelect,
     PrimaryStateSelect,
- 
+    SearchInput,
 
     PrimaryHeader,
     MarketHeader,

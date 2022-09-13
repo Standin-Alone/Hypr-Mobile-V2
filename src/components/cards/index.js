@@ -21,7 +21,7 @@ export const ProductCard = ({
                <FastImage source={{ uri:productImage}} resizeMode={FastImage.resizeMode.contain} style={styles.productImage}/>
             </View>   
             <View>
-                  <Text style={styles.productName}>{productName}</Text>
+                  <Text style={styles.productName} numberOfLines={2}>{productName}</Text>
             </View>         
             <View style={{right:constants.Dimensions.vh(1.5)}}>
                   <Text style={styles.productPrice}> ${productPrice}</Text>

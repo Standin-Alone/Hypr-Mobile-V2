@@ -152,7 +152,7 @@ export default class Home extends React.Component {
                     goToMessenger={()=>this.props.navigation.navigate(constants.ScreenNames.Social.MESSENGER)}        
                 />
                 
-                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
+                {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                  */}
                 
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
@@ -179,7 +179,7 @@ export default class Home extends React.Component {
 
                     
                 {this.state.isLoading ?
-                        // <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+    
                         <>
                    
                     
@@ -237,7 +237,7 @@ export default class Home extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View> */}
-                </ImageBackground>
+                {/* </ImageBackground> */}
             </>
         )
     }

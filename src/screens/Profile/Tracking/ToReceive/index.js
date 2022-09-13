@@ -32,11 +32,11 @@ export default class ToReceive extends React.Component {
     }
 
     renderItems = ({item,index}) =>{
-
-        console.warn('item',item);
+        console.warn(item.orderedProducts?.product_image)
         return (
             <Components.OrderCardButton
-                title={item?.orderNum}                
+                title={item?.orderNum}     
+                image={item.orderedProducts?.product_image}           
                 showIcon={true}
                 iconName={'clipboard-list'}
                 iconSize={50}
