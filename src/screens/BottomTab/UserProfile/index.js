@@ -28,16 +28,16 @@ export default class UserProfile extends React.Component {
 
 
     async componentDidMount(){
-        getUserInfo(this.setMyState)
+        // getUserInfo(this.setMyState)
 
-        // this.props.navigation.addListener('focus',()=>{
-        //     getUserInfo(this.setMyState)
-        // })
+        this.props.navigation.addListener('focus',()=>{
+            getUserInfo(this.setMyState)
+        })
 
     }
 
     handleCopyLink = (referral_link)=>{
-        
+        console.warn(referral_link);
         Clipboard.setString(referral_link);       
         ToastAndroid.show("Successfully copied the link", ToastAndroid.SHORT);       
     }
@@ -91,7 +91,7 @@ export default class UserProfile extends React.Component {
                 <Components.ShareReferralLinkModal 
                     openModal={this.state.showReferralModal}
                     onCloseModal={()=>this.setState({showReferralModal: false})}
-                    onCopy={()=>this.handleCopyLink(this.state.userInfo?.referral_link)}
+                    onCopy={()=>this.handleCopyLink(`${getBaseUrl().accesspointPlain}${this.state.userInfo?.referral_link}`)}
                     referralLink={`${getBaseUrl().accesspointPlain}this.state.userInfo?.referral_link`}
                 />
 

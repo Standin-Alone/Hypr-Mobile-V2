@@ -41,9 +41,9 @@ export default class Camera extends React.Component {
 
             let fileSize = (metadata.size /1000) / 1000;
 
-
-            if(fileSize < 1){
-
+         
+            if(fileSize < 5){
+             
                 let  fileParts = data.uri.split('/');
                 let filename = fileParts[fileParts.length - 1];
                 
@@ -84,9 +84,11 @@ export default class Camera extends React.Component {
             const metadata = await getFileData(gallery.uri);
 
 
-            let fileSize = (metadata.size /1000) / 1000;
-
+            let fileSize = (metadata.size /1024) / 1024;
+            console.warn(fileSize < 1) ;
             if(fileSize < 1){
+                
+                
                 imageGallery.push({fileBase64:gallery.base64,fileName:gallery.fileName});                        
             }else{
                 countError++;
@@ -94,9 +96,9 @@ export default class Camera extends React.Component {
             }
             
         })
+  
 
-
-        if(countError > 0){
+        if(countError ==  0){
             let parameter = {
                 image:imageGallery,
                 multiple:true,

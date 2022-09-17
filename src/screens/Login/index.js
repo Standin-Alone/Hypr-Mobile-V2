@@ -39,23 +39,20 @@ export default class Login extends React.Component {
 
     // handleLogin
     handleLogin = (loginType)=>{
-                
-    
         let payload = {
             username    : this.state.username.value,
             password : this.state.password.value,
             loginType: loginType
         };
-
-        
-
-        return login(payload,this.setMyState,this.props);               
-        
-              
+        return login(payload,this.setMyState,this.props);                
     }
 
     goToSignUp = () => {
         this.props.navigation.navigate('SignUp');
+    }
+
+    handleGoToForgotPassword = ()=>{
+        this.props.navigation.navigate(constants.ScreenNames.AppStack.FORGOT_PASSWORD);
     }
 
     render(){
@@ -111,7 +108,7 @@ export default class Login extends React.Component {
 
                         <View style={styles.buttonContainer}> 
                             <View style={{ flexDirection:'row',justifyContent:'flex-end',marginBottom:20,right:constants.Dimensions.vw(10)}}>
-                                <Text style={styles.forgotPassword}>Forgot Password?</Text>
+                                <Text style={styles.forgotPassword} onPress={this.handleGoToForgotPassword} >Forgot Password?</Text>
                             </View>
                             
                             <Animated.View>

@@ -36,7 +36,8 @@ export default class ToShip extends React.Component {
         console.warn('item',item);
         return (
             <Components.OrderCardButton
-                title={item?.orderNum}                
+                title={item?.orderNum}     
+                image={item.orderedProducts?.product_image}                 
                 showIcon={true}
                 iconName={'clipboard-list'}
                 iconSize={50}

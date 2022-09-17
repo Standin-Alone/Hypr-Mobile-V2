@@ -5,6 +5,7 @@ export default {
       SIGNUP:'SignUp',
       VERIFY_OTP:'VerifyOtp',
       HOME:'Home',
+      FORGOT_PASSWORD:'ForgotPassword'
 
    },
    BottomTab:{

@@ -53,7 +53,7 @@ export default class Mlm extends React.Component {
 
     renderMembers =  ({item,index})=>{
      
-        console.warn(this.state.userInfo );
+        
         return(<Components.MemberCard
                     fullName={`${item.first_name} ${item.last_name} ${item._id == this.state.userInfo?._id ? '(Me)' : ''}`}         
                     profilePicture={item.profile_image}
@@ -80,7 +80,7 @@ export default class Mlm extends React.Component {
                             </View>
                             <View style={{flexDirection:'column',justifyContent:'center',marginVertical:constants.Dimensions.vh(10)}}>
                                 <Text style={styles.rewardValueText}>
-                                    {this.state.userInfo.reward ? this.state.userInfo.reward  : 'Processing' }
+                                    {this.state.userInfo.reward >= 0  ? this.state.userInfo.reward.toFixed(2)  : 'Processing' }
                                 </Text>
 
                                 <Text style={styles.rewardTitleText     }>

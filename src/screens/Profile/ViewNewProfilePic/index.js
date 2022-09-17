@@ -14,7 +14,9 @@ export default class ViewNewProfilePic extends React.Component {
       super(props);
       this.state = {      
         capturedImageBase4:this.props.route.params.image,
-        imageInfo:this.props.route.params.imageInfo
+        imageInfo:this.props.route.params.imageInfo,
+        isLoading:false,
+        title:'Processing'
       };
     }
 
@@ -59,7 +61,10 @@ export default class ViewNewProfilePic extends React.Component {
                     showSaveButton                            
                 />      
 
-           
+                <Components.ProgressLoadingModal
+                    openModal={this.state.isLoading}
+                    title={this.state.title}
+                />
 
                         
                 <FastImage source={{uri: `data:image/jpeg;base64,${this.state.capturedImageBase4}`}} style={styles.image} resizeMode={FastImage.resizeMode.cover}/>

@@ -16,50 +16,50 @@ export default class SignUp extends React.Component {
               focus:false,
               error:false,
               errorMessage:'',
-              value:'John Edcel'
+              value:''
           },
           lastName:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'Zenarosa'
+            value:''
           },
           email:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'standinalone01000@gmail.com'
+            value:''
           },
           contact:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'9106120892'
+            value:''
           },
           birthday:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'04/27/1992',
+            value:'',
             openDatePicker:false
           },
           username:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'standinalone01000@gmail.com'
+            value:''
           },
           password:{
                 focus:false,
                 error:false,
                 errorMessage:'',
-                value:'Hypr01000!'
+                value:''
           },      
           confirmPassword:{
             focus:false,
             error:false,
             errorMessage:'',
-            value:'Hypr01000!'
+            value:''
           },      
           isLoading:false,
           showPassword1:true,

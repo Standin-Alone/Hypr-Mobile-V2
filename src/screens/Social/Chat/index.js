@@ -41,13 +41,13 @@ export default class Chat extends React.Component {
         getUserInfo(this.setMyState)
 
         this.setState({socketIo:socket});
-       
+  
         const mySocket = io(getBaseUrl().SOCKET_IO, {
             transports: ['websocket'] // you need to explicitly tell it to use websockets
         });
 
-      
-            mySocket.on('connect', ()=>{
+ 
+            mySocket.on('connect', (err)=>{
              
                 checkRoom(this.props.route.params,this.setMyState,this.state,mySocket)
                 

@@ -15,7 +15,8 @@ export default class Friend extends React.Component {
             extraFriendSuggestion:[],
             friendRequests:[],
             extrafriendRequests:[],
-            isLoading:false
+            isLoading:false,
+            userId:''
     
       };
     }
@@ -27,6 +28,8 @@ export default class Friend extends React.Component {
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
         }
+
+        this.setState({userId:parameter.userId})
         getAllFriendSuggestion(parameter,this.setMyState)
         getAllFriendRequests(parameter,this.setMyState)
         
@@ -63,9 +66,11 @@ export default class Friend extends React.Component {
         declineFriendRequest(parameter,this.setMyState,this.props,this.state)
     }
 
-    renderItem = ({item,index})=>{
-       
-        return(<Components.FriendSuggestionCard
+    renderItem =  ({item,index})=>{
+    
+        return(
+                item.first_name && this.state.userId != item._id &&    
+                <Components.FriendSuggestionCard
                     fullName={`${item.first_name} ${item.last_name}`}
                     onAddFriend={()=>this.handleAddFriend(item)}
                     profilePicture={item.picture}
@@ -74,7 +79,7 @@ export default class Friend extends React.Component {
     }
      
 
-    renderFriendRequests = ({item,index})=>{
+    renderFriendRequests =  ({item,index})=>{
      
         return(<Components.FriendRequestsCard
                     fullName={`${item.first_name} ${item.last_name}`}

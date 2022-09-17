@@ -80,8 +80,8 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-
-     
+        console.warn(`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item.filenames[0]}`);
+        
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
                 <Components.SocialPostCard

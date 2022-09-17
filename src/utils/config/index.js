@@ -2,7 +2,8 @@
 
 const ipAddress = '192.168.1.8';
 const ipAddressProd = '54.149.9.125';
-// const ipAddressProd = '192.168.1.2:8080';
+
+// const ipAddressProd = '192.168.1.8';
 const SOCKET_IO = `http://${ipAddress}:9090`;
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
 const API_DEV_HOST = `http://${ipAddress}:9002/hypr-mobile`;
@@ -21,7 +22,7 @@ const API_PRO_HOST_PLAIN = `http://${ipAddressProd}`;
 const API_PRO_HOST = `http://${ipAddressProd}/hypr-mobile`;
 const CJ_API_PRO_HOST = `http://${ipAddressProd}/cj/api/v1`;
 const MLM_API_PRO_HOST = `http://${ipAddressProd}/mlm/api/v1`;
-
+const SOCKET_IO_PROD = `http://${ipAddressProd}:4500`;
 
 
 const Config = {
@@ -72,7 +73,7 @@ export default function getBaseUrl() {
             MLM_ACCESS_POINT: Config.PRODUCTION.MLM_ACCESS_POINT,
             accesspoint: Config.PRODUCTION.API_ACCESS_POINT,
             accesspointPlain: Config.PRODUCTION.API_ACCESS_POINT_PLAIN,
-            SOCKET_IO:SOCKET_IO
+            SOCKET_IO:SOCKET_IO_PROD
         };
     }
 

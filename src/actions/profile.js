@@ -9,7 +9,7 @@ import { Buffer } from 'buffer'
 
 export const changeProfilePicture = (payload,setState,props)=>{
 
-
+    setState({isLoading:true})
     let countError = 0;
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -31,7 +31,7 @@ export const changeProfilePicture = (payload,setState,props)=>{
                         text1: response.data.message
                     });
               
-                    
+                    setState({isLoading:false})
                     props.navigation.goBack();
                 }else{
                     Toast.show({
@@ -44,7 +44,7 @@ export const changeProfilePicture = (payload,setState,props)=>{
         
                  
             }).catch((error)=>{
-                console.warn(error)
+                console.warn(error.response)
                 Toast.show({
                     type:'error',
                     text1:'Something went wrong!'
@@ -61,7 +61,7 @@ export const changeProfilePicture = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false,isLoadingPlaceholder:false});
+            setState({isLoading:false});
          }
     });
 

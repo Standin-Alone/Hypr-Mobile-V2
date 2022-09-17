@@ -183,7 +183,7 @@ export const createAccount = (payload,setState,props)=>{
                 }
 
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT}`,clean_payload).then((response)=>{                    
-                    console.warn(clean_payload);
+                
                     if(response.data.status == true){
                         
                         Toast.show({
@@ -269,9 +269,10 @@ export const login = (payload,setState,props) => {
                     loginType:payload.loginType
                 }
 
+                
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
-              
+                    console.warn(response);
                     if(response.data.status == true){
                         Toast.show({
                                 type:'success',
@@ -302,7 +303,8 @@ export const login = (payload,setState,props) => {
                     console.warn(error.response);
                     Toast.show({
                         type:'error',
-                        text1:'Something went wrong!'
+                        text1:`${error}`,
+                        text2:error.response
                     });
                     
                     // turn off loading
@@ -557,3 +559,88 @@ export const getUserInfo = (setState)=>{
 
 
 
+
+
+
+
+export const sendForgotPasswordLink = (payload,setState,props) => {     
+ 
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then(async (state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){
+            
+
+          
+            //turn on loading
+            setState({isLoading:true});
+             // validate payload
+             Object.keys(payload).map((item,index)=>{                
+                if(payload[item] !== undefined || payload[item] != '' ){                      
+                    if(payload[item] == ''){
+                        setState({[item]:{...payload[item],error:true,errorMessage:`Please enter your ${item}.`}})                                                
+                        countError++;
+                    }                                     
+                }
+            })            
+            
+            if(countError == 0){
+                                      
+                let clean_payload = {
+                    email : payload.username,    
+                }
+
+                // POST REQUEST
+                POST(`${getBaseUrl().accesspoint}${constants.EndPoints.SEND_FORGOT_PASSWORD_LINK}`,clean_payload).then((response)=>{                    
+              
+                    if(response.data.status == true){
+                        Toast.show({
+                                type:'success',
+                                text1:'Success',                    
+                                text2: response.data.message
+                        });
+
+                        // turn off loading
+                        setState({isLoading:false});
+                    }else{
+                        Toast.show({
+                            type:'error',
+                            text1: response.data.message
+                        });
+                    // turn off loading
+                    setState({isLoading:false});
+                    }
+
+                     
+                }).catch((error)=>{
+                    
+            
+                    Toast.show({
+                        type:'error',
+                        text1:'Something went wrong!'
+                    });
+                    
+                    // turn off loading
+                    setState({isLoading:false});
+                });
+            }else{
+                setState({isLoading:false});
+            }
+                         
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+            
+        }
+     
+        
+    });
+
+}
