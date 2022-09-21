@@ -267,7 +267,7 @@ export const hypePost = (payload,setState,props,myState)=>{
 
 export const createPost = (payload,setState,props)=>{
 
-
+    setState({isProgress:true});
     let countError = 0;
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -287,7 +287,7 @@ export const createPost = (payload,setState,props)=>{
 
      
             
-            if(payload.caption){
+            if(payload.caption != ''){
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
                          
@@ -302,7 +302,7 @@ export const createPost = (payload,setState,props)=>{
                         index: 0,
                         routes: [{ name: constants.ScreenNames.AppStack.HOME }]
                     });  
-                    setState({isLoading:false});
+                        setState({isProgress:false});
 
                     
 
@@ -311,7 +311,7 @@ export const createPost = (payload,setState,props)=>{
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({isLoading:false});
+                    setState({isProgress:false});
 
                 }
         
@@ -324,14 +324,14 @@ export const createPost = (payload,setState,props)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isProgress:false});
             });
         }else{
             Toast.show({
                 type:'error',
                 text1:'Please write something to post.'
             });
-
+            setState({isProgress:false});
         }
          }else{
              //  No internet Connection
@@ -340,7 +340,7 @@ export const createPost = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false,isLoadingPlaceholder:false});
+            setState({isProgress:false});
          }
     });
 
@@ -375,6 +375,7 @@ export const comment = (payload,setState,props,state)=>{
                    
                     setState({isLoading:false});
 
+                    setState({comment:{...state.comment,value:''}})
                     
 
                 }else{
@@ -474,7 +475,7 @@ export const getProfileInfo = (payload,setState)=>{
 
 export const createStory = (payload,setState,props,state)=>{
 
-
+    setState({isProgress:true});
     let countError = 0;
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -501,7 +502,7 @@ export const createStory = (payload,setState,props,state)=>{
                         routes: [{ name: constants.ScreenNames.AppStack.HOME }]
                     });  
                     
-                    setState({isLoading:false});
+                    setState({isProgress:false});
 
                     
 
@@ -510,7 +511,7 @@ export const createStory = (payload,setState,props,state)=>{
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({isLoading:false});
+                    setState({isProgress:false});
 
                 }
         
@@ -523,7 +524,7 @@ export const createStory = (payload,setState,props,state)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isProgress:false});
             });
 
          }else{
@@ -533,7 +534,7 @@ export const createStory = (payload,setState,props,state)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isLoading:false,isLoadingPlaceholder:false});
+            setState({isProgress:false});
          }
     });
 

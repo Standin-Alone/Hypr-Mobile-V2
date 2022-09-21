@@ -1,6 +1,6 @@
 
 
-const ipAddress = '192.168.1.8';
+const ipAddress = '192.168.1.11';
 const ipAddressProd = '54.149.9.125';
 
 // const ipAddressProd = '192.168.1.8';
@@ -14,7 +14,7 @@ const MLM_API_HOST = `http://${ipAddress}:9002/mlm/api/v1`;
 // const API_DEV_HOST_PLAIN = `http://${ipAddress}`;
 // const API_DEV_HOST = `http://${ipAddress}/hypr-mobile`;
 // const CJ_API_HOST = `http://${ipAddress}/cj/api/market`;
-// const MLM_API_HOST = `http://${ipAddress}/mlm/api/v1`;
+// const MLM_API_HOST = `htrtp://${ipAddress}/mlm/api/v1`;
 
 
 

@@ -14,7 +14,9 @@ export default class CapturedPhoto extends React.Component {
       super(props);
       this.state = {      
         capturedImageBase4:this.props.route.params.image,
-        addType:this.props.route.params.addType
+        addType:this.props.route.params.addType,
+        isProgress:false,
+        progressTitle:'Posting story...'
       };
     }
 
@@ -60,7 +62,10 @@ export default class CapturedPhoto extends React.Component {
                     onNext={this.state.addType == 'post' ? this.handleGoToCreatePost : this.handleCreateStory }
                     showNextButton                               
                 />      
-
+                <Components.ProgressLoadingModal
+                    openModal={this.state.isProgress}
+                    title={this.state.progressTitle}
+                />
            
 
         

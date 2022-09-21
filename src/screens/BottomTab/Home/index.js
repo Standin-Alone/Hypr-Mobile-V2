@@ -80,7 +80,7 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-        console.warn(`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item.filenames[0]}`);
+       
         
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -116,14 +116,18 @@ export default class Home extends React.Component {
         
         this.props.navigation.navigate(constants.ScreenNames.Social.STORIES,{story:item,stories:stories})
     }
-    renderStories = ({item,index})=>(
-        <Components.UserProfilePicture
-            profilePicture={item.user_image}
-            fullName={item.user_name}
-            onViewStory={()=>this.handleViewStory(item,this.state.stories)}
-        />
+    renderStories = ({item,index})=>{        
+        let filterStory =  item.files.filter((storyFilter)=>storyFilter.status == 1);
+        return (            
+            filterStory.length > 0 &&
+                <Components.UserProfilePicture
+                    profilePicture={item.user_image}
+                    fullName={item.user_name}
+                    onViewStory={()=>this.handleViewStory(item,this.state.stories)}
+                />
         
-    )
+        )
+    }
 
     handleOpenAddStories = ()=>{
         this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:'stories'})
@@ -208,7 +212,7 @@ export default class Home extends React.Component {
                                  
                                if (distanceFromEnd > 0   ) 
                                 {                               
-                                    console.warn(this.state.currentPage);
+                                   
                                     if(this.state.posts.length == this.state.currentPage || this.state.posts.length  == 2 ){
                                         this.setState((prevState) => ({currentPage:prevState.currentPage + 2,showFooter:true}));
                                     

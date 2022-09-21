@@ -20,6 +20,8 @@ export default class CreatePost extends React.Component {
             errorMessage:'',
             value:''
         },
+        isProgress:false
+        
       };
     }
 
@@ -54,7 +56,10 @@ export default class CreatePost extends React.Component {
                     showPostButton
                     onCreatePost={this.handleCreatePost}    
                 />      
-
+                <Components.ProgressLoadingModal
+                    openModal={this.state.isProgress}
+                    title={"Posting..."}
+                />
                 <View style={styles.container}>
                     <View style={{flexDirection:'row'}}>                        
                         

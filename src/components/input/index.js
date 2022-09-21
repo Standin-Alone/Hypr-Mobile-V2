@@ -133,7 +133,7 @@ errorMessage
             <PhoneInput           
                 textInputStyle={styles.phoneInput}
                 defaultValue={value}
-                defaultCode="PH"
+                defaultCode="IT"
                 layout="first"
                 onChangeText={onChangeText}
                 onChangeFormattedText={onChangeFormattedText}          

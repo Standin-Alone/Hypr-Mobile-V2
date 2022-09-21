@@ -52,15 +52,18 @@ export default class Chat extends React.Component {
                 checkRoom(this.props.route.params,this.setMyState,this.state,mySocket)
                 
                 mySocket.on('message-from-server',  async (data)=>{
+           
                     let userId  = await GET_SESSION('USER_ID');
                   
-                    if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId)                             
-                    )
-                    {
-                       this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
+                    // if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId)                             
+                    // )
+                    // {
+                    //    this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
                            
-                    }
-    
+                    // }else{
+
+                    // }
+                    this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
     
                    
                 });

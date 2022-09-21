@@ -34,7 +34,6 @@ export default class Comments extends React.Component {
 
         console.warn(this.state.parameter.hypes.some(async (hypeItem)=>hypeItem.user_id == await GET_SESSION('USER_ID')))
 
-        console.warn('comment',this.props.route.params)
     }   
  
     

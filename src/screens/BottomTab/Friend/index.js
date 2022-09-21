@@ -102,20 +102,21 @@ export default class Friend extends React.Component {
                     <View>
 
                         {this.state.friendRequests.length > 0 &&
-                        <>
+                        <View>
                             <View style={{left:constants.Dimensions.vw(1)}}>
                                 <Text style={styles.headerText1} >Friend requests</Text>
                                 <FlatList
                                     data={this.state.friendRequests}
                                     extraData={this.state.extrafriendRequests}
-                                    renderItem={this.renderFriendRequests}
+                                    renderItem={this.renderFriendRequests}  
+                                    contentContainerStyle={{height:constants.Dimensions.vh(40)}}                                  
                                 />
                             </View>
-                            <View style={{top:constants.Dimensions.vh(2)}}>
+                            <View style={{top:constants.Dimensions.vh(1)}}>
                                 <View style={styles.divider}>                            
                                 </View>
                             </View>
-                        </>                                                
+                        </View>                                                
                         }
                         <View style={{top:constants.Dimensions.vh(2),left:constants.Dimensions.vw(1)}}>
                             <View  style={{left:constants.Dimensions.vw(1)}}>

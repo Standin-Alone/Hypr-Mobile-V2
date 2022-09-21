@@ -81,7 +81,7 @@ export const checkRoom = (payload,setState,state,socket)=>{
 
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CHECK_ROOM}`,payload).then((response)=>{                    
-                alert(response.data.status);
+          
                 if(response.data.status == true){
                     console.warn('CONNECTED TRUE ',response.data.data.room_name)
                     socket.emit('join-room',response.data.data.room_name);
@@ -93,7 +93,7 @@ export const checkRoom = (payload,setState,state,socket)=>{
                
                    
                 }else{
-                    console.warn('CONNECTED FAILED')
+                  
                     socket.emit('join-room',response.data.data.room_name);
                     
                     setState({room:response.data.data.room_name});
