@@ -17,8 +17,7 @@ export const sendMessage = (payload,setState,state)=>{
         room: payload.room
     }
 
-    console.warn(payload.message);
-    
+   
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -72,18 +71,20 @@ export const sendMessage = (payload,setState,state)=>{
 export const checkRoom = (payload,setState,state,socket)=>{
 
   
-    payload.room = generateUuid();  
+    payload.room = payload.room ? payload.room : generateUuid();  
+
+
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-
-
+       
+            console.warn(`PAYLOAD`,payload);
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CHECK_ROOM}`,payload).then((response)=>{                    
-          
+               
                 if(response.data.status == true){
-                    console.warn('CONNECTED TRUE ',response.data.data.room_name)
+                    
                     socket.emit('join-room',response.data.data.room_name);
                     
                    setState({room:response.data.data.room_name});

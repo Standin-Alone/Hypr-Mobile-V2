@@ -34,11 +34,12 @@ export default class Messenger extends React.Component {
 
 
     handleViewChat = async (item)=>{
-
+        console.warn(`CHAT`,item)
         let parameters = {
             userId:await GET_SESSION('USER_ID'),
-            friendUserId:item.userId == await GET_SESSION('USER_ID') ? item.userId :  await GET_SESSION('USER_ID') ,
-            username:item.name,          
+            friendUserId:item.userId == await GET_SESSION('USER_ID') ?   await GET_SESSION('USER_ID')  :  item.userId ,
+            username:item.name,   
+            room:item.room      
 
         }
 
@@ -62,11 +63,12 @@ export default class Messenger extends React.Component {
 
     handleGoToChat = async (item)=>{
 
-        console.warn(item)
+        
         let parameters = {
             userId:await GET_SESSION('USER_ID'),
             friendUserId:item._id,
-            username:`${item.first_name} ${item.middle_name ? item.middle_name : ''} ${item.last_name}`,          
+            username:`${item.first_name} ${item.middle_name ? item.middle_name : ''} ${item.last_name}`, 
+            room:item.room         
         }
 
         this.props.navigation.navigate(constants.ScreenNames.Social.CHAT,parameters)

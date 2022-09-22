@@ -41,7 +41,7 @@ export default class Chat extends React.Component {
         getUserInfo(this.setMyState)
 
         this.setState({socketIo:socket});
-  
+        console.warn(`PROPS`,this.state.parameters)
         const mySocket = io(getBaseUrl().SOCKET_IO, {
             transports: ['websocket'] // you need to explicitly tell it to use websockets
         });
@@ -50,20 +50,18 @@ export default class Chat extends React.Component {
             mySocket.on('connect', (err)=>{
              
                 checkRoom(this.props.route.params,this.setMyState,this.state,mySocket)
-                
-                mySocket.on('message-from-server',  async (data)=>{
            
-                    let userId  = await GET_SESSION('USER_ID');
+                mySocket.on('message-from-server',  async (data)=>{
                   
-                    // if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId)                             
-                    // )
-                    // {
-                    //    this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
-                           
-                    // }else{
-
-                    // }
+                    let userId  = await GET_SESSION('USER_ID');
                     this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
+                    if((data.userId == this.state.parameters.friendUserId && data.friendUserId == userId)                             
+                    )
+                    {
+                       this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
+                           
+                    }
+                    // this.setState({messages:GiftedChat.append(this.state.messages, ...data.message)});
     
                    
                 });
