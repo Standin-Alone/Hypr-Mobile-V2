@@ -44,27 +44,34 @@ divider:{
 },
 subTotalText:{
     fontFamily:constants.Fonts.OpenSansMedium,
-    fontSize:16,
+    fontSize:constants.Dimensions.normalize(8),
 },
 subTotalValue:{
     fontFamily:constants.Fonts.OpenSansMedium,
-    fontSize:16,
+    fontSize:constants.Dimensions.normalize(8),
+
+},
+selectPayment:{
+    fontFamily:constants.Fonts.OpenSansMedium,
+    color:constants.Colors.gradient.secondary,
+    fontSize:constants.Dimensions.normalize(8),
+
 },
 subTotalContainer:{    
     paddingVertical:constants.Dimensions.vh(2),
-    top:constants.Dimensions.vh(-5),
+    top:constants.Dimensions.vh(3),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
 },
 totalContainer:{    
     paddingVertical:constants.Dimensions.vh(2),
-    top:constants.Dimensions.vh(-4),
+    top:constants.Dimensions.vh(2),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
 },
 paymentMethodContainer:{    
     paddingVertical:constants.Dimensions.vh(5),
-    top:constants.Dimensions.vh(-3),
+    top:constants.Dimensions.vh(6),
     backgroundColor:constants.Colors.light,
     flexDirection:'column',
 },

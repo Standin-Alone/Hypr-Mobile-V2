@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     },
     subtitleText:{
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:constants.Dimensions.normalize(10),        
+        fontSize:constants.Dimensions.normalize(7),        
         color:constants.Colors.dark_tint,                
     },
     forgotPassword:{

@@ -29,10 +29,15 @@ import {
     FriendHeader,
     CommentHeader,
     MessengerHeader,
-    MlmHeader
+    MlmHeader,
+    PrimaryHomeHeader
     } from "./headers";
 
 
+import { 
+    PrimaryHomeFooter
+    
+} from "./footers";
 import { 
     ProductCard,
     VariantCard,
@@ -79,6 +84,7 @@ export default {
     OrderCardButton,
     PrimaryButtonWithPicture,
 
+    // TEXT INPUT
     PrimaryTextInput,
     PrimaryInputNoBorder,
     CommentInput,
@@ -88,6 +94,7 @@ export default {
     PrimaryStateSelect,
     SearchInput,
 
+    // HEADERS
     PrimaryHeader,
     MarketHeader,
     ProfileHeader,
@@ -96,8 +103,10 @@ export default {
     CommentHeader,
     MessengerHeader,
     MlmHeader,
-
-
+    PrimaryHomeHeader,
+    // FOOTER
+    PrimaryHomeFooter,
+    // CARDS
     ProductCard,
     VariantCard,
     AddressCard,
@@ -112,11 +121,12 @@ export default {
     UserProfilePicture,
     MemberCard,
     RewardHistoryCard,
+    // LOADER
     Loader,
     LoadingScreen,
     FooterLoader,
     EmptyComponent,
-    
+    // MODAL
     PaymentMethodModal,
     ShareReferralLinkModal,
     ProgressLoadingModal,

@@ -69,9 +69,10 @@ export default class Mlm extends React.Component {
         return(
             <>
                 <Components.MlmHeader
+                    onGoBack={()=>this.props.navigation.goBack()}
                     goToRewardHistory = {()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.REWARD_HISTORY)}
                 />                                 
-                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                 
+                {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                  */}
                     <View style={styles.pointsCard}>
                         <View style={{flexDirection:'row',justifyContent:'space-evenly'}}>
                                 
@@ -101,7 +102,7 @@ export default class Mlm extends React.Component {
                             contentContainerStyle={{paddingBottom:constants.Dimensions.vh(100)}}
                         />
                         }              
-                </ImageBackground>
+                {/* </ImageBackground> */}
             </>
         ) 
     }

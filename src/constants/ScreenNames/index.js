@@ -5,6 +5,7 @@ export default {
       SIGNUP:'SignUp',
       VERIFY_OTP:'VerifyOtp',
       HOME:'Home',
+      PRIMARY_HOME:'PrimaryHome',
       FORGOT_PASSWORD:'ForgotPassword'
 
    },

@@ -1,7 +1,7 @@
 
 
-const ipAddress = '192.168.1.11';
-const ipAddressProd = '54.149.9.125';
+const ipAddress = '192.168.1.4';
+const ipAddressProd = '34.223.255.252';
 
 // const ipAddressProd = '192.168.1.8';
 const SOCKET_IO = `http://${ipAddress}:9090`;
@@ -27,7 +27,7 @@ const SOCKET_IO_PROD = `http://${ipAddressProd}:4500`;
 
 const Config = {
     // 0 => Devlopment env, 1 => Production env
-    APP_MODE: 1,
+    APP_MODE: 0,
     DEVELOPMENT: {
         API_HOST: `${API_DEV_HOST}`,
         API_ACCESS_POINT_PLAIN: `${API_DEV_HOST_PLAIN}`,

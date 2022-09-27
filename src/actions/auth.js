@@ -384,7 +384,7 @@ export const verifyOtp = (payload,setState,props)=>{
                                             
                         props.navigation.reset({
                             index: 0,
-                            routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                            routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
                         });    
                         
                      // turn off loading

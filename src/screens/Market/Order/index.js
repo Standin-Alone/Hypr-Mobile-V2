@@ -218,7 +218,7 @@ export default class Order extends React.Component {
 
           
                         <TouchableOpacity style={{flex:0,justifyContent:'flex-end'}} onPress={()=>this.handleOpenPaymentModal()}>
-                            <Text style={styles.subTotalValue} >    
+                            <Text style={styles.selectPayment} >    
                             {  this.state.selectedPaymentMethod == '' ?
                                  'Select Payment...' 
                                  : 

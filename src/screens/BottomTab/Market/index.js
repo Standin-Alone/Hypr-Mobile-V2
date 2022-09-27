@@ -91,9 +91,7 @@ export default class Market extends React.Component {
         return(
             <>
                 
-                    <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>
-
-                   
+                    <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                   
                     <Components.Loader isLoading={this.state.isProgress}/>
                     <Components.MarketHeader
                         showSearch={true}

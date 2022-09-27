@@ -1,14 +1,23 @@
 export default Colors = {
     dark:'#000000',
     light:'#ffffff',
-    primary: '#246EE9', 
+    primary: '#ff7b00', 
     primary_tint:'#d6e4fb',
-    secondary:'#6803ff',        
+    secondary:'#6803ff',   
+    // primary: '#246EE9', 
+    // primary_tint:'#d6e4fb',
+    // secondary:'#6803ff',        
     gradient:{
-        primary:'#BB22FE',
-        secondary:'#0561D0',
-        tertiary:'#2787FA'
+        primary:'#fc7005',
+        secondary:'#f78c1e',
+        tertiary:'#f49f2e',
+        quarternary:'#f2a937',
     }, 
+    // gradient:{
+    //     primary:'#BB22FE',
+    //     secondary:'#0561D0',
+    //     tertiary:'#2787FA'
+    // }, 
     danger:'',
     warning:'#ffba3b',
     gray:'#ACB1C1',

@@ -1,12 +1,12 @@
 import React from 'react';
 import { View,ActivityIndicator,Text,ImageBackground } from 'react-native';
 import constants from '../../constants';
-import { GET_SESSION } from '../../utils/async_storage';
+import { CLEAR_SESSION, GET_SESSION } from '../../utils/async_storage';
 import FastImage from 'react-native-fast-image'
 import { styles } from './styles';
 import NetInfo from "@react-native-community/netinfo";
 import Toast from 'react-native-toast-message';
-
+import LinearGradient from 'react-native-linear-gradient';
 export default class Authentication extends React.Component {
     constructor(props) {
       super(props);
@@ -17,10 +17,10 @@ export default class Authentication extends React.Component {
     }
     async componentDidMount(){
         let checkSession = await GET_SESSION('USER_ID');
-
+        // await CLEAR_SESSION(); 
         // Check Internet Connection
         NetInfo.fetch().then((state)=>{
-
+            
             // if internet connected
             if(state.isConnected && state.isInternetReachable){
                 
@@ -31,12 +31,12 @@ export default class Authentication extends React.Component {
                  
                         
                     
-                        // this.props.navigation.replace(constants.ScreenNames.AppStack.HOME,{stories:stories});
-                        this.props.navigation.replace(constants.ScreenNames.AppStack.HOME, {
-                            screen: constants.ScreenNames.BottomTab.SOCIAL_HOME,
-                            params: { screen: constants.ScreenNames.Social.SOCIAL,
-                            },
-                          });
+                        this.props.navigation.replace(constants.ScreenNames.AppStack.PRIMARY_HOME);
+                        // this.props.navigation.replace(constants.ScreenNames.AppStack.HOME, {
+                        //     screen: constants.ScreenNames.BottomTab.SOCIAL_HOME,
+                        //     params: { screen: constants.ScreenNames.Social.SOCIAL,
+                        //     },
+                        //   });
                     }else{
                         this.props.navigation.replace(constants.ScreenNames.AppStack.LOGIN);
                     }
@@ -61,16 +61,20 @@ export default class Authentication extends React.Component {
     render(){
         return(
             <>  
-                <ImageBackground source={constants.Images.socialPageBackground} style={styles.container}>                                 
-                    
-                    
+                {/* <ImageBackground source={constants.Images.socialPageBackground} style={styles.container}>                                 
+                     */}
+                 <LinearGradient
+                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
+                    colors={[constants.Colors.gradient.primary, constants.Colors.gradient.secondary,constants.Colors.gradient.tertiary,constants.Colors.gradient.quarternary]}
+                    style={[styles.container]}
+                >
                         <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
                         <View style={{top:constants.Dimensions.vh(80)}}>
-                        <ActivityIndicator animating={true} size="large" color={constants.Colors.primary}/>
+                        <ActivityIndicator animating={true} size="large" color={constants.Colors.light}/>
                         <Text style={styles.loadingText}>{this.state.loadingText}</Text>
-                        </View>
-                    
-                </ImageBackground>
+                        </View>                    
+                </LinearGradient>
+                {/* </ImageBackground> */}
             </>
         )
     }

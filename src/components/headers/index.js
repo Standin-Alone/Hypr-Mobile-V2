@@ -1,6 +1,6 @@
 
 import React from "react";
-import { View,TouchableOpacity,TextInput,Text,ImageBackground } from "react-native";
+import { View,TouchableOpacity,TextInput,Text,ImageBackground,Image } from "react-native";
 import { styles } from "./styles";
 import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
@@ -9,6 +9,42 @@ import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityI
 import FastImage from 'react-native-fast-image'
 
 
+
+export const PrimaryHomeHeader = ({
+hyprPoints,
+onPressHyprPoints
+})=>{
+    return(
+        <View style={styles.primaryHomeContainer}>   
+            <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2)}}>
+                <View style={{top:constants.Dimensions.vh(2)}}>
+                    <TouchableOpacity onPress={onPressHyprPoints} style={styles.hyprPointsBtn}>
+                        <Text style={styles.hyprPoints}>
+                            {hyprPoints}
+                        </Text>    
+                        <Text style={styles.hyprPoints}>
+                            Hypr Wallet
+                        </Text>    
+                    </TouchableOpacity>                
+                </View>
+                <View style={{left:constants.Dimensions.vw(20)}}>
+                    <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
+                </View>
+                {/* <View style={{left:constants.Dimensions.vw(50)}}>
+                    <TouchableOpacity >
+                        <constants.Icons.Ionicons name="notifications" size={constants.Dimensions.normalize(14)} color={constants.Colors.light}/>
+                    </TouchableOpacity>
+                </View> */}
+
+                <View style={{left:constants.Dimensions.vw(45),top:constants.Dimensions.vh(2)}}>
+                    <TouchableOpacity >
+                        <constants.Icons.Ionicons name="menu" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
+                    </TouchableOpacity>
+                </View>
+            </View> 
+        </View>
+    )
+}
 
 export const FriendHeader = ({
  })=>(   
@@ -33,29 +69,37 @@ export const FriendHeader = ({
 
 
 export const MlmHeader = ({
-    goToRewardHistory
+    goToRewardHistory,
+    onGoBack
  })=>(   
-    <>   
-        
-            <View style={styles.socialContainer}>     
-                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}} blurRadius={2}>
-                    <View style={{flexDirection:'row'}}>                    
-                        <View >
-                            <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
-                        </View>    
-                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(65)}]}>                                        
-                                <TouchableOpacity style={{flexDirection:'row',top:constants.Dimensions.vh(5)}} onPress={goToRewardHistory}>                              
-                                        <constants.Icons.FontAwesome5 
-                                                name="history" 
-                                                size={constants.Dimensions.normalize(10)} 
-                                                color={constants.Colors.secondary}
-                                            />
-                                </TouchableOpacity>
-                        </View>                   
+    <>           
+        <View style={styles.socialContainer}>     
+           
+                <View style={{flexDirection:'row'}}>                    
+                <View style={{justifyContent:'flex-start',flexDirection:'row', left:constants.Dimensions.vw(2) }}>
+                    <TouchableOpacity onPress={onGoBack} style={styles.goBackButton}>
+                        <MaterialIcons 
+                            name="chevron-left" 
+                            size={45} 
+                            color={constants.Colors.primary}
+                        />
+                    </TouchableOpacity>
                     </View>
-                </ImageBackground>               
-            </View>    
-        
+                    <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>                                        
+                            <TouchableOpacity style={{flexDirection:'row',top:constants.Dimensions.vh(5)}} onPress={goToRewardHistory}>                              
+                                    <constants.Icons.FontAwesome5 
+                                            name="history" 
+                                            size={constants.Dimensions.normalize(10)} 
+                                            color={constants.Colors.primary}
+                                        />
+                                <Text style={styles.rewardHistoryText}>
+                                    Reward History
+                                </Text>
+                            </TouchableOpacity>
+                    </View>                   
+                </View>
+                     
+        </View>            
     </>
 );
 

@@ -11,6 +11,10 @@ export const styles = StyleSheet.create({
         justifyContent:'flex-end',        
         backgroundColor:'transparent'
     },
+    hyprLogo:{
+        width:constants.Dimensions.vw(15),
+        height:constants.Dimensions.vh(15),
+    },
     buttonContainer:{
         justifyContent:'flex-end',
         flexDirection:'row',                
@@ -94,6 +98,30 @@ export const styles = StyleSheet.create({
     commentHypes:{
         height:constants.Dimensions.vh(10),
         width:constants.Dimensions.vw(10),  
+    },
+
+    // PRIMARY HOME
+    primaryHomeContainer:{
+        flexDirection:'row',
+        backgroundColor:constants.Colors.gradient.secondary,        
+    },
+
+    hyprPoints:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:constants.Dimensions.normalize(6),
+        alignSelf:'center',        
+        color:constants.Colors.light
+    },
+    hyprPointsBtn:{
+        borderWidth:1,
+        borderColor:constants.Colors.light,
+        paddingHorizontal:constants.Dimensions.vw(2)
+    },
+    rewardHistoryText:{
+        left:constants.Dimensions.vw(2),
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:constants.Dimensions.normalize(6),
+        color:constants.Colors.primary
     }
   
 });

@@ -405,7 +405,7 @@ export const disseminateRewards = (payload,setState,props)=>{
 
                     props.navigation.reset({
                         index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                        routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
                     }); 
                     
 
