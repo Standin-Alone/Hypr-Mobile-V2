@@ -644,3 +644,13 @@ export const sendForgotPasswordLink = (payload,setState,props) => {
     });
 
 }
+
+
+export const logOut = async()=>{
+    await CLEAR_SESSION();
+    alert('helop')
+    this.props.navigation.reset({
+        index: 0,
+        routes: [{ name: constants.ScreenNames.AppStack.AUTHENTICATION }]
+    })
+}

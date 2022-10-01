@@ -12,7 +12,9 @@ import FastImage from 'react-native-fast-image'
 
 export const PrimaryHomeHeader = ({
 hyprPoints,
-onPressHyprPoints
+onPressHyprPoints,
+onOpenMenu,
+onOpenSocial
 })=>{
     return(
         <View style={styles.primaryHomeContainer}>   
@@ -35,10 +37,14 @@ onPressHyprPoints
                         <constants.Icons.Ionicons name="notifications" size={constants.Dimensions.normalize(14)} color={constants.Colors.light}/>
                     </TouchableOpacity>
                 </View> */}
-
-                <View style={{left:constants.Dimensions.vw(45),top:constants.Dimensions.vh(2)}}>
-                    <TouchableOpacity >
-                        <constants.Icons.Ionicons name="menu" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
+                 <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
+                    <TouchableOpacity onPress={onOpenSocial}>
+                        <constants.Icons.MaterialCommunityIcons name="post-outline" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
+                    </TouchableOpacity>
+                </View>
+                <View style={{left:constants.Dimensions.vw(35),top:constants.Dimensions.vh(2)}}>
+                    <TouchableOpacity onPress={onOpenMenu} >
+                        <constants.Icons.MaterialCommunityIcons name="menu" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>
                 </View>
             </View> 
@@ -149,34 +155,43 @@ export const CommentHeader = ({
 
 export const SocialHeader = ({
     goToMessenger,
-    onCreatePost
+    onCreatePost,
+    onGoBack
  })=>(   
     <>   
         
             <View style={styles.socialContainer}>     
-                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}} blurRadius={2}>
-                    <View style={{flexDirection:'row'}}>                    
+            
+                    <View style={{flexDirection:'row'}}>  
                         <View >
+                            <TouchableOpacity onPress={onGoBack}  style={{ padding:15 }}>
+                                <MaterialIcons 
+                                    name="chevron-left" 
+                                    size={constants.Dimensions.normalize(12)} 
+                                    color={constants.Colors.light}
+                                />
+                            </TouchableOpacity>  
+                        </View>                     
+                        <View  style={{right:constants.Dimensions.vw(5)}}>
                             <FastImage source={constants.Images.hyprLogoNew} resizeMode={FastImage.resizeMode.contain} style={styles.logo}/>
                         </View>    
-                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(50)}]}>        
+                        <View style={[styles.buttonContainer,{left:constants.Dimensions.vw(35)}]}>        
                             <TouchableOpacity onPress={onCreatePost}   style={{ padding:15,borderRadius:20 }}>
                                     <constants.Icons.Ionicons 
                                         name="camera" 
                                         size={30} 
-                                        color={constants.Colors.secondary}
+                                        color={constants.Colors.light}
                                     />
                             </TouchableOpacity>                
                             <TouchableOpacity onPress={goToMessenger}  style={{ padding:15 }}>
                                 <constants.Icons.Ionicons 
                                     name="chatbubble-ellipses" 
                                     size={30} 
-                                    color={constants.Colors.secondary}
+                                    color={constants.Colors.light}
                                 />
                             </TouchableOpacity>                       
                         </View>                   
-                    </View>
-                </ImageBackground>               
+                    </View>         
             </View>    
         
     </>
@@ -187,12 +202,22 @@ export const SocialHeader = ({
 export const ProfileHeader = ({
     goToProfileSettings,
     onShareReferralLink,
-    onChangeCoverPhoto
+    onChangeCoverPhoto,
+    onGoBack
  })=>(   
     <>   
         
-        <View style={styles.marketContainer}>     
-            <View style={{ justifyContent:'flex-start',flexDirection:'row',right:constants.Dimensions.vw(55)}}>  
+        <View style={styles.marketContainer}>   
+            <View style={{ justifyContent:'flex-start',flexDirection:'row',right:constants.Dimensions.vw(40)}}>  
+                <TouchableOpacity onPress={onGoBack}  style={{ padding:15 }}>
+                    <MaterialIcons 
+                        name="chevron-left" 
+                        size={35} 
+                        color={constants.Colors.primary}
+                    />
+                </TouchableOpacity>  
+            </View>  
+            <View style={{ justifyContent:'flex-start',flexDirection:'row',right:constants.Dimensions.vw(45)}}>  
                 <TouchableOpacity onPress={onChangeCoverPhoto}  style={{ padding:15 }}>
                         <MaterialCommunityIcons 
                             name="image-edit" 
@@ -322,6 +347,10 @@ export const PrimaryHeader = ({
 // CREATE POST FUNCTIONS
    showPostButton,
    onCreatePost,
+// CREATE INSPIRE FUNCTIONS
+   showInspireButton,
+   onInspirePost,
+   
 // NEXT FUNCTION
 showNextButton,
 onNext,
@@ -419,7 +448,7 @@ onSave
                             <constants.Icons.SimpleLineIcons 
                                 name="note" 
                                 size={25} 
-                                color={constants.Colors.secondary}
+                                color={constants.Colors.primary}
                             />
                             <View style={{top:constants.Dimensions.vh(1.5) }}>                        
                                 <Text style={styles.postText}>
@@ -429,6 +458,30 @@ onSave
                         </TouchableOpacity>                       
                     </View>               
                 </View>
+            }
+
+            {showInspireButton &&
+
+            <View style={{  justifyContent:'flex-end',
+                flexDirection:'row',
+                left:constants.Dimensions.vw(40)
+            }}>
+
+                <View style={styles.postButtonContainer}>                     
+                    <TouchableOpacity onPress={onInspirePost} style={{ paddingVertical:constants.Dimensions.vh(2),flexDirection:'row',backgroundColor:constants.Colors.primary,paddingHorizontal:constants.Dimensions.vh(2),marginVertical:constants.Dimensions.vh(2),borderRadius:10 }} >
+                        <constants.Icons.Foundation 
+                            name="lightbulb" 
+                            size={constants.Dimensions.normalize(12)} 
+                            color={constants.Colors.light}
+                        />
+                        <View style={{top:constants.Dimensions.vh(1.5) }}>                        
+                            <Text style={styles.postText}>
+                                Inspire
+                            </Text>
+                        </View>
+                    </TouchableOpacity>                       
+                </View>               
+            </View>
             }
 
             {showNextButton &&
@@ -442,7 +495,7 @@ onSave
                         <MaterialIcons 
                             name="chevron-right" 
                             size={40} 
-                            color={constants.Colors.secondary}
+                            color={constants.Colors.primary}
                         />
                     </TouchableOpacity>              
                 </View>

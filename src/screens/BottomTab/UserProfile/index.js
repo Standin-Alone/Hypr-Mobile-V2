@@ -28,7 +28,7 @@ export default class UserProfile extends React.Component {
 
 
     async componentDidMount(){
-        // getUserInfo(this.setMyState)
+        getUserInfo(this.setMyState)
 
         this.props.navigation.addListener('focus',()=>{
             getUserInfo(this.setMyState)
@@ -64,6 +64,7 @@ export default class UserProfile extends React.Component {
                     goToProfileSettings={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.ACCOUNT_SETTINGS)}
                     onShareReferralLink={()=>this.setState({showReferralModal: this.state.showReferralModal ? false :true})}
                     onChangeCoverPhoto={()=>this.openUploadSelection('cover')}
+                    onGoBack={()=>this.props.navigation.goBack()}
                 />
 
             <Components.UploadingSelectionCard
@@ -97,7 +98,7 @@ export default class UserProfile extends React.Component {
 
 
         
-                <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1,zIndex:-4}}>                                 
+                {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1,zIndex:-4}}>                                  */}
                 {this.state.isLoading ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
                     :
@@ -114,7 +115,7 @@ export default class UserProfile extends React.Component {
                                     <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
                                     <constants.Icons.FontAwesome5 name="edit" size={20} color={constants.Colors.secondary} style={styles.edit}/>
                                 </TouchableOpacity>
-                                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}  `}</Text>
+                                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name }  ${this.state.userInfo?.last_name}  `}</Text>
                             </View>
 
                             <View style={[styles.profileContainer,{top:constants.Dimensions.vh(15), backgroundColor:'rgba(255,255,255,0.5)'}]}>
@@ -124,6 +125,7 @@ export default class UserProfile extends React.Component {
                                     <Components.ButtonWithTopIcon
                                         title="To Verify"
                                         iconName={"user-check"}
+                                        color={constants.Colors.gradient.primary}
                                         onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_VERIFY)}
                                         
                                     />
@@ -131,12 +133,14 @@ export default class UserProfile extends React.Component {
                                     <Components.ButtonWithTopIcon
                                         title="To Ship"
                                         iconName={"ship"}
+                                        color={constants.Colors.gradient.primary}
                                         onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_SHIP)}
                                     />
 
                                     <Components.ButtonWithTopIcon
                                         title="To Receive"
                                         iconName={"shipping-fast"}
+                                        color={constants.Colors.gradient.primary}
                                         onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_RECEIVE)}
                                     />
                                 </View>    
@@ -144,7 +148,7 @@ export default class UserProfile extends React.Component {
                     </View>
                     </>
                 }
-                </ImageBackground>
+                {/* </ImageBackground> */}
   
             </>
         )

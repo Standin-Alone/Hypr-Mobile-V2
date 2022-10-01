@@ -77,7 +77,7 @@ export const styles = StyleSheet.create({
     socialContainer:{
         flexDirection:'row',
         justifyContent:"flex-start",
-        backgroundColor:constants.Colors.light
+        backgroundColor:constants.Colors.primary
     },
     postButtonContainer:{
 
@@ -86,13 +86,13 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,
         fontSize:12,
         alignSelf:'center',        
-        color:constants.Colors.secondary
+        color:constants.Colors.light
     },
     saveText:{
         fontFamily:constants.Fonts.PoppinsBold,
         fontSize:14,
         alignSelf:'center',        
-        color:constants.Colors.secondary
+        color:constants.Colors.primary
     },
 
     commentHypes:{

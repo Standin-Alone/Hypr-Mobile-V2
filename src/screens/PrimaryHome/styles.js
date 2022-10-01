@@ -18,6 +18,27 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.OpenSansBold,
         color:constants.Colors.dark,        
         fontSize:16, 
-    }
+    },
+    // sidemenu
+    userProfile:{
+        marginVertical:constants.Dimensions.vh(4),
+        height:constants.Dimensions.vh(40),
+        width:constants.Dimensions.vw(40),
+        borderRadius:2000,
+        borderWidth:5,
+        borderColor:'rgba(255,255,255,1)',
+        alignSelf:'center',
+     },
+     fullName:{
+        textAlign:'center',
+        fontFamily:constants.Fonts.PoppinsExtraBold,
+        fontSize:constants.Dimensions.normalize(6),
+        color:constants.Colors.dark
+     },
+     logOut:{
+        fontFamily:constants.Fonts.OpenSansBold,
+        color:constants.Colors.danger,        
+        fontSize:constants.Dimensions.normalize(10), 
+    },
 });
 

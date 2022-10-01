@@ -4,6 +4,7 @@ export default Colors = {
     primary: '#ff7b00', 
     primary_tint:'#d6e4fb',
     secondary:'#6803ff',   
+    // FIGO
     // primary: '#246EE9', 
     // primary_tint:'#d6e4fb',
     // secondary:'#6803ff',        
@@ -13,6 +14,7 @@ export default Colors = {
         tertiary:'#f49f2e',
         quarternary:'#f2a937',
     }, 
+    // FIGO
     // gradient:{
     //     primary:'#BB22FE',
     //     secondary:'#0561D0',
@@ -26,7 +28,8 @@ export default Colors = {
     dark_tint:'#545a64',
     transparent_white:'rgba(255,255,255,0.2)',
     transparent_black:'rgba(0,0,0,0.5)',
-    green:'#008000'
+    green:'#008000',
+    info:'#007bff'
     
     
 }

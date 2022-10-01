@@ -252,3 +252,36 @@ export const getFileData = async (file)=>{
 
     return fileResult;
 }
+
+
+
+export const openPhotoAndVideosGallery = (payload,setState,props)=>{
+    setState({isProgress:true,loadingTitle:'Opening the gallery'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){                                                
+            let openUpCamera = await ImagePicker.openPicker({
+                mediaType: 'any',
+                quality:0.5,
+                includeBase64:true,
+                multiple:true         
+            });   
+            if(openUpCamera.length > 0){
+                console.warn(openUpCamera);
+                setState({isProgress:false,files:openUpCamera});   
+            }else{
+                setState({isProgress:false});   
+            }  
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({isProgress:false,loadingTitle:'Loading'});
+        }
+    });
+}

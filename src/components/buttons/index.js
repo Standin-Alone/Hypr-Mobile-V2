@@ -7,6 +7,7 @@ import constants from "../../constants";
 import Spinner from 'react-native-spinkit';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import  Ionicons from 'react-native-vector-icons/Ionicons';
+import  Foundation from 'react-native-vector-icons/Foundation';
 import FastImage from 'react-native-fast-image'
 
 export const PrimaryButton = ({
@@ -120,7 +121,8 @@ export const PrimaryButtonNoOutline = ({
     showIcon,
     iconName,
     iconSize,
-    iconColor
+    iconColor,
+    iconPackageName
 })=>(   
 
     <View
@@ -131,13 +133,22 @@ export const PrimaryButtonNoOutline = ({
             <View style={{ flexDirection:'row' }}>
 
             {showIcon &&
-
+                
+                iconPackageName == 'Foundation' ?
+                <Foundation 
+                    name={iconName}
+                    size={iconSize} 
+                    color={iconColor ? iconColor : constants.Colors.primary}
+                />
+                :
                 <Ionicons 
                     name={iconName}
                     size={iconSize} 
                     color={iconColor ? iconColor : constants.Colors.primary}
                 />
             }
+
+
 
             {
                 isLoading ?

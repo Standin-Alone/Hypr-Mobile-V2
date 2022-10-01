@@ -1,5 +1,6 @@
 
 import React from "react";
+import 'react-native-gesture-handler';
 import { LogBox } from 'react-native';
 import { CardStyleInterpolators, createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from "@react-navigation/native";
@@ -27,6 +28,28 @@ import MarketAddressEditForm from "../screens/Market/MarketAddressEditForm";
 import AddressForm from "../screens/Market/AddressForm";
 import Mlm from "../screens/BottomTab/Mlm";
 import RewardHistory from "../screens/MLM/RewardHistory";
+import UserProfile from "../screens/BottomTab/UserProfile";
+import AccountSettings from "../screens/Profile/AccountSettings";
+import AddressEditForm from '../screens/Profile/AddressEditForm';
+import AddressBook from "../screens/Profile/AddressBook";
+import ToVerify from "../screens/Profile/Tracking/ToVerify";
+import ToShip from "../screens/Profile/Tracking/ToShip";
+import ToReceive from "../screens/Profile/Tracking/ToReceive";
+import OrderStatus from "../screens/Market/OrderStatus";
+import ViewNewProfilePic from "../screens/Profile/ViewNewProfilePic";
+import Home from "../screens/BottomTab/Home";
+import CreatePost from "../screens/Social/CreatePost";
+import Camera from "../screens/Social/Camera";
+import CapturedPhoto from "../screens/Social/CapturedPhoto";
+import ViewPost from "../screens/Social/ViewPost";
+import Comments from "../screens/Social/Comments";
+import ViewProfile from "../screens/Social/ViewProfile";
+import SocialStories from "../screens/Social/Stories";
+import Messenger from "../screens/Social/Messenger";
+import Chat from "../screens/Social/Chat";
+import ChooseFriendToChat from "../screens/Social/ChooseFriendToChat";
+import { SideMenuBar } from "./SideMenu";
+import Inspire from "../screens/Social/Inspire";
 // LogBox.ignoreLogs([
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
@@ -61,10 +84,33 @@ const AppStack = () =>(
         <Stack.Screen component={Mlm} name={constants.ScreenNames.Mlm.MLM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={RewardHistory} name={constants.ScreenNames.Mlm.REWARD_HISTORY} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
+        {/* USER PROFILE */}
+        <Stack.Screen component={UserProfile} name={constants.ScreenNames.Profile.PROFILE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={AccountSettings} name={constants.ScreenNames.Profile.ACCOUNT_SETTINGS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={AddressBook} name={constants.ScreenNames.Profile.ADDRESS_BOOK} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={AddressEditForm} name={constants.ScreenNames.Profile.ADDRESS_EDIT_FORM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ToVerify} name={constants.ScreenNames.Profile.tracking.TO_VERIFY} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ToShip} name={constants.ScreenNames.Profile.tracking.TO_SHIP} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ToReceive} name={constants.ScreenNames.Profile.tracking.TO_RECEIVE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={OrderStatus} name={constants.ScreenNames.Market.ORDER_STATUS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ViewNewProfilePic} name={constants.ScreenNames.Profile.VIEW_NEW_PROFILE_PIC} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
+        {/*SOCIAL  */}
+        <Stack.Screen component={Home} name={constants.ScreenNames.Social.SOCIAL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={CreatePost} name={constants.ScreenNames.Social.CREATE_POST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Camera} name={constants.ScreenNames.Social.CAMERA} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={CapturedPhoto} name={constants.ScreenNames.Social.CAPTURED_PHOTO} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ViewPost} name={constants.ScreenNames.Social.VIEW_POST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Comments} name={constants.ScreenNames.Social.COMMENTS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ViewProfile} name={constants.ScreenNames.Social.VIEW_PROFILE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={SocialStories} name={constants.ScreenNames.Social.STORIES} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Messenger} name={constants.ScreenNames.Social.MESSENGER} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Chat} name={constants.ScreenNames.Social.CHAT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ChooseFriendToChat} name={constants.ScreenNames.Social.CHOOSE_FRIEND_TO_CHAT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Inspire} name={constants.ScreenNames.Social.INSPIRE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
+        <Stack.Screen component={SideMenuBar} name={constants.ScreenNames.AppStack.HOME} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         {/* <Stack.Screen component={BottomTabNavigator} name={constants.ScreenNames.AppStack.HOME} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>     */}
-
         
     </Stack.Navigator>
 

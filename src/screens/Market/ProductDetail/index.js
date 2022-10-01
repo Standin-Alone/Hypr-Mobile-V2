@@ -10,7 +10,7 @@ import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
-
+import DraggablePanel from 'react-native-draggable-panel';
 
 export default class ProductDetail extends React.Component {
     constructor(props) {
@@ -21,7 +21,8 @@ export default class ProductDetail extends React.Component {
         notificationCount:0,
         shippingAddress:[],
         wishList:[],
-        isLoading:false
+        isLoading:false,
+        isOpenShareModal:true
       };
     }
 
@@ -80,17 +81,10 @@ export default class ProductDetail extends React.Component {
                 position:'top'
             });
         }
-
-   
-
-
-
     }
 
-
     handleBuyNow = async ()=>{
-        let userId = await GET_SESSION('USER_ID');
-        
+        let userId = await GET_SESSION('USER_ID');        
         if(this.state.shippingAddress.length != 0){
             
             let payload = {
@@ -108,14 +102,25 @@ export default class ProductDetail extends React.Component {
                 position:'top'
             });
         }
-
     }
-
+    handleGoToInspire = ()=>{
+        let parameters={
+            image:this.state.variant.variantImage,
+            variantName:this.state.variant.variantName,
+            variant:this.state.variant
+        }
+        this.props.navigation.navigate(constants.ScreenNames.Social.INSPIRE,parameters)
+    }
+    handleGoToBoost = ()=>{
+        
+    }
     handleGoToChangeAddress = () =>{
-
         this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS,{variant:this.state.variant,reCalculateFreight : this.handleUpdateStateFromChangeAddress.bind(this)});
     }
-    
+    handleOpenShareModal = ()=>{
+       this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
+    }
+
     render(){
      
         return(
@@ -128,6 +133,59 @@ export default class ProductDetail extends React.Component {
                     isNotificationCount
                     notificationCount={this.state.notificationCount}
                 />
+
+                <Components.DraggableModal
+                    isOpen={this.state.isOpenShareModal}
+                    height={constants.Dimensions.vh(150)}
+                    content={()=>(
+                        <View style={{flex:1}}>
+                            <View>
+                            <Image 
+                                source={{uri:this.state.variant.variantImage}} 
+                                style={styles.shareVariantImage} 
+                                resizeMode='contain'
+                                />
+
+                            </View>
+                            <View style={{left:constants.Dimensions.vw(2)}}>
+                                 <Text style={styles.shareVariantName} numberOfLines={2}>
+                                    {this.state.variant.variantName}
+                                </Text>                                   
+                            </View>
+                            <View style={{left:constants.Dimensions.vw(2)}}>
+                                    <Text style={styles.variantPrice} numberOfLines={2}>
+                                        ${this.state.variant.variantPrice}
+                                    </Text>      
+                            </View>
+                            <View style={{top:constants.Dimensions.vw(2)}}>
+                                <Text style={styles.shareProductText}>
+                                    Share this product with pals!
+                                </Text>
+                            </View>
+
+                            <View style={{top:constants.Dimensions.vw(5)}}>
+                            <Components.PrimaryButtonNoOutline
+                                    title={"Nspire"}
+                                    showIcon
+                                    iconPackageName={"Foundation"}
+                                    iconSize={constants.Dimensions.normalize(12)}
+                                    iconName={"lightbulb"}
+                                    onPress={this.handleGoToInspire}
+                                />
+                                <Components.PrimaryButtonNoOutline
+                                    title={"Boost"}
+                                    showIcon
+                                    iconSize={constants.Dimensions.normalize(12)}
+                                    iconName={"rocket"}
+                                    onPress={this.handleGoToBoost}
+                                />
+                            </View>
+                        </View>
+                    )}
+                />
+
+
+
                 <View style={styles.variantContainer}>                                                 
                     <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
 
@@ -209,18 +267,29 @@ export default class ProductDetail extends React.Component {
 
                 <View style={{flex: 1}}>
                     <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
-                        <TouchableOpacity onPress={this.handleAddToWishList}  style={{  marginHorizontal:constants.Dimensions.vw(2) ,top:2 }}>
+                        <TouchableOpacity onPress={this.handleAddToWishList}  style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(10)}}>
                             <constants.Icons.MaterialCommunityIcons 
                                 name={ this.state.wishList.filter((item)=>item.variant_id == this.state.variant.variantVid).length != 0 ? 'heart': 'heart-outline'} 
-                                size={40} 
+                                size={constants.Dimensions.normalize(30)} 
                                 color={constants.Colors.danger}                               
                             />
                         </TouchableOpacity>
-                        <Components.PrimaryButton
-                            title="Add To Cart"
-                            moreStyle={styles.addToCartButton}
-                            onPress={this.handleAddToCart}                        
-                        />   
+
+                        <TouchableOpacity onPress={this.handleOpenShareModal}    style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(6)}} >
+                            <constants.Icons.FontAwesome
+                                name="share-square-o" 
+                                size={constants.Dimensions.normalize(30)} 
+                                color={constants.Colors.primary}
+                            />
+                        </TouchableOpacity>
+
+                        <TouchableOpacity onPress={this.handleAddToCart}    style={{top:constants.Dimensions.vw(1),right:constants.Dimensions.vw(3) }} >
+                            <constants.Icons.FontAwesome5 
+                                name="cart-plus" 
+                                size={constants.Dimensions.normalize(30)} 
+                                color={constants.Colors.primary}
+                            />
+                        </TouchableOpacity>
 
                         <Components.PrimaryButton
                             title="Buy Now"

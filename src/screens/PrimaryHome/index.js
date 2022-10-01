@@ -1,10 +1,13 @@
 import React from 'react';
-import { FlatList, View,Text,ActivityIndicator,ImageBackground} from 'react-native';
+import { FlatList, View,Text,ActivityIndicator,Image} from 'react-native';
 import Components from '../../components';
 import constants from '../../constants';
 import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../actions/market';
 import { styles } from './styles';
-import { getUserInfo } from '../../actions/auth';
+import { getUserInfo,logOut} from '../../actions/auth';
+import SideMenu from 'react-native-side-menu-updated';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import { CLEAR_SESSION } from '../../utils/async_storage';
 
 export default class PrimaryHome extends React.Component {
     constructor(props) {
@@ -17,7 +20,8 @@ export default class PrimaryHome extends React.Component {
         notificationCount:0,
         products:[],
         newProducts:[],
-        currentPage:1
+        currentPage:1,
+        openMenu:false
      }    
      
     }
@@ -36,6 +40,8 @@ export default class PrimaryHome extends React.Component {
             getCartCount(this.setMyState)
         })       
     }
+
+    
     handleAddToCart = (item)=>{
         
         let parameters = {            
@@ -70,14 +76,54 @@ export default class PrimaryHome extends React.Component {
         :
         <Components.FooterLoader/>
     )
+
+    goToUserProfile = ()=>{
+        this.props.navigation.navigate(constants.ScreenNames.Profile.PROFILE);
+    }
+    goToSocial = ()=>{
+        this.props.navigation.navigate(constants.ScreenNames.Social.SOCIAL);
+    }
+    menu = ()=>(
+        <View style={{flex:1}}>
+            <View style={{flexDirection:'column'}}>
+                <TouchableOpacity onPress={()=>this.goToUserProfile()}>
+                    <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
+                </TouchableOpacity>
+                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}  `}</Text>
+            </View>
+            <View style={{position:'absolute',bottom:constants.Dimensions.vh(2),left:0,right:0}}>
+                <View style={{left:constants.Dimensions.vw(17)}}>
+                    <TouchableOpacity onPress={()=>logOut} style={{flexDirection:'row'}}>
+                        <constants.Icons.Ionicons
+                            name="log-out"
+                            color={constants.Colors.danger}
+                            size={constants.Dimensions.normalize(10)}
+                        />
+                        <Text style={styles.logOut}>
+                            Log out
+                        </Text>
+                    </TouchableOpacity>
+                </View>
+              
+            </View>
+        </View>
+
+    )
     render(){
         
        
         return(
-            <>       
+            <>      
+ 
+             <View style={{flex:1}}>
              <Components.PrimaryHomeHeader
                 hyprPoints={this.state.userInfo.reward >= 0  ? this.state.userInfo.reward.toFixed(2)  : 'Processing' }
                 onPressHyprPoints={()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.MLM)}
+                onOpenMenu={()=>{                                    
+                    this.props.navigation.openDrawer()
+                }}
+                onOpenSocial={()=>this.goToSocial()}
+                // onOpenMenu ={()=>this.goToUserProfile()}
              />                                 
              <View style={{flex:1}}>
                 <View style={styles.titleContainer}>
@@ -116,6 +162,8 @@ export default class PrimaryHome extends React.Component {
                     goToSearch={()=>this.props.navigation.navigate(constants.ScreenNames.Market.SEARCH)}
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                 />     
+                </View>
+    
             </>
         )
     }

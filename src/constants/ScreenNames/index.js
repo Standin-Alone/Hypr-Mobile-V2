@@ -56,7 +56,8 @@ export default {
       STORIES:'Stories',
       MESSENGER:'Messenger',
       CHAT:'chat',
-      CHOOSE_FRIEND_TO_CHAT:'ChooseFriendToChat'
+      CHOOSE_FRIEND_TO_CHAT:'ChooseFriendToChat',
+      INSPIRE:'Inspire',   
   },
   Friend:{
    FRIEND:'Friend'

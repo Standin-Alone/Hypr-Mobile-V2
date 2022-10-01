@@ -65,7 +65,8 @@ from "./loader"
 import {
     PaymentMethodModal,
     ShareReferralLinkModal,
-    ProgressLoadingModal
+    ProgressLoadingModal,
+    DraggableModal
 } from "./modal"
 
 import {
@@ -73,6 +74,8 @@ import {
     FriendSkeletonHolder
     
 } from "./placeholder"
+
+
 
 export default {
     // Buttons
@@ -130,6 +133,7 @@ export default {
     PaymentMethodModal,
     ShareReferralLinkModal,
     ProgressLoadingModal,
+    DraggableModal,
 
 
 

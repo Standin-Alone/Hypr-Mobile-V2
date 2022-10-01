@@ -8,6 +8,7 @@ import Feather from 'react-native-vector-icons/Feather';
 import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
+import Foundation from 'react-native-vector-icons/Foundation';
 
 export default Icons = {
 
@@ -22,6 +23,7 @@ export default Icons = {
     SimpleLineIcons:SimpleLineIcons,
     MaterialIcons:MaterialIcons,
     AntDesign:AntDesign,
+    Foundation:Foundation,
     Loader: require("./animated-icons/loading-spinner.json"),
     
 }

@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
     deliveryTitle:{
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.dark_tint,
-        fontSize:20,          
+        fontSize:constants.Dimensions.normalize(10),          
     },
     deliveryContent:{
         flex:1.6
@@ -37,7 +37,7 @@ export const styles = StyleSheet.create({
     deliverySubtitle:{
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.gray,
-        fontSize:14,      
+        fontSize:constants.Dimensions.normalize(8),  
     },
     changeDeliveryButton:{
         justifyContent:'flex-end'
@@ -69,20 +69,37 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.dark,
         marginHorizontal:constants.Dimensions.vw(2),
-        fontSize:20,                        
+        fontSize:constants.Dimensions.normalize(10),                               
     },
     variantPrice:{
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.danger,
-        fontSize:25,          
+        fontSize:constants.Dimensions.normalize(11),                  
     },
     addToCartButton:{
         width:constants.Dimensions.vw(35), 
         marginHorizontal:constants.Dimensions.vw(2)       
     },
     buyNowButton:{
-        width:constants.Dimensions.vw(35),
+        top:constants.Dimensions.vw(4),
+        width:constants.Dimensions.vw(40),
         marginHorizontal:constants.Dimensions.vw(2)
+    },
+    shareVariantImage:{
+        width:constants.Dimensions.vw(100),
+        height:constants.Dimensions.vh(80),
+        resizeMode:'contain'
+    },
+    shareProductText:{
+        fontFamily:constants.Fonts.GothamBold,
+        color:constants.Colors.dark,
+        fontSize:constants.Dimensions.normalize(8),   
+        textAlign:'center'
+    },
+    shareVariantName:{
+        fontFamily:constants.Fonts.PoppinsLight,
+        color:constants.Colors.dark,
+        fontSize:constants.Dimensions.normalize(8),   
     }
 
   

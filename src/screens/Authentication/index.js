@@ -31,7 +31,11 @@ export default class Authentication extends React.Component {
                  
                         
                     
-                        this.props.navigation.replace(constants.ScreenNames.AppStack.PRIMARY_HOME);
+                        // this.props.navigation.replace(constants.ScreenNames.AppStack.PRIMARY_HOME);
+                        this.props.navigation.replace( constants.ScreenNames.AppStack.HOME);
+                
+                       
+                        
                         // this.props.navigation.replace(constants.ScreenNames.AppStack.HOME, {
                         //     screen: constants.ScreenNames.BottomTab.SOCIAL_HOME,
                         //     params: { screen: constants.ScreenNames.Social.SOCIAL,

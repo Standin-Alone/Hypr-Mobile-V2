@@ -3,7 +3,7 @@ import React from "react";
 import { View,Text,Modal,TouchableOpacity,TextInput, ActivityIndicator} from "react-native";
 import { styles } from "./styles";
 import constants from "../../constants";
-
+import DraggablePanel from 'react-native-draggable-panel';
 
 
 export const PaymentMethodModal = ({
@@ -157,4 +157,20 @@ export const ProgressLoadingModal = ({
             </Modal>
                  
     );
+}
+
+
+export const DraggableModal = ({
+    isOpen,
+    height,
+    content
+})=>{
+    return(
+        <DraggablePanel
+            visible={isOpen}
+            initialHeight={height}
+      > 
+        {content()}
+      </DraggablePanel>
+    )
 }

@@ -58,6 +58,7 @@ export default class CapturedPhoto extends React.Component {
         return(
             <>
                 <Components.PrimaryHeader
+                
                     onGoBack = {()=>this.props.navigation.goBack()}                                                        
                     onNext={this.state.addType == 'post' ? this.handleGoToCreatePost : this.handleCreateStory }
                     showNextButton                               

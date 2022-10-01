@@ -65,8 +65,9 @@ export const styles = StyleSheet.create({
     },
     primaryInputNoBorder:{
         borderWidth:0,
-        fontFamily:constants.Fonts.PoppinsMedium,
-        fontSize:constants.Dimensions.normalize(9)
+        width:constants.Dimensions.vw(95),
+        fontFamily:constants.Fonts.PoppinsMedasium,
+        fontSize:constants.Dimensions.normalize(8),        
     },
     commentInput:{
         borderWidth:0.5,

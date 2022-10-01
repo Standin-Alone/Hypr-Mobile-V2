@@ -154,6 +154,10 @@ export default class Home extends React.Component {
                 <Components.SocialHeader
                     onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}          
                     goToMessenger={()=>this.props.navigation.navigate(constants.ScreenNames.Social.MESSENGER)}        
+                    onGoBack={()=>this.props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
+                    })}
                 />
                 
                 {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                  */}
@@ -163,7 +167,7 @@ export default class Home extends React.Component {
                         <constants.Icons.Ionicons 
                             name="add-circle" 
                             size={40} 
-                            color={constants.Colors.secondary}
+                            color={constants.Colors.primary}
                         />
                     </TouchableOpacity> 
                     <View style={{top:constants.Dimensions.vh(2)}}>
@@ -204,7 +208,7 @@ export default class Home extends React.Component {
                             refreshing={this.state.refreshing}
                             onRefresh={()=>this.handleLoadPosts}
                             renderItem = {this.renderItem}   
-                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(28)}}                     
+                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(50)}}                     
                             ListEmptyComponent={this.renderEmptyComponent}
                             ListFooterComponent={this.renderFooterComponent}
                             onEndReachedThreshold={0.1} // so when you are at 1 pixel from the bottom react run onEndReached function

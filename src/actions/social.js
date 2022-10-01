@@ -300,7 +300,7 @@ export const createPost = (payload,setState,props)=>{
                     
                     props.navigation.reset({
                         index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
                     });  
                         setState({isProgress:false});
 
@@ -349,6 +349,88 @@ export const createPost = (payload,setState,props)=>{
 
 
 
+
+
+export const createInspire = (payload,setState,props)=>{
+
+    setState({isProgress:true});
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+             // validate payload
+             Object.keys(payload).map((item,index)=>{                
+                if(payload[item] !== undefined || payload[item] != '' ){  
+                    
+                    if(payload[item] == ''){
+                        setState({[item]:{...payload[item],error:true,errorMessage:`Please enter this required field.`}})                                                
+                        countError++;
+                    }
+                }
+            })
+            
+
+     
+            
+            if(payload.caption != ''){
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
+                         
+                if(response.data.status == true){
+                    
+                    Toast.show({
+                        type:'success',
+                        text1:'Successfully posted.'
+                    });
+                    
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
+                    });  
+                        setState({isProgress:false});
+
+                    
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isProgress:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isProgress:false});
+            });
+        }else{
+            Toast.show({
+                type:'error',
+                text1:'Please write something to post.'
+            });
+            setState({isProgress:false});
+        }
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isProgress:false});
+         }
+    });
+
+}
 
 
 
@@ -498,8 +580,8 @@ export const createStory = (payload,setState,props,state)=>{
                     });
 
                     props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                        index: 2,
+                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
                     });  
                     
                     setState({isProgress:false});
