@@ -255,7 +255,7 @@ export const getFileData = async (file)=>{
 
 
 
-export const openPhotoAndVideosGallery = (payload,setState,props)=>{
+export const openInspirePhotoAndVideosGallery = (payload,setState,props)=>{
     setState({isProgress:true,loadingTitle:'Opening the gallery'});
     // Check Internet Connection
     NetInfo.fetch().then(async(state)=>{
@@ -269,8 +269,48 @@ export const openPhotoAndVideosGallery = (payload,setState,props)=>{
                 multiple:true         
             });   
             if(openUpCamera.length > 0){
-                console.warn(openUpCamera);
-                setState({isProgress:false,files:openUpCamera});   
+                let filterVideos = openUpCamera.filter((item)=>item.mime == 'video/mp4');
+                let videoIndex = [];
+                filterVideos.map((item,index)=>{
+                    videoIndex.push(index);
+                });
+            
+                setState((prevState)=>({isProgress:false,files:[...prevState.files,...openUpCamera],videosIndex:videoIndex}));   
+            }else{
+                setState({isProgress:false});   
+            }  
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({isProgress:false,loadingTitle:'Loading'});
+        }
+    });
+}
+
+
+
+
+export const openInspireCamera = (payload,setState,props)=>{
+    setState({isProgress:true,loadingTitle:'Opening the gallery'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){                                                
+            let openUpCamera = await ImagePicker.openCamera({
+                mediaType: 'any',
+                quality:0.5,
+                includeBase64:true,
+      
+            });   
+            console.warn(openUpCamera);
+            if(openUpCamera){
+    
+                setState((prevState)=>({isProgress:false,files:[...prevState.files,...openUpCamera]}));   
             }else{
                 setState({isProgress:false});   
             }  

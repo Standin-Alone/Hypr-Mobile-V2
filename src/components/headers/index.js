@@ -350,17 +350,19 @@ export const PrimaryHeader = ({
 // CREATE INSPIRE FUNCTIONS
    showInspireButton,
    onInspirePost,
-   
+// CREATE INSPIRE FUNCTIONS
+   showBoostButton,
+   onBoost,      
 // NEXT FUNCTION
-showNextButton,
-onNext,
+    showNextButton,
+    onNext,
 // SAVE BUTTON
-showSaveButton,
-onSave
+    showSaveButton,
+    onSave
 })=>(   
    <>  
         <View style={[styles.primaryContainer,customStyle]}>
-            <TouchableOpacity onPress={onGoBack} delayPressIn={20}>
+            <TouchableOpacity onPress={onGoBack} >
                 <MaterialIcons 
                     name="chevron-left" 
                     size={40} 
@@ -477,6 +479,28 @@ onSave
                         <View style={{top:constants.Dimensions.vh(1.5) }}>                        
                             <Text style={styles.postText}>
                                 Inspire
+                            </Text>
+                        </View>
+                    </TouchableOpacity>                       
+                </View>               
+            </View>
+            }
+
+            {showBoostButton &&
+            <View style={{  justifyContent:'flex-end',
+                flexDirection:'row',
+                left:constants.Dimensions.vw(65)
+            }}>
+                <View style={styles.postButtonContainer}>                     
+                    <TouchableOpacity onPress={onBoost} style={{ paddingVertical:constants.Dimensions.vh(2),flexDirection:'row',backgroundColor:constants.Colors.primary,paddingHorizontal:constants.Dimensions.vh(2),marginVertical:constants.Dimensions.vh(2),borderRadius:10 }} >
+                        <constants.Icons.Ionicons 
+                            name="rocket" 
+                            size={constants.Dimensions.normalize(12)} 
+                            color={constants.Colors.light}
+                        />
+                        <View style={{top:constants.Dimensions.vh(1.5) }}>                        
+                            <Text style={styles.postText}>
+                                Boost
                             </Text>
                         </View>
                     </TouchableOpacity>                       

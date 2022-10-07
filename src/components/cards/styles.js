@@ -80,7 +80,7 @@ export const styles = StyleSheet.create({
         width: constants.Dimensions.itemWidth,
         height: constants.Dimensions.vh(150),
         flexDirection:'column',        
-        elevation: 1,            
+        elevation: 5               
     },
     variantImage:{                         
         alignSelf:'center',       
@@ -106,22 +106,22 @@ export const styles = StyleSheet.create({
     variantPrice:{
         flexWrap: 'wrap',
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:constants.Dimensions.normalize(15),
-        color:constants.Colors.dark_tint,        
+        fontSize:constants.Dimensions.normalize(13),
+        color:constants.Colors.danger,        
     },
     checkVariant:{
         borderRadius:20,
-        padding:'5%',
-        left:constants.Dimensions.vw(5),
+        padding:'5%',        
         borderColor:constants.Colors.primary,
         backgroundColor:constants.Colors.primary,
+        width:constants.Dimensions.vw(70)
         
     },
     checkVariantText:{
         fontFamily:constants.Fonts.OpenSansMedium,
         color:constants.Colors.light,
         top:constants.Dimensions.vh(2),   
-        fontSize:14,
+        fontSize:constants.Dimensions.normalize(6),
     },
 
 

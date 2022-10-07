@@ -29,6 +29,17 @@ bottom:{
     bottom:0,
     left:0,
     right:0
+},
+video:{
+    width:constants.Dimensions.vw(100),
+    height:constants.Dimensions.vh(80),
+    backgroundColor:'black'    
+},
+carouselImage:{
+    width:constants.Dimensions.vw(100),
+    height:constants.Dimensions.vh(100),
+    backgroundColor:constants.Colors.dark
+ 
 }
   
 });

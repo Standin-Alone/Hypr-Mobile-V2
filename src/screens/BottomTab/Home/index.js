@@ -85,6 +85,7 @@ export default class Home extends React.Component {
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
                 <Components.SocialPostCard
+                    
                     fullName={item.full_name}
                     profilePicture={item.user_picture}
                     postImage={item.filenames[0]}

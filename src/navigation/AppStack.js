@@ -50,6 +50,7 @@ import Chat from "../screens/Social/Chat";
 import ChooseFriendToChat from "../screens/Social/ChooseFriendToChat";
 import { SideMenuBar } from "./SideMenu";
 import Inspire from "../screens/Social/Inspire";
+import Boost from "../screens/Social/Boost";
 // LogBox.ignoreLogs([
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
@@ -96,7 +97,7 @@ const AppStack = () =>(
         <Stack.Screen component={ViewNewProfilePic} name={constants.ScreenNames.Profile.VIEW_NEW_PROFILE_PIC} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
         {/*SOCIAL  */}
-        <Stack.Screen component={Home} name={constants.ScreenNames.Social.SOCIAL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        {/* <Stack.Screen component={Home} name={constants.ScreenNames.Social.SOCIAL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>     */}
         <Stack.Screen component={CreatePost} name={constants.ScreenNames.Social.CREATE_POST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={Camera} name={constants.ScreenNames.Social.CAMERA} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={CapturedPhoto} name={constants.ScreenNames.Social.CAPTURED_PHOTO} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
@@ -108,6 +109,7 @@ const AppStack = () =>(
         <Stack.Screen component={Chat} name={constants.ScreenNames.Social.CHAT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ChooseFriendToChat} name={constants.ScreenNames.Social.CHOOSE_FRIEND_TO_CHAT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={Inspire} name={constants.ScreenNames.Social.INSPIRE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Boost} name={constants.ScreenNames.Social.BOOST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
         <Stack.Screen component={SideMenuBar} name={constants.ScreenNames.AppStack.HOME} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         {/* <Stack.Screen component={BottomTabNavigator} name={constants.ScreenNames.AppStack.HOME} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>     */}

@@ -79,23 +79,27 @@ export const SearchProductCard = ({
 export const VariantCard = ({
    viewProduct,
    data,
-   parallaxProps   
+   parallaxProps,
+   showGlow
 })=> (
-   <View style={[styles.variantCardContainer]}>  
+   <View style={[styles.variantCardContainer,{shadowColor:showGlow ? constants.Colors.primary : constants.Colors.dark}]}>  
       <View style={{ flex:1 }}>
          
          <FastImage source={{ uri:data.variantImage}} resizeMode={FastImage.resizeMode.contain} style={styles.variantImage}/>
          <View style={styles.variantInfo}>
          
          <View style={styles.variantNameContainer}>
-            <Text style={styles.variantName} numberOfLines={3} >{data.variantName}</Text>         
+            <Text style={styles.variantName} numberOfLines={2} >{data.variantName}</Text>         
+            
          </View>
-
-         <View style={{ flexDirection:'row',position:'absolute',top:constants.Dimensions.vh(30),left:0,right:0}}>
-               <Text style={styles.variantPrice} adjustsFontSizeToFit > ${data.variantPrice}</Text> 
+         <View style={{flexDirection:'row',left:constants.Dimensions.vw(50),top:constants.Dimensions.vw(5)}}>
+            <Text style={styles.variantPrice} adjustsFontSizeToFit > ${data.variantPrice}</Text> 
+         </View>
+         <View style={{ flexDirection:'row',position:'absolute',top:constants.Dimensions.vh(30),left:constants.Dimensions.vw(5),right:0}}>
+               
                <View style={{ flexDirection:'row',justifyContent:'flex-end' }}>
                   <TouchableOpacity onPress={viewProduct}  style={styles.checkVariant}>
-                     <View style={{ flexDirection:'row' }}>
+                     <View style={{ flexDirection:'row',alignSelf:'center' }}>
                         <MaterialIcons 
                               name="preview" 
                               size={30} 
@@ -251,7 +255,8 @@ export const SocialPostCard = ({
    hypesCount,
    fullName,
    shortName,
-   onViewPost
+   onViewPost,
+   mediaType
 })=>(
    <View style={styles.socialPostContainer}>
       <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>

@@ -40,16 +40,13 @@ export default class SideProfile extends React.Component {
                 <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}  `}</Text>
             </View>
             <DrawerContentScrollView {...this.props}>
-                <DrawerItem
-                    label="Social"
-                    onPress={()=>this.goToSocial()}
-                  
-                />
-              
+                <DrawerItemList
+                    {...this.props}
+                />                     
             </DrawerContentScrollView>
             <View style={{position:'absolute',bottom:constants.Dimensions.vh(2),left:0,right:0}}>
                 <View style={{left:constants.Dimensions.vw(17)}}>
-                    <TouchableOpacity onPress={()=>logOut()} style={{flexDirection:'row'}}>
+                    <TouchableOpacity onPress={()=>logOut(this.props)} style={{flexDirection:'row'}}>
                         <constants.Icons.Ionicons
                             name="log-out"
                             color={constants.Colors.danger}

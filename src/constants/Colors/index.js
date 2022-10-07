@@ -2,7 +2,7 @@ export default Colors = {
     dark:'#000000',
     light:'#ffffff',
     primary: '#ff7b00', 
-    primary_tint:'#d6e4fb',
+    primary_tint:'#ffae62',
     secondary:'#6803ff',   
     // FIGO
     // primary: '#246EE9', 

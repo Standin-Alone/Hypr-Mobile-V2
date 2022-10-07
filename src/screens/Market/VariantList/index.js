@@ -57,8 +57,6 @@ export default class VariantList extends React.Component {
         calculateFreight(payload,this.setMyState,this.props);
         
     }
-
-    
     renderItem = ({item,index},parallaxProps)=>{
         
         return(
@@ -66,6 +64,7 @@ export default class VariantList extends React.Component {
                 data={item}
                 parallaxProps={parallaxProps}    
                 viewProduct={()=>this.handleViewProduct(item)}            
+                showGlow={this.state.activeIndex  == index ? true :false}
             />
         )
     }
@@ -87,12 +86,15 @@ export default class VariantList extends React.Component {
                     sliderWidth={constants.Dimensions.itemWidth + 100}
                     itemWidth={constants.Dimensions.itemWidth}                                                                                                                            
                     renderItem={this.renderItem}
-                    onSnapToItem = { index => this.setState({activeIndex:index}) }          
+                    onSnapToItem = { index => {
+                        console.warn(index);
+                        this.setState({activeIndex:index})                
+                    }}          
                     inactiveSlideShift={0}           
                     loop={true}           
                     layoutCardOffset={9}        
                     useScrollView={true}               
-                    containerCustomStyle={{ top:constants.Dimensions.vh(10),alignSelf:'center' }}
+                    containerCustomStyle={{ top:constants.Dimensions.vh(10),alignSelf:'center',height:constants.Dimensions.vh(500)}}                 
                     />
                 </View>
             </>

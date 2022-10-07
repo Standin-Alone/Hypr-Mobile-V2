@@ -5,7 +5,7 @@ import constants from '../constants';
 import Toast from 'react-native-toast-message';
 import {POST,GET} from '../utils/axios';
 import moment from 'moment';
-import { GET_SESSION, SET_SESSION } from "../utils/async_storage";
+import { GET_SESSION, SET_SESSION,CLEAR_SESSION } from "../utils/async_storage";
 import {
     GoogleSignin,    
   } from '@react-native-google-signin/google-signin';
@@ -384,7 +384,7 @@ export const verifyOtp = (payload,setState,props)=>{
                                             
                         props.navigation.reset({
                             index: 0,
-                            routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
+                            routes: [{ name: constants.ScreenNames.AppStack.HOME }]
                         });    
                         
                      // turn off loading
@@ -646,10 +646,10 @@ export const sendForgotPasswordLink = (payload,setState,props) => {
 }
 
 
-export const logOut = async()=>{
+export const logOut = async(props)=>{
     await CLEAR_SESSION();
-    alert('helop')
-    this.props.navigation.reset({
+   
+    props.navigation.reset({
         index: 0,
         routes: [{ name: constants.ScreenNames.AppStack.AUTHENTICATION }]
     })

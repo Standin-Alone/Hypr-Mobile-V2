@@ -112,7 +112,12 @@ export default class ProductDetail extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.INSPIRE,parameters)
     }
     handleGoToBoost = ()=>{
-        
+        let parameters={
+            image:this.state.variant.variantImage,
+            variantName:this.state.variant.variantName,
+            variant:this.state.variant
+        }
+        this.props.navigation.navigate(constants.ScreenNames.Social.BOOST,parameters)
     }
     handleGoToChangeAddress = () =>{
         this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS,{variant:this.state.variant,reCalculateFreight : this.handleUpdateStateFromChangeAddress.bind(this)});

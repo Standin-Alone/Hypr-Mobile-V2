@@ -353,10 +353,10 @@ export const createPost = (payload,setState,props)=>{
 
 export const createInspire = (payload,setState,props)=>{
 
-    setState({isProgress:true});
+    setState({isProgress:true,loadingTitle:'Posting...'});
     let countError = 0;
     // Check Internet Connection
-    NetInfo.fetch().then((state)=>{
+    NetInfo.fetch().then( async (state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
              // validate payload
@@ -370,14 +370,36 @@ export const createInspire = (payload,setState,props)=>{
                 }
             })
             
-
-     
-            
             if(payload.caption != ''){
+
+            var formData = new FormData();
+            formData.append('userId',payload.userId); 
+            formData.append('caption',payload.caption);    
+            formData.append('fileInfo',JSON.stringify(payload.file));    
+            formData.append('productLink',JSON.stringify(payload.productLink));    
+                
+            if(payload.files.length > 0 ){
+               payload.files.map(item=>{          
+                    let filename = item.path.replace(/^.*[\\\/]/, '')                  
+                    formData.append('attachments[]',{name:filename,type:item.mime,uri:item.path})                
+                })
+            }
+                                   
             // POST REQUEST
-            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,payload).then((response)=>{                    
+            POST(
+                `${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`, 
+                formData,
+                {
+                    headers: {
+                      "Content-Type": "multipart/form-data",
+                    },
+                }
+                
+                ).then((response)=>{         
+                               
                          
                 if(response.data.status == true){
+
                     
                     Toast.show({
                         type:'success',
@@ -386,9 +408,12 @@ export const createInspire = (payload,setState,props)=>{
                     
                     props.navigation.reset({
                         index: 0,
-                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
-                    });  
-                        setState({isProgress:false});
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME,
+                            state: {
+                                routes: [{name: constants.ScreenNames.Social.SOCIAL}],
+                            } }]
+                    });    
+                    setState({isProgress:false,loadingTitle:''});
 
                     
 
@@ -397,27 +422,27 @@ export const createInspire = (payload,setState,props)=>{
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({isProgress:false});
+                    setState({isProgress:false,loadingTitle:''});
 
                 }
         
                  
             }).catch((error)=>{
-                console.warn(error)
+                console.warn(error.response)
                 Toast.show({
                     type:'error',
                     text1:'Something went wrong!'
                 });
                 
                 // turn off loading
-                setState({isProgress:false});
+                setState({isProgress:false,loadingTitle:''});
             });
         }else{
             Toast.show({
                 type:'error',
                 text1:'Please write something to post.'
             });
-            setState({isProgress:false});
+            setState({isProgress:false,loadingTitle:''});
         }
          }else{
              //  No internet Connection
@@ -426,7 +451,7 @@ export const createInspire = (payload,setState,props)=>{
                 text1:'No internet Connection!'
             })
              // turn off loading
-            setState({isProgress:false});
+            setState({isProgress:false,loadingTitle:''});
          }
     });
 
@@ -556,6 +581,75 @@ export const getProfileInfo = (payload,setState)=>{
 
 
 export const createStory = (payload,setState,props,state)=>{
+
+    setState({isProgress:true});
+    let countError = 0;
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+      
+            
+
+            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`);
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`,payload).then((response)=>{                    
+            
+
+          
+                if(response.data.status == true){
+                 
+                    Toast.show({
+                        type:'success',
+                        text1: response.data.message
+                    });
+
+                    props.navigation.reset({
+                        index: 2,
+                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
+                    });  
+                    
+                    setState({isProgress:false});
+
+                    
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isProgress:false});
+
+                }
+        
+                 
+            }).catch((error)=>{
+                console.warn(error.response)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isProgress:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isProgress:false});
+         }
+    });
+
+}
+
+
+
+export const boost = (payload,setState,props,state)=>{
 
     setState({isProgress:true});
     let countError = 0;
