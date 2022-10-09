@@ -30,7 +30,7 @@ export default class VariantList extends React.Component {
         getShippingAddress(this.setMyState);
 
         let cleanVariantList = [];
-  
+        console.warn(this.props.route.params)
         this.state.params.variantList.map((item)=>{
             cleanVariantList.push({
                 variantName:item.variantNameEn,
@@ -41,6 +41,8 @@ export default class VariantList extends React.Component {
                 variantSku: item.variantSku,
             })
         })
+
+
         this.setState({variantList:cleanVariantList})        
     }
 

@@ -12,7 +12,7 @@ import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartC
 import Toast from 'react-native-toast-message';
 
 
-export default class ProductDetail extends React.Component {
+export default class Reviews extends React.Component {
     constructor(props) {
       super(props);
       this.state = {
@@ -31,7 +31,7 @@ export default class ProductDetail extends React.Component {
     
 
     componentDidMount(){
-        console.warn(this.props.route.params.variant.variantPid)
+           
 
         this.props.navigation.addListener('focus',()=>{
             getShippingAddress(this.setMyState)
@@ -63,7 +63,7 @@ export default class ProductDetail extends React.Component {
 
     handleAddToCart = async ()=>{
         let userId = await GET_SESSION('USER_ID');
-
+        
         if(this.state.shippingAddress.length != 0){
             
             let payload = {
@@ -72,7 +72,6 @@ export default class ProductDetail extends React.Component {
                 shippingAddress:this.state.shippingAddress.filter((item)=>item.is_selected==true)[0],
                 freightCalculation:this.state.freightCalculation
             }
-          
             return addToCart(payload,this.setMyState)
         }else{
             Toast.show({
@@ -110,7 +109,6 @@ export default class ProductDetail extends React.Component {
             variantName:this.state.variant.variantName,
             variant:this.state.variant
         }
-        this.setState((prev)=>({isOpenShareModal:false }))
         this.props.navigation.navigate(constants.ScreenNames.Social.INSPIRE,parameters)
     }
     handleGoToBoost = ()=>{
@@ -119,14 +117,10 @@ export default class ProductDetail extends React.Component {
             variantName:this.state.variant.variantName,
             variant:this.state.variant
         }
-        this.setState((prev)=>({isOpenShareModal:false }))
         this.props.navigation.navigate(constants.ScreenNames.Social.BOOST,parameters)
     }
     handleGoToChangeAddress = () =>{
         this.props.navigation.navigate(constants.ScreenNames.Market.ADDRESS,{variant:this.state.variant,reCalculateFreight : this.handleUpdateStateFromChangeAddress.bind(this)});
-    }
-    handleGoToReviews = () =>{
-        this.props.navigation.navigate(constants.ScreenNames.Market.REVIEWS,this.props.route.params);
     }
     handleOpenShareModal = ()=>{
        this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
@@ -196,107 +190,7 @@ export default class ProductDetail extends React.Component {
                     )}
                 />
 
-
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
-                    <View style={styles.variantContainer}>                                                 
-                        <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
-
-                        <View  style={styles.variantNameContainer}>
-                            <View>
-                                <Text style={styles.variantName} numberOfLines={2}>
-                                    {this.state.variant.variantName}
-                                </Text>                                   
-                            </View>
-                            <View style={styles.variantPriceContainer}>
-                                <Text style={styles.variantPrice} numberOfLines={2}>${this.state.variant.variantPrice}</Text>
-                            </View>
-                        </View>
-                        
-                        <View  style={styles.deliveryContainer}>      
-                            <View style={{flexDirection:'row',flex:1}}>
-                                <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliveryTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery</Text>
-                                </View>
-
-                                <View style={styles.deliveryButton}>
-                                    <View style={styles.changeDeliveryButton}>
-                                            <Components.ChangeDeliveryButton
-                                                title={this.state.shippingAddress.length == 0 ? 'No delivery address...'  : this.state.shippingAddress.filter((item)=>item.is_selected==true)[0].address}
-                                                onPress={this.handleGoToChangeAddress}
-                                            />
-                                    </View>
-                                </View>    
-                            </View>    
-
-                            <View style={{flexDirection:'row',flex:1}}>
-                                <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery </Text>
-                                </View>
-
-                                <View style={styles.deliveryButton}>
-                                    <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
-
-                                            {this.state.freightCalculation[0].logisticName}
-                                        </Text> 
-                                    </View>
-                                </View>    
-                            </View>  
-
-                            <View style={{flexDirection:'row',flex:1}}>
-                                <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Days</Text>
-                                </View>
-
-                                <View style={styles.deliveryDays}>
-                                    <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
-
-                                            {this.state.freightCalculation[0].logisticAging} Days
-                                        </Text> 
-                                    </View>
-                                </View>    
-                            </View>  
-
-
-                            <View style={{flexDirection:'row',flex:1}}>
-                                <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Fee</Text>
-                                </View>
-
-                                <View style={styles.deliveryButton}>
-                                    <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
-                                            ${this.state.freightCalculation[0].logisticPrice}
-                                        </Text> 
-                                    </View>
-                                </View>    
-                            </View>  
-
-                            
-                        </View>
-
-                        <View style={styles.reviewContainer}>
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                                
-                                    <View >
-                                        <Text style={styles.headerText}>Review</Text>                                        
-                                    </View>                              
-                                    <View >
-                                        <TouchableOpacity style={{flexDirection:'row'}} onPress={this.handleGoToReviews}>
-                                            <Text>
-                                                View All
-                                            </Text>
-                                            <constants.Icons.MaterialIcons
-                                                name="chevron-right"
-                                                size={constants.Dimensions.normalize(10)}
-                                            />
-                                        </TouchableOpacity>
-                                    </View>                              
-                                </View>
-                        </View>
-                    </View>
-                </ScrollView>
+             
                 <View style={{flex: 1}}>
                     <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
                         <TouchableOpacity onPress={this.handleAddToWishList}  style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(10)}}>

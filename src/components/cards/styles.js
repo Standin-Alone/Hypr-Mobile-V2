@@ -216,15 +216,15 @@ export const styles = StyleSheet.create({
 
     orderStatusVariantName:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:12,        
+        fontSize:constants.Dimensions.normalize(6),        
     },
     orderStatusQuantity:{                             
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:12,        
+        fontSize:constants.Dimensions.normalize(6),        
     },
     orderStatusPrice:{                             
         fontFamily:constants.Fonts.GothamBold,
-        fontSize:14, 
+        fontSize:constants.Dimensions.normalize(7),   
         color:constants.Colors.danger       
     },
     orderStatusFirstColumn:{        
@@ -429,6 +429,12 @@ export const styles = StyleSheet.create({
         fontSize:constants.Dimensions.normalize(6),  
         
         color:constants.Colors.green
+    },
+    video:{
+        borderRadius:20,
+        width:constants.Dimensions.vw(95),
+        height:constants.Dimensions.vh(80),   
+        backgroundColor:'black'    
     }
 });
 

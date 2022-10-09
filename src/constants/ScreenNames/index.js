@@ -30,7 +30,8 @@ export default {
        ORDER:'Order',
        PAYMENT:'Payment',
        ORDER_STATUS:'OrderStatus',
-       ADDRESS_EDIT_FORM:'MarketAddressEditForm'
+       ADDRESS_EDIT_FORM:'MarketAddressEditForm',
+       REVIEWS:'Reviews'
    },
    Profile:{
       PROFILE:'Profile',       

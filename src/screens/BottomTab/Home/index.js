@@ -80,7 +80,7 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-       
+       console.warn( item.filenames[0]);
         
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
@@ -88,7 +88,7 @@ export default class Home extends React.Component {
                     
                     fullName={item.full_name}
                     profilePicture={item.user_picture}
-                    postImage={item.filenames[0]}
+                    postImage={ item.filenames[0]}
                     shortName={item.full_name.split(' ')[0]}
                     post={item.caption}
                     hypesCount={item.hypes.length}

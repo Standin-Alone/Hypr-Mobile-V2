@@ -55,9 +55,7 @@ export const getToVerifyOrders = (payload,setState)=>{
 }
 
 
-const orderedProductsCallBack = ()=>{
 
-}
 
 export const checkOrdersStatus= (payload,setState)=>{
     
@@ -95,6 +93,8 @@ export const checkOrdersStatus= (payload,setState)=>{
                                 //         billing_contact: items.billing_contact,
                                 //         billing_zip_code: items.billing_zip_code
                                 //     }
+
+                                    result.data.data.order_status = items.order_status;
                                     return result.data.data;
                                 }                                                                                                                                     
                             }
@@ -172,33 +172,22 @@ export const checkOrdersStatus= (payload,setState)=>{
 
 
 export const getOrderedProducts= (payload,setState)=>{
-
-    
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-
-            
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ORDERED_PRODUCTS}`,payload).then(async (response)=>{                    
-                
                 if(response.data.status == true){
-                    
-                    
                     let orderedProducts = response.data.data;
-                    
-        
-                    
-                    
-                    setState({orderedProducts:orderedProducts})  
 
+                    console.warn(`orderedPRoducts`,response.data.data);
+                    setState({orderedProducts:orderedProducts})  
                 }else{
                     Toast.show({
                         type:'error',
                         text1: response.data.message
                     });
-
                 }
            
             }).catch((error)=>{
@@ -227,7 +216,7 @@ export const getOrderedProducts= (payload,setState)=>{
 
 export const getTrackOrder= (payload,setState)=>{
 
-    setState({isTracking:true});
+    setState({isTracking:true,progressTitle:'Tracking...'});
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -286,13 +275,6 @@ export const getTrackOrder= (payload,setState)=>{
                         
                         setState({isTracking:false});
                     });
-        
-            
-             
-
-                    
-                    
-                    
                   
                 }else{
                     Toast.show({
@@ -319,6 +301,87 @@ export const getTrackOrder= (payload,setState)=>{
                 text1:'No internet Connection!'
             })
             setState({isTracking:false});
+         }
+    });
+
+}
+
+
+
+export const orderReceived= (payload,setState,props)=>{
+    setState({isTracking:true,progressTitle:"Processing..."});
+                 
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.ORDER_RECEIVED}`,payload).then(async (response)=>{                    
+
+                if(response.data.status == true){
+                    
+                    let totalMarkUp = payload.orderedProducts.reduce((prev, current) => prev + current.mark_up, 0).toFixed(2);
+                    
+                    let myPayload = {                 
+                        markUp: totalMarkUp,
+                        orderId: payload.orderNumber,
+                        userId: payload.userId             
+                    }
+        
+                    // POST REQUEST
+                    POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,myPayload).then((response)=>{                    
+                     
+                        if(response.data.response == 'success'){          
+                            setState({isTracking:false}); 
+                            Toast.show({
+                                type:'success',
+                                text1:'Success',
+                                text2:'Successfully order received.'
+                            });
+                            props.navigation.reset({
+                                index: 0,
+                                routes: [{ name: constants.ScreenNames.AppStack.HOME}]
+                            });       
+                        }else{
+                            Toast.show({
+                                type:'error',
+                                text1: 'Error',
+                                text2:response.data.errorMessage
+                            });
+                            setState({isTracking:false});
+                        }
+                    }).catch((error)=>{
+                        console.warn(error)
+                        Toast.show({
+                            type:'error',
+                            text1: 'Error',
+                            text2:error
+                        });
+                         setState({isTracking:false});   
+                    });
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({isTracking:false});
+                }
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                setState({isTracking:false});
+            });
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+            setState({isTracking:false});
+      
          }
     });
 

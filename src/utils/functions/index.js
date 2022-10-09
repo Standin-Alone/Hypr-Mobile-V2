@@ -267,7 +267,11 @@ export const openInspirePhotoAndVideosGallery = (payload,setState,props)=>{
                 quality:0.5,
                 includeBase64:true,
                 multiple:true         
+            }).catch(()=>{
+                setState({isProgress:false});   
             });   
+
+         
             if(openUpCamera.length > 0){
                 let filterVideos = openUpCamera.filter((item)=>item.mime == 'video/mp4');
                 let videoIndex = [];
@@ -295,7 +299,7 @@ export const openInspirePhotoAndVideosGallery = (payload,setState,props)=>{
 
 
 export const openInspireCamera = (payload,setState,props)=>{
-    setState({isProgress:true,loadingTitle:'Opening the gallery'});
+    setState({isProgress:true,loadingTitle:'Opening the camera'});
     // Check Internet Connection
     NetInfo.fetch().then(async(state)=>{
             
@@ -306,7 +310,9 @@ export const openInspireCamera = (payload,setState,props)=>{
                 quality:0.5,
                 includeBase64:true,
       
-            });   
+            }).catch(()=>{
+                setState({isProgress:false});   
+            });   ;   
             console.warn(openUpCamera);
             if(openUpCamera){
     

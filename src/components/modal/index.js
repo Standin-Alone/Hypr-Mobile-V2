@@ -163,12 +163,14 @@ export const ProgressLoadingModal = ({
 export const DraggableModal = ({
     isOpen,
     height,
-    content
+    content,
+    onDismiss
 })=>{
     return(
         <DraggablePanel
             visible={isOpen}
             initialHeight={height}
+            onDismiss={onDismiss}
       > 
         {content()}
       </DraggablePanel>

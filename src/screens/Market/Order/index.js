@@ -93,14 +93,12 @@ export default class Order extends React.Component {
 
     
     handleOpenPaymentModal(){
-        
         this.setState({openPaymentMethodModal:true})
     }
 
 
     // HANDLE PAY BUTTON
     handlePay = async () =>{
-
         let payload ={
             cart:this.state.cart,
             paymentMethod:this.state.selectedPaymentMethod,
@@ -109,28 +107,17 @@ export default class Order extends React.Component {
             points:this.state.userInfo?.reward,
             lineItemsPayload:[] // for stripe only.
         }
-
         this.setState({isProgress:true});
-
-
         if(this.state.selectedPaymentMethod != ''){
-            
-          
             return pay(payload,this.setMyState,this.props)
-         
-            
         }else{
             Toast.show({
                 type:'error',
                 text1: 'Error',
                 text2:'Please select payment method first'
             });
-            
             this.setState({isProgress:false});
-
         }
-
-        
     }
     
     

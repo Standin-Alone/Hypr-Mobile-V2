@@ -6,7 +6,7 @@ import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image'
 import DraggablePanel from 'react-native-draggable-panel';
-
+import Video from 'react-native-video';
 
 export const ProductCard = ({
    productImage,
@@ -260,7 +260,18 @@ export const SocialPostCard = ({
 })=>(
    <View style={styles.socialPostContainer}>
       <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>
-         <FastImage source={{ uri:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+
+         {postImage?.split('.')[1] == 'mp4' ? 
+                 <Video source={{uri:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${postImage}`}}  
+                        style={styles.video}
+                        posterResizeMode={"center"}                 
+                        allowsExternalPlayback={false}
+                        resizeMode='contain'                 
+                  />
+            :
+            <FastImage source={{ uri:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${postImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+         }
+         
          
          <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100) ,top:constants.Dimensions.vh(2)}}>
             <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPress={onViewProfile}>

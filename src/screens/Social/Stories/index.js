@@ -47,16 +47,13 @@ export default class SocialStories extends React.Component {
                  },
               }}
               onComplete={()=>{ 
-
                   let stories = this.props.route.params.stories.filter((storyFilter)=>storyFilter._id != this.state.userInfo._id);
-
                   this.props.route.params.stories.map((storyItem)=>{
                     if(storyItem._id != this.props.route.params.story._id){
                       this.props.navigation.replace(constants.ScreenNames.Social.STORIES,{story:storyItem,stories:stories})
                     }
-                  });
-                  
-              }}
+                  });        
+              }}    
               barStyle={{
                 barActiveColor: constants.Colors.primary,                
           

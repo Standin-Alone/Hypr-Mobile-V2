@@ -6,7 +6,7 @@ import { View,Text,InteractionManager,FlatList} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import { styles } from './styles';
-import { getOrderedProducts,getTrackOrder } from '../../../actions/tracking';
+import { getOrderedProducts,getTrackOrder,orderReceived } from '../../../actions/tracking';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import DraggablePanel from 'react-native-draggable-panel';
 import Timeline from 'react-native-timeline-flatlist';
@@ -29,7 +29,8 @@ export default class OrderStatus extends React.Component {
           openTrackingPanel:false,
           isTracking:false,
           tracking:[],
-          routes:[]
+          routes:[],
+          progressTitle:""
       };
     }
 
@@ -41,7 +42,7 @@ export default class OrderStatus extends React.Component {
         let payload = {
             orderNumber :this.state.parameters.orderInfo?.orderNum 
         }
-        
+     
 
         getOrderedProducts(payload,this.setMyState)
    
@@ -51,8 +52,7 @@ export default class OrderStatus extends React.Component {
  
     }   
 
-    renderItem = ({item,index})=>{
-      
+    renderItem = ({item,index})=>{      
         return(
             <Components.OrderStatusProductCard 
                 image={item.product_image}
@@ -62,9 +62,7 @@ export default class OrderStatus extends React.Component {
             />
         )
     }
-
-    handleOpenTracking =async ()=>{
-       
+    handleOpenTracking =async ()=>{       
         let payload = {
             trackNumber:this.state.orderInfo.trackNumber,
             orderNumber :this.state.parameters.orderInfo?.orderNum,
@@ -72,7 +70,15 @@ export default class OrderStatus extends React.Component {
         }
         getTrackOrder(payload,this.setMyState)
     }
-
+    handleOrderReceived =  async ()=>{
+        let payload = {
+            orderNumber :this.state.parameters.orderInfo?.orderNum,
+            userId: await GET_SESSION('USER_ID'),
+            orderedProducts:this.state.orderedProducts
+        }
+      
+        orderReceived(payload,this.setMyState,this.props)
+    }
     render(){
      
         return  (
@@ -84,19 +90,35 @@ export default class OrderStatus extends React.Component {
 
                 <Components.ProgressLoadingModal
                     openModal={this.state.isTracking}
-                    title={"Tracking...."}
+                    title={this.state.progressTitle}
                 />
 
                 {this.state.isReadyToRender == true ? (
                 <View style={{flexDirection:'column',alignContent:'space-between'}}>                
                         <View style={styles.orderStatusHeader}>
-                            <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
-                                <Text style={styles.orderNumLabel}><constants.Icons.MaterialCommunityIcons name="clipboard-edit" size={20} color={constants.Colors.secondary}/>Order Number</Text>
-                                <Text style={styles.orderNumVal}>{this.state.parameters.orderInfo?.orderNum}</Text>
-                            </View>                
-                            <View style={{flexDirection:'row',left:constants.Dimensions.vw(5), top:constants.Dimensions.vh(4)}}>
-                                <Text>Order Date: </Text>
-                                <Text> {this.state.parameters.orderInfo?.createDate}</Text>
+                            <View>
+                                <View style={{flexDirection:'column',left:constants.Dimensions.vw(5),  top:constants.Dimensions.vh(4),}}>
+                                    <Text style={styles.orderNumLabel}><constants.Icons.MaterialCommunityIcons name="clipboard-edit" size={20} color={constants.Colors.secondary}/>Order Number</Text>
+                                    <Text style={styles.orderNumVal}>{this.state.parameters.orderInfo?.orderNum}</Text>
+                                </View>                
+                                <View style={{flexDirection:'row',left:constants.Dimensions.vw(5), top:constants.Dimensions.vh(4)}}>
+                                    <Text>Order Date: </Text>
+                                    <Text> {this.state.parameters.orderInfo?.createDate}</Text>
+                                </View>
+                            </View>
+                            <View>
+                                {this.state.orderInfo.trackNumber && 
+                                   <Components.PrimaryButtonOutline
+                                    title={`Track ${this.state.orderInfo.trackNumber}`}
+                                     onPress={this.handleOpenTracking}
+                                     moreStyle={{width:constants.Dimensions.vw(45),left:constants.Dimensions.vw(2)}}
+                                     moreTextStyle={{fontSize:constants.Dimensions.normalize(6),top:constants.Dimensions.vh(1)}}
+                                     showIcon
+                                     iconName={"location-pin"}
+                                     iconSize={constants.Dimensions.normalize(7)}
+                                    />
+
+                                }
                             </View>
                         </View>         
 
@@ -135,15 +157,22 @@ export default class OrderStatus extends React.Component {
                             </View>                
                         </View>      
 
-                        {this.state.orderInfo.trackNumber && 
-                           <Components.PrimaryButtonOutline
-                                title={`Track ${this.state.orderInfo.trackNumber}`}
-                                onPress={this.handleOpenTracking}
-                                moreStyle={{width:constants.Dimensions.vw(95),left:constants.Dimensions.vw(2)}}
-                           />
+                        {this.state.orderInfo.trackNumber && this.state.orderInfo.order_status != 'Received'  && 
+                           (
+                            <>
                         
+                           <View style={styles.orderReceivedContainer}>
+                                <Components.PrimaryButton
+                                    title={`Order Received`}      
+                                    moreStyle={styles.orderReceivedBtn}  
+                                    onPress={this.handleOrderReceived}                                                     
+                                    /> 
+                            </View>   
+                            </>
+                   
+                           )
                         }
-
+                      
 
                     <DraggablePanel
                         visible={this.state.openTrackingPanel}

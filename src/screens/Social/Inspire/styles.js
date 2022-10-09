@@ -32,7 +32,7 @@ bottom:{
 },
 video:{
     width:constants.Dimensions.vw(100),
-    height:constants.Dimensions.vh(80),
+    height:constants.Dimensions.vh(100),
     backgroundColor:'black'    
 },
 carouselImage:{

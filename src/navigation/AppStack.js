@@ -51,6 +51,7 @@ import ChooseFriendToChat from "../screens/Social/ChooseFriendToChat";
 import { SideMenuBar } from "./SideMenu";
 import Inspire from "../screens/Social/Inspire";
 import Boost from "../screens/Social/Boost";
+import Reviews from "../screens/Market/Reviews";
 // LogBox.ignoreLogs([
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
@@ -74,6 +75,7 @@ const AppStack = () =>(
         <Stack.Screen component={Address} name={constants.ScreenNames.Market.ADDRESS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={AddressForm} name={constants.ScreenNames.Market.ADDRESS_FORM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={MarketAddressEditForm} name={constants.ScreenNames.Market.ADDRESS_EDIT_FORM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Reviews} name={constants.ScreenNames.Market.REVIEWS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ProductDetail} name={constants.ScreenNames.Market.PRODUCT_DETAIL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={VariantList} name={constants.ScreenNames.Market.VARIANT_LIST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={WishList} name={constants.ScreenNames.Market.WISH_LIST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    

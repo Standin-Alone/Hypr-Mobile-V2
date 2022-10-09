@@ -47,6 +47,7 @@ const EndPoints = {
     CONFIRM_ORDER:'/confirm-order',
 
 
+
     // MLM
     DISSEMINATE_REWARDS:'/mlm-disseminate-rewards',
     GET_MEMBERS:'/get-members',
@@ -62,16 +63,9 @@ const EndPoints = {
     GET_TO_VERIFY_ORDERS:'/tracking/get-to-verify-orders',
     GET_ORDERED_PRODUCTS:'/tracking/get-ordered-products',
     GET_TRACKING_DETAILS:'/tracking-details',
-
-
-
-
-
-
-
+    ORDER_RECEIVED:'/tracking/order-received',
 
     // SOCIAL
-
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',
     GET_ALL_MY_POST:'/social/get-all-my-post',
     CREATE_POST:'/social/create-post',
@@ -80,6 +74,7 @@ const EndPoints = {
     GET_PROFILE_INFO:'/social/get-profile-info',
     GET_ALL_FRIENDS_STORIES:'/social/get-all-friends-stories',
     CREATE_STORY:'/social/create-story',
+    BOOST:'/social/boost',
   
 
     // FRIEND

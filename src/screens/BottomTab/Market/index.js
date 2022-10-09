@@ -61,8 +61,7 @@ export default class Market extends React.Component {
                 productImage={result.item.productImage}
                 productName={result.item.productNameEn}
                 productPrice={result.item.sellPrice}
-                addToCart = {()=>this.handleAddToCart(result.item)}
-                                
+                addToCart = {()=>this.handleAddToCart(result.item)}                                
             />
     )
 

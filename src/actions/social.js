@@ -406,17 +406,14 @@ export const createInspire = (payload,setState,props)=>{
                         text1:'Successfully posted.'
                     });
                     
-                    props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME,
-                            state: {
-                                routes: [{name: constants.ScreenNames.Social.SOCIAL}],
-                            } }]
-                    });    
+                    // props.navigation.reset({
+                    //     index: 0,
+                    //     routes: [{ name: constants.ScreenNames.AppStack.HOME,
+                    //         state: {
+                    //             routes: [{name: constants.ScreenNames.Social.SOCIAL}],
+                    //         } }]
+                    // });    
                     setState({isProgress:false,loadingTitle:''});
-
-                    
-
                 }else{
                     Toast.show({
                         type:'error',
@@ -660,12 +657,10 @@ export const boost = (payload,setState,props,state)=>{
       
             
 
-            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`);
+    
             // POST REQUEST
-            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`,payload).then((response)=>{                    
-            
-
-          
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.BOOST}`,payload).then((response)=>{                    
+                      
                 if(response.data.status == true){
                  
                     Toast.show({
@@ -674,8 +669,12 @@ export const boost = (payload,setState,props,state)=>{
                     });
 
                     props.navigation.reset({
-                        index: 2,
-                        routes: [{ name: constants.ScreenNames.Social.SOCIAL }]
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME,state:{
+                            routes:[{
+                                name:constants.ScreenNames.Social.SOCIAL
+                            }]
+                        } }]
                     });  
                     
                     setState({isProgress:false});

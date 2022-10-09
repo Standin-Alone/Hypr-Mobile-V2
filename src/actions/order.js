@@ -135,7 +135,7 @@ export const paywithReward = (payload,setState,props)=>{
                     // MLM REWARDS
                     disseminateRewards(cleanPayload,setState,props);
 
-                  
+                    setState({isProgress:false});
 
                 }else{
                     Toast.show({
@@ -143,22 +143,23 @@ export const paywithReward = (payload,setState,props)=>{
                         text1:'Something went wrong!',
                         text2:result.data.message
                     });
+                    setState({isProgress:false});
                 }
             });
                              
         }else{
-
+            setState({isProgress:false});
         }
      
     }).catch((error)=>{
-        console.warn(error)
+    
         Toast.show({
             type:'error',
             text1:'Something went wrong!'
         });
         
         // turn off loading
-        setState({isLoading:false});
+        setState({isProgress:false});
     });
 
 }
@@ -178,7 +179,7 @@ export const payWithPaypal = (payload,setState) =>{
          // turn off loading
          setState({isLoading:false});
     }).catch((error)=>{
-        console.warn(error)
+      
         Toast.show({
             type:'error',
             text1:'Something went wrong!'
@@ -245,6 +246,7 @@ export const pay = (payload,setState,props)=>{
                             text1:'Something went wrong!',
                             text2:result.data.message
                         });
+                        setState({isProgress:false});
                     }
                 });
             }
@@ -261,6 +263,7 @@ export const pay = (payload,setState,props)=>{
                         text1:'Message',
                         text2: "Not enough ba lance"
                     });
+                    setState({isProgress:false});
                 }
 
               
@@ -322,9 +325,18 @@ export const successPayment = (payload,setState,props)=>{
 
                         if(result.data.result == true){
 
-                            // MLM REWARDS
-                            disseminateRewards(cleanPayload,setState,props);
-
+                           
+                            Toast.show({
+                                type:'success',
+                                text1:'Success',
+                                text2:'Successfully paid your order. Please wait for your order to verify.'
+                            });
+        
+                            props.navigation.reset({
+                                index: 0,
+                                routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                            }); 
+                            
                                
                         }else{
                             Toast.show({

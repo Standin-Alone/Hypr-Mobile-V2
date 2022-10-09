@@ -24,7 +24,8 @@ export default class Boost extends React.Component {
     handleBoost = async ()=>{
         let parameter = {         
             userId:await GET_SESSION('USER_ID'),
-            file:this.state.capturedImageBase4,     
+            variant:this.state.params.variant 
+      
         }
         
         boost(parameter,this.setMyState,this.props)

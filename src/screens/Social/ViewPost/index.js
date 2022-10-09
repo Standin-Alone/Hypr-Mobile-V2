@@ -9,7 +9,8 @@ import { SharedElement } from 'react-navigation-shared-element';
 import constants from '../../../constants';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { hypePost } from '../../../actions/social';
-
+import { FlatList } from 'react-native-gesture-handler';
+import Video from 'react-native-video';
 
 export default class ViewPost extends React.Component {
     constructor(props) {
@@ -17,7 +18,9 @@ export default class ViewPost extends React.Component {
       this.state = {      
         parameters:this.props.route.params.post,
         isHype:false,
-        posts:this.props.route.params.posts
+        posts:this.props.route.params.posts,
+        videoIndex:0,
+        isShowControl:true
     
       };
     }
@@ -30,16 +33,31 @@ export default class ViewPost extends React.Component {
       
         this.setState({isHype:this.props.route.params.post.hypes.some( (item)=>item.user_id ==  userId)});
 
-       
     }
 
-    renderItem = ({item,index})=>(
-    
-
-            <FastImage source={{uri:item}} 
+    renderItem = ({item,index})=>{
+        
+            console.warn( item)
+        return (
+        
+        item.split('.')[1] == 'mp4'? 
+            <Video source={{uri: `${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`}}  
+                style={styles.image}
+                posterResizeMode={"center"}
+                
+                controls           
+                paused={this.state.isShowControl && index == this.state.videoIndex ? true : false}
+                allowsExternalPlayback={false}
+                resizeMode='contain'
+                onAudioFocusChanged={(event)=>{
+                    console.warn('audio',event)
+                }}
+            />
+        :
+            <FastImage source={{uri: `${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`}} 
             resizeMode={FastImage.resizeMode.contain}
             style={styles.image}/>      
-    )
+    )}
 
 
     onHype = async (item)=>{
@@ -58,6 +76,11 @@ export default class ViewPost extends React.Component {
     handleGoToComments = (item)=>{
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
+    onViewableItemsChanged = (viewableItems)=>{
+        if (viewableItems && viewableItems.length > 0) {
+            this.setState({ videoIndex: viewableItems[0].index });
+        }
+    }
 
     render(){
      
@@ -72,16 +95,16 @@ export default class ViewPost extends React.Component {
 
             <View style={styles.container}>
                 <SharedElement id={`item.${this.state.parameters._id}.photo`} style={{top:constants.Dimensions.vh(5)}}>
-                    <Carousel
-                        ref={(c) => { this._carousel = c; }}
-                        data={this.state.parameters.filenames.map((item)=>`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`)}
+              
+
+                    <FlatList
+                        horizontal
+                        data={this.state.parameters.filenames}
                         renderItem={this.renderItem}
-                        sliderWidth={constants.Dimensions.vw(100)}
-                        itemWidth={constants.Dimensions.vw(100)}
-                        lockScrollWhileSnapping={true}
-                        inactiveSlideOpacity={1}
-                        inactiveSlideScale={1}
-                        slideStyle={{flex:1,backgroundColor:constants.Colors.dark}}
+                        onViewableItemsChanged={this.onViewableItemsChanged}
+                        viewabilityConfig={{
+                            viewAreaCoveragePercentThreshold: 90
+                        }}
                     />
                 </SharedElement>
 
