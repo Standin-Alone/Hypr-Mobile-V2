@@ -331,3 +331,75 @@ export const openInspireCamera = (payload,setState,props)=>{
         }
     });
 }
+
+
+
+export const openReviewCamera = (payload,setState,props)=>{
+    setState({isProgress:true,loadingTitle:'Opening the camera'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){                                                
+            let openUpCamera = await ImagePicker.openCamera({
+                mediaType: 'photo',
+                quality:0.5,
+                includeBase64:true,
+      
+            }).catch(()=>{
+                setState({isProgress:false});   
+            });   ;   
+        
+            if(openUpCamera){
+                
+                setState((prevState)=>({isProgress:false,uploadedImages:[...prevState.uploadedImages,openUpCamera]}));
+                setState({isProgress:false});     
+            }else{
+                setState({isProgress:false});   
+            }  
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({isProgress:false,loadingTitle:'Loading'});
+        }
+    });
+}
+
+export const openReviewVideo = (payload,setState,props)=>{
+    setState({isProgress:true,loadingTitle:'Opening the camera'});
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+            
+        // if internet connected
+        if(state.isConnected && state.isInternetReachable){                                                
+            let openUpCamera = await ImagePicker.openCamera({
+                mediaType: 'video',
+                quality:0.5,
+                includeBase64:true,
+      
+            }).catch(()=>{
+                setState({isProgress:false});   
+            });   ;   
+        
+            if(openUpCamera){
+               
+                setState((prevState)=>({isProgress:false,uploadedVideos:[...prevState.uploadedVideos,openUpCamera]}));   
+                setState({isProgress:false});   
+            }else{
+                setState({isProgress:false});   
+            }  
+        }else{
+            //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+  
+            setState({isProgress:false,loadingTitle:'Loading'});
+        }
+    });
+}

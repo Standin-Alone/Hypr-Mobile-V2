@@ -96,5 +96,32 @@ export const styles = StyleSheet.create({
         fontSize:constants.Dimensions.normalize(6),
         fontFamily:constants.Fonts.PoppinsLight,        
         color:constants.Colors.dark_tint
-    }
+    },
+    reviewButton:{
+        width:constants.Dimensions.vw(30),
+        height:constants.Dimensions.vh(10)
+    },
+    reviewText:{
+        bottom:constants.Dimensions.vh(2),
+        fontSize:constants.Dimensions.normalize(8),
+        fontFamily:constants.Fonts.PoppinsRegular,        
+        color:constants.Colors.light
+    },
+    buttonBoxed:{
+        backgroundColor:constants.Colors.gray_tint,
+        paddingHorizontal:constants.Dimensions.vw(5),
+        paddingVertical:constants.Dimensions.vh(5),
+        borderRadius:10,
+        borderWidth:1,
+        borderColor:constants.Dimensions.gray_tint,
+        borderStyle: 'dashed',
+        
+    },
+    buttonBoxedIconText:{
+        textAlign:'center',
+        fontSize:constants.Dimensions.normalize(4),
+        fontFamily:constants.Fonts.OpenSansMedium,        
+        top:5,
+        color:constants.Colors.dark_tint
+    },
 });

@@ -371,86 +371,72 @@ export const createInspire = (payload,setState,props)=>{
             })
             
             if(payload.caption != ''){
-
-            var formData = new FormData();
-            formData.append('userId',payload.userId); 
-            formData.append('caption',payload.caption);    
-            formData.append('fileInfo',JSON.stringify(payload.file));    
-            formData.append('productLink',JSON.stringify(payload.productLink));    
-                
-            if(payload.files.length > 0 ){
-               payload.files.map(item=>{          
-                    let filename = item.path.replace(/^.*[\\\/]/, '')                  
-                    formData.append('attachments[]',{name:filename,type:item.mime,uri:item.path})                
-                })
-            }
-                                   
-            // POST REQUEST
-            POST(
-                `${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`, 
-                formData,
-                {
-                    headers: {
-                      "Content-Type": "multipart/form-data",
-                    },
-                }
-                
-                ).then((response)=>{         
-                               
-                         
-                if(response.data.status == true){
-
-                    
-                    Toast.show({
-                        type:'success',
-                        text1:'Successfully posted.'
+                    var formData = new FormData();
+                    formData.append('userId',payload.userId); 
+                    formData.append('caption',payload.caption);    
+                    formData.append('fileInfo',JSON.stringify(payload.file));    
+                    formData.append('productLink',JSON.stringify(payload.productLink));    
+                        
+                    if(payload.files.length > 0 ){
+                    payload.files.map(item=>{          
+                            let filename = item.path.replace(/^.*[\\\/]/, '')                  
+                            formData.append('attachments[]',{name:filename,type:item.mime,uri:item.path})                
+                        })
+                    }            
+                    let headers =   {
+                        headers: {
+                        "Content-Type": "multipart/form-data",
+                        },
+                    };
+                    // POST REQUEST
+                    POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,formData,headers).then((response)=>{                                                                 
+                        if(response.data.status == true){                    
+                            Toast.show({
+                                type:'success',
+                                text1:'Successfully posted.'
+                            });            
+                            props.navigation.reset({
+                                index: 0,
+                                routes: [{ name: constants.ScreenNames.AppStack.HOME,
+                                    state: {
+                                        routes: [{name: constants.ScreenNames.Social.SOCIAL}],
+                                    } }]
+                            });    
+                            setState({isProgress:false,loadingTitle:''});
+                        }else{
+                            Toast.show({
+                                type:'error',
+                                text1: response.data.message
+                            });
+                            setState({isProgress:false,loadingTitle:''});
+                        }
+                    }).catch((error)=>{
+                        console.warn(error.response)
+                        Toast.show({
+                            type:'error',
+                            text1:'Something went wrong!'
+                        });
+                        
+                        // turn off loading
+                        setState({isProgress:false,loadingTitle:''});
                     });
-                    
-                    // props.navigation.reset({
-                    //     index: 0,
-                    //     routes: [{ name: constants.ScreenNames.AppStack.HOME,
-                    //         state: {
-                    //             routes: [{name: constants.ScreenNames.Social.SOCIAL}],
-                    //         } }]
-                    // });    
-                    setState({isProgress:false,loadingTitle:''});
-                }else{
-                    Toast.show({
-                        type:'error',
-                        text1: response.data.message
-                    });
-                    setState({isProgress:false,loadingTitle:''});
-
-                }
-        
-                 
-            }).catch((error)=>{
-                console.warn(error.response)
+            }else{
                 Toast.show({
                     type:'error',
-                    text1:'Something went wrong!'
+                    text1:'Please write something to post.'
                 });
-                
+                setState({isProgress:false,loadingTitle:''});
+            }
+            }else{
+                //  No internet Connection
+                Toast.show({
+                    type:'error',
+                    text1:'No internet Connection!'
+                })
                 // turn off loading
                 setState({isProgress:false,loadingTitle:''});
-            });
-        }else{
-            Toast.show({
-                type:'error',
-                text1:'Please write something to post.'
-            });
-            setState({isProgress:false,loadingTitle:''});
-        }
-         }else{
-             //  No internet Connection
-            Toast.show({
-                type:'error',
-                text1:'No internet Connection!'
-            })
-             // turn off loading
-            setState({isProgress:false,loadingTitle:''});
-         }
-    });
+            }
+        });
 
 }
 

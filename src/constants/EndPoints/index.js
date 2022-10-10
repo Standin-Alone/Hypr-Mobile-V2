@@ -61,9 +61,11 @@ const EndPoints = {
     CHECK_ORDER_STATUS:'/fetch-order',
     UPDATE_TRACKING:'/tracking/update-tracking',
     GET_TO_VERIFY_ORDERS:'/tracking/get-to-verify-orders',
+    GET_TO_REVIEW_ORDERS:'/tracking/get-to-review-orders',
     GET_ORDERED_PRODUCTS:'/tracking/get-ordered-products',
     GET_TRACKING_DETAILS:'/tracking-details',
     ORDER_RECEIVED:'/tracking/order-received',
+    REVIEW_PRODUCT:'/tracking/review-product',
 
     // SOCIAL
     GET_ALL_FRIENDS_POST:'/social/get-all-friends-post',

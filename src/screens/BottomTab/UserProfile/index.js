@@ -143,6 +143,12 @@ export default class UserProfile extends React.Component {
                                         color={constants.Colors.gradient.primary}
                                         onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_RECEIVE)}
                                     />
+                                       <Components.ButtonWithTopIcon
+                                        title="To Review"
+                                        iconName={"comment-dots"}
+                                        color={constants.Colors.gradient.primary}
+                                        onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_REVIEW)}
+                                    />
                                 </View>    
                             </View>            
                     </View>

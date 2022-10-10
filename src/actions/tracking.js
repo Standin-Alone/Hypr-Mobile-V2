@@ -57,6 +57,57 @@ export const getToVerifyOrders = (payload,setState)=>{
 
 
 
+
+export const getForReviewOrders= (payload,setState)=>{
+    
+    // Check Internet Connection
+    NetInfo.fetch().then((state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+            // GET REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_TO_REVIEW_ORDERS}`,payload).then(async (response)=>{                    
+           
+                if(response.data.status == true){
+
+                    let orders = response.data.data;
+
+                    console.warn(orders)
+                    setState({orders:orders,loadingData:false})
+
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    setState({orders:[],loadingData:false})          
+
+                }
+           
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                setState({loadingData:false})          
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+            setState({loadingData:false})          
+      
+         }
+    });
+
+}
+
+
 export const checkOrdersStatus= (payload,setState)=>{
     
  
@@ -320,7 +371,7 @@ export const orderReceived= (payload,setState,props)=>{
 
                 if(response.data.status == true){
                     
-                    let totalMarkUp = payload.orderedProducts.reduce((prev, current) => prev + current.mark_up, 0).toFixed(2);
+                    let totalMarkUp = payload.orderedProducts.reduce((prev, current) => prev + current.computed_markup_price, 0).toFixed(2);
                     
                     let myPayload = {                 
                         markUp: totalMarkUp,

@@ -52,6 +52,8 @@ import { SideMenuBar } from "./SideMenu";
 import Inspire from "../screens/Social/Inspire";
 import Boost from "../screens/Social/Boost";
 import Reviews from "../screens/Market/Reviews";
+import ToReview from "../screens/Profile/Tracking/ToReview";
+import ReviewProduct from "../screens/Market/ReviewProduct";
 // LogBox.ignoreLogs([
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
@@ -95,6 +97,8 @@ const AppStack = () =>(
         <Stack.Screen component={ToVerify} name={constants.ScreenNames.Profile.tracking.TO_VERIFY} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ToShip} name={constants.ScreenNames.Profile.tracking.TO_SHIP} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ToReceive} name={constants.ScreenNames.Profile.tracking.TO_RECEIVE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ToReview} name={constants.ScreenNames.Profile.tracking.TO_REVIEW} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={ReviewProduct} name={constants.ScreenNames.Market.REVIEW_PRODUCT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={OrderStatus} name={constants.ScreenNames.Market.ORDER_STATUS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ViewNewProfilePic} name={constants.ScreenNames.Profile.VIEW_NEW_PROFILE_PIC} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 

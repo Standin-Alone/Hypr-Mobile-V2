@@ -31,7 +31,8 @@ export default {
        PAYMENT:'Payment',
        ORDER_STATUS:'OrderStatus',
        ADDRESS_EDIT_FORM:'MarketAddressEditForm',
-       REVIEWS:'Reviews'
+       REVIEWS:'Reviews',
+       REVIEW_PRODUCT:'ReviewProduct'
    },
    Profile:{
       PROFILE:'Profile',       
@@ -42,6 +43,7 @@ export default {
          TO_VERIFY:'ToVerify',
          TO_SHIP:'ToShip',
          TO_RECEIVE:'ToReceive',
+         TO_REVIEW:'ToReview',
       },
       VIEW_NEW_PROFILE_PIC:'ViewNewProfilePic'
    },

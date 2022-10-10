@@ -9,6 +9,7 @@ import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import  Ionicons from 'react-native-vector-icons/Ionicons';
 import  Foundation from 'react-native-vector-icons/Foundation';
 import FastImage from 'react-native-fast-image'
+import Components from "..";
 
 export const PrimaryButton = ({
     onPress,
@@ -218,7 +219,9 @@ export const OrderCardButton = ({
     onPress,
     title,
     showIcon,
-    image
+    image,
+    showReviewButton,
+    onReview
 })=>(   
 
     <View
@@ -230,26 +233,31 @@ export const OrderCardButton = ({
 
 
             
-            {showIcon &&
-
-                // <constants.Icons.FontAwesome5 
-                //     name={iconName}
-                //     size={iconSize} 
-                //     color={constants.Colors.primary}
-                // />
+            {showIcon &&     
                 <FastImage source={{uri:image}} 
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.myOrderImage}/>
             }
 
-            <View style={{flexDirection:'column'}}>                             
-                <Text>Order Number:</Text>
-                <Text style={[styles.primaryButtonNoOutlineText]}>
-                    {title}
-                </Text>
-                <Text>
-                    
-                </Text>
+            <View style={{flexDirection:'column'}}>     
+                <View>
+                    <Text>Order Number:</Text>
+                    <Text style={[styles.primaryButtonNoOutlineText]}>
+                        {title}
+                    </Text>
+                </View>    
+
+                {showReviewButton && 
+                    <View style={{flexDirection:'row',justifyContent:'flex-end'}}>
+                        <Components.PrimaryButton 
+                            title={"Review"}
+                            moreStyle={styles.reviewButton}
+                            moreStyleText={styles.reviewText}
+                            onPress={onReview}
+                        />
+                    </View>   
+                 }
+                               
             </View>
 
             </View>
@@ -317,6 +325,35 @@ export const ButtonWithTopIcon = ({
                 </Text>
 
         
+            </View>
+        </TouchableOpacity>
+
+);
+
+
+
+export const ButtonWithIconBoxed = ({
+    onPress,
+    fontSize,
+    title,
+    width,
+    height,
+    isLoading,
+    loadingTitle,
+    iconName
+})=>(   
+
+        <TouchableOpacity  onPress={onPress} style={styles.buttonBoxed} >
+            <View style={{ flexDirection:'column',justifyContent:'center' }}>
+                <constants.Icons.FontAwesome5 
+                    name={iconName} 
+                    size={20} 
+                    color={constants.Colors.dark_tint}
+                    style={{alignSelf:'center'}}
+                />
+                <Text style={[styles.buttonBoxedIconText]} numberOfLines={1} ellipsizeMode="tail">
+                    { isLoading ? loadingTitle : title}
+                </Text>
             </View>
         </TouchableOpacity>
 
