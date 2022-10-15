@@ -1,6 +1,6 @@
 
 
-const ipAddress = '192.168.1.13';
+const ipAddress = '192.168.1.2';
 const ipAddressProd = '34.223.255.252';
 
 // const ipAddressProd = '192.168.1.8';

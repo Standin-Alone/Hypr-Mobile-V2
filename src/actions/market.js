@@ -243,7 +243,123 @@ export const getCartCount = async (setState)=>{
 }
 
 
+export const getReviewCount = async (payload,setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
 
+
+
+            let cleanPayload = {
+                pid:payload.variantPid
+            }
+                
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_REVIEW_COUNT}`,cleanPayload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                                                   
+                    
+                    setState({reviewCount:response.data.data});                                                          
+                                        
+                                        
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
+
+
+
+export const getProductReviews = async (payload,setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+
+        
+            let cleanPayload = {
+                pid:payload.variantPid
+            }
+             
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_PRODUCT_REVIEWS}`,cleanPayload).then((response)=>{                    
+               
+                if(response.data.status == true){
+                                                                   
+                    console.warn('REVIEWS',response.data.data[0].user_info)
+                    setState({productReviews:response.data.data});                                                          
+                                        
+                                        
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+
+                }
+               
+                 // turn off loading
+                 setState({isLoading:false});
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
 export const getShippingAddress = async (setState)=>{
     setState({isLoading:true});
     

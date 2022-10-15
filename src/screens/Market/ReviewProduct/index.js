@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,FlatList, InteractionManager,Image,Text, TextInput} from 'react-native';
+import { View,FlatList, InteractionManager,Image,Text, TextInput,TouchableOpacity} from 'react-native';
 
 import { getForReviewOrders } from '../../../actions/tracking';
 import Components from '../../../components';
@@ -12,7 +12,7 @@ import { openReviewCamera, openReviewVideo } from '../../../utils/functions';
 import Video from 'react-native-video';
 import FastImage from 'react-native-fast-image';
 import { reviewProduct } from '../../../actions/review';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 export default class ReviewProduct extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class ReviewProduct extends React.Component {
         InteractionManager.runAfterInteractions(()=>{
             this.setState({loadingData:false})
         })
-        console.warn(this.state.productInfo)
+        console.warn(this.state.productInfo.pid)
     }
 
     handleRemoveItem = (type,index)=>{
@@ -49,13 +49,13 @@ export default class ReviewProduct extends React.Component {
             tempImage.splice(index,1)
         }
     }
-    
+
     renderItem = ({item,index})=>{
         console.warn(item)
         return(
             item.mime == "video/mp4" ?
 
-                <View>
+                <View style={{marginRight:constants.Dimensions.vw(4)}}>
                     <Video source={{uri: item.path}}  
                         style={styles.video}
                         posterResizeMode={"center"}                
@@ -74,7 +74,7 @@ export default class ReviewProduct extends React.Component {
                     </TouchableOpacity>
                 </View>
             :
-            <View>
+            <View style={{marginRight:constants.Dimensions.vw(4)}}>
 
                     <FastImage source={{uri: item.path}} 
                     resizeMode={FastImage.resizeMode.contain}
@@ -99,6 +99,7 @@ export default class ReviewProduct extends React.Component {
     }
     handleReview = async ()=>{
         let parameter = {
+            pid:this.state.productInfo.pid,
             userId: await GET_SESSION('USER_ID'),
             rating:this.state.overAllRatingStar,
             productReview:this.state.productReview,
@@ -106,6 +107,7 @@ export default class ReviewProduct extends React.Component {
             uploadedVideos:this.state.uploadedVideos,
         };
 
+    
         reviewProduct(parameter,this.setMyState,this.props)
     }
 

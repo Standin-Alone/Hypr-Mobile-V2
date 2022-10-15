@@ -15,6 +15,8 @@ export const reviewProduct = (payload,setState,props)=>{
             
 
             let fd = new FormData();
+            fd.append('userId',payload.userId);
+            fd.append('pid',payload.pid);
             fd.append('rating',payload.rating);
             fd.append('productReview',payload.productReview);
 

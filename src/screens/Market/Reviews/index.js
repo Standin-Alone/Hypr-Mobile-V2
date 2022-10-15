@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View,Image,Text,TouchableOpacity, ScrollView} from 'react-native';
+import { View,Image,Text,TouchableOpacity} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 import Components from '../../../components';
@@ -8,9 +8,9 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount} from '../../../actions/market';
+import { getReviewCount,addToCart,addToWishList,buyNow,getProductReviews} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
-
+import StarRating from 'react-native-star-rating';
 
 export default class Reviews extends React.Component {
     constructor(props) {
@@ -19,10 +19,12 @@ export default class Reviews extends React.Component {
         variant:this.props.route.params.variant,     
         freightCalculation:this.props.route.params.freightCalculation,   
         notificationCount:0,
-        shippingAddress:[],
+        productReviews:[],
         wishList:[],
         isLoading:false,
-        isOpenShareModal:false
+        isOpenShareModal:false,
+        reviewCount:0,
+        overAllRatingStar:5
       };
     }
 
@@ -32,21 +34,15 @@ export default class Reviews extends React.Component {
 
     componentDidMount(){
            
-
+   
         this.props.navigation.addListener('focus',()=>{
-            getShippingAddress(this.setMyState)
-            getWishList(this.setMyState)     
-            getCartCount(this.setMyState)
+            getProductReviews(this.props.route.params.variant,this.setMyState)
+            getReviewCount(this.props.route.params.variant,this.setMyState)     
         })
-     
-                         
+          
     }
 
-    handleUpdateStateFromChangeAddress = (newFreight)=>{
-        // get latest shipping address info
-        getShippingAddress(this.setMyState)
-        this.setState({freightCalculation:newFreight});
-    }
+
 
     handleAddToWishList = async ()=>{
         
@@ -192,6 +188,21 @@ export default class Reviews extends React.Component {
 
              
                 <View style={{flex: 1}}>
+                    <View style={styles.summaryReview}>
+                        <Text style={styles.overAllRatingStar}>{this.state.overAllRatingStar}/5</Text>
+                        <StarRating
+                                disabled={false}
+                                maxStars={5}
+                                fullStarColor={constants.Colors.warning}
+                                rating={this.state.overAllRatingStar}
+                            
+                                starSize={constants.Dimensions.normalize(10)}
+                                containerStyle={{marginHorizontal:constants.Dimensions.vw(10),right:constants.Dimensions.vw(28)}}
+                            />
+                        <Text>{this.state.reviewCount} Reviews</Text>
+                    </View>
+
+
                     <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
                         <TouchableOpacity onPress={this.handleAddToWishList}  style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(10)}}>
                             <constants.Icons.MaterialCommunityIcons 

@@ -11,6 +11,8 @@ const EndPoints = {
 
     GET_ALL_PRODUCTS:'/get-products',
     GET_CART_COUNT:'/market/get-cart-count',
+    GET_REVIEW_COUNT:'/market/get-review-count',
+    GET_PRODUCT_REVIEWS:'/market/get-product-reviews',
     SEARCH_PRODUCTS:'/search-products',
     GET_PRODUCT_VARIANTS:'/get-variants',
     GET_SHIPPING_ADDRESS:'/market/get-shipping-address',

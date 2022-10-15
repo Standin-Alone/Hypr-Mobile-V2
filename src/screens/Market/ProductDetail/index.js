@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount} from '../../../actions/market';
+import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount,getReviewCount} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
 
 
@@ -22,7 +22,8 @@ export default class ProductDetail extends React.Component {
         shippingAddress:[],
         wishList:[],
         isLoading:false,
-        isOpenShareModal:false
+        isOpenShareModal:false,
+        reviewCount:0
       };
     }
 
@@ -31,12 +32,13 @@ export default class ProductDetail extends React.Component {
     
 
     componentDidMount(){
-        console.warn(this.props.route.params.variant.variantPid)
+        console.warn(this.props.route.params)
 
         this.props.navigation.addListener('focus',()=>{
             getShippingAddress(this.setMyState)
             getWishList(this.setMyState)     
             getCartCount(this.setMyState)
+            getReviewCount(this.props.route.params.variant,this.setMyState)
         })
      
                          
@@ -280,7 +282,7 @@ export default class ProductDetail extends React.Component {
                                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>
                                 
                                     <View >
-                                        <Text style={styles.headerText}>Review</Text>                                        
+                                        <Text style={styles.headerText}>Review ({this.state.reviewCount})</Text>                                        
                                     </View>                              
                                     <View >
                                         <TouchableOpacity style={{flexDirection:'row'}} onPress={this.handleGoToReviews}>

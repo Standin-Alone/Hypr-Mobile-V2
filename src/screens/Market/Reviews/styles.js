@@ -114,6 +114,21 @@ export const styles = StyleSheet.create({
         flexDirection:'column',
         justifyContent:'space-between'
     },
+    summaryReview:{
+        flexDirection:'row',
+        backgroundColor:constants.Colors.gray_tint,
+        marginHorizontal:constants.Dimensions.vw(5),
+        justifyContent:'flex-end',
+        paddingHorizontal:constants.Dimensions.vw(2),
+        paddingVertical:constants.Dimensions.vw(2),
+        borderRadius:5
+    },
+    overAllRatingStar:{
+        right:constants.Dimensions.vw(20),
+        fontFamily:constants.Fonts.GothamBold,
+        color:constants.Colors.dark,
+        fontSize:constants.Dimensions.normalize(8),    
+    }
 
   
 });
