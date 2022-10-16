@@ -9,6 +9,18 @@ export const styles = StyleSheet.create({
     variantContainer:{        
         flexDirection:'column',                        
     },
+    bottom:{
+        position: 'absolute', 
+        left: 0, 
+        right: 0,
+         bottom: 0,
+         flexDirection:'row',
+         justifyContent:'flex-end',
+         backgroundColor:constants.Colors.light,
+         borderTopWidth:0.5,
+         borderTopColor:constants.Colors.gray,
+         height:constants.Dimensions.vh(20)
+    },
     deliveryContainer:{
         top:constants.Dimensions.vh(4),
         backgroundColor:constants.Colors.light,             
@@ -128,6 +140,27 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.GothamBold,
         color:constants.Colors.dark,
         fontSize:constants.Dimensions.normalize(8),    
+    },
+    productReviews:{
+        top:constants.Dimensions.vw(5)
+    },
+    video:{
+        width:constants.Dimensions.vw(20),
+        height:constants.Dimensions.vh(20),
+        backgroundColor:'black',
+        borderRadius:15
+    },
+    image:{
+        width:constants.Dimensions.vw(20),
+        height:constants.Dimensions.vh(20),
+        backgroundColor:constants.Colors.dark,
+        borderRadius:15
+     
+    },
+    removeAttachment:{
+        top:constants.Dimensions.vh(1),
+        left:constants.Dimensions.vw(16),
+        position:'absolute'
     }
 
   

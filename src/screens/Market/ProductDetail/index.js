@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View,Image,Text,TouchableOpacity, ScrollView} from 'react-native';
+import { View,Image,Text,TouchableOpacity, ScrollView,FlatList} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 import Components from '../../../components';
@@ -8,7 +8,7 @@ import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
 import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
-import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount,getReviewCount} from '../../../actions/market';
+import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount,getReviewCount,getProductReviews} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
 
 
@@ -23,7 +23,8 @@ export default class ProductDetail extends React.Component {
         wishList:[],
         isLoading:false,
         isOpenShareModal:false,
-        reviewCount:0
+        reviewCount:0,
+        productReviews:[]
       };
     }
 
@@ -31,15 +32,19 @@ export default class ProductDetail extends React.Component {
 
     
 
-    componentDidMount(){
-        console.warn(this.props.route.params)
-
-        this.props.navigation.addListener('focus',()=>{
-            getShippingAddress(this.setMyState)
-            getWishList(this.setMyState)     
-            getCartCount(this.setMyState)
-            getReviewCount(this.props.route.params.variant,this.setMyState)
-        })
+    componentDidMount(){         
+         getShippingAddress(this.setMyState)
+         getWishList(this.setMyState)     
+         getCartCount(this.setMyState)
+         getReviewCount(this.props.route.params.variant,this.setMyState)
+         getProductReviews(this.props.route.params.variant,this.setMyState)
+        // this.props.navigation.addListener('focus',()=>{
+        //     getShippingAddress(this.setMyState)
+        //     getWishList(this.setMyState)     
+        //     getCartCount(this.setMyState)
+        //     getReviewCount(this.props.route.params.variant,this.setMyState)
+        //     getProductReviews(this.props.route.params.variant,this.setMyState)
+        // })
      
                          
     }
@@ -133,7 +138,48 @@ export default class ProductDetail extends React.Component {
     handleOpenShareModal = ()=>{
        this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
     }
+    renderReviewAttachments= ({item,index})=>{
+        return(
+            item.split('.')[1] == ".mp4" ?
+            <View style={{marginRight:constants.Dimensions.vw(4)}}>
+                <Video source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}}  
+                    style={styles.video}
+                    posterResizeMode={"center"}                
+                    allowsExternalPlayback={false}
+                    resizeMode='contain'
+                    onAudioFocusChanged={(event)=>{
+                        console.warn('audio',event)
+                    }}
+                />
+            </View>
+        :
+        <View style={{marginRight:constants.Dimensions.vw(4)}}>
+                <FastImage source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}} 
+                resizeMode={FastImage.resizeMode.contain}
+                style={styles.image}/>
+        </View>
+        )
+    }
+    renderProductReviews = ({item,index})=>{
+        
+        return(
+            <Components.ProductReviewCard
+                profilePicture={item.user_info[0]?.profile_image}
+                fullName={`${item.user_info[0]?.first_name} ${item.user_info[0]?.last_name}`}
+                review={`${item.review}`}
+                rating={item.rating}
+                attachments={()=>(
+                    <View style={{left:constants.Dimensions.vw(4)}}>
+                        <FlatList
+                            data={item?.file_names}                        
+                            renderItem={this.renderReviewAttachments}
+                        />
+                    </View>
 
+                )}
+            />
+        )
+    }
     render(){
      
         return(
@@ -199,7 +245,7 @@ export default class ProductDetail extends React.Component {
                 />
 
 
-                <ScrollView contentContainerStyle={{ flexGrow: 1 }}>
+                <ScrollView contentContainerStyle={{ flexGrow: 1,paddingBottom:constants.Dimensions.vh(30) }}>
                     <View style={styles.variantContainer}>                                                 
                         <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
 
@@ -297,10 +343,17 @@ export default class ProductDetail extends React.Component {
                                     </View>                              
                                 </View>
                         </View>
+
+                        <View style={styles.reviewContainer}>
+                            <FlatList
+                                data={this.state.productReviews.filter((item,index)=>index < 5)}
+                                renderItem={this.renderProductReviews}
+                            />
+                        </View>
                     </View>
                 </ScrollView>
                 <View style={{flex: 1}}>
-                    <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
+                    <View style={styles.bottom}>
                         <TouchableOpacity onPress={this.handleAddToWishList}  style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(10)}}>
                             <constants.Icons.MaterialCommunityIcons 
                                 name={ this.state.wishList.filter((item)=>item.variant_id == this.state.variant.variantVid).length != 0 ? 'heart': 'heart-outline'} 

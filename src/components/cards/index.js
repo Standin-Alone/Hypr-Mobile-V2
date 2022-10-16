@@ -7,6 +7,7 @@ import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import FastImage from 'react-native-fast-image'
 import DraggablePanel from 'react-native-draggable-panel';
 import Video from 'react-native-video';
+import StarRating from 'react-native-star-rating';
 
 export const ProductCard = ({
    productImage,
@@ -534,4 +535,41 @@ export const UploadingSelectionCard = ({
          </View>
 
       </View>
+   )
+
+
+   export const ProductReviewCard = ({
+      profilePicture,
+      fullName,
+      review,
+      rating,
+      attachments
+   })=>
+   (
+      <View style={styles.productReviewContainer}>   
+            <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5),marginVertical:constants.Dimensions.vh(4)}}>
+               <View>
+                  <FastImage source={{uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} resizeMode={FastImage.resizeMode.contain} style={styles.userProfile}/>
+               </View>
+               <View style={{left:constants.Dimensions.vw(2)}}>
+                  <Text style={styles.reviewUserFullName} numberOfLines={1}>{fullName}</Text>
+               </View>
+            </View>
+            <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5),marginVertical:constants.Dimensions.vh(4)}}>
+               <Text style={styles.reviewText}>{review}</Text>
+            </View>
+            <View>
+               {attachments()}
+            </View>
+            <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5),marginVertical:constants.Dimensions.vh(2)}}>
+            <StarRating
+                  disabled={false}
+                  maxStars={5}
+                  fullStarColor={constants.Colors.warning}
+                  rating={rating}               
+                  starSize={constants.Dimensions.normalize(10)}
+                  
+               />
+            </View>
+      </View>  
    )

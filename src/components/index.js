@@ -53,7 +53,8 @@ import {
     UploadingSelectionCard,
     UserProfilePicture,
     MemberCard,
-    RewardHistoryCard
+    RewardHistoryCard,
+    ProductReviewCard
     } from "./cards";
 import {
     Loader,
@@ -126,6 +127,7 @@ export default {
     UserProfilePicture,
     MemberCard,
     RewardHistoryCard,
+    ProductReviewCard,
     // LOADER
     Loader,
     LoadingScreen,

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View,Image,Text,TouchableOpacity} from 'react-native';
+import { View,Image,Text,TouchableOpacity,FlatList} from 'react-native';
 
 import Carousel from 'react-native-snap-carousel';
 import Components from '../../../components';
@@ -11,6 +11,7 @@ import { GET_SESSION } from '../../../utils/async_storage';
 import { getReviewCount,addToCart,addToWishList,buyNow,getProductReviews} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
 import StarRating from 'react-native-star-rating';
+import Video from 'react-native-video';
 
 export default class Reviews extends React.Component {
     constructor(props) {
@@ -24,7 +25,8 @@ export default class Reviews extends React.Component {
         isLoading:false,
         isOpenShareModal:false,
         reviewCount:0,
-        overAllRatingStar:5
+        overAllRatingStar:5,
+        loadingData:true
       };
     }
 
@@ -32,14 +34,12 @@ export default class Reviews extends React.Component {
 
     
 
-    componentDidMount(){
-           
-   
-        this.props.navigation.addListener('focus',()=>{
-            getProductReviews(this.props.route.params.variant,this.setMyState)
-            getReviewCount(this.props.route.params.variant,this.setMyState)     
-        })
+    componentDidMount(){              
+        // this.props.navigation.addListener('focus',()=>{
           
+        // })          
+        getReviewCount(this.props.route.params.variant,this.setMyState)    
+        getProductReviews(this.props.route.params.variant,this.setMyState)
     }
 
 
@@ -121,7 +121,48 @@ export default class Reviews extends React.Component {
     handleOpenShareModal = ()=>{
        this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
     }
+    renderReviewAttachments= ({item,index})=>{
+        return(
+            item.split('.')[1] == ".mp4" ?
+            <View style={{marginRight:constants.Dimensions.vw(4)}}>
+                <Video source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}}  
+                    style={styles.video}
+                    posterResizeMode={"center"}                
+                    allowsExternalPlayback={false}
+                    resizeMode='contain'
+                    onAudioFocusChanged={(event)=>{
+                        console.warn('audio',event)
+                    }}
+                />
+            </View>
+        :
+        <View style={{marginRight:constants.Dimensions.vw(4)}}>
+                <FastImage source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}} 
+                resizeMode={FastImage.resizeMode.contain}
+                style={styles.image}/>
+        </View>
+        )
+    }
+    renderProductReviews = ({item,index})=>{
+        
+        return(
+            <Components.ProductReviewCard
+                profilePicture={item.user_info[0]?.profile_image}
+                fullName={`${item.user_info[0]?.first_name} ${item.user_info[0]?.last_name}`}
+                review={`${item.review}`}
+                rating={item.rating}
+                attachments={()=>(
+                    <View style={{left:constants.Dimensions.vw(4)}}>
+                        <FlatList
+                            data={item?.file_names}                        
+                            renderItem={this.renderReviewAttachments}
+                        />
+                    </View>
 
+                )}
+            />
+        )
+    }
     render(){
      
         return(
@@ -186,7 +227,7 @@ export default class Reviews extends React.Component {
                     )}
                 />
 
-             
+                    
                 <View style={{flex: 1}}>
                     <View style={styles.summaryReview}>
                         <Text style={styles.overAllRatingStar}>{this.state.overAllRatingStar}/5</Text>
@@ -201,9 +242,23 @@ export default class Reviews extends React.Component {
                             />
                         <Text>{this.state.reviewCount} Reviews</Text>
                     </View>
+                    {this.state.loadingData ?(
+                        <View>
+                            <Components.LoadingScreen />
+                        </View>
+                        
+                        ) : (
+                    <View style={styles.productReviews}>
+                        
+                        <FlatList
+                            data={this.state.productReviews}
+                            renderItem={this.renderProductReviews}
+                            contentContainerStyle={{paddingBottom:constants.Dimensions.vh(20)}}
+                        />
+                    </View>
+                    )}
 
-
-                    <View style={{position: 'absolute', left: 0, right: 0, bottom: 5,flexDirection:'row',justifyContent:'flex-end'}}>
+                    <View style={styles.bottom}>
                         <TouchableOpacity onPress={this.handleAddToWishList}  style={{top:constants.Dimensions.vw(2),right:constants.Dimensions.vw(10)}}>
                             <constants.Icons.MaterialCommunityIcons 
                                 name={ this.state.wishList.filter((item)=>item.variant_id == this.state.variant.variantVid).length != 0 ? 'heart': 'heart-outline'} 

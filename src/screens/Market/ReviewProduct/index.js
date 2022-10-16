@@ -54,7 +54,6 @@ export default class ReviewProduct extends React.Component {
         console.warn(item)
         return(
             item.mime == "video/mp4" ?
-
                 <View style={{marginRight:constants.Dimensions.vw(4)}}>
                     <Video source={{uri: item.path}}  
                         style={styles.video}
@@ -65,7 +64,6 @@ export default class ReviewProduct extends React.Component {
                             console.warn('audio',event)
                         }}
                     />
-
                     <TouchableOpacity onPress={()=>this.handleRemoveItem('video',index)}>
                         <constants.Icons.FontAwesome5
                             name='times'
@@ -75,17 +73,16 @@ export default class ReviewProduct extends React.Component {
                 </View>
             :
             <View style={{marginRight:constants.Dimensions.vw(4)}}>
-
                     <FastImage source={{uri: item.path}} 
                     resizeMode={FastImage.resizeMode.contain}
                     style={styles.image}/>
-
-                    <TouchableOpacity onPress={()=>this.handleRemoveItem('image',index)}>
-                        <constants.Icons.FontAwesome5
-                            name='times'
-                            color={constants.Colors.light}
-                        />
-                    </TouchableOpacity>
+                <TouchableOpacity onPress={()=>this.handleRemoveItem('image',index)} style={styles.removeAttachment}>
+                    <constants.Icons.FontAwesome5
+                        name='times'
+                        color={constants.Colors.light}
+                        size={constants.Dimensions.normalize(7)}
+                    />
+                </TouchableOpacity>
             </View>
         )
     }

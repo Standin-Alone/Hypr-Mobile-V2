@@ -426,8 +426,7 @@ export const styles = StyleSheet.create({
     },
     rHNewReward:{
         fontFamily:constants.Fonts.PoppinsLight,
-        fontSize:constants.Dimensions.normalize(6),  
-        
+        fontSize:constants.Dimensions.normalize(6),        
         color:constants.Colors.green
     },
     video:{
@@ -435,6 +434,28 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(95),
         height:constants.Dimensions.vh(80),   
         backgroundColor:'black'    
+    },
+    productReviewContainer:{
+        flex:1,
+        backgroundColor:constants.Colors.light,
+        marginVertical:constants.Dimensions.vh(2)
+    },
+    userProfile:{
+        borderRadius:200,
+        width:constants.Dimensions.vw(15),
+        height:constants.Dimensions.vh(15),    
+        borderColor:constants.Colors.secondary,
+        borderWidth:0.8
+    },
+    reviewText:{
+        fontFamily:constants.Fonts.OpenSansRegular,
+        fontSize:constants.Dimensions.normalize(6),          
+        color:constants.Colors.dark
+    },
+    reviewUserFullName:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:constants.Dimensions.normalize(6),          
+        color:constants.Colors.dark
     }
 });
 

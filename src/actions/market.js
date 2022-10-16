@@ -323,7 +323,7 @@ export const getProductReviews = async (payload,setState)=>{
                 if(response.data.status == true){
                                                                    
                     console.warn('REVIEWS',response.data.data[0].user_info)
-                    setState({productReviews:response.data.data});                                                          
+                    setState({productReviews:response.data.data,loadingData:false});                                                          
                                         
                                         
                 }else{
@@ -331,11 +331,10 @@ export const getProductReviews = async (payload,setState)=>{
                         type:'error',
                         text1: response.data.message
                     });
-
+                 // turn off loading
+                 setState({isLoading:false,loadingData:false});
                 }
                
-                 // turn off loading
-                 setState({isLoading:false});
             }).catch((error)=>{
                 console.warn(error)                
                 
@@ -345,7 +344,7 @@ export const getProductReviews = async (payload,setState)=>{
                 });
                 
                 // turn off loading
-                setState({isLoading:false});
+                setState({isLoading:false,loadingData:false});
             });
 
          }else{
@@ -354,12 +353,16 @@ export const getProductReviews = async (payload,setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
-             // turn off loading
-            setState({isLoading:false});
+           
+            // turn off loading
+            setState({isLoading:false,loadingData:false});
          }
     });
 
 }
+
+
+
 export const getShippingAddress = async (setState)=>{
     setState({isLoading:true});
     

@@ -44,8 +44,12 @@ export const styles = StyleSheet.create({
         width:constants.Dimensions.vw(20),
         height:constants.Dimensions.vh(20),
         backgroundColor:constants.Colors.dark,
-        borderRadius:15
-     
+        borderRadius:15     
+    },
+    removeAttachment:{
+        top:constants.Dimensions.vh(1),
+        left:constants.Dimensions.vw(16),
+        position:'absolute'
     }
 });
 
