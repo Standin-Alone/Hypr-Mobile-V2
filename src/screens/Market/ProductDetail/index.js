@@ -141,7 +141,7 @@ export default class ProductDetail extends React.Component {
     renderReviewAttachments= ({item,index})=>{
         return(
             item.split('.')[1] == ".mp4" ?
-            <View style={{marginRight:constants.Dimensions.vw(4)}}>
+            <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}}>
                 <Video source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}}  
                     style={styles.video}
                     posterResizeMode={"center"}                
@@ -151,13 +151,13 @@ export default class ProductDetail extends React.Component {
                         console.warn('audio',event)
                     }}
                 />
-            </View>
+            </TouchableOpacity>
         :
-        <View style={{marginRight:constants.Dimensions.vw(4)}}>
+        <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}}>
                 <FastImage source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}} 
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.image}/>
-        </View>
+        </TouchableOpacity>
         )
     }
     renderProductReviews = ({item,index})=>{
@@ -252,12 +252,21 @@ export default class ProductDetail extends React.Component {
                         <View  style={styles.variantNameContainer}>
                             <View>
                                 <Text style={styles.variantName} numberOfLines={2}>
+                                    
                                     {this.state.variant.variantName}
                                 </Text>                                   
                             </View>
-                            <View style={styles.variantPriceContainer}>
-                                <Text style={styles.variantPrice} numberOfLines={2}>${this.state.variant.variantPrice}</Text>
+                            <View style={styles.variantPriceContainer}>                                
+                                <Text style={styles.variantPrice} numberOfLines={1}>${this.state.variant.variantPrice}</Text>
                             </View>
+                            <View style={styles.variantPriceContainer}>
+                                <Image source={constants.Images.cashBack} style={styles.cashBackIcon} resizeMode='stretch'/>
+                                <View style={{flexDirection:"column",marginLeft:constants.Dimensions.vw(5)}}>
+                                    <Text style={styles.cashBackValue} numberOfLines={1}>${this.state.variant.variantCashBack}</Text>
+                                    <Text style={styles.cashBackLabel} numberOfLines={1}>Cash Back</Text>
+                                </View>                                
+                            </View>
+                            
                         </View>
                         
                         <View  style={styles.deliveryContainer}>      
@@ -323,10 +332,9 @@ export default class ProductDetail extends React.Component {
 
                             
                         </View>
-
+                        {/* REVIEW PANEL START HERE */}
                         <View style={styles.reviewContainer}>
-                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>
-                                
+                                <View style={{flexDirection:'row',justifyContent:'space-between'}}>                                
                                     <View >
                                         <Text style={styles.headerText}>Review ({this.state.reviewCount})</Text>                                        
                                     </View>                              

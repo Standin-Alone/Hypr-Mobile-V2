@@ -37,12 +37,12 @@ onOpenSocial
                         <constants.Icons.Ionicons name="notifications" size={constants.Dimensions.normalize(14)} color={constants.Colors.light}/>
                     </TouchableOpacity>
                 </View> */}
-                 <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
+                 {/* <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={onOpenSocial}>
                         <constants.Icons.MaterialCommunityIcons name="post-outline" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>
-                </View>
-                <View style={{left:constants.Dimensions.vw(35),top:constants.Dimensions.vh(2)}}>
+                </View> */}
+                <View style={{left:constants.Dimensions.vw(45),top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={onOpenMenu} >
                         <constants.Icons.MaterialCommunityIcons name="menu" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>

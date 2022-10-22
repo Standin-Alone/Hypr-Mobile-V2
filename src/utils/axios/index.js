@@ -14,9 +14,9 @@ const POST = async (
 
 
 const GET = async (
-url    
+url,data  
 )=>{
-    const result = await axios.get(url);
+    const result = await axios.get(url,data);
 
     return result;
 }   

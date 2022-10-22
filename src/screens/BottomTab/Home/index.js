@@ -7,6 +7,7 @@ import { getAllFriendsPost,hypePost,getAllFriendsStories } from '../../../action
 import { GET_SESSION } from '../../../utils/async_storage';
 import { SharedElement } from 'react-navigation-shared-element';
 
+
 export default class Home extends React.Component {
     constructor(props) {
       super(props);
@@ -20,14 +21,12 @@ export default class Home extends React.Component {
         userId:'',
         currentPage:0,
         refreshing:true,
-     
       };
     }
 
     setMyState = (value)=>this.setState(value);
 
     handleLoadPosts = async ()=>{
-   
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
             previousPost:this.state.posts,
@@ -36,14 +35,11 @@ export default class Home extends React.Component {
         getAllFriendsPost(parameter,this.setMyState)     
     }
 
-    handleLoadStories = async ()=>{
-                
+    handleLoadStories = async ()=>{      
         let parameter = {
             userId:await GET_SESSION('USER_ID'),
 
         }
-
-      
         getAllFriendsStories(parameter,this.setMyState)     
     }
 
@@ -80,8 +76,6 @@ export default class Home extends React.Component {
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
     renderItem = ({item})=>{
-       console.warn( item.filenames[0]);
-        
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
                 <Components.SocialPostCard
@@ -98,15 +92,11 @@ export default class Home extends React.Component {
                     onViewProfile={()=>this.viewProfile(item)}
                     onComment={()=>this.handleGoToComments(item)}
                 />
-
-
             </SharedElement>
         )
     }
 
     renderEmptyComponent = ()=>(
-
-
         <View>
             <Text style={styles.textEmptyComponent}>No latest posts</Text>
         </View>
@@ -135,12 +125,9 @@ export default class Home extends React.Component {
     }
 
     renderFooterComponent = () =>(
-
-    
             this.state.showFooter ?
             <Components.FooterLoader message={"Getting more posts..."}/> 
             :
-
             this.state.posts.length != 0 && (
             <View > 
                 <Text style={styles.emptyFooter}>No more posts...</Text>
@@ -160,9 +147,7 @@ export default class Home extends React.Component {
                         routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
                     })}
                 />
-                
-                {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1}}>                  */}
-                
+     
                 <View style={{flexDirection:'row'}}>
                     <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
                         <constants.Icons.Ionicons 
@@ -188,12 +173,8 @@ export default class Home extends React.Component {
 
                     
                 {this.state.isLoading ?
-    
-                        <>
-                   
-                    
+                        <>                              
                         <Components.PostSkeletonHolder/>
-
                         <Components.PostSkeletonHolder/>
                         <Components.PostSkeletonHolder/>
                         <Components.PostSkeletonHolder/>
@@ -202,39 +183,40 @@ export default class Home extends React.Component {
                         <Components.PostSkeletonHolder/>
                         </>
                     :
-                    <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vh(2)}}>
-                        <FlatList
-                            data={this.state.posts}
-                            extraData={this.state.posts}
-                            refreshing={this.state.refreshing}
-                            onRefresh={()=>this.handleLoadPosts}
-                            renderItem = {this.renderItem}   
-                            contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(50)}}                     
-                            ListEmptyComponent={this.renderEmptyComponent}
-                            ListFooterComponent={this.renderFooterComponent}
-                            onEndReachedThreshold={0.1} // so when you are at 1 pixel from the bottom react run onEndReached function
-                            onEndReached={ ({distanceFromEnd}) => {     
-                                 
-                               if (distanceFromEnd > 0   ) 
-                                {                               
-                                   
-                                    if(this.state.posts.length == this.state.currentPage || this.state.posts.length  == 2 ){
-                                        this.setState((prevState) => ({currentPage:prevState.currentPage + 2,showFooter:true}));
-                                    
-                            
-                                        let parameter = {
-                                            userId:this.state.userId,
-                                            previousPost:this.state.posts,
-                                            currentPage:this.state.currentPage,
-                                        }
-                                        getAllFriendsPost(parameter,this.setMyState)     
-                                    }
-                                }                              
-                            }}
-                            
-                            />
-                    </View>  
+                    
+                    <>                                                            
+                        <View style={{left:constants.Dimensions.vw(2),top:constants.Dimensions.vh(2)}}>
+                            <FlatList
+                                data={this.state.posts}
+                                extraData={this.state.posts}
+                                refreshing={this.state.refreshing}
+                                onRefresh={()=>this.handleLoadPosts}
+                                renderItem = {this.renderItem}   
+                                contentContainerStyle ={{paddingBottom:constants.Dimensions.vh(50)}}                     
+                                ListEmptyComponent={this.renderEmptyComponent}
+                                ListFooterComponent={this.renderFooterComponent}
+                                onEndReachedThreshold={0.1} // so when you are at 1 pixel from the bottom react run onEndReached function
+                                onEndReached={ ({distanceFromEnd}) => {                                         
+                                    if (distanceFromEnd > 0   ) 
+                                        {                               
+                                        
+                                            if(this.state.posts.length == this.state.currentPage || this.state.posts.length  == 2 ){
+                                                this.setState((prevState) => ({currentPage:prevState.currentPage + 2,showFooter:true}));
+                                                let parameter = {
+                                                    userId:this.state.userId,
+                                                    previousPost:this.state.posts,
+                                                    currentPage:this.state.currentPage,
+                                                }
+                                                getAllFriendsPost(parameter,this.setMyState)     
+                                            }
+                                        }                              
+                                    }}                                
+                                />
+                            </View>  
+                    </>
                 }
+
+      
 
                     {/* <View style={styles.createPostContainer}>
                         <View style={styles.createPostInnerContainer}>
@@ -246,7 +228,7 @@ export default class Home extends React.Component {
                             </TouchableOpacity>
                         </View>
                     </View> */}
-                {/* </ImageBackground> */}
+           
             </>
         )
     }

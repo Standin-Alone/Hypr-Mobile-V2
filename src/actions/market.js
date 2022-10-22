@@ -431,7 +431,7 @@ export const getProductVariants = async (payload,setState,props)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
             // GET REQUEST
-            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_PRODUCT_VARIANTS}?pid=${payload.pid}`).then((response)=>{                    
+            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_PRODUCT_VARIANTS}?pid=${payload.pid}&markupPrice=${payload.markupPrice}`).then((response)=>{                    
                
                 if(response.data.result == true){
                     

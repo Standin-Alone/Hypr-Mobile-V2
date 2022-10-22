@@ -36,7 +36,8 @@ export default class VariantList extends React.Component {
                 variantName:item.variantNameEn,
                 variantPid: item.pid,
                 variantVid: item.vid,
-                variantPrice: item.variantSellPrice,
+                variantPrice: item.display_price,
+                variantCashBack: item.cashBack,
                 variantImage: item.variantImage,
                 variantSku: item.variantSku,
             })

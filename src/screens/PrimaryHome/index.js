@@ -8,7 +8,7 @@ import { getUserInfo,logOut} from '../../actions/auth';
 import SideMenu from 'react-native-side-menu-updated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { CLEAR_SESSION } from '../../utils/async_storage';
-
+import ActionButton from 'react-native-circular-action-menu';
 export default class PrimaryHome extends React.Component {
     constructor(props) {
       super(props);
@@ -46,7 +46,8 @@ export default class PrimaryHome extends React.Component {
         
         let parameters = {            
             pid:item.pid,
-            productName:item.productNameEn
+            productName:item.productNameEn,
+            markupPrice:item.markup_price
         }    
    
         return getProductVariants(parameters,this.setMyState,this.props)
@@ -121,8 +122,7 @@ export default class PrimaryHome extends React.Component {
                 onPressHyprPoints={()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.MLM)}
                 onOpenMenu={()=>{                                    
                     this.props.navigation.openDrawer()
-                }}
-                onOpenSocial={()=>this.goToSocial()}
+                }}                
                 // onOpenMenu ={()=>this.goToUserProfile()}
              />                                 
              <View style={{flex:1}}>
@@ -163,7 +163,26 @@ export default class PrimaryHome extends React.Component {
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                 />     
                 </View>
-    
+                {/* Side Wheel Button */}
+                <View style={styles.buttonWheelContainer}>
+                    <ActionButton 
+                        buttonColor="rgba(0,0,0.5,0.5)"  
+                        btnOutRange="rgba(0,0,0.5,0.5)"  
+                        radius={constants.Dimensions.vh(20)} 
+                        icon={<constants.Icons.FontAwesome name='arrow-right' color={constants.Colors.light} 
+                        style={styles.wheelMainButtonIcon} 
+                        size={constants.Dimensions.normalize(10)}/>}>
+                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
+                            <constants.Icons.MaterialCommunityIcons name="arrow-right" size={constants.Dimensions.normalize(10)} color={constants.Colors.light}/>
+                        </ActionButton.Item>   
+                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={()=>this.goToSocial}  size={constants.Dimensions.normalize(25)}>
+                                <constants.Icons.Foundation name="social-500px" size={constants.Dimensions.normalize(10)} color={constants.Colors.light} style={styles.middleButtonWheel}/>
+                        </ActionButton.Item>   
+                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
+                            <constants.Icons.FontAwesome5 name="arrow-right" style={styles.actionButtonIcon} />
+                        </ActionButton.Item>                
+                    </ActionButton>         
+                </View>
             </>
         )
     }

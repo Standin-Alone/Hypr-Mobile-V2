@@ -8,6 +8,9 @@ import PrimaryHome from '../screens/PrimaryHome';
 
 import SideProfile from './SideProfile';
 import Home from '../screens/BottomTab/Home';
+import ToVerify from '../screens/Profile/Tracking/ToVerify';
+import ToShip from '../screens/Profile/Tracking/ToShip';
+import ToReceive from '../screens/Profile/Tracking/ToReceive';
 
 const SideMenu = createDrawerNavigator();
 
@@ -35,7 +38,7 @@ export const SideMenuBar = (props)=>{
                     })}
             />   
 
-            <SideMenu.Screen 
+            {/* <SideMenu.Screen 
                  {...props}
                     name ={constants.ScreenNames.Social.SOCIAL} 
                     component={Home}
@@ -44,6 +47,42 @@ export const SideMenuBar = (props)=>{
                         // tabBarStyle:{display:getTabBarVisibility(route)},          
                         drawerIcon: ({color})=>(
                             <constants.Icons.Foundation name="social-500px" size={constants.Dimensions.normalize(10)} color={color}/>
+                        )
+                    })}
+            />    */}
+
+            <SideMenu.Screen 
+                 {...props}
+                    name ={constants.ScreenNames.Profile.tracking.TO_VERIFY} 
+                    component={ToVerify}
+                    options={({route,navigation})=>({    
+                        title:'To Verify',                      
+                        drawerIcon: ({color})=>(
+                            <constants.Icons.FontAwesome5 name="user-check" size={constants.Dimensions.normalize(10)} color={color}/>
+                        )
+                    })}
+            />   
+
+            <SideMenu.Screen 
+                 {...props}
+                    name ={constants.ScreenNames.Profile.tracking.TO_SHIP} 
+                    component={ToShip}
+                    options={({route,navigation})=>({    
+                        title:'To Ship',                      
+                        drawerIcon: ({color})=>(
+                            <constants.Icons.FontAwesome5 name="ship" size={constants.Dimensions.normalize(10)} color={color}/>
+                        )
+                    })}
+            />   
+
+            <SideMenu.Screen 
+                 {...props}
+                    name ={constants.ScreenNames.Profile.tracking.TO_RECEIVE} 
+                    component={ToReceive}
+                    options={({route,navigation})=>({    
+                        title:'To Receive',                      
+                        drawerIcon: ({color})=>(
+                            <constants.Icons.FontAwesome5 name="shipping-fast" size={constants.Dimensions.normalize(10)} color={color}/>
                         )
                     })}
             />   

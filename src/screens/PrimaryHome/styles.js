@@ -40,5 +40,18 @@ export const styles = StyleSheet.create({
         color:constants.Colors.danger,        
         fontSize:constants.Dimensions.normalize(10), 
     },
+    buttonWheelContainer:{
+        position:'absolute',
+        left:constants.Dimensions.vw(85),
+        transform: [{ rotate: '90deg'}],
+        bottom:constants.Dimensions.vh(20),
+        top:0
+    },
+    wheelMainButtonIcon:{
+        transform: [{ rotate: '270deg'}],
+    },
+    middleButtonWheel:{
+        transform: [{ rotate: '90deg'}],
+    }
 });
 

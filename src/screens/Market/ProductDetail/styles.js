@@ -7,7 +7,9 @@ import {Dimensions, StyleSheet} from 'react-native';
 import constants from '../../../constants';
 export const styles = StyleSheet.create({  
     variantContainer:{        
-        flexDirection:'column',                        
+        flexDirection:'column',  
+        elevation:5 ,
+                   
     },
     bottom:{
         position: 'absolute', 
@@ -27,7 +29,8 @@ export const styles = StyleSheet.create({
         height:constants.Dimensions.vh(30),        
         padding:'2%', 
         flexDirection:'column',
-        justifyContent:'space-between'
+        justifyContent:'space-between',
+        elevation:5
     },
     deliveryTitle:{
         fontFamily:constants.Fonts.GothamBold,
@@ -66,12 +69,11 @@ export const styles = StyleSheet.create({
     },
     variantNameContainer:{
         flexDirection:'column', 
-        height:constants.Dimensions.vh(30),
+        height:"auto",
         top:constants.Dimensions.vh(2),
         backgroundColor:constants.Colors.light
     },
-    variantPriceContainer:{
-      top:constants.Dimensions.vh(8),      
+    variantPriceContainer:{    
       right:constants.Dimensions.vw(5),
       flexDirection:'row',
       justifyContent:'flex-end'
@@ -121,7 +123,7 @@ export const styles = StyleSheet.create({
         flexGrow:1,
         top:constants.Dimensions.vh(6),
         backgroundColor:constants.Colors.light,             
-        
+        elevation:5,
         padding:'2%', 
         flexDirection:'column',
         justifyContent:'space-between'
@@ -137,7 +139,24 @@ export const styles = StyleSheet.create({
         height:constants.Dimensions.vh(20),
         backgroundColor:constants.Colors.dark,
         borderRadius:15
-    }
+    },
+    cashBackIcon:{
+        width:constants.Dimensions.vw(6),
+        height:constants.Dimensions.vh(6),   
+        resizeMode:'contain'
+    },
+    cashBackValue:{
+        fontFamily:constants.Fonts.PoppinsRegular,
+        color:constants.Colors.dark_tint,
+        fontSize:constants.Dimensions.normalize(8),       
+        
+    },
+    cashBackLabel:{
+        fontFamily:constants.Fonts.PoppinsRegular,
+        color:constants.Colors.dark_tint,
+        fontSize:constants.Dimensions.normalize(5),       
+        
+    },
 
   
 });
