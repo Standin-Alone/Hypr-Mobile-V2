@@ -12,6 +12,7 @@ const socialPageBackground = require('./images/SocialPageBackground.png');
 const hype = require('./images/social-menu-card/hype.png'); 
 const unhype = require('./images/social-menu-card/unhype.png'); 
 const cashBack = require('./images/cash-back.png'); 
+const signIn = require('./images/sign-in.gif'); 
 export default {
 
     loginCover,
@@ -25,7 +26,8 @@ export default {
     hyprLogoOnly,
     hype,
     unhype,
-    cashBack
+    cashBack,
+    signIn
     
     
 }

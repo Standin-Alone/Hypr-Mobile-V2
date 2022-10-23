@@ -520,7 +520,7 @@ export const getUserInfo = (setState)=>{
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                    
      
                 if(response.data.status == true){          
-                    console.warn(`${constants.Directories.COVER_PICTURE_DIRECTORY}/${response.data.data?.cover_pic}`)
+                    console.warn(response.data.data.totalPals);
                     setState({userInfo:response.data.data})
 
                 }else{

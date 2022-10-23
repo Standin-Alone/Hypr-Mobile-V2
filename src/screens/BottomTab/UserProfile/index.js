@@ -29,10 +29,7 @@ export default class UserProfile extends React.Component {
 
     async componentDidMount(){
         getUserInfo(this.setMyState)
-
-        this.props.navigation.addListener('focus',()=>{
-            getUserInfo(this.setMyState)
-        })
+    
 
     }
 
@@ -55,6 +52,7 @@ export default class UserProfile extends React.Component {
         
         this.setState({showSelection:true,changeImageType:type});
     }
+
 
 
     render(){
@@ -89,72 +87,61 @@ export default class UserProfile extends React.Component {
                     }}
                 />
 
-                <Components.ShareReferralLinkModal 
-                    openModal={this.state.showReferralModal}
-                    onCloseModal={()=>this.setState({showReferralModal: false})}
-                    onCopy={()=>this.handleCopyLink(`${getBaseUrl().accesspointPlain}${this.state.userInfo?.referral_link}`)}
-                    referralLink={`${getBaseUrl().accesspointPlain}this.state.userInfo?.referral_link`}
-                />
-
-
-        
-                {/* <ImageBackground source={constants.Images.socialPageBackground} style={{flex:1,zIndex:-4}}>                                  */}
+                
                 {this.state.isLoading ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
                     :
 
                 <>
-                <Image source={{uri: `${constants.Directories.COVER_PICTURE_DIRECTORY}/${this.state.userInfo?.cover_pic}`}} style={styles.cover_pic} />
-
                 
-
                     <View style={styles.container}>                             
+                            <View style={[styles.profileContainer]}>
+                                <View style={{   flexDirection:'row'}}>
+                                    <TouchableOpacity onPress={()=>this.openUploadSelection('profile')} style={{left:constants.Dimensions.vw(2)}} >                            
+                                        <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
+                                        <constants.Icons.FontAwesome5 name="camera" size={20} color={constants.Colors.primary} style={styles.edit}/>
+                                    </TouchableOpacity>
+                                    <View style={{top:constants.Dimensions.vh(5),left:constants.Dimensions.vw(5)}}> 
+                                        <Text style={styles.fullName}>{`${this.state.userInfo?.first_name }  ${this.state.userInfo?.last_name}  `}</Text>
+                                    </View>
+                                </View>
 
-                            <View style={[styles.profileContainer,{height:constants.Dimensions.vh(70)}]}>
-                                <TouchableOpacity onPress={()=>this.openUploadSelection('profile')} >                            
-                                    <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
-                                    <constants.Icons.FontAwesome5 name="edit" size={20} color={constants.Colors.secondary} style={styles.edit}/>
-                                </TouchableOpacity>
-                                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name }  ${this.state.userInfo?.last_name}  `}</Text>
-                            </View>
-
-                            <View style={[styles.profileContainer,{top:constants.Dimensions.vh(15), backgroundColor:'rgba(255,255,255,0.5)'}]}>
-                                <Text style={styles.orderTitleText}>My Orders</Text>
-                                <View style={styles.myOrdersContainer}>
-                                    
-                                    <Components.ButtonWithTopIcon
-                                        title="To Verify"
-                                        iconName={"user-check"}
-                                        color={constants.Colors.gradient.primary}
-                                        onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_VERIFY)}
-                                        
-                                    />
-                                    
-                                    <Components.ButtonWithTopIcon
-                                        title="To Ship"
-                                        iconName={"ship"}
-                                        color={constants.Colors.gradient.primary}
-                                        onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_SHIP)}
-                                    />
-
-                                    <Components.ButtonWithTopIcon
-                                        title="To Receive"
-                                        iconName={"shipping-fast"}
-                                        color={constants.Colors.gradient.primary}
-                                        onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_RECEIVE)}
-                                    />
-                                       <Components.ButtonWithTopIcon
-                                        title="To Review"
-                                        iconName={"comment-dots"}
-                                        color={constants.Colors.gradient.primary}
-                                        onPress={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_REVIEW)}
-                                    />
-                                </View>    
-                            </View>            
+                                <View style={{flexDirection:'row',alignSelf:'center'}}>
+                                    <View style={{flexDirection:'column',marginHorizontal:constants.Dimensions.vw(5)}}>
+                                        <Text style={styles.palsValue}>{this.state.userInfo?.totalPals}</Text>
+                                        <Text style={styles.palsLabel}>Pals</Text>
+                                    </View>
+                                </View>                             
+                            </View>         
+                                 
+                            <View style={styles.invitePalsContainer}>                                    
+                                    <Text style={styles.invitePalsLabel}>Invite Friends/Pals</Text>
+                                    <View style={styles.primaryContainer}>                              
+                                        <View>                
+                                            <View                                                                                              
+                                                style={[styles.shareLinkTextInput,]}                                                                                 
+                                            
+                                                numberOfLines={1}
+                                                >
+                                                <Text style={[styles.referralLink]} numberOfLines={1} ellipsizeMode='middle'  >
+                                                    {`${getBaseUrl().accesspointPlain}${this.state.userInfo?.referral_link}`}
+                                                </Text>
+                                        </View>
+                                            
+                                        </View>                                
+                                        <TouchableOpacity style={styles.icon}     onPress={this.handleCopyLink}>
+                                            <constants.Icons.Ionicons 
+                                                    name={'copy'} 
+                                                    size={constants.Dimensions.normalize(12)} 
+                                                    color={ constants.Colors.primary }                                                                                                                                                                      
+                                                />
+                                        </TouchableOpacity>
+                                    </View>
+                                </View> 
+                            
                     </View>
                     </>
                 }
-                {/* </ImageBackground> */}
   
             </>
         )

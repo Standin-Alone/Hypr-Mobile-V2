@@ -1,5 +1,5 @@
 import React from 'react';
-import { FlatList, View,Text,ActivityIndicator,Image} from 'react-native';
+import { FlatList, View,Text,ActivityIndicator,Image,StatusBar} from 'react-native';
 import Components from '../../components';
 import constants from '../../constants';
 import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../actions/market';
@@ -117,13 +117,19 @@ export default class PrimaryHome extends React.Component {
             <>      
  
              <View style={{flex:1}}>
+             <StatusBar
+                animated={true}
+                backgroundColor={constants.Colors.primary} 
+                barStyle={"light-content"}               
+
+
+            />
              <Components.PrimaryHomeHeader
                 hyprPoints={this.state.userInfo.reward >= 0  ? this.state.userInfo.reward.toFixed(2)  : 'Processing' }
                 onPressHyprPoints={()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.MLM)}
                 onOpenMenu={()=>{                                    
                     this.props.navigation.openDrawer()
-                }}                
-                // onOpenMenu ={()=>this.goToUserProfile()}
+                }}                                
              />                                 
              <View style={{flex:1}}>
                 <View style={styles.titleContainer}>
@@ -140,8 +146,7 @@ export default class PrimaryHome extends React.Component {
                         numColumns={2}
                         renderItem = {this.renderAllProducts}
                         style ={styles.allProductsContainer}                        
-                        // contentContainerStyle={{}}
-                        onEndReachedThreshold={0.1} // so when you are at 5 pixel from the bottom react run onEndReached function
+                        onEndReachedThreshold={0.1} // so when you are at 1 pixel from the bottom react run onEndReached function
                         onEndReached={async ({distanceFromEnd}) => {                                                             
                             
                             if (distanceFromEnd > 0 ) 
@@ -175,8 +180,11 @@ export default class PrimaryHome extends React.Component {
                         <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
                             <constants.Icons.MaterialCommunityIcons name="arrow-right" size={constants.Dimensions.normalize(10)} color={constants.Colors.light}/>
                         </ActionButton.Item>   
-                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={()=>this.goToSocial}  size={constants.Dimensions.normalize(25)}>
-                                <constants.Icons.Foundation name="social-500px" size={constants.Dimensions.normalize(10)} color={constants.Colors.light} style={styles.middleButtonWheel}/>
+                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={this.goToSocial}  size={constants.Dimensions.normalize(25)}>
+                                <View style={styles.middleButtonWheel}>
+                                    <constants.Icons.Foundation name="social-500px" size={constants.Dimensions.normalize(10)} color={constants.Colors.light} style={{textAlign:'center'}} />
+                                    <Text style={styles.middleButtonWheelText}>Social</Text>
+                                </View>
                         </ActionButton.Item>   
                         <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
                             <constants.Icons.FontAwesome5 name="arrow-right" style={styles.actionButtonIcon} />

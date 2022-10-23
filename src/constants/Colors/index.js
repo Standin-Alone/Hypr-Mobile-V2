@@ -22,6 +22,7 @@ export default Colors = {
     // }, 
     danger:'',
     warning:'#ffba3b',
+    orange_tint:'#fee0b3',
     gray:'#ACB1C1',
     gray_tint:'#ececec',
     danger:'#D9534F',

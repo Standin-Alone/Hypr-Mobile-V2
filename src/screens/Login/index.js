@@ -63,9 +63,8 @@ export default class Login extends React.Component {
 
                     <View style={styles.bannerContainer}>
                         <View>
-                            <FastImage source={constants.Images.hyprLogoNew} style={styles.loginCover} resizeMode="contain"/>
+                            <FastImage source={constants.Images.signIn} style={styles.loginCover} resizeMode="contain"/>
                         </View>
-
                         <View style={styles.headerContainer}>
                                 <View style={{ left:constants.Dimensions.vw(5) }}>
                                     <Text style={styles.headerText}>Welcome to Hypr</Text>

@@ -51,7 +51,14 @@ export const styles = StyleSheet.create({
         transform: [{ rotate: '270deg'}],
     },
     middleButtonWheel:{
-        transform: [{ rotate: '90deg'}],
+        transform: [{ rotate: '270deg'}],
+        textAlign:'center'
+    },
+    middleButtonWheelText:{
+ 
+        fontFamily:constants.Fonts.PoppinsExtraBold,
+        fontSize:constants.Dimensions.normalize(4),
+        color:constants.Colors.light
     }
 });
 
