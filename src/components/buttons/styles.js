@@ -21,7 +21,7 @@ export const styles = StyleSheet.create({
         color:constants.Colors.light
     },
     primaryButtonOutline:{
-        height:constants.Dimensions.vh(12),
+        height:constants.Dimensions.vh(13),
         width:constants.Dimensions.vw(90),
         borderRadius:240,    
         borderWidth:1,

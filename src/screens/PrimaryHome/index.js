@@ -130,7 +130,9 @@ export default class PrimaryHome extends React.Component {
                 onOpenMenu={()=>{                                    
                     this.props.navigation.openDrawer()
                 }}                                
-             />                                 
+             />               
+
+
              <View style={{flex:1}}>
                 <View style={styles.titleContainer}>
                     <Text style={styles.title}>Featured Products</Text>
@@ -177,7 +179,7 @@ export default class PrimaryHome extends React.Component {
                         icon={<constants.Icons.FontAwesome name='arrow-right' color={constants.Colors.light} 
                         style={styles.wheelMainButtonIcon} 
                         size={constants.Dimensions.normalize(10)}/>}>
-                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
+                        <ActionButton.Item buttonColor={"rgba(0,0,0,0)"} title="New Task"  size={constants.Dimensions.normalize(25)}>
                             <constants.Icons.MaterialCommunityIcons name="arrow-right" size={constants.Dimensions.normalize(10)} color={constants.Colors.light}/>
                         </ActionButton.Item>   
                         <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={this.goToSocial}  size={constants.Dimensions.normalize(25)}>
@@ -186,7 +188,7 @@ export default class PrimaryHome extends React.Component {
                                     <Text style={styles.middleButtonWheelText}>Social</Text>
                                 </View>
                         </ActionButton.Item>   
-                        <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={() => console.log("notes tapped!")} size={constants.Dimensions.normalize(25)}>
+                        <ActionButton.Item buttonColor={"rgba(0,0,0,0)"}  title="New Task"  size={constants.Dimensions.normalize(25)}>
                             <constants.Icons.FontAwesome5 name="arrow-right" style={styles.actionButtonIcon} />
                         </ActionButton.Item>                
                     </ActionButton>         

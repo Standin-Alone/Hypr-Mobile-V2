@@ -1,8 +1,5 @@
 import React from 'react';
-
 import { View,Image,Text,TouchableOpacity, ScrollView,FlatList} from 'react-native';
-
-import Carousel from 'react-native-snap-carousel';
 import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
@@ -10,7 +7,7 @@ import {styles} from './styles';
 import { GET_SESSION } from '../../../utils/async_storage';
 import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount,getReviewCount,getProductReviews} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
-
+import ImageView from "react-native-image-viewing";
 
 export default class ProductDetail extends React.Component {
     constructor(props) {
@@ -23,7 +20,9 @@ export default class ProductDetail extends React.Component {
         wishList:[],
         isLoading:false,
         isOpenShareModal:false,
+        showImageView:false,
         reviewCount:0,
+        images:[],
         productReviews:[]
       };
     }
@@ -138,10 +137,14 @@ export default class ProductDetail extends React.Component {
     handleOpenShareModal = ()=>{
        this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
     }
+
+    handleShowImage = (image)=>{
+        this.setState({showImageView:true,images:[{uri:image}]})
+    }
     renderReviewAttachments= ({item,index})=>{
         return(
             item.split('.')[1] == ".mp4" ?
-            <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}}>
+            <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}} >
                 <Video source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}}  
                     style={styles.video}
                     posterResizeMode={"center"}                
@@ -153,7 +156,7 @@ export default class ProductDetail extends React.Component {
                 />
             </TouchableOpacity>
         :
-        <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}}>
+        <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}} onPress={()=>this.handleShowImage(`${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`)}>
                 <FastImage source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}} 
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.image}/>
@@ -191,6 +194,13 @@ export default class ProductDetail extends React.Component {
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                     isNotificationCount
                     notificationCount={this.state.notificationCount}
+                />
+
+                <ImageView
+                    images={this.state.images}
+                    imageIndex={0}
+                    visible={this.state.showImageView}
+                     onRequestClose={() => this.setState({showImageView:false})}
                 />
 
                 <Components.DraggableModal

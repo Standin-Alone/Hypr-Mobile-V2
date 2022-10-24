@@ -358,3 +358,22 @@ export const ButtonWithIconBoxed = ({
         </TouchableOpacity>
 
 );
+
+export const ButtonTransparentCircle = ({
+iconName,
+onPress,
+iconColor,
+}) =>(                
+    <TouchableOpacity style={{
+        backgroundColor:constants.Colors.transparent_gray,
+        borderRadius:100,
+        width:constants.Dimensions.vw(10),
+        height:constants.Dimensions.vh(10),
+        alignItems:'center',
+        justifyContent:'center',
+        }}
+        onPress={onPress}
+        >
+        <constants.Icons.FontAwesome5 name={iconName} size={constants.Dimensions.normalize(10)} style={{textAlign:'center'}} color={constants.Colors.light}/>
+    </TouchableOpacity>
+)

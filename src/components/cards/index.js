@@ -19,7 +19,7 @@ export const ProductCard = ({
       <TouchableOpacity onPress={addToCart} style={styles.productCardContainer}>
          <View style={{ flexDirection:'column'}}>
             <View>               
-               <FastImage source={{ uri:productImage}} resizeMode={FastImage.resizeMode.contain} style={styles.productImage}/>
+               <FastImage source={{ uri:productImage}} resizeMode={FastImage.resizeMode.center} style={styles.productImage}/>
             </View>   
             <View>
                   <Text style={styles.productName} numberOfLines={2}>{productName}</Text>

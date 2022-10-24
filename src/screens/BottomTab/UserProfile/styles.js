@@ -122,6 +122,24 @@ export const styles = StyleSheet.create({
     color:constants.Colors.dark,
     fontSize:constants.Dimensions.normalize(8),      
     textAlign:'center'      
+  },
+  walletText:{
+    fontFamily:constants.Fonts.PoppinsBold,    
+    fontSize:constants.Dimensions.normalize(8), 
+    color:constants.Colors.light,
+    textAlign:'center'
+  },
+  walletContainer:{
+    backgroundColor:constants.Colors.primary,
+    borderRadius:20,
+    paddingVertical:constants.Dimensions.vh(2),
+    paddingHorizontal:constants.Dimensions.vh(2)    
+  },
+  walletLabel:{
+    fontFamily:constants.Fonts.PoppinsLight,    
+    fontSize:constants.Dimensions.normalize(5), 
+    color:constants.Colors.light,
+    textAlign:'center'
   }
 });
 

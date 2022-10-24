@@ -7,7 +7,8 @@ import {
     ButtonWithTopIcon,
     OrderCardButton,
     PrimaryButtonWithPicture,
-    ButtonWithIconBoxed
+    ButtonWithIconBoxed,
+    ButtonTransparentCircle
     } from "./buttons";
 
 import { 
@@ -89,6 +90,7 @@ export default {
     OrderCardButton,
     PrimaryButtonWithPicture,
     ButtonWithIconBoxed,
+    ButtonTransparentCircle,
 
     // TEXT INPUT
     PrimaryTextInput,

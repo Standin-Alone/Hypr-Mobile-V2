@@ -42,7 +42,7 @@ export const styles = StyleSheet.create({
     },
     buttonWheelContainer:{
         position:'absolute',
-        left:constants.Dimensions.vw(85),
+        left:constants.Dimensions.vw(70),
         transform: [{ rotate: '90deg'}],
         bottom:constants.Dimensions.vh(20),
         top:0

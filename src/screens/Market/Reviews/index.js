@@ -12,7 +12,7 @@ import { getReviewCount,addToCart,addToWishList,buyNow,getProductReviews} from '
 import Toast from 'react-native-toast-message';
 import StarRating from 'react-native-star-rating';
 import Video from 'react-native-video';
-
+import ImageView from "react-native-image-viewing";
 export default class Reviews extends React.Component {
     constructor(props) {
       super(props);
@@ -26,7 +26,9 @@ export default class Reviews extends React.Component {
         isOpenShareModal:false,
         reviewCount:0,
         overAllRatingStar:5,
-        loadingData:true
+        loadingData:true,
+        showImageView:false,
+        images:[]
       };
     }
 
@@ -35,25 +37,17 @@ export default class Reviews extends React.Component {
     
 
     componentDidMount(){              
-        // this.props.navigation.addListener('focus',()=>{
-          
-        // })          
         getReviewCount(this.props.route.params.variant,this.setMyState)    
         getProductReviews(this.props.route.params.variant,this.setMyState)
     }
 
 
-
     handleAddToWishList = async ()=>{
-        
-
-        let userId = await GET_SESSION('USER_ID');
-                
+        let userId = await GET_SESSION('USER_ID');    
         let payload = {
             variant:this.state.variant,
             userId: userId,            
         }
-
         return addToWishList(payload,this.setMyState)
     }
 
@@ -121,10 +115,13 @@ export default class Reviews extends React.Component {
     handleOpenShareModal = ()=>{
        this.setState((prev)=>({isOpenShareModal:prev.isOpenShareModal ? false : true }))
     }
+    handleShowImage = (image)=>{
+        this.setState({showImageView:true,images:[{uri:image}]})
+    }
     renderReviewAttachments= ({item,index})=>{
         return(
             item.split('.')[1] == ".mp4" ?
-            <View style={{marginRight:constants.Dimensions.vw(4)}}>
+            <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}}>
                 <Video source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}}  
                     style={styles.video}
                     posterResizeMode={"center"}                
@@ -134,13 +131,13 @@ export default class Reviews extends React.Component {
                         console.warn('audio',event)
                     }}
                 />
-            </View>
+            </TouchableOpacity>
         :
-        <View style={{marginRight:constants.Dimensions.vw(4)}}>
+        <TouchableOpacity style={{marginRight:constants.Dimensions.vw(4)}} onPress={()=>this.handleShowImage(`${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`)}>
                 <FastImage source={{uri: `${constants.Directories.REVIEW_FILES_DIRECTORY}/${item}`}} 
                 resizeMode={FastImage.resizeMode.contain}
                 style={styles.image}/>
-        </View>
+        </TouchableOpacity>
         )
     }
     renderProductReviews = ({item,index})=>{
@@ -174,6 +171,13 @@ export default class Reviews extends React.Component {
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                     isNotificationCount
                     notificationCount={this.state.notificationCount}
+                />
+
+                 <ImageView
+                    images={this.state.images}
+                    imageIndex={0}
+                    visible={this.state.showImageView}
+                     onRequestClose={() => this.setState({showImageView:false})}
                 />
 
                 <Components.DraggableModal

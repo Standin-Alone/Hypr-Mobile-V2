@@ -110,7 +110,7 @@ export default class Address extends React.Component {
                         title="Add Address"
                         showIcon={true}
                         iconName="add-circle-outline"
-                        iconSize={25}
+                        iconSize={constants.Dimensions.normalize(10)}
                         onPress={this.handleGoToAddressForm}
                     />
 

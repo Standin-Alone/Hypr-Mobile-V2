@@ -75,24 +75,49 @@ export default class Home extends React.Component {
     handleGoToComments = (item)=>{
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
-    renderItem = ({item})=>{
-        return(          
-            <SharedElement id={`item.${item._id}.photo`}>
-                <Components.SocialPostCard
-                    
-                    fullName={item.full_name}
-                    profilePicture={item.user_picture}
-                    postImage={ item.filenames[0]}
-                    shortName={item.full_name.split(' ')[0]}
-                    post={item.caption}
-                    hypesCount={item.hypes.length}
-                    isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
-                    onHype={()=>this.onHype(item)}
-                    onViewPost={()=>this.viewPost(item)}
-                    onViewProfile={()=>this.viewProfile(item)}
-                    onComment={()=>this.handleGoToComments(item)}
-                />
-            </SharedElement>
+    renderItem = ({item,index})=>{
+        return(                
+            <>
+                {index == 0 && 
+                      <View style={{flexDirection:'row'}}>
+                      <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
+                          <constants.Icons.Ionicons 
+                              name="add-circle" 
+                              size={40} 
+                              color={constants.Colors.primary}
+                          />
+                      </TouchableOpacity> 
+                      <View style={{top:constants.Dimensions.vh(2)}}>
+  
+                      
+                      <FlatList
+                          data={this.state.stories}
+             
+                          horizontal={true}
+                          contentContainerStyle ={{paddingRight:constants.Dimensions.vw(10)}}   
+                          renderItem = {this.renderStories}   
+                 
+                          />
+                      </View>
+                  </View>
+                  }
+                <SharedElement id={`item.${item._id}.photo`}>
+                    <Components.SocialPostCard                    
+                        fullName={item.full_name}
+                        profilePicture={item.user_picture}
+                        postImage={ item.filenames[0]}
+                        shortName={item.full_name.split(' ')[0]}
+                        post={item.caption}
+                        hypesCount={item.hypes.length}
+                        isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
+                        onHype={()=>this.onHype(item)}
+                        onViewPost={()=>this.viewPost(item)}
+                        onViewProfile={()=>this.viewProfile(item)}
+                        onComment={()=>this.handleGoToComments(item)}
+                    />
+                </SharedElement>
+            </>
+      
         )
     }
 
@@ -148,28 +173,7 @@ export default class Home extends React.Component {
                     })}
                 />
      
-                <View style={{flexDirection:'row'}}>
-                    <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
-                        <constants.Icons.Ionicons 
-                            name="add-circle" 
-                            size={40} 
-                            color={constants.Colors.primary}
-                        />
-                    </TouchableOpacity> 
-                    <View style={{top:constants.Dimensions.vh(2)}}>
-
-                    
-                    <FlatList
-                        data={this.state.stories}
-           
-                        horizontal={true}
-                        contentContainerStyle ={{paddingRight:constants.Dimensions.vw(10)}}   
-                        renderItem = {this.renderStories}   
-               
-                        />
-                    </View>
-                </View>
-                
+          
 
                     
                 {this.state.isLoading ?

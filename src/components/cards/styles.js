@@ -68,6 +68,7 @@ export const styles = StyleSheet.create({
     productImage:{
         width:constants.Dimensions.vw(50),                
         height:constants.Dimensions.vh(40),
+        borderRadius:10,        
         alignSelf:'center',
         overflow:'hidden'        
     },

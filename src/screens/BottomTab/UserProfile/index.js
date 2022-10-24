@@ -103,9 +103,16 @@ export default class UserProfile extends React.Component {
                                     </TouchableOpacity>
                                     <View style={{top:constants.Dimensions.vh(5),left:constants.Dimensions.vw(5)}}> 
                                         <Text style={styles.fullName}>{`${this.state.userInfo?.first_name }  ${this.state.userInfo?.last_name}  `}</Text>
+                                        <View style={{flexDirection:'row',alignSelf:'center',top:constants.Dimensions.vh(2)}}>
+                                            <View style={styles.walletContainer}>
+                                                <Text style={styles.walletText}>${this.state.userInfo.reward >= 0  ? this.state.userInfo.reward.toFixed(2)  : 'Processing'}</Text>
+                                                <Text style={styles.walletLabel} >Hypr Wallet</Text>
+                                                <Text style={styles.walletLabel} >Available Balance</Text>
+                                            </View>
+                                        </View>
                                     </View>
                                 </View>
-
+                                
                                 <View style={{flexDirection:'row',alignSelf:'center'}}>
                                     <View style={{flexDirection:'column',marginHorizontal:constants.Dimensions.vw(5)}}>
                                         <Text style={styles.palsValue}>{this.state.userInfo?.totalPals}</Text>
