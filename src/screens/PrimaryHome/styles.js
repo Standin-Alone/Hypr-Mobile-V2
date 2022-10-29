@@ -42,13 +42,13 @@ export const styles = StyleSheet.create({
     },
     buttonWheelContainer:{
         position:'absolute',
-        left:constants.Dimensions.vw(70),
+        left:constants.Dimensions.vw(59),
         transform: [{ rotate: '90deg'}],
         bottom:constants.Dimensions.vh(20),
         top:0
     },
     wheelMainButtonIcon:{
-        transform: [{ rotate: '270deg'}],
+        transform: [{ rotate: '270deg'}]
     },
     middleButtonWheel:{
         transform: [{ rotate: '270deg'}],

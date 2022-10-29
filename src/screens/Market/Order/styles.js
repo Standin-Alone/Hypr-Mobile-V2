@@ -44,17 +44,17 @@ divider:{
 },
 subTotalText:{
     fontFamily:constants.Fonts.OpenSansMedium,
-    fontSize:constants.Dimensions.normalize(8),
-},
+    fontSize:constants.Dimensions.normalize(7),
+}, 
 subTotalValue:{
     fontFamily:constants.Fonts.OpenSansMedium,
-    fontSize:constants.Dimensions.normalize(8),
+    fontSize:constants.Dimensions.normalize(7),
 
 },
 selectPayment:{
     fontFamily:constants.Fonts.OpenSansMedium,
     color:constants.Colors.gradient.secondary,
-    fontSize:constants.Dimensions.normalize(8),
+    fontSize:constants.Dimensions.normalize(7),
 
 },
 subTotalContainer:{    
@@ -64,6 +64,12 @@ subTotalContainer:{
     flexDirection:'column',
 },
 totalContainer:{    
+    paddingVertical:constants.Dimensions.vh(2),
+    top:constants.Dimensions.vh(2),
+    backgroundColor:constants.Colors.light,
+    flexDirection:'column',
+},
+totalCashBackContainer:{    
     paddingVertical:constants.Dimensions.vh(2),
     top:constants.Dimensions.vh(2),
     backgroundColor:constants.Colors.light,

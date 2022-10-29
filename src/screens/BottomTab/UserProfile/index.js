@@ -58,12 +58,12 @@ export default class UserProfile extends React.Component {
     render(){
         return(
             <>  
-                <Components.ProfileHeader
+                {/* <Components.ProfileHeader
                     goToProfileSettings={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.ACCOUNT_SETTINGS)}
                     onShareReferralLink={()=>this.setState({showReferralModal: this.state.showReferralModal ? false :true})}
                     onChangeCoverPhoto={()=>this.openUploadSelection('cover')}
                     onGoBack={()=>this.props.navigation.goBack()}
-                />
+                /> */}
 
             <Components.UploadingSelectionCard
                     showPanel={this.state.showSelection}

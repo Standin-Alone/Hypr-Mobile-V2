@@ -14,11 +14,13 @@ export default class SideProfile extends React.Component {
       super(props);
       this.state = {        
         userInfo:[],
+        drawerItems:this.props
       };
     }
     setMyState = (value)=>this.setState(value);    
     componentDidMount(){
         getUserInfo(this.setMyState)
+
     }    
 
 

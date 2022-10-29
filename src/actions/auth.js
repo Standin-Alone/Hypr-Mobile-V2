@@ -521,19 +521,20 @@ export const getUserInfo = (setState)=>{
      
                 if(response.data.status == true){          
                     console.warn(response.data.data.totalPals);
-                    setState({userInfo:response.data.data})
-
+                    setState((prevData)=>({...prevData,userInfo:response.data.data}))
+                    // turn off loading
+                     setState((prevData)=>({...prevData,isLoading:false}))
                 }else{
                     Toast.show({
                         type:'error',
                         text1: 'Error',
                         text2:response.data.errorMessage
                     });
-
+                    // turn off loading
+                     setState((prevData)=>({...prevData,isLoading:false}))
                 }
                
-                 // turn off loading
-                 setState({isLoading:false});
+              
             }).catch((error)=>{
                 console.warn(error)
                 Toast.show({
@@ -541,7 +542,7 @@ export const getUserInfo = (setState)=>{
                     text1: 'Error',
                     text2:error
                 });
-                setState({isLoading:false});   
+                 setState((prevData)=>({...prevData,isLoading:false}))   
             });
 
          }else{
@@ -550,7 +551,7 @@ export const getUserInfo = (setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
-            setState({isLoading:false});
+             setState((prevData)=>({...prevData,isLoading:false}))
          }
     });
 

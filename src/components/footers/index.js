@@ -13,11 +13,13 @@ import FastImage from 'react-native-fast-image'
 export const PrimaryHomeFooter = ({
     goToWishList,
     goToShoppingCart,
-    goToSearch
+    goToSearch,
+    cartCount
 })=>{
 
     return(
         <View style={styles.primaryHomeFooter}>   
+            <View style={{flexDirection:'row',alignSelf:'center',left:constants.Dimensions.vw(15)}}>
             <View style={{flexDirection:'row'}}>
                 <TouchableOpacity onPress={goToWishList} >
                     <constants.Icons.Ionicons 
@@ -45,6 +47,14 @@ export const PrimaryHomeFooter = ({
                         color={constants.Colors.light}                                               
                     />
                 </TouchableOpacity>
+
+            
+                <View style={styles.cartCountNotif}>
+                    <Text style={{ fontSize: 12, color: "#fff" }}>{cartCount}</Text>
+                </View>
+           
+                
+            </View>
             </View>
         </View>
     )

@@ -273,7 +273,7 @@ export const styles = StyleSheet.create({
     },
     username:{
         fontFamily:constants.Fonts.OpenSansMedium,
-        fontSize:12,  
+        fontSize:constants.Dimensions.normalize(6),  
         color:constants.Colors.light
     },
     socialMenuIcon:{
@@ -457,6 +457,39 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsBold,
         fontSize:constants.Dimensions.normalize(6),          
         color:constants.Colors.dark
+    },
+
+    // SOCIAL POST CART NO MEDIA
+
+    socialPostNoMediaContainer:{
+        borderRadius:20,            
+        marginVertical:constants.Dimensions.vh(2),
+        width:constants.Dimensions.vw(95),
+        height:constants.Dimensions.vh(60),     
+        flexDirection:'column',
+        backgroundColor:'rgba(255,255,255,0.5)'
+    },
+    usernameNoMedia:{
+        fontFamily:constants.Fonts.OpenSansMedium,
+        fontSize:constants.Dimensions.normalize(6),  
+        color:constants.Colors.dark
+    },
+    divider:{
+        borderBottomWidth:0.5,
+        top:constants.Dimensions.vh(25),
+        width:constants.Dimensions.vw(85),
+        left:constants.Dimensions.vw(5),
+        borderColor:constants.Colors.gray
+    },
+    postDate:{
+        fontFamily:constants.Fonts.OpenSansBold,
+        fontSize:constants.Dimensions.normalize(4),  
+        color:constants.Colors.light
+    },
+    postDateNoMedia:{
+        fontFamily:constants.Fonts.OpenSansBold,
+        fontSize:constants.Dimensions.normalize(4),  
+        color:constants.Colors.dark_tint
     }
 });
 

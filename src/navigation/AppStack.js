@@ -80,17 +80,17 @@ const AppStack = () =>(
         <Stack.Screen component={Reviews} name={constants.ScreenNames.Market.REVIEWS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={ProductDetail} name={constants.ScreenNames.Market.PRODUCT_DETAIL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={VariantList} name={constants.ScreenNames.Market.VARIANT_LIST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
-        <Stack.Screen component={WishList} name={constants.ScreenNames.Market.WISH_LIST} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
-        <Stack.Screen component={Search} name={constants.ScreenNames.Market.SEARCH} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={WishList} name={constants.ScreenNames.Market.WISH_LIST} options={{cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}/>    
+        <Stack.Screen component={Search} name={constants.ScreenNames.Market.SEARCH} options={{cardStyleInterpolator:CardStyleInterpolators.forFadeFromBottomAndroid}}/>    
         <Stack.Screen component={Cart} name={constants.ScreenNames.Market.CART} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={Order} name={constants.ScreenNames.Market.ORDER} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={Payment} name={constants.ScreenNames.Market.PAYMENT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         {/* MLM */}
-        <Stack.Screen component={Mlm} name={constants.ScreenNames.Mlm.MLM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        <Stack.Screen component={Mlm} name={constants.ScreenNames.Mlm.MLM} options={{cardStyleInterpolator:CardStyleInterpolators.forScaleFromCenterAndroid}}/>    
         <Stack.Screen component={RewardHistory} name={constants.ScreenNames.Mlm.REWARD_HISTORY} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
         {/* USER PROFILE */}
-        <Stack.Screen component={UserProfile} name={constants.ScreenNames.Profile.PROFILE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+        {/* <Stack.Screen component={UserProfile} name={constants.ScreenNames.Profile.PROFILE} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>     */}
         <Stack.Screen component={AccountSettings} name={constants.ScreenNames.Profile.ACCOUNT_SETTINGS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={AddressBook} name={constants.ScreenNames.Profile.ADDRESS_BOOK} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
         <Stack.Screen component={AddressEditForm} name={constants.ScreenNames.Profile.ADDRESS_EDIT_FORM} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    

@@ -79,7 +79,7 @@ export const MlmHeader = ({
     onGoBack
  })=>(   
     <>           
-        <View style={styles.socialContainer}>     
+        <View style={styles.mlmContainer}>     
            
                 <View style={{flexDirection:'row'}}>                    
                 <View style={{justifyContent:'flex-start',flexDirection:'row', left:constants.Dimensions.vw(2) }}>

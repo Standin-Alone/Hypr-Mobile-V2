@@ -322,7 +322,6 @@ export const getProductReviews = async (payload,setState)=>{
                
                 if(response.data.status == true){
                                                                    
-                    console.warn('REVIEWS',response.data.data[0].user_info)
                     setState({productReviews:response.data.data,loadingData:false});                                                          
                                         
                                         
@@ -516,7 +515,6 @@ export const getState = (payload,setState)=>{
 
                     // LOAD STATE
                     setState({states:response.data.data});
-                    console.warn(response.data.data);
                     
                 }else{
                     Toast.show({

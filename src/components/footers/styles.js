@@ -14,13 +14,24 @@ export const styles = StyleSheet.create({
         backgroundColor:constants.Colors.primary,
         flexDirection:'row'
     },
-    searchButton:{
-        width:constants.Dimensions.vw(75),
+    searchButton:{        
+        width:constants.Dimensions.vw(50),
         backgroundColor:constants.Colors.light,
         borderRadius:20,
         marginHorizontal:constants.Dimensions.vw(2),      
         paddingTop:constants.Dimensions.vh(2),
         paddingHorizontal:constants.Dimensions.vw(2)
+    },
+    cartCountNotif:{
+        position: "absolute",
+        left: constants.Dimensions.vw(4),
+        bottom: constants.Dimensions.vh(7),
+        width: 20,
+        height: 20,
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: 20,
+        backgroundColor: constants.Colors.danger
     }
     
 });

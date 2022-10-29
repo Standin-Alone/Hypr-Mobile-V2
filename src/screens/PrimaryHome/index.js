@@ -21,7 +21,8 @@ export default class PrimaryHome extends React.Component {
         products:[],
         newProducts:[],
         currentPage:1,
-        openMenu:false
+        openMenu:false,
+        notificationCount:0
      }    
      
     }
@@ -34,11 +35,7 @@ export default class PrimaryHome extends React.Component {
         getShippingAddress(this.setMyState);
         getCartCount(this.setMyState)
         getUserInfo(this.setMyState)
-        this.props.navigation.addListener('focus',()=>{
-            getAllProducts(parameter,this.setMyState)        
-            getShippingAddress(this.setMyState);
-            getCartCount(this.setMyState)
-        })       
+      
     }
 
     
@@ -124,14 +121,7 @@ export default class PrimaryHome extends React.Component {
 
 
             />
-             <Components.PrimaryHomeHeader
-                hyprPoints={this.state.userInfo.reward >= 0  ? this.state.userInfo.reward.toFixed(2)  : 'Processing' }
-                onPressHyprPoints={()=>this.props.navigation.navigate(constants.ScreenNames.Mlm.MLM)}
-                onOpenMenu={()=>{                                    
-                    this.props.navigation.openDrawer()
-                }}                                
-             />               
-
+            
 
              <View style={{flex:1}}>
                 <View style={styles.titleContainer}>
@@ -165,6 +155,7 @@ export default class PrimaryHome extends React.Component {
               
               </View>    
               <Components.PrimaryHomeFooter
+                    cartCount={this.state.notificationCount}
                     goToShoppingCart={()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}
                     goToSearch={()=>this.props.navigation.navigate(constants.ScreenNames.Market.SEARCH)}
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
@@ -173,10 +164,10 @@ export default class PrimaryHome extends React.Component {
                 {/* Side Wheel Button */}
                 <View style={styles.buttonWheelContainer}>
                     <ActionButton 
-                        buttonColor="rgba(0,0,0.5,0.5)"  
-                        btnOutRange="rgba(0,0,0.5,0.5)"  
+                        buttonColor="rgba(252, 112, 5,0.8)"  
+                        btnOutRange="rgba(252, 112, 5,0.8)"  
                         radius={constants.Dimensions.vh(20)} 
-                        icon={<constants.Icons.FontAwesome name='arrow-right' color={constants.Colors.light} 
+                        icon={<constants.Icons.FontAwesome name='add-plus' color={constants.Colors.light} 
                         style={styles.wheelMainButtonIcon} 
                         size={constants.Dimensions.normalize(10)}/>}>
                         <ActionButton.Item buttonColor={"rgba(0,0,0,0)"} title="New Task"  size={constants.Dimensions.normalize(25)}>

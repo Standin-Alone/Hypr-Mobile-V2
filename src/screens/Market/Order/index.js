@@ -8,7 +8,7 @@ import {styles} from './styles';
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import { increaseQuantity,decreaseQuantity } from '../../../actions/market';
 
-import { computeCart } from "../../../utils/functions";
+import { computeCart, computeCashBack } from "../../../utils/functions";
 import { pay} from '../../../actions/order';
 import Toast from 'react-native-toast-message';
 import { TouchableOpacity } from 'react-native-gesture-handler';
@@ -168,7 +168,7 @@ export default class Order extends React.Component {
             
             <View style={styles.subTotalContainer}>
 
-                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>
                    <View style={{flex:1,justifyContent:'flex-start'}}>
                         <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}> Sub Total:</Text>
                    </View>
@@ -182,7 +182,8 @@ export default class Order extends React.Component {
                         
             <View style={styles.totalContainer}>
 
-                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+
+               <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>
                    <View style={{flex:1,justifyContent:'flex-start'}}>
                         <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}> Total:</Text>
                    </View>
@@ -195,10 +196,24 @@ export default class Order extends React.Component {
                    </View>                                  
                </View>
             </View>
+
+                         
+            <View style={styles.totalContainer}>              
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>
+                   <View style={{flex:1,justifyContent:'flex-start'}}>
+                        <Text style={[styles.subTotalText,{color:constants.Colors.dark}]}> Total Cash Back:</Text>
+                   </View>
+                   <View style={{flex:0,justifyContent:'flex-end',flexDirection:'row'}}>
+                        <Text style={[styles.subTotalValue,{color:constants.Colors.dark}]} >${computeCashBack(this.state.cart)} </Text>                        
+                        
+                   </View>                                  
+               </View>
+            </View>
+            
             
             <View style={styles.paymentMethodContainer}>
 
-                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(10)}}>
+                <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(5)}}>
                    <View style={{flex:1,justifyContent:'flex-start'}}>
                         <Text style={styles.subTotalText}>Payment Method:</Text>
                    </View>

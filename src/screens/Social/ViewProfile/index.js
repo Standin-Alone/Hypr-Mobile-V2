@@ -50,23 +50,34 @@ export default class ViewProfile extends React.Component {
     }
 
     renderItem = ({item})=>{
-
+        console.warn(item.filenames[0]);
      
         return(          
             <SharedElement id={`item.${item._id}.photo`}>
-                <Components.SocialPostCard
-                    fullName={item.full_name}
-                    profilePicture={item.user_picture}
-                    postImage={item.filenames[0]}
-                    shortName={item.full_name.split(' ')[0]}
-                    post={item.caption}
-                    hypesCount={item.hypes.length}
-                    isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
-                    onHype={()=>this.onHype(item)}
-                    onViewPost={()=>this.viewPost(item)}
-                    onViewProfile={()=>this.viewProfile(item)}
-                    onComment={()=>this.handleGoToComments(item)}
-                />
+                  {item.filenames.length > 0  &&  item.filenames[0] !== undefined? 
+                        <Components.SocialPostCard                    
+                            fullName={item.full_name}
+                            profilePicture={item.user_picture}
+                            postImage={ item.filenames[0]}
+                            shortName={item.full_name.split(' ')[0]}
+                            post={item.caption}
+                            hypesCount={item.hypes.length}
+                            isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
+                            onHype={()=>this.onHype(item)}
+                            onViewPost={()=>this.viewPost(item)}
+                            onViewProfile={()=>this.viewProfile(item)}
+                            onComment={()=>this.handleGoToComments(item)}
+                            postDate={item.date_created}
+                        />
+                        :
+                        <Components.SocialPostCardNoMedia                    
+                            fullName={item.full_name}
+                            profilePicture={item.user_picture}
+                            onViewProfile={()=>this.viewProfile(item)}
+                            post={item.caption}   
+                            postDate={item.date_created}                        
+                        />
+                    }
             </SharedElement>
         )
     }

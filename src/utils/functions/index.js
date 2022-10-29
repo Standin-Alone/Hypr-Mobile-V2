@@ -92,6 +92,11 @@ export const computeCart = (cart)=>{
 
 
 
+export const computeCashBack = (cart)=>{
+    
+    return cart.reduce((itemA,itemB)=> itemA = itemA + parseFloat(itemB.cash_back),0).toFixed(2);
+}
+
 
 export const openCamera = (payload,setState,props)=>{
     

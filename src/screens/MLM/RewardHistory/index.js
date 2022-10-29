@@ -50,7 +50,7 @@ export default class RewardHistory extends React.Component {
      
         return(
             <>
-                <Components.PrimaryHeader
+                <Components.PrimaryButtonNoOutline
                     onGoBack = {()=>this.props.navigation.goBack()}
                     title={'Reward History'}                                                                                                      
                 />      

@@ -13,6 +13,10 @@ export default class AccountSettings extends React.Component {
       super(props);
       this.state = {        
           buttons:[{
+            name:'Manage Account',
+            icon:'cog',
+            navigateTo:constants.ScreenNames.Profile.ADDRESS_BOOK
+          },{
             name:'Address Book',
             icon:'location',
             navigateTo:constants.ScreenNames.Profile.ADDRESS_BOOK

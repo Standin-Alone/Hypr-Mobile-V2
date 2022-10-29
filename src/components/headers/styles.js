@@ -122,7 +122,12 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsMedium,
         fontSize:constants.Dimensions.normalize(6),
         color:constants.Colors.primary
-    }
+    },
+    mlmContainer:{
+        flexDirection:'row',
+        justifyContent:"flex-start",
+        backgroundColor:constants.Colors.light
+    },
   
 });
 

@@ -8,7 +8,7 @@ import FastImage from 'react-native-fast-image'
 import DraggablePanel from 'react-native-draggable-panel';
 import Video from 'react-native-video';
 import StarRating from 'react-native-star-rating';
-
+import moment from 'moment';
 export const ProductCard = ({
    productImage,
    productName,
@@ -257,7 +257,8 @@ export const SocialPostCard = ({
    fullName,
    shortName,
    onViewPost,
-   mediaType
+   mediaType,
+   postDate
 })=>(
    <View style={styles.socialPostContainer}>
       <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>
@@ -281,6 +282,9 @@ export const SocialPostCard = ({
             <View style={{left:constants.Dimensions.vw(4)}}>
                <Text style={styles.username}> 
                      {fullName}
+               </Text>
+               <Text  style={styles.postDate}> 
+                  {moment(postDate).fromNow()}
                </Text>
             </View>
          </View>      
@@ -312,6 +316,59 @@ export const SocialPostCard = ({
       </View> 
    </View>
 )
+
+
+
+export const SocialPostCardNoMedia = ({
+   fullName,
+   profilePicture,
+   onViewProfile,
+   post,
+   onComment,
+   onHype,
+   isHype,
+   postDate
+})=>(
+   <View style={styles.socialPostNoMediaContainer}>
+         <View style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(100),paddingTop:constants.Dimensions.vh(2)}}>
+            <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPress={onViewProfile}>
+               <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+            </TouchableOpacity>            
+            <View style={{left:constants.Dimensions.vw(4)}}>
+               <Text style={styles.usernameNoMedia}> 
+                     {fullName}
+               </Text>
+               <Text style={styles.postDateNoMedia}>
+                  {moment(postDate).fromNow()}
+               </Text>
+            </View>
+         </View>     
+      
+         <View style={{top:constants.Dimensions.vw(20),marginHorizontal:constants.Dimensions.vw(5)}}>
+            <Text style={styles.postMessageNoMedia} numberOfLines={5} >{post}</Text>        
+         </View> 
+         <View style={styles.divider}>                            
+         </View>   
+         <View style={{flexDirection:'row',top:constants.Dimensions.vh(25),justifyContent:'center'}}>
+            
+            <View style={styles.socialPostMenu}>
+          
+               <TouchableOpacity onPress={onComment}>
+                  <constants.Icons.Ionicons name="chatbubble-outline" size={35} adjustsFontSizeToFit color={constants.Colors.dark}/>
+               </TouchableOpacity>
+                              
+               <TouchableOpacity onPress={onHype}>
+                  {isHype ? 
+                     <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                     :
+                     <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                  }                  
+               </TouchableOpacity>
+            </View>
+         </View>
+   </View>
+)
+
 
 
 export const UserProfilePicture = ({
