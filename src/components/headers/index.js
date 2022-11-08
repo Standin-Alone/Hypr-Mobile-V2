@@ -14,7 +14,8 @@ export const PrimaryHomeHeader = ({
 hyprPoints,
 onPressHyprPoints,
 onOpenMenu,
-onOpenSocial
+onOpenSocial,
+openNotification
 })=>{
     return(
         <View style={styles.primaryHomeContainer}>   
@@ -32,17 +33,17 @@ onOpenSocial
                 <View style={{left:constants.Dimensions.vw(20)}}>
                     <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
                 </View>
-                {/* <View style={{left:constants.Dimensions.vw(50)}}>
-                    <TouchableOpacity >
-                        <constants.Icons.Ionicons name="notifications" size={constants.Dimensions.normalize(14)} color={constants.Colors.light}/>
+                <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
+                    <TouchableOpacity onPress={openNotification} >
+                        <constants.Icons.Ionicons name="notifications" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>
-                </View> */}
+                </View>
                  {/* <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={onOpenSocial}>
                         <constants.Icons.MaterialCommunityIcons name="post-outline" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>
                 </View> */}
-                <View style={{left:constants.Dimensions.vw(45),top:constants.Dimensions.vh(2)}}>
+                <View style={{left:constants.Dimensions.vw(35),top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={onOpenMenu} >
                         <constants.Icons.MaterialCommunityIcons name="menu" size={constants.Dimensions.normalize(20)} color={constants.Colors.light}/>
                     </TouchableOpacity>
@@ -165,9 +166,9 @@ export const SocialHeader = ({
                     <View style={{flexDirection:'row'}}>  
                         <View >
                             <TouchableOpacity onPress={onGoBack}  style={{ padding:15 }}>
-                                <MaterialIcons 
-                                    name="chevron-left" 
-                                    size={constants.Dimensions.normalize(12)} 
+                                <constants.Icons.MaterialCommunityIcons 
+                                    name="arrow-left" 
+                                    size={constants.Dimensions.normalize(15)} 
                                     color={constants.Colors.light}
                                 />
                             </TouchableOpacity>  
@@ -362,10 +363,10 @@ export const PrimaryHeader = ({
 })=>(   
    <>  
         <View style={[styles.primaryContainer,customStyle]}>
-            <TouchableOpacity onPress={onGoBack} >
-                <MaterialIcons 
-                    name="chevron-left" 
-                    size={40} 
+            <TouchableOpacity onPress={onGoBack} style={{top:constants.Dimensions.vh(1)}} >
+                <constants.Icons.MaterialCommunityIcons 
+                    name="arrow-left" 
+                    size={constants.Dimensions.normalize(15)} 
                     color={constants.Colors.primary}
                 />
             </TouchableOpacity>

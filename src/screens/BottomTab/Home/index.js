@@ -103,10 +103,45 @@ export default class Home extends React.Component {
                   }
                 <SharedElement id={`item.${item._id}.photo`}>
                     {item.filenames.length > 0 ? 
+                        // product social card
+                        item.product_link ?
+                        <Components.SocialPostProductCard                    
+                            fullName={item.full_name}
+                            profilePicture={item.user_picture}
+                            postImage={ item.filenames[0]}
+                            shortName={item.full_name.split(' ')[0]}
+                            post={item.caption}
+                            hypesCount={item.hypes.length}
+                            isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
+                            onHype={()=>this.onHype(item)}
+                            onViewPost={()=>this.viewPost(item)}
+                            onViewProfile={()=>this.viewProfile(item)}
+                            onComment={()=>this.handleGoToComments(item)}
+                            postDate={item.date_created}
+                        />
+                        :
                         <Components.SocialPostCard                    
                             fullName={item.full_name}
                             profilePicture={item.user_picture}
                             postImage={ item.filenames[0]}
+                            shortName={item.full_name.split(' ')[0]}
+                            post={item.caption}
+                            hypesCount={item.hypes.length}
+                            isHype={item.hypes.some((hypeItem)=>hypeItem.user_id == this.state.userId)}
+                            onHype={()=>this.onHype(item)}
+                            onViewPost={()=>this.viewPost(item)}
+                            onViewProfile={()=>this.viewProfile(item)}
+                            onComment={()=>this.handleGoToComments(item)}
+                            postDate={item.date_created}
+                        />
+                        :
+                        // product social card
+                        item.product_link ?
+                        <Components.SocialPostProductCard                    
+                            fullName={item.full_name}
+                            profilePicture={item.user_picture}
+                            postImage={ item.filenames[0]}
+                            productImage={item.product_link.variantImage}
                             shortName={item.full_name.split(' ')[0]}
                             post={item.caption}
                             hypesCount={item.hypes.length}
@@ -125,6 +160,8 @@ export default class Home extends React.Component {
                             post={item.caption}   
                             postDate={item.date_created}                        
                         />
+
+                     
                     }
                 </SharedElement>
             </>
@@ -178,13 +215,32 @@ export default class Home extends React.Component {
                 <Components.SocialHeader
                     onCreatePost={()=>this.props.navigation.navigate(constants.ScreenNames.Social.CAMERA,{addType:"post"})}          
                     goToMessenger={()=>this.props.navigation.navigate(constants.ScreenNames.Social.MESSENGER)}        
-                    onGoBack={()=>this.props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.PRIMARY_HOME }]
-                    })}
+                    onGoBack={()=>this.props.navigation.goBack()}
                 />
-     
-          
+                {this.state.posts.length == 0 && 
+                        <View style={{flexDirection:'row'}}>
+                        <TouchableOpacity onPress={this.handleOpenAddStories}  style={{ padding:15 }}>
+                            <constants.Icons.Ionicons 
+                                name="add-circle" 
+                                size={40} 
+                                color={constants.Colors.primary}
+                            />
+                        </TouchableOpacity> 
+                        <View style={{top:constants.Dimensions.vh(2)}}>
+    
+                        
+                        <FlatList
+                            data={this.state.stories}
+                
+                            horizontal={true}
+                            contentContainerStyle ={{paddingRight:constants.Dimensions.vw(10)}}   
+                            renderItem = {this.renderStories}   
+                    
+                            />
+                        </View>
+                    </View>
+                    }
+                    
 
                     
                 {this.state.isLoading ?

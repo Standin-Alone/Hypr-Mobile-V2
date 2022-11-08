@@ -56,7 +56,9 @@ import {
     UserProfilePicture,
     MemberCard,
     RewardHistoryCard,
-    ProductReviewCard
+    ProductReviewCard,
+    NotificationCard,
+    SocialPostProductCard
     } from "./cards";
 import {
     Loader,
@@ -132,6 +134,8 @@ export default {
     MemberCard,
     RewardHistoryCard,
     ProductReviewCard,
+    NotificationCard,
+    SocialPostProductCard,
     // LOADER
     Loader,
     LoadingScreen,

@@ -8,7 +8,7 @@ const EndPoints = {
     CHANGE_PROFILE_PICTURE:'/user/change-profile-picture',
     SEND_FORGOT_PASSWORD_LINK:'/user/send-forgot-password-link',
 
-
+    GET_ALL_CATEGORIES:'/get-categories',
     GET_ALL_PRODUCTS:'/get-products',
     GET_CART_COUNT:'/market/get-cart-count',
     GET_REVIEW_COUNT:'/market/get-review-count',

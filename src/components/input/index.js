@@ -2,7 +2,6 @@
 import React from "react";
 import { View,TouchableOpacity,TextInput,Text } from "react-native";
 import { styles } from "./styles";
-import LinearGradient from 'react-native-linear-gradient';
 import constants from "../../constants";
 import  MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 import PhoneInput from "react-native-phone-number-input";

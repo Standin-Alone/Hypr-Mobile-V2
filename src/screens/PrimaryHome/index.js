@@ -2,7 +2,7 @@ import React from 'react';
 import { FlatList, View,Text,ActivityIndicator,Image,StatusBar} from 'react-native';
 import Components from '../../components';
 import constants from '../../constants';
-import { getAllProducts,getProductVariants,getShippingAddress,getCartCount, getCart} from '../../actions/market';
+import { getAllProducts,getProductVariants,getShippingAddress,getCartCount,getProductCategories} from '../../actions/market';
 import { styles } from './styles';
 import { getUserInfo,logOut} from '../../actions/auth';
 import SideMenu from 'react-native-side-menu-updated';
@@ -22,7 +22,9 @@ export default class PrimaryHome extends React.Component {
         newProducts:[],
         currentPage:1,
         openMenu:false,
-        notificationCount:0
+        notificationCount:0,
+        productCategories:[],
+        selectedCategoryId:''
      }    
      
     }
@@ -35,7 +37,7 @@ export default class PrimaryHome extends React.Component {
         getShippingAddress(this.setMyState);
         getCartCount(this.setMyState)
         getUserInfo(this.setMyState)
-      
+        getProductCategories(this.setMyState)
     }
 
     
@@ -107,6 +109,30 @@ export default class PrimaryHome extends React.Component {
         </View>
 
     )
+
+    handleSelectCategory = (categoryId)=>{
+     
+        this.setState({selectedCategoryId:categoryId});
+    }
+    renderCategories = ({item,index})=>{
+        return (
+            <>                  
+                <TouchableOpacity style={
+                   item.categoryFirstId == this.state.selectedCategoryId ?
+                   styles.categorySelectedButton
+                   :
+                   styles.categoryButton                
+                } onPress={()=>this.handleSelectCategory(item.categoryFirstId)}>
+                    <Text style={
+                   item.categoryFirstId == this.state.selectedCategoryId  ?
+                   styles.categorySelectedLabelText
+                   :
+                   styles.categoryLabelText                
+                }>{item.categoryFirstName}</Text>
+                </TouchableOpacity>
+            </>
+        )
+    }
     render(){
         
        
@@ -117,17 +143,22 @@ export default class PrimaryHome extends React.Component {
              <StatusBar
                 animated={true}
                 backgroundColor={constants.Colors.primary} 
-                barStyle={"light-content"}               
-
-
-            />
+                barStyle={"light-content"}                               
+                />
             
 
              <View style={{flex:1}}>
-                <View style={styles.titleContainer}>
-                    <Text style={styles.title}>Featured Products</Text>
+              
+                {/* list for categories */}
+                <View style={{backgroundColor:constants.Colors.gradient.secondary}}>
+                    <FlatList
+                        horizontal={true}
+                        data={this.state.productCategories}
+                        renderItem={this.renderCategories}
+                        contentContainerStyle={{paddingBottom:constants.Dimensions.vh(2)}}
+                    />
                 </View>
-     
+            
                 {this.state.isLoadingPlaceholder ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
                         :

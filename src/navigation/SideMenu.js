@@ -13,6 +13,7 @@ import ToShip from '../screens/Profile/Tracking/ToShip';
 import ToReceive from '../screens/Profile/Tracking/ToReceive';
 import UserProfile from '../screens/BottomTab/UserProfile';
 import { getUserInfo } from '../actions/auth';
+import Notification from '../screens/Notification';
 
 const SideMenu = createDrawerNavigator();
 
@@ -22,9 +23,11 @@ export const SideMenuBar =   (props)=>{
         
     
     const [state,setState] = useState({userInfo:[]});
-    useEffect(async ()=>{
+    useEffect( ()=>{
         getUserInfo(setState)
-        return false;
+        return () => {
+            console.log("This will be logged on unmount");
+          }
     },[])
     return(
         <SideMenu.Navigator 
@@ -53,7 +56,8 @@ export const SideMenuBar =   (props)=>{
                             onPressHyprPoints={()=>navigation.navigate(constants.ScreenNames.Mlm.MLM)}
                             onOpenMenu={()=>{                                    
                                navigation.openDrawer()
-                            }}                                
+                            }}                        
+                            openNotification={()=>navigation.navigate(constants.ScreenNames.AppStack.NOTIFICATION)}                     
                          />                           
                         ),
                         
@@ -122,6 +126,33 @@ export const SideMenuBar =   (props)=>{
                         ),
                         headerShown:false,
                     })}
+            />   
+
+            <SideMenu.Screen 
+                 {...props}
+                    name ={constants.ScreenNames.AppStack.NOTIFICATION} 
+                    component={Notification}
+                    options={({route,navigation})=>({    
+                        title:'Notification',                      
+                        drawerIcon: ({color})=>(
+                            <constants.Icons.FontAwesome5 name="shipping-fast" size={constants.Dimensions.normalize(10)} color={color}/>
+                        ),
+                        header:()=>(
+                            <Components.PrimaryHomeHeader
+                            hyprPoints={state.userInfo?.reward >= 0  ? state.userInfo?.reward.toFixed(2)  : 'Processing' }
+                            onPressHyprPoints={()=>navigation.navigate(constants.ScreenNames.Mlm.MLM)}
+                            onOpenMenu={()=>{                                    
+                               navigation.openDrawer()
+                            }}                  
+                            openNotification={()=>navigation.navigate(constants.ScreenNames.AppStack.NOTIFICATION)}             
+                         />                           
+                        )
+                        ,
+                        
+                        drawerItemStyle: { display: 'none' },                        
+                    })}
+                    
+
             />   
 
         </SideMenu.Navigator>

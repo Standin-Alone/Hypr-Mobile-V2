@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {View,Text,TouchableOpacity} from 'react-native';
+import {View,Text,TouchableOpacity,ScrollView} from 'react-native';
 import Components from '../../../components';
 import {styles} from './styles';
 import FastImage from 'react-native-fast-image';
@@ -11,7 +11,7 @@ import { GET_SESSION } from '../../../utils/async_storage';
 import { hypePost } from '../../../actions/social';
 import { FlatList } from 'react-native-gesture-handler';
 import Video from 'react-native-video';
-
+import ViewMoreText from 'react-native-view-more-text';
 export default class ViewPost extends React.Component {
     constructor(props) {
       super(props);
@@ -32,7 +32,8 @@ export default class ViewPost extends React.Component {
         let userId = await GET_SESSION('USER_ID');
       
         this.setState({isHype:this.props.route.params.post.hypes.some( (item)=>item.user_id ==  userId)});
-
+        console.warn(this.props.route.params.post.filenames.length)
+        
     }
 
     renderItem = ({item,index})=>{
@@ -54,28 +55,25 @@ export default class ViewPost extends React.Component {
                 }}
             />
         :
-            <FastImage source={{uri: `${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`}} 
-            resizeMode={FastImage.resizeMode.contain}
+            <FastImage source={{uri:  item.includes('http') ? `${item}`:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${item}`}} 
+            resizeMode={FastImage.resizeMode.center}
             style={styles.image}/>      
     )}
 
 
     onHype = async (item)=>{
-
         let parameter = {
             post:item,            
             userId:await GET_SESSION('USER_ID'),  
             viewType:'ViewPost'          
         }
-
         hypePost(parameter,this.setMyState,this.props,this.state)   
-
-        
     }
 
     handleGoToComments = (item)=>{
         this.props.navigation.navigate(constants.ScreenNames.Social.COMMENTS,item)
     }
+
     onViewableItemsChanged = (viewableItems)=>{
         if (viewableItems && viewableItems.length > 0) {
             this.setState({ videoIndex: viewableItems[0].index });
@@ -83,23 +81,19 @@ export default class ViewPost extends React.Component {
     }
 
     render(){
-     
         return(
             <>
-                <Components.PrimaryHeader
-                    onGoBack = {()=>this.props.navigation.goBack()}                                                        
-       
-                    customStyle={{backgroundColor:'black'}}                   
-                />      
+            <Components.PrimaryHeader
+                onGoBack = {()=>this.props.navigation.goBack()}                                                        
 
-
-            <View style={styles.container}>
+                customStyle={{backgroundColor:'black'}}                   
+            />      
+ 
+            <View style={styles.container}>            
                 <SharedElement id={`item.${this.state.parameters._id}.photo`} style={{top:constants.Dimensions.vh(5)}}>
-              
-
                     <FlatList
                         horizontal
-                        data={this.state.parameters.filenames}
+                        data={this.state.parameters.filenames ?  [this.state.parameters.product_link.variantImage] :this.state.parameters.filenames }
                         renderItem={this.renderItem}
                         onViewableItemsChanged={this.onViewableItemsChanged}
                         viewabilityConfig={{
@@ -107,18 +101,19 @@ export default class ViewPost extends React.Component {
                         }}
                     />
                 </SharedElement>
-
-
-              
-
             </View>
-                
-            
+    
             <View style={styles.footer}>
+                <Text style={styles.mainInfoTextBold}>{this.state.parameters?.full_name}</Text>
+                <ScrollView>
                 <View style={styles.mainInfo}>
                     
-                    <Text style={styles.mainInfoTextBold}>{this.state.parameters?.full_name}</Text>
+                    
+                    <ViewMoreText
+                          numberOfLines={3}
+                    >
                     <Text style={styles.mainInfoText}>{this.state.parameters?.caption}</Text>                    
+                    </ViewMoreText>
 
                     <View style={{flexDirection:'row'}}>
                         <Text style={styles.mainInfoTextBold}>{this.state.parameters?.hypes.length} Hypes</Text>  
@@ -142,12 +137,10 @@ export default class ViewPost extends React.Component {
                         />
                     </TouchableOpacity>   
                 </View>
-            </View>
-              
-       
-        
-               
-              
+                </ScrollView>
+            </View>    
+     
+                
             </>
         ) 
     }

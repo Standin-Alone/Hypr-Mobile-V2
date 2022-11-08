@@ -9,6 +9,7 @@ import DraggablePanel from 'react-native-draggable-panel';
 import Video from 'react-native-video';
 import StarRating from 'react-native-star-rating';
 import moment from 'moment';
+import LinearGradient from "react-native-linear-gradient";
 export const ProductCard = ({
    productImage,
    productName,
@@ -370,6 +371,81 @@ export const SocialPostCardNoMedia = ({
 )
 
 
+export const SocialPostProductCard = ({
+   onViewProfile,
+   onHype,
+   onComment,
+   post,
+   isHype,
+   profilePicture,
+   postImage,
+   productImage,
+   hypesCount,
+   fullName,
+   shortName,
+   onViewPost,
+   mediaType,
+   postDate
+})=>(
+   <View style={styles.socialPostContainer}>
+      <TouchableOpacity style={styles.socialPostImage} onPress={onViewPost}>
+
+         {postImage?.split('.')[1] == 'mp4' ? 
+                 <Video source={{uri:`${constants.Directories.POSTS_PICTURE_DIRECTORY}/${postImage}`}}  
+                        style={styles.video}
+                        posterResizeMode={"center"}                 
+                        allowsExternalPlayback={false}
+                        resizeMode='contain'                 
+                  />
+            :
+            <FastImage source={{ uri:`${productImage}`}} resizeMode={FastImage.resizeMode.cover} style={styles.socialImage}/>
+         }
+         
+         
+         <LinearGradient style={{flexDirection:'row',position:'absolute',width:constants.Dimensions.vw(95),paddingVertical:constants.Dimensions.vh(2),borderTopLeftRadius:20,borderTopRightRadius:20}} 
+             start={{ x: 0, y: 0 }} end={{ x: 0, y: 1 }}
+             colors={[constants.Colors.dark,constants.Colors.transparent_black]}         
+            >
+            <TouchableOpacity style={{left:constants.Dimensions.vw(1)}} onPress={onViewProfile}>
+               <FastImage source={{ uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}` }} resizeMode={FastImage.resizeMode.cover} style={styles.profile} />   
+            </TouchableOpacity>            
+            <View style={{left:constants.Dimensions.vw(4)}}>
+               <Text style={styles.username}> 
+                     {fullName}
+               </Text>
+               <Text  style={styles.postDate}> 
+                  {moment(postDate).fromNow()}
+               </Text>
+            </View>
+         </LinearGradient>      
+
+         <View style={{flexDirection:'row',bottom:constants.Dimensions.vh(20),justifyContent:'center'}}>
+            <View style={styles.socialPostMenu}>
+               
+               <TouchableOpacity onPress={onComment}>
+                  <constants.Icons.Ionicons name="chatbubble-outline" size={35} adjustsFontSizeToFit color={constants.Colors.dark}/>
+               </TouchableOpacity>
+                              
+               <TouchableOpacity onPress={onHype}>
+                  {isHype ? 
+                     <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                     :
+                     <FastImage source={constants.Images.unhype} resizeMode={FastImage.resizeMode.cover} style={styles.socialMenuIcon}/>   
+                  }                  
+               </TouchableOpacity>
+            </View>
+         </View>
+
+      
+      </TouchableOpacity>     
+      <View style={{bottom:constants.Dimensions.vw(10),left:constants.Dimensions.vw(2)}}>
+         <Text style={styles.hypeCount}>{hypesCount ? hypesCount : 0} Hypes</Text>
+      </View> 
+      <View style={{bottom:constants.Dimensions.vw(10),left:constants.Dimensions.vw(2),flexDirection:'row',width:constants.Dimensions.vw(90)}}>
+         <Text style={styles.name} numberOfLines={1}>{shortName} -<Text style={styles.postMessage} numberOfLines={1} >{post}</Text></Text>         
+      </View> 
+   </View>
+)
 
 export const UserProfilePicture = ({
 profilePicture,
@@ -595,7 +671,7 @@ export const UploadingSelectionCard = ({
    )
 
 
-   export const ProductReviewCard = ({
+export const ProductReviewCard = ({
       profilePicture,
       fullName,
       review,
@@ -629,4 +705,39 @@ export const UploadingSelectionCard = ({
                />
             </View>
       </View>  
+   )
+
+
+   export const NotificationCard = ({
+      profilePicture,
+      fullName,
+      date,
+      message,
+       openNotification
+   })=>
+   (
+      <TouchableOpacity style={[styles.notifCard,{}]} onPress={openNotification}>
+                <View style={{ flexDirection:'row'}}>
+                    <View style={{ flexDirection:'column',marginHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2)}}>
+                        <Image source={{uri:`${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${profilePicture}`}} style={styles.notifProfilePic}/>
+                    </View>    
+                    <View style={{ flexDirection:'column',marginHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2),width:constants.Dimensions.vw(65)}}>
+                        <View style={{ flexDirection:'row' }}>
+                            <Text style={styles.name} numberOfLines={1}>
+                                {fullName}
+                            </Text>
+                        </View>
+                        <View style={{ flexDirection:'row' }}>
+                            <Text style={styles.message}  numberOfLines={2}> 
+                                {message}
+                            </Text>
+                        </View>
+                        <View style={{ flexDirection:'row' }}>
+                            <Text style={styles.date}> 
+                                {date}
+                            </Text>
+                        </View>
+                    </View>           
+                </View>     
+            </TouchableOpacity>
    )

@@ -59,6 +59,33 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsExtraBold,
         fontSize:constants.Dimensions.normalize(4),
         color:constants.Colors.light
+    },
+    categoryButton:{
+        borderRadius:100,
+    
+        borderColor:constants.Colors.gray_tint,
+        paddingVertical:constants.Dimensions.vh(2),
+        paddingHorizontal:constants.Dimensions.vw(2),
+        marginHorizontal:constants.Dimensions.vw(2)
+    },
+    categoryLabelText:{
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:constants.Dimensions.normalize(4),
+        color:constants.Colors.light
+    },
+    categorySelectedButton:{
+        borderRadius:100,
+   
+        borderColor:constants.Colors.gray_tint,
+        paddingVertical:constants.Dimensions.vh(2),
+        paddingHorizontal:constants.Dimensions.vw(2),
+        marginHorizontal:constants.Dimensions.vw(2),
+        backgroundColor:constants.Colors.transparent_white
+    },
+    categorySelectedLabelText:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:constants.Dimensions.normalize(4),
+        color:constants.Colors.light
     }
 });
 

@@ -9,7 +9,7 @@ export const styles = StyleSheet.create({
 image:{
     width:constants.Dimensions.vw(100),
     height:constants.Dimensions.vh(300),  
-    bottom:constants.Dimensions.vh(100)
+    bottom:constants.Dimensions.vh(100),
 },
 container:{
   flex:1,
@@ -17,10 +17,10 @@ container:{
 },
 footer:{
   position:'absolute',
-  bottom:0,
+  bottom:40,
   left:0,
   right:0,
-  height:constants.Dimensions.vh(40), 
+  height:constants.Dimensions.vh(50), 
   backgroundColor:constants.Colors.transparent_black
 },
 mainInfo:{
@@ -35,7 +35,7 @@ mainInfoTextBold:{
 },
 mainInfoText:{
   fontFamily:constants.Fonts.PoppinsRegular,
-  fontSize:14,
+  fontSize:constants.Dimensions.normalize(7),
   color:constants.Colors.light
 },
 socialMenuIcon:{

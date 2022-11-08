@@ -8,6 +8,56 @@ import {SET_SESSION,GET_SESSION} from '../utils/async_storage';
 import { setUserIdSession } from "../utils/async_storage";
 import { calculateFreight,groupBy } from "../utils/functions";
 
+export const getProductCategories = async (setState)=>{
+    setState({isLoading:true});
+    
+    // Check Internet Connection
+    NetInfo.fetch().then( async (state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){        
+            console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_CATEGORIES}`)
+            // GET REQUEST
+            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_CATEGORIES}`).then((response)=>{                    
+                console.warn(response.data)
+                if(response.data.result == true){                                                                                       
+                    setState({productCategories:response.data.data});                                                                                                                                          
+                    // turn off loading
+                    setState({isLoading:false});
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: response.data.message
+                    });
+                    // turn off loading
+                    setState({isLoading:false});
+                }
+               
+              
+            }).catch((error)=>{
+                console.warn(error)                
+                
+                Toast.show({
+                    type:'error',
+                    text1:'Something went wrong!'
+                });
+                
+                // turn off loading
+                setState({isLoading:false});
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             // turn off loading
+            setState({isLoading:false});
+         }
+    });
+
+}
+
 export const getAllProducts = (payload,setState)=>{
 
   
@@ -918,7 +968,7 @@ export const removeProductFromWishList = (payload,setState,props)=>{
 export const addToWishList =  (payload,setState)=>{
     setState({isLoading:true});
   
-    console.warn('payloads',payload)
+  
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -980,7 +1030,7 @@ export const addToWishList =  (payload,setState)=>{
 export const addToCart =  (payload,setState)=>{
     setState({isLoading:true});
     
-    console.warn('payloads',payload)
+ 
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -1043,7 +1093,7 @@ export const addToCart =  (payload,setState)=>{
 export const buyNow =  (payload,setState,props)=>{
     setState({isLoading:true});
   
-    console.warn('payloads',payload)
+
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected
@@ -1095,7 +1145,7 @@ export const buyNow =  (payload,setState,props)=>{
 export const updateSelectedAddress =  (payload,setState,props)=>{
     setState({isLoading:true});
   
-    console.warn('payloads',payload)
+
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
          // if internet connected

@@ -490,6 +490,32 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.OpenSansBold,
         fontSize:constants.Dimensions.normalize(4),  
         color:constants.Colors.dark_tint
+    },
+
+    notifCard:{
+        
+        backgroundColor:constants.Colors.light,
+        borderColor:constants.Colors.gray,
+        flexDirection:'row',        
+        
+        elevation:15
+    },
+    name:{
+        fontFamily:constants.Fonts.PoppinsBold,
+        fontSize:constants.Dimensions.normalize(8)
+    },
+    date:{
+        fontFamily:constants.Fonts.PoppinsRegular,
+        fontSize:constants.Dimensions.normalize(6)
+    },
+    message:{
+        fontFamily:constants.Fonts.OpenSansRegular,
+        fontSize:constants.Dimensions.normalize(5)
+    },
+    notifProfilePic:{
+        borderRadius:200,
+        width:constants.Dimensions.vw(20),
+        height:constants.Dimensions.vh(20),
     }
 });
 
