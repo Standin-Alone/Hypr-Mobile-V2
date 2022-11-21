@@ -67,8 +67,8 @@ export default class Login extends React.Component {
                         </View>
                         <View style={styles.headerContainer}>
                                 <View style={{ left:constants.Dimensions.vw(5) }}>
-                                    <Text style={styles.headerText}>Welcome to Hypr</Text>
-                                    <Text style={styles.subtitleText}>Sign in to start shopping.</Text>
+                                    <Text style={styles.headerText} allowFontScaling={false}>Welcome to Hypr</Text>
+                                    <Text style={styles.subtitleText} allowFontScaling={false}>Sign in to start shopping.</Text>
                                 </View>
                         </View>
                     </View>
@@ -158,8 +158,8 @@ export default class Login extends React.Component {
 
                         
                         <View style={styles.signUpContainer}>
-                            <Text style={styles.signUpTitle}>Don't have an account?</Text>
-                            <Text  style={styles.signUpText} onPress={this.goToSignUp} > Sign Up here...</Text>
+                            <Text style={styles.signUpTitle} allowFontScaling={false}>Don't have an account?</Text>
+                            <Text  style={styles.signUpText} onPress={this.goToSignUp}  allowFontScaling={false}> Sign Up here...</Text>
                         </View>
                         
                     </View>

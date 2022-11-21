@@ -7,8 +7,9 @@ import { styles } from './styles';
 import { getUserInfo,logOut} from '../../actions/auth';
 import SideMenu from 'react-native-side-menu-updated';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { CLEAR_SESSION } from '../../utils/async_storage';
 import ActionButton from 'react-native-circular-action-menu';
+
+
 export default class PrimaryHome extends React.Component {
     constructor(props) {
       super(props);
@@ -24,7 +25,9 @@ export default class PrimaryHome extends React.Component {
         openMenu:false,
         notificationCount:0,
         productCategories:[],
-        selectedCategoryId:''
+        selectedCategoryId:'all',
+        showFooterLoader:false,
+        selectedCategoryName:'All'
      }    
      
     }
@@ -32,6 +35,7 @@ export default class PrimaryHome extends React.Component {
     componentDidMount(){        
         let parameter = {
             currentPage:1,
+            categoryName:this.state.selectedCategoryName
         }
         getAllProducts(parameter,this.setMyState)        
         getShippingAddress(this.setMyState);
@@ -63,7 +67,8 @@ export default class PrimaryHome extends React.Component {
     loadMore = async (allProducts) => { 
             let parameter = {
                 currentPage : this.state.currentPage,
-                previousProductPage : this.state.products
+                previousProductPage : this.state.products,
+                categoryName:this.state.selectedCategoryName
             }
             getAllProducts(parameter,this.setMyState)  ;
 
@@ -74,7 +79,9 @@ export default class PrimaryHome extends React.Component {
         this.state.products.length == 0 ?
         null
         :
+        this.state.showFooterLoader ?
         <Components.FooterLoader/>
+        : null
     )
 
     goToUserProfile = ()=>{
@@ -110,11 +117,18 @@ export default class PrimaryHome extends React.Component {
 
     )
 
-    handleSelectCategory = (categoryId)=>{
+    handleSelectCategory = (categoryId,categoryName)=>{
      
-        this.setState({selectedCategoryId:categoryId});
+        this.setState({selectedCategoryId:categoryId,selectedCategoryName:categoryName});
+
+        let parameter = {
+            currentPage:1,
+            categoryName:categoryName
+        }
+        getAllProducts(parameter,this.setMyState)
     }
     renderCategories = ({item,index})=>{
+       
         return (
             <>                  
                 <TouchableOpacity style={
@@ -122,7 +136,7 @@ export default class PrimaryHome extends React.Component {
                    styles.categorySelectedButton
                    :
                    styles.categoryButton                
-                } onPress={()=>this.handleSelectCategory(item.categoryFirstId)}>
+                } onPress={()=>this.handleSelectCategory(item.categoryFirstId,item.categoryFirstName)}>
                     <Text style={
                    item.categoryFirstId == this.state.selectedCategoryId  ?
                    styles.categorySelectedLabelText
@@ -161,7 +175,7 @@ export default class PrimaryHome extends React.Component {
             
                 {this.state.isLoadingPlaceholder ?
                         <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
-                        :
+                        :             
                         <FlatList
                         nestedScrollEnabled
                         keyExtractor={(item)=>item.pid}   
@@ -198,21 +212,20 @@ export default class PrimaryHome extends React.Component {
                         buttonColor="rgba(252, 112, 5,0.8)"  
                         btnOutRange="rgba(252, 112, 5,0.8)"  
                         radius={constants.Dimensions.vh(20)} 
-                        icon={<constants.Icons.FontAwesome name='add-plus' color={constants.Colors.light} 
+                        icon={<constants.Icons.FontAwesome name='arrow-down' color={constants.Colors.light} 
                         style={styles.wheelMainButtonIcon} 
                         size={constants.Dimensions.normalize(10)}/>}>
                         <ActionButton.Item buttonColor={"rgba(0,0,0,0)"} title="New Task"  size={constants.Dimensions.normalize(25)}>
                             <constants.Icons.MaterialCommunityIcons name="arrow-right" size={constants.Dimensions.normalize(10)} color={constants.Colors.light}/>
-                        </ActionButton.Item>   
+                        </ActionButton.Item>                      
+                        <ActionButton.Item buttonColor={"rgba(0,0,0,0)"}  title="New Task"  size={constants.Dimensions.normalize(25)}>                    
+                        </ActionButton.Item>                
                         <ActionButton.Item buttonColor={constants.Colors.gradient.secondary} title="New Task" onPress={this.goToSocial}  size={constants.Dimensions.normalize(25)}>
                                 <View style={styles.middleButtonWheel}>
                                     <constants.Icons.Foundation name="social-500px" size={constants.Dimensions.normalize(10)} color={constants.Colors.light} style={{textAlign:'center'}} />
                                     <Text style={styles.middleButtonWheelText}>Social</Text>
                                 </View>
-                        </ActionButton.Item>   
-                        <ActionButton.Item buttonColor={"rgba(0,0,0,0)"}  title="New Task"  size={constants.Dimensions.normalize(25)}>
-                            <constants.Icons.FontAwesome5 name="arrow-right" style={styles.actionButtonIcon} />
-                        </ActionButton.Item>                
+                        </ActionButton.Item>  
                     </ActionButton>         
                 </View>
             </>

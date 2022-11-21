@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Image,Text,TouchableOpacity, ScrollView,FlatList} from 'react-native';
+import { View,Image,Text,TouchableOpacity, ScrollView,FlatList,Platform,PermissionsAndroid} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
@@ -8,7 +8,11 @@ import { GET_SESSION } from '../../../utils/async_storage';
 import { getShippingAddress,addToCart,addToWishList, getWishList,buyNow,getCartCount,getReviewCount,getProductReviews} from '../../../actions/market';
 import Toast from 'react-native-toast-message';
 import ImageView from "react-native-image-viewing";
-
+import ViewShot from "react-native-view-shot";
+import {
+    addScreenshotListener,
+    removeScreenshotListener,
+  } from 'react-native-detector';
 export default class ProductDetail extends React.Component {
     constructor(props) {
       super(props);
@@ -25,13 +29,44 @@ export default class ProductDetail extends React.Component {
         images:[],
         productReviews:[]
       };
+
     }
 
-    setMyState = (value)=>this.setState(value)
-
     
+   
+    setMyState = (value)=>this.setState(value)
+     requestPermission = async () => {
+        try {
+          const granted = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
+              title: 'Get Read External Storage Access',
+              message:
+                'get read external storage access for detecting screenshots',
+              buttonNeutral: 'Ask Me Later',
+              buttonNegative: 'Cancel',
+              buttonPositive: 'OK',
+            }
+          );
+          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
+            console.log('You can use the READ_EXTERNAL_STORAGE');
+          } else {
+            console.log('READ_EXTERNAL_STORAGE permission denied');
+          }
+        } catch (err) {
+          console.warn(err);
+        }
+      };
 
-    componentDidMount(){         
+    userDidScreenshot = () => {
+        alert('helop')
+    };
+
+     componentDidMount(){    
+        this.requestPermission();     
+        addScreenshotListener(this.userDidScreenshot);
+
+
          getShippingAddress(this.setMyState)
          getWishList(this.setMyState)     
          getCartCount(this.setMyState)
@@ -44,10 +79,15 @@ export default class ProductDetail extends React.Component {
         //     getReviewCount(this.props.route.params.variant,this.setMyState)
         //     getProductReviews(this.props.route.params.variant,this.setMyState)
         // })
-     
-                         
+        
+  
     }
 
+   
+
+    
+
+   
     handleUpdateStateFromChangeAddress = (newFreight)=>{
         // get latest shipping address info
         getShippingAddress(this.setMyState)
@@ -183,6 +223,12 @@ export default class ProductDetail extends React.Component {
             />
         )
     }
+
+    onCapture = (uri)=>{
+        alert('uri',uri);
+    }
+
+    
     render(){
      
         return(
@@ -190,7 +236,7 @@ export default class ProductDetail extends React.Component {
                 <Components.MarketHeader
                     onGoBack = {()=>this.props.navigation.goBack()}      
                     goToShoppingCart = {()=>this.props.navigation.navigate(constants.ScreenNames.Market.CART)}                         
-                    showGoback={true}                                                      
+                    showGoback={true}                                                       
                     goToWishList={()=>this.props.navigation.navigate(constants.ScreenNames.Market.WISH_LIST)}
                     isNotificationCount
                     notificationCount={this.state.notificationCount}
@@ -256,33 +302,36 @@ export default class ProductDetail extends React.Component {
 
 
                 <ScrollView contentContainerStyle={{ flexGrow: 1,paddingBottom:constants.Dimensions.vh(30) }}>
-                    <View style={styles.variantContainer}>                                                 
-                        <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
+                 
+                    <View style={styles.variantContainer}>       
 
+                       <ViewShot  onCapture={this.onCapture}  options={{ format: "png", quality: 1 }}> 
+                        <Image source={{uri:this.state.variant.variantImage}} style={styles.variantImage} resizeMode='stretch'/>
+                        
                         <View  style={styles.variantNameContainer}>
                             <View>
-                                <Text style={styles.variantName} numberOfLines={2}>
+                                <Text style={styles.variantName} numberOfLines={2} allowFontScaling={false}>
                                     
                                     {this.state.variant.variantName}
                                 </Text>                                   
                             </View>
                             <View style={styles.variantPriceContainer}>                                
-                                <Text style={styles.variantPrice} numberOfLines={1}>${this.state.variant.variantPrice}</Text>
+                                <Text style={styles.variantPrice} numberOfLines={1} allowFontScaling={false}>${this.state.variant.variantPrice}</Text>
                             </View>
                             <View style={styles.variantPriceContainer}>
                                 <Image source={constants.Images.cashBack} style={styles.cashBackIcon} resizeMode='stretch'/>
                                 <View style={{flexDirection:"column",marginLeft:constants.Dimensions.vw(5)}}>
-                                    <Text style={styles.cashBackValue} numberOfLines={1}>${this.state.variant.variantCashBack}</Text>
-                                    <Text style={styles.cashBackLabel} numberOfLines={1}>Cash Back</Text>
+                                    <Text style={styles.cashBackValue} numberOfLines={1} allowFontScaling={false}>${this.state.variant.variantCashBack}</Text>
+                                    <Text style={styles.cashBackLabel} numberOfLines={1} allowFontScaling={false}>Cash Back</Text>
                                 </View>                                
-                            </View>
-                            
+                            </View>                            
                         </View>
+                        </ViewShot>
                         
                         <View  style={styles.deliveryContainer}>      
                             <View style={{flexDirection:'row',flex:1}}>
                                 <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliveryTitle} numberOfLines={1} ellipsizeMode='tail'>Delivery</Text>
+                                    <Text style={ styles.deliveryTitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>Delivery</Text>
                                 </View>
 
                                 <View style={styles.deliveryButton}>
@@ -297,12 +346,12 @@ export default class ProductDetail extends React.Component {
 
                             <View style={{flexDirection:'row',flex:1}}>
                                 <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery </Text>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>Delivery </Text>
                                 </View>
 
                                 <View style={styles.deliveryButton}>
                                     <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
+                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>
 
                                             {this.state.freightCalculation[0].logisticName}
                                         </Text> 
@@ -312,12 +361,12 @@ export default class ProductDetail extends React.Component {
 
                             <View style={{flexDirection:'row',flex:1}}>
                                 <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Days</Text>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>Delivery Days</Text>
                                 </View>
 
                                 <View style={styles.deliveryDays}>
                                     <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
+                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>
 
                                             {this.state.freightCalculation[0].logisticAging} Days
                                         </Text> 
@@ -328,12 +377,12 @@ export default class ProductDetail extends React.Component {
 
                             <View style={{flexDirection:'row',flex:1}}>
                                 <View style={styles.deliveryContent}>            
-                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>Delivery Fee</Text>
+                                    <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>Delivery Fee</Text>
                                 </View>
 
                                 <View style={styles.deliveryButton}>
                                     <View style={styles.changeDeliveryButton}>
-                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail'>
+                                        <Text style={ styles.deliverySubtitle} numberOfLines={1} ellipsizeMode='tail' allowFontScaling={false}>
                                             ${this.state.freightCalculation[0].logisticPrice}
                                         </Text> 
                                     </View>
@@ -346,11 +395,11 @@ export default class ProductDetail extends React.Component {
                         <View style={styles.reviewContainer}>
                                 <View style={{flexDirection:'row',justifyContent:'space-between'}}>                                
                                     <View >
-                                        <Text style={styles.headerText}>Review ({this.state.reviewCount})</Text>                                        
+                                        <Text style={styles.headerText} allowFontScaling={false}>Review ({this.state.reviewCount})</Text>                                        
                                     </View>                              
                                     <View >
                                         <TouchableOpacity style={{flexDirection:'row'}} onPress={this.handleGoToReviews}>
-                                            <Text>
+                                            <Text allowFontScaling={false}>
                                                 View All
                                             </Text>
                                             <constants.Icons.MaterialIcons

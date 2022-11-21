@@ -2,8 +2,6 @@ import React,{useState,useEffect} from 'react';
 import { StyleSheet,View,TouchableOpacity,Image,Text} from 'react-native';
 import { createDrawerNavigator } from '@react-navigation/drawer'
 import constants from '../constants';
-import { SocialStackComponent } from './SocialStack';
-import { MarketStackComponent } from './MarketStack';
 import PrimaryHome from '../screens/PrimaryHome';
 import Components from '../components';
 import SideProfile from './SideProfile';

@@ -42,16 +42,16 @@ export const styles = StyleSheet.create({
     },
     buttonWheelContainer:{
         position:'absolute',
-        left:constants.Dimensions.vw(59),
-        transform: [{ rotate: '90deg'}],
-        bottom:constants.Dimensions.vh(20),
+        left:constants.Dimensions.vw(-5),
+        // transform: [{ rotate: `${constants.Dimensions.normalize(4)}deg`}],
+        bottom:constants.Dimensions.vh(80),
         top:0
     },
     wheelMainButtonIcon:{
         transform: [{ rotate: '270deg'}]
     },
     middleButtonWheel:{
-        transform: [{ rotate: '270deg'}],
+        transform: [{ rotate: `${constants.Dimensions.normalize(1)}deg`}],
         textAlign:'center'
     },
     middleButtonWheelText:{

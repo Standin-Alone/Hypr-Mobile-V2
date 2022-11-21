@@ -15,12 +15,15 @@ export const getProductCategories = async (setState)=>{
     NetInfo.fetch().then( async (state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){        
-            console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_CATEGORIES}`)
+
             // GET REQUEST
             GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_CATEGORIES}`).then((response)=>{                    
-                console.warn(response.data)
-                if(response.data.result == true){                                                                                       
-                    setState({productCategories:response.data.data});                                                                                                                                          
+
+                if(response.data.result == true){ 
+                    let allElement = [{categoryFirstId:'all',categoryFirstName:'All'}];         
+                    let cleanCategories = allElement.concat(response.data.data); 
+           
+                    setState({productCategories:cleanCategories});                                                                                                                                          
                     // turn off loading
                     setState({isLoading:false});
                 }else{
@@ -61,7 +64,7 @@ export const getProductCategories = async (setState)=>{
 export const getAllProducts = (payload,setState)=>{
 
   
-    setState({isLoading:true});
+    setState({isLoadingPlaceholder:true});
     
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -70,11 +73,10 @@ export const getAllProducts = (payload,setState)=>{
 
             
             // GET REQUEST
-            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}?pageNum=${payload.currentPage}`).then((response)=>{                    
+            GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_ALL_PRODUCTS}?pageNum=${payload.currentPage}&categoryName=${encodeURIComponent(payload.categoryName)}`).then((response)=>{                    
                 
                 if(response.data.result == true){
-                                                                   
-
+               
                     if(payload.currentPage > 1){
                         setState({products:[...new Set(payload.previousProductPage),...response.data.data.list],newProducts:response.data.data.list})
                     }else{

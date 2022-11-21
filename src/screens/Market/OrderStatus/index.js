@@ -111,7 +111,7 @@ export default class OrderStatus extends React.Component {
                                    <Components.PrimaryButtonOutline
                                     title={`Track ${this.state.orderInfo.trackNumber}`}
                                      onPress={this.handleOpenTracking}
-                                     moreStyle={{width:constants.Dimensions.vw(45),left:constants.Dimensions.vw(2)}}
+                                     moreStyle={{width:constants.Dimensions.vw(43),left:constants.Dimensions.vw(2)}}
                                      moreTextStyle={{fontSize:constants.Dimensions.normalize(6),top:constants.Dimensions.vh(1)}}
                                      showIcon
                                      iconName={"location-pin"}

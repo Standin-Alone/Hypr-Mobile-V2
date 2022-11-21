@@ -395,13 +395,7 @@ export const createInspire = (payload,setState,props)=>{
                                 type:'success',
                                 text1:'Successfully posted.'
                             });            
-                            props.navigation.reset({
-                                index: 0,
-                                routes: [{ name: constants.ScreenNames.AppStack.HOME,
-                                    state: {
-                                        routes: [{name: constants.ScreenNames.Social.SOCIAL}],
-                                    } }]
-                            });    
+                            props.navigation.replace(constants.ScreenNames.Social.SOCIAL); 
                             setState({isProgress:false,loadingTitle:''});
                         }else{
                             Toast.show({
@@ -654,14 +648,7 @@ export const boost = (payload,setState,props,state)=>{
                         text1: response.data.message
                     });
 
-                    props.navigation.reset({
-                        index: 0,
-                        routes: [{ name: constants.ScreenNames.AppStack.HOME,state:{
-                            routes:[{
-                                name:constants.ScreenNames.Social.SOCIAL
-                            }]
-                        } }]
-                    });  
+                    props.navigation.replace(constants.ScreenNames.Social.SOCIAL);  
                     
                     setState({isProgress:false});
 

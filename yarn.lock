@@ -6168,6 +6168,11 @@
     "prop-types" "15.7.2"
     "react-async-hook" "3.6.1"
 
+"react-native-detector@^0.2.3":
+  "integrity" "sha512-q0uMXKsK4hAYK5OKMJmMpPiHDyiXWV9Cvlrwbn51gdIoPApzWkK61pOW411gLn6KbeoUQnDqJoDIuIqi0m0TSg=="
+  "resolved" "https://registry.npmjs.org/react-native-detector/-/react-native-detector-0.2.3.tgz"
+  "version" "0.2.3"
+
 "react-native-draggable-panel@^1.2.3":
   "integrity" "sha512-t7fbleUswHcad4dgD18q/DCXZFkvv48qLTspjrhhpWEzOcc5oGGNX9Pg3BvpjALA/t6n+xPdZcuY8g/ZbJurlQ=="
   "resolved" "https://registry.npmjs.org/react-native-draggable-panel/-/react-native-draggable-panel-1.2.3.tgz"
@@ -6332,6 +6337,11 @@
     "react-freeze" "^1.0.0"
     "warn-once" "^0.1.0"
 
+"react-native-screenshot-detect@^1.1.0":
+  "integrity" "sha512-VRU5Zvu1lvZMthISmbNHTwuD56+ZgA4M6RcLema7JPFnztrsKDU06KU8LUuVJsxI+p6pDzYaQRb/omGrgSou/Q=="
+  "resolved" "https://registry.npmjs.org/react-native-screenshot-detect/-/react-native-screenshot-detect-1.1.0.tgz"
+  "version" "1.1.0"
+
 "react-native-shared-element@*", "react-native-shared-element@^0.8.4":
   "integrity" "sha512-agRuD5AB4daw4QLo7KCTBqCtmIjbQkqpwsT/aYrxDu/McvTCdDuXVttaVMrqeyAgdDkU1egp41FdiExS1L/hJw=="
   "resolved" "https://registry.npmjs.org/react-native-shared-element/-/react-native-shared-element-0.8.4.tgz"
@@ -6442,6 +6452,11 @@
   "version" "2.1.0"
   dependencies:
     "prop-types" "^15.5.7"
+
+"react-native-view-shot@^3.5.0":
+  "integrity" "sha512-+/a0zcEcCzAwuzQTU7CmwR1/bDcuy3Yj7093xI3Dhcjccb3FwxNiRyIBonsMSj3fQMmBcqV5d8DGCAeOJ5Ij3A=="
+  "resolved" "https://registry.npmjs.org/react-native-view-shot/-/react-native-view-shot-3.5.0.tgz"
+  "version" "3.5.0"
 
 "react-native-webview@*", "react-native-webview@^11.18.2":
   "integrity" "sha512-EB2BzFi+soOp6GmZQrw6kpeFfoKMxw1vzZg68gWsBllAXfTpfJuxr5zsRoZSNyRRpIoaJ+N+Ok2BVJJiyUYx+g=="

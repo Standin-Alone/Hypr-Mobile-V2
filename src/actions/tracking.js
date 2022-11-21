@@ -232,7 +232,7 @@ export const getOrderedProducts= (payload,setState)=>{
                 if(response.data.status == true){
                     let orderedProducts = response.data.data;
 
-                    console.warn(`orderedPRoducts`,response.data.data);
+              
                     setState({orderedProducts:orderedProducts})  
                 }else{
                     Toast.show({
@@ -276,7 +276,7 @@ export const getTrackOrder= (payload,setState)=>{
             
             // GET REQUEST
             GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_TRACKING_DETAILS}?trackNumber=${payload.trackNumber}`).then(async (response)=>{                    
-            
+                console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.GET_TRACKING_DETAILS}?trackNumber=${payload.trackNumber}`);
                 if(response.data.result == true){
                     
                     
@@ -284,17 +284,18 @@ export const getTrackOrder= (payload,setState)=>{
                         trackNumber:payload.trackNumber,
                         orderNumber:payload.orderNumber,
                         userId:payload.userId,
-                        tracks:response.data.data[0].routes
+                        tracks:response.data.data[0]?.routes
                     };
 
+                  
                     POST(`${getBaseUrl().accesspoint}${constants.EndPoints.UPDATE_TRACKING}`,updateTrackingPayload).then(async (updateTrackingResponse)=>{   
                         if(updateTrackingResponse.data.status == true){
 
-                            setState({openTrackingPanel:true,trackingInfo:response.data.data[0],isTracking:false});
+                            setState({openTrackingPanel:true,trackingInfo:updateTrackingResponse.tracking,isTracking:false});
 
-                    
+                     
 
-                            let routes = response.data.data[0].routes;
+                            let routes = updateTrackingResponse.tracking;
         
                             routes.sort((a,b)=>{
                                  

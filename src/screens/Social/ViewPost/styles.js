@@ -17,10 +17,10 @@ container:{
 },
 footer:{
   position:'absolute',
-  bottom:40,
+  bottom:0,
   left:0,
   right:0,
-  height:constants.Dimensions.vh(50), 
+
   backgroundColor:constants.Colors.transparent_black
 },
 mainInfo:{

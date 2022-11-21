@@ -73,9 +73,9 @@ export default class VerifyOtp extends React.Component {
                 />
 
                 <View style={styles.otpVerificationTitleContainer}>
-                    <Text style={styles.otpVerificationTitle} adjustsFontSizeToFit>OTP Verification</Text>
-                    <Text style={styles.otpSubtitle} adjustsFontSizeToFit numberOfLines={3}>Enter the OTP has sent to
-                        <Text style={styles.email}> {this.props.route.params.email  }</Text>
+                    <Text style={styles.otpVerificationTitle} adjustsFontSizeToFit allowFontScaling={false}>OTP Verification</Text>
+                    <Text style={styles.otpSubtitle} adjustsFontSizeToFit numberOfLines={3} allowFontScaling={false}>Enter the OTP has sent to
+                        <Text style={styles.email} allowFontScaling={false}> {this.props.route.params.email  }</Text>
                     </Text>
                 </View>
                 <View style={styles.codeFieldContainer}>
