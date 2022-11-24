@@ -1,14 +1,14 @@
 
 
 const ipAddress = '192.168.1.3';
-const ipAddressProd = '34.223.255.252';
+const ipAddressProd = '54.184.155.1';
 
 // const ipAddressProd = '192.168.1.8';
 const SOCKET_IO = `http://${ipAddress}:9090`;
 const API_DEV_HOST_PLAIN = `http://${ipAddress}:9002`;
 const API_DEV_HOST = `http://${ipAddress}:9002/hypr-mobile`;
-const CJ_API_HOST = `http://${ipAddress}:9002/cj/api/v1`;
-const MLM_API_HOST = `http://${ipAddress}:9002/mlm/api/v1`;
+const CJ_API_HOST = `http://${ipAddress}:9002/hypr-mobile/cj/api/v1`;
+const MLM_API_HOST = `http://${ipAddress}:9002/hypr-mobile/mlm/api/v1`;
 
 // const SOCKET_IO = `http://${ipAddress}:9090`;
 // const API_DEV_HOST_PLAIN = `http://${ipAddress}`;
@@ -18,16 +18,16 @@ const MLM_API_HOST = `http://${ipAddress}:9002/mlm/api/v1`;
 
 
 
-const API_PRO_HOST_PLAIN = `http://${ipAddressProd}`;
-const API_PRO_HOST = `http://${ipAddressProd}/hypr-mobile`;
-const CJ_API_PRO_HOST = `http://${ipAddressProd}/cj/api/v1`;
-const MLM_API_PRO_HOST = `http://${ipAddressProd}/mlm/api/v1`;
+const API_PRO_HOST_PLAIN = `http://${ipAddressProd}:4500`;
+const API_PRO_HOST = `http://${ipAddressProd}:4500/hypr-mobile`;
+const CJ_API_PRO_HOST = `http://${ipAddressProd}:4500/hypr-mobile/cj/api/v1`;
+const MLM_API_PRO_HOST = `http://${ipAddressProd}:4500/hypr-mobile/mlm/api/v1`;
 const SOCKET_IO_PROD = `http://${ipAddressProd}:4500`;
 
 
 const Config = {
     // 0 => Devlopment env, 1 => Production env
-    APP_MODE: 0,
+    APP_MODE: 1,
     DEVELOPMENT: {
         API_HOST: `${API_DEV_HOST}`,
         API_ACCESS_POINT_PLAIN: `${API_DEV_HOST_PLAIN}`,
@@ -42,6 +42,7 @@ const Config = {
         API_ACCESS_POINT: `${API_PRO_HOST}`,
         CJ_ACCESS_POINT: `${CJ_API_PRO_HOST}`,
         MLM_ACCESS_POINT: `${MLM_API_PRO_HOST}`,
+        
     },
 };
 

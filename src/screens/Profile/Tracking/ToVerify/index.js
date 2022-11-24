@@ -1,6 +1,5 @@
 import React from 'react';
-import { View,InteractionManager } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View,InteractionManager,FlatList} from 'react-native';
 import { getToVerifyOrders,checkOrdersStatus } from '../../../../actions/tracking';
 import Components from '../../../../components';
 import constants from '../../../../constants';
@@ -26,8 +25,11 @@ export default class ToVerify extends React.Component {
             condition:'UNPAID'
         }
 
-          
-        checkOrdersStatus(payload,this.setMyState)
+     
+        this.props.navigation.addListener('focus',()=>{
+  
+            checkOrdersStatus(payload,this.setMyState)
+        })
      
     }
 

@@ -86,6 +86,11 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsBold,
         fontSize:constants.Dimensions.normalize(4),
         color:constants.Colors.light
+    },
+    emptyList:{
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:constants.Dimensions.normalize(8),
+        color:constants.Colors.gray
     }
 });
 

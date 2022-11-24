@@ -1,6 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View,FlatList } from 'react-native';
 import { getForReviewOrders } from '../../../../actions/tracking';
 import Components from '../../../../components';
 import constants from '../../../../constants';
@@ -13,7 +12,8 @@ export default class ToReview extends React.Component {
       this.state = {   
         isReadyToRender:false,     
         orders:[],
-        loadingData:true
+        loadingData:true,
+        refreshing:false
       };
     }
 
@@ -58,6 +58,14 @@ export default class ToReview extends React.Component {
                 ) : (
                     <>                    
                         <FlatList
+                            refreshing={this.state.refreshing}
+                            onRefresh={async ()=>{
+                                let payload = {
+                                    userId: await GET_SESSION('USER_ID'),
+                                    condition:'SHIPPED'
+                                }
+                                getForReviewOrders(payload,this.setMyState)
+                            }}
                             data={this.state.orders}            
                             renderItem={this.renderItems}
                             ListEmptyComponent={this.renderEmptyComponent}

@@ -79,7 +79,6 @@ export const checkRoom = (payload,setState,state,socket)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
        
-            console.warn(`PAYLOAD`,payload);
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CHECK_ROOM}`,payload).then((response)=>{                    
                

@@ -27,9 +27,12 @@ export default class UserProfile extends React.Component {
     setMyState = (value)=>this.setState(value)
 
 
-    async componentDidMount(){
-        getUserInfo(this.setMyState)
-    
+     componentDidMount(){
+     
+        
+        this.props.navigation.addListener('focus',()=>{
+            getUserInfo(this.setMyState)
+        })
 
     }
 

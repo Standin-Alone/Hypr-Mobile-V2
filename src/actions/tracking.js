@@ -73,14 +73,14 @@ export const getForReviewOrders= (payload,setState)=>{
                     let orders = response.data.data;
 
                     console.warn(orders)
-                    setState({orders:orders,loadingData:false})
+                    setState({orders:orders,loadingData:false,refreshing:false})
 
                 }else{
                     Toast.show({
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({orders:[],loadingData:false})          
+                    setState({orders:[],loadingData:false,refreshing:false})          
 
                 }
            
@@ -91,7 +91,7 @@ export const getForReviewOrders= (payload,setState)=>{
                     text1:'Something went wrong!'
                 });
                 
-                setState({loadingData:false})          
+                setState({loadingData:false,refreshing:false})          
             });
 
          }else{
@@ -100,7 +100,7 @@ export const getForReviewOrders= (payload,setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
-            setState({loadingData:false})          
+            setState({loadingData:false,refreshing:false})          
       
          }
     });
@@ -109,7 +109,8 @@ export const getForReviewOrders= (payload,setState)=>{
 
 
 export const checkOrdersStatus= (payload,setState)=>{
-    
+       
+    setState({loadingData:true})  
  
     // Check Internet Connection
     NetInfo.fetch().then((state)=>{
@@ -148,7 +149,9 @@ export const checkOrdersStatus= (payload,setState)=>{
                                     result.data.data.order_status = items.order_status;
                                     return result.data.data;
                                 }                                                                                                                                     
-                            }
+                            }else[
+                                setState({loadingData:false,refreshing:false})    
+                            ]
                             })                    
                         })).then((cleanOrders)=>{
                             
@@ -175,7 +178,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                                 })).then((data)=>
                                 {                       
                                
-                                    setState({loadingData:false,orders:data.filter(item=>item != undefined)}) 
+                                    setState({loadingData:false,refreshing:false,orders:data.filter(item=>item != undefined)}) 
                                 })
                                  
                             }
@@ -190,7 +193,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                         type:'error',
                         text1: response.data.message
                     });
-                    setState({orders:[],loadingData:false})          
+                    setState({orders:[],loadingData:false,refreshing:false})          
 
                 }
            
@@ -201,7 +204,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                     text1:'Something went wrong!'
                 });
                 
-                setState({loadingData:false})          
+                setState({loadingData:false,refreshing:false})          
             });
 
          }else{
@@ -210,7 +213,7 @@ export const checkOrdersStatus= (payload,setState)=>{
                 type:'error',
                 text1:'No internet Connection!'
             })
-            setState({loadingData:false})          
+            setState({loadingData:false,refreshing:false})          
       
          }
     });
@@ -369,9 +372,9 @@ export const orderReceived= (payload,setState,props)=>{
          if(state.isConnected && state.isInternetReachable){
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.ORDER_RECEIVED}`,payload).then(async (response)=>{                    
-
+                console.warn(`MLM`,response.data);
                 if(response.data.status == true){
-                    
+                    console.warn('PRODUCTS',payload.orderedProducts)
                     let totalMarkUp = payload.orderedProducts.reduce((prev, current) => prev + current.computed_markup_price, 0).toFixed(2);
                     
                     let myPayload = {                 
@@ -379,26 +382,25 @@ export const orderReceived= (payload,setState,props)=>{
                         orderId: payload.orderNumber,
                         userId: payload.userId             
                     }
-        
+                    
                     // POST REQUEST
-                    POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,myPayload).then((response)=>{                    
-                     
-                        if(response.data.response == 'success'){          
+                    POST(`${getBaseUrl().MLM_ACCESS_POINT}${constants.EndPoints.DISSEMINATE_REWARDS}`,myPayload).then((mlmResponse)=>{                    
+                    
+                        if(mlmResponse.data.response == 'success'){          
                             setState({isTracking:false}); 
                             Toast.show({
                                 type:'success',
                                 text1:'Success',
                                 text2:'Successfully order received.'
                             });
-                            props.navigation.reset({
-                                index: 0,
-                                routes: [{ name: constants.ScreenNames.AppStack.HOME}]
-                            });       
+
+                            props.navigation.navigate(constants.ScreenNames.Profile.tracking.TO_REVIEW)                            
                         }else{
+                            
                             Toast.show({
                                 type:'error',
                                 text1: 'Error',
-                                text2:response.data.errorMessage
+                                text2:mlmResponse.data.errorMessage
                             });
                             setState({isTracking:false});
                         }

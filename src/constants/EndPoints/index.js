@@ -98,6 +98,12 @@ const EndPoints = {
 
     // MLM
     GET_REWARDS_HISTORY:'/mlm/reward-history',
+
+    // NOTIFICATION    
+    GET_NOTIFICATIONS:'/notification/get-notifications',
+
+    // PARTNERS
+    GET_PARTNERS:'/partners/get-partners',
 }
 
 

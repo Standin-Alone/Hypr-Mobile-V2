@@ -7,6 +7,12 @@ import constants from '../../../constants';
 import base64 from 'react-native-base64';
 import { successPayment } from '../../../actions/order';
 import StripeCheckout from 'react-native-stripe-checkout-webview';
+import io from "socket.io-client/dist/socket.io";
+import { generateUuid } from "../../../utils/functions";
+// socket for push notif
+const socket = io(getBaseUrl().SOCKET_IO, {
+    transports: ['websocket'] // you need to explicitly tell it to use websockets
+});
 
 
 export default class Payment extends React.Component {
@@ -14,7 +20,8 @@ export default class Payment extends React.Component {
       super(props);
       this.state = {      
           isReadyToRender:true,            
-          parameters:this.props.route.params
+          parameters:this.props.route.params,
+          paymentRoom:generateUuid()
       };
     }
 
@@ -27,6 +34,13 @@ export default class Payment extends React.Component {
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
        }) 
+
+       socket.on('connect',function(){
+            console.warn('connected')
+           
+            socket.emit('join-payment-room',this.state.paymentRoom);
+            
+       });
        
     }   
 
@@ -40,7 +54,9 @@ export default class Payment extends React.Component {
                 orderId:this.state.parameters.orderId,
                 userId:this.state.parameters.userId,
                 paymentMethod:this.state.parameters.paymentMethod,
-                url:navState.url
+                url:navState.url,
+                socket:socket,
+                paymentRoom:this.state.paymentRoom
             }
                 
             setTimeout(()=>{

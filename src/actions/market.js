@@ -310,24 +310,18 @@ export const getReviewCount = async (payload,setState)=>{
             }
                 
             // POST REQUEST
-            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_REVIEW_COUNT}`,cleanPayload).then((response)=>{                    
-               
-                if(response.data.status == true){
-                                                                   
-                    
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_REVIEW_COUNT}`,cleanPayload).then((response)=>{                                   
+                if(response.data.status == true){                                                                                       
                     setState({reviewCount:response.data.data});                                                          
-                                        
-                                        
+                    // turn off loading
+                    setState({isLoading:false});
+                                                                                
                 }else{
-                    Toast.show({
-                        type:'error',
-                        text1: response.data.message
-                    });
-
+                    // turn off loading
+                    setState({isLoading:false});
                 }
                
-                 // turn off loading
-                 setState({isLoading:false});
+                 
             }).catch((error)=>{
                 console.warn(error)                
                 
@@ -377,11 +371,7 @@ export const getProductReviews = async (payload,setState)=>{
                     setState({productReviews:response.data.data,loadingData:false});                                                          
                                         
                                         
-                }else{
-                    Toast.show({
-                        type:'error',
-                        text1: response.data.message
-                    });
+                }else{                
                  // turn off loading
                  setState({isLoading:false,loadingData:false});
                 }
@@ -437,10 +427,7 @@ export const getShippingAddress = async (setState)=>{
                     setState({shippingAddress:response.data.data.length == 0 ? [] :  response.data.data,loadingData:false,isLoading:false,});                                                          
                                                                                 
                 }else{
-                    Toast.show({
-                        type:'error',
-                        text1: response.data.message
-                    });
+                  
                     setState({isLoading:false,loadingData:false});
                 }
                

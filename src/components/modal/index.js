@@ -56,7 +56,7 @@ export const PaymentMethodModal = ({
 
                         <TouchableOpacity style={styles.button} onPress={()=>onPress('hypr')}>
                             <View style={{flexDirection:'row',justifyContent:'center',flex:1}}>
-                                    <Text style={styles.hyprPoints}> {points} Hypr Points</Text>
+                                    <Text style={styles.hyprPoints}> {points?.toFixed(2)} Hypr Points</Text>
                             </View>
                         </TouchableOpacity>
 

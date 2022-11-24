@@ -2,7 +2,7 @@ import React from 'react';
 import { View,Image,Text,TouchableOpacity } from 'react-native';
 import { getUserInfo,logOut} from '../actions/auth';
 import constants from '../constants';
-import { styles } from '../screens/PrimaryHome/styles';
+import { styles } from '../screens/ShopHome/styles';
 import {
     DrawerContentScrollView,
     DrawerItemList,

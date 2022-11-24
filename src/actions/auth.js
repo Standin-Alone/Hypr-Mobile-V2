@@ -182,6 +182,7 @@ export const createAccount = (payload,setState,props)=>{
                     age:computeAge               
                 }
 
+             
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_ACCOUNT}`,clean_payload).then((response)=>{                    
                 
                     if(response.data.status == true){
@@ -272,7 +273,7 @@ export const login = (payload,setState,props) => {
                 
                 // POST REQUEST
                 POST(`${getBaseUrl().accesspoint}${constants.EndPoints.LOGIN}`,clean_payload).then((response)=>{                    
-                    console.warn(response);
+                   
                     if(response.data.status == true){
                         Toast.show({
                                 type:'success',
@@ -603,6 +604,8 @@ export const sendForgotPasswordLink = (payload,setState,props) => {
                                 text2: response.data.message
                         });
 
+                        props.navigation.goBack();
+                        
                         // turn off loading
                         setState({isLoading:false});
                     }else{

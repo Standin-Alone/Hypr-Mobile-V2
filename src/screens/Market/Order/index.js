@@ -36,7 +36,7 @@ export default class Order extends React.Component {
     componentDidMount(){          
         
         getUserInfo(this.setMyState);
-        console.warn(this.props.route.params.cart)
+        
        
        InteractionManager.runAfterInteractions(()=>{
          this.setState({isReadyToRender:true})
@@ -143,8 +143,7 @@ export default class Order extends React.Component {
                 onPress={(paymentMethod)=>this.handleSelectPaymentMethod(paymentMethod)}
                 points={this.state.userInfo?.reward}
             />
-            <View>
-              
+            <View>              
                 <View style={styles.itemCountContainer}>
                     <Text style={styles.itemCountText}>{`${this.state.cart.length} items`}</Text>
                 </View>
@@ -234,14 +233,8 @@ export default class Order extends React.Component {
                                     color={constants.Colors.primary}
                                 /> 
                                 } </Text>
-                        </TouchableOpacity>   
-                        
-                        
-                    
-                                                 
+                        </TouchableOpacity>                           
                </View>
-       
-
             </View>
 
             <View style={styles.buttonContainer}>       

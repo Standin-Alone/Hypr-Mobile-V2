@@ -10,19 +10,18 @@ import { TouchableOpacity } from 'react-native-gesture-handler';
 import ActionButton from 'react-native-circular-action-menu';
 
 
-export default class PrimaryHome extends React.Component {
+export default class ShopHome extends React.Component {
     constructor(props) {
       super(props);
       this.state = {   
+        partnerInfo:this.props.route.params,
         userInfo:[],
         isLoadingPlaceholder:true,
         isLoading:false,
-        isProgress:false,
         notificationCount:0,
         products:[],
         newProducts:[],
         currentPage:1,
-        openMenu:false,
         notificationCount:0,
         productCategories:[],
         selectedCategoryId:'all',
@@ -77,7 +76,9 @@ export default class PrimaryHome extends React.Component {
 
     renderFooter = ()=>(
         this.state.products.length == 0 ?
-        null
+        <View style={{alignSelf:'center'}}>
+            <Text  style={styles.emptyList}  allowFontScaling={false}>No products to show.</Text>
+         </View>
         :
         this.state.showFooterLoader ?
         <Components.FooterLoader/>
@@ -142,7 +143,7 @@ export default class PrimaryHome extends React.Component {
                    styles.categorySelectedLabelText
                    :
                    styles.categoryLabelText                
-                }>{item.categoryFirstName}</Text>
+                } allowFontScaling={false}>{item.categoryFirstName}</Text>
                 </TouchableOpacity>
             </>
         )

@@ -48,6 +48,11 @@ export const reviewProduct = (payload,setState,props)=>{
                         type:'success',
                         text1: response.data.message
                     });
+
+                    props.navigation.reset({
+                        index: 0,
+                        routes: [{ name: constants.ScreenNames.AppStack.HOME }]
+                    });
                     
                     setState({isProgress:false});
                 }else{

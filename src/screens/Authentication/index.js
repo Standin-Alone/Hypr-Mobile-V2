@@ -7,7 +7,12 @@ import { styles } from './styles';
 import NetInfo from "@react-native-community/netinfo";
 import Toast from 'react-native-toast-message';
 import LinearGradient from 'react-native-linear-gradient';
+import io from "socket.io-client/dist/socket.io";
+import getBaseUrl from '../../utils/config';
+import { AuthContext } from '../../contexts/AuthContexts';
+
 export default class Authentication extends React.Component {
+
     constructor(props) {
       super(props);
       this.state = {        
@@ -24,18 +29,15 @@ export default class Authentication extends React.Component {
             // if internet connected
             if(state.isConnected && state.isInternetReachable){
                 
+                const socket = io(getBaseUrl().SOCKET_IO, {
+                    transports: ['websocket'] 
+                });
+
                 this.setState({loadingText:'Authentication...'});
 
                 setTimeout(()=>{
-                    if(checkSession){            
-                 
-                        
-                    
-                        // this.props.navigation.replace(constants.ScreenNames.AppStack.PRIMARY_HOME);
-                        this.props.navigation.replace( constants.ScreenNames.AppStack.HOME);
-                
-                       
-                        
+                    if(checkSession){                               
+                        this.props.navigation.replace( constants.ScreenNames.AppStack.HOME,{socket:socket});                                        
                         // this.props.navigation.replace(constants.ScreenNames.AppStack.HOME, {
                         //     screen: constants.ScreenNames.BottomTab.SOCIAL_HOME,
                         //     params: { screen: constants.ScreenNames.Social.SOCIAL,
@@ -45,8 +47,7 @@ export default class Authentication extends React.Component {
                         this.props.navigation.replace(constants.ScreenNames.AppStack.LOGIN);
                     }
                 },2000)
-              
-            
+                          
             }else{
                 
                 this.setState({loadingText:'No internet connection. Please check your network.'});

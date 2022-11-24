@@ -22,10 +22,10 @@ openNotification
             <View style={{flexDirection:'row',marginHorizontal:constants.Dimensions.vw(2),paddingVertical:constants.Dimensions.vh(2)}}>
                 <View style={{top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={onPressHyprPoints} style={styles.hyprPointsBtn}>
-                        <Text style={styles.hyprPoints}>
+                        <Text style={styles.hyprPoints} allowFontScaling={false}>
                             {hyprPoints}
                         </Text>    
-                        <Text style={styles.hyprPoints}>
+                        <Text style={styles.hyprPoints} allowFontScaling={false}>
                             Hypr Wallet
                         </Text>    
                     </TouchableOpacity>                
@@ -99,7 +99,7 @@ export const MlmHeader = ({
                                             size={constants.Dimensions.normalize(10)} 
                                             color={constants.Colors.primary}
                                         />
-                                <Text style={styles.rewardHistoryText}>
+                                <Text style={styles.rewardHistoryText}  allowFontScaling={false}>
                                     Reward History
                                 </Text>
                             </TouchableOpacity>
@@ -123,7 +123,7 @@ export const CommentHeader = ({
                             <FastImage source={constants.Images.hype} resizeMode={FastImage.resizeMode.contain} style={styles.commentHypes}/>                            
                         </View> 
                         <TouchableOpacity style={{flexDirection:'row',top:constants.Dimensions.vh(2)}}>
-                                <Text style={{ fontSize: 16, color: constants.Colors.dark_tint}}>{hypesCount}</Text>
+                                <Text style={{ fontSize: 16, color: constants.Colors.dark_tint}} allowFontScaling={false}>{hypesCount}</Text>
                                 <constants.Icons.Ionicons 
                                         name="md-chevron-forward" 
                                         size={18} 
@@ -267,10 +267,10 @@ export const MarketHeader = ({
         <View style={styles.marketContainer}>     
         {showGoback &&       
            <View style={{justifyContent:'flex-start',flexDirection:'row', right:constants.Dimensions.vw(60) }}>
-                <TouchableOpacity onPress={onGoBack} style={styles.goBackButton}>
-                    <MaterialIcons 
-                        name="chevron-left" 
-                        size={45} 
+                <TouchableOpacity onPress={onGoBack} style={[styles.goBackButton,{top:constants.Dimensions.vh(2)}]} > 
+                    <constants.Icons.MaterialCommunityIcons 
+                        name="arrow-left" 
+                        size={constants.Dimensions.normalize(20)} 
                         color={constants.Colors.primary}
                     />
                 </TouchableOpacity>
@@ -288,7 +288,7 @@ export const MarketHeader = ({
                             />
                         </View>
                         <View style={{ flexDirection:'row',justifyContent:'center' }}>
-                            <Text style={styles.searchText}>Search</Text>
+                            <Text style={styles.searchText}  allowFontScaling={false}>Search</Text>
                         </View>           
                     </View>         
                 </TouchableOpacity>
@@ -307,7 +307,7 @@ export const MarketHeader = ({
                     <View
                         style={styles.notification}
                     >
-                        <Text style={{ fontSize: 12, color: "#fff" }}>{notificationCount}</Text>
+                        <Text style={{ fontSize: 12, color: "#fff" }}  allowFontScaling={false}>{notificationCount}</Text>
                     </View>
                 }
             </View>  
@@ -372,7 +372,7 @@ export const PrimaryHeader = ({
             </TouchableOpacity>
 
             <View>
-                <Text style={styles.primaryTitle}>
+                <Text style={styles.primaryTitle} allowFontScaling={false}>
                     {title}
                 </Text>
             </View>
@@ -454,7 +454,7 @@ export const PrimaryHeader = ({
                                 color={constants.Colors.primary}
                             />
                             <View style={{top:constants.Dimensions.vh(1.5) }}>                        
-                                <Text style={styles.postText}>
+                                <Text style={styles.postText}  allowFontScaling={false}>
                                     POST
                                 </Text>
                             </View>
@@ -478,7 +478,7 @@ export const PrimaryHeader = ({
                             color={constants.Colors.light}
                         />
                         <View style={{top:constants.Dimensions.vh(1.5) }}>                        
-                            <Text style={styles.postText}>
+                            <Text style={styles.postText}  allowFontScaling={false}>
                                 Inspire
                             </Text>
                         </View>
@@ -500,7 +500,7 @@ export const PrimaryHeader = ({
                             color={constants.Colors.light}
                         />
                         <View style={{top:constants.Dimensions.vh(1.5) }}>                        
-                            <Text style={styles.postText}>
+                            <Text style={styles.postText}  allowFontScaling={false}>
                                 Boost
                             </Text>
                         </View>

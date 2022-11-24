@@ -91,11 +91,11 @@ export const VariantCard = ({
          <View style={styles.variantInfo}>
          
          <View style={styles.variantNameContainer}>
-            <Text style={styles.variantName} numberOfLines={2} >{data.variantName}</Text>         
+            <Text style={styles.variantName} numberOfLines={2} allowFontScaling={false}>{data.variantName}</Text>         
             
          </View>
          <View style={{flexDirection:'row',left:constants.Dimensions.vw(50),top:constants.Dimensions.vw(5)}}>
-            <Text style={styles.variantPrice} adjustsFontSizeToFit > ${data.variantPrice}</Text> 
+            <Text style={styles.variantPrice} adjustsFontSizeToFit allowFontScaling={false}> ${data.variantPrice}</Text> 
          </View>
          <View style={{ flexDirection:'row',position:'absolute',top:constants.Dimensions.vh(30),left:constants.Dimensions.vw(5),right:0}}>
                

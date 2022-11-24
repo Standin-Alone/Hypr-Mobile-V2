@@ -261,7 +261,7 @@ export const pay = (payload,setState,props)=>{
                     Toast.show({
                         type:'error',
                         text1:'Message',
-                        text2: "Not enough ba lance"
+                        text2: "Not enough balance"
                     });
                     setState({isProgress:false});
                 }
@@ -285,7 +285,9 @@ export const pay = (payload,setState,props)=>{
 // FINAL SUCESS PAYMENT ACTION
 export const successPayment = (payload,setState,props)=>{
     
-  
+
+
+
     setState({isLoading:true});
     
     // Check Internet Connection
@@ -295,13 +297,10 @@ export const successPayment = (payload,setState,props)=>{
             let url = payload.url;    
             let spliturl = url.split('?');     
             let splitotherhalf = spliturl[1].split('&');
-         
-            console.warn('URL',url);
+
             let paymentId = splitotherhalf[0].replace("paymentId=","");
             let payerId = splitotherhalf[2].replace("PayerID=","");
 
-            console.warn('payerId',payerId);
-            console.warn('paymentId',paymentId);
 
             let cleanPayload = {
                 cart:payload.cart,
@@ -324,14 +323,19 @@ export const successPayment = (payload,setState,props)=>{
                     POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CONFIRM_ORDER}`,confirmOrderPayload).then((result)=>{
 
                         if(result.data.result == true){
+                            
+                            // payment room for push notif
+                            // payload.socket.emit("payment-notif",{
+                            //     room:payload.paymentRoom,
+                            //     message:'You successfully bought a product. Please wait for your order to verify'
+                            // })
 
-                           
                             Toast.show({
                                 type:'success',
                                 text1:'Success',
                                 text2:'Successfully paid your order. Please wait for your order to verify.'
                             });
-        
+                            
                             props.navigation.reset({
                                 index: 0,
                                 routes: [{ name: constants.ScreenNames.AppStack.HOME }]

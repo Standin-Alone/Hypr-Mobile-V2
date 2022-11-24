@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Text,Image } from 'react-native';
+import { View,Text,Image,KeyboardAvoidingView} from 'react-native';
 import Components from '../../components';
 import constants from '../../constants';
 import { styles } from './styles';
@@ -196,15 +196,15 @@ export default class SignUp extends React.Component {
                             />                        
                         </View>
                     </View>                                                 
-                    <View style={styles.buttonContainer}>
+                    
+                </View>
+                <View style={styles.buttonContainer}>
                         <Components.PrimaryButton                              
                             title={"Create an Account"}  
                             onPress={this.handleCreateAccount}                          
                             isLoading={this.state.isLoading}
                         />
-                    </View>
                 </View>
-                
             </>
         )
     }

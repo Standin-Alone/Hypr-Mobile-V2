@@ -72,8 +72,7 @@ export const getAllFriendsPost = (payload,setState)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`);
-            
+      
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_POST}`,payload).then((response)=>{                    
                          
@@ -377,6 +376,7 @@ export const createInspire = (payload,setState,props)=>{
                     formData.append('fileInfo',JSON.stringify(payload.file));    
                     formData.append('productLink',JSON.stringify(payload.productLink));    
                         
+                    console.warn(formData)
                     if(payload.files.length > 0 ){
                     payload.files.map(item=>{          
                             let filename = item.path.replace(/^.*[\\\/]/, '')                  
@@ -388,6 +388,8 @@ export const createInspire = (payload,setState,props)=>{
                         "Content-Type": "multipart/form-data",
                         },
                     };
+
+                    console.warn(formData)
                     // POST REQUEST
                     POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_POST}`,formData,headers).then((response)=>{                                                                 
                         if(response.data.status == true){                    
@@ -398,6 +400,7 @@ export const createInspire = (payload,setState,props)=>{
                             props.navigation.replace(constants.ScreenNames.Social.SOCIAL); 
                             setState({isProgress:false,loadingTitle:''});
                         }else{
+                            console.warn(response.data)
                             Toast.show({
                                 type:'error',
                                 text1: response.data.message
@@ -405,7 +408,7 @@ export const createInspire = (payload,setState,props)=>{
                             setState({isProgress:false,loadingTitle:''});
                         }
                     }).catch((error)=>{
-                        console.warn(error.response)
+                        console.warn(error)
                         Toast.show({
                             type:'error',
                             text1:'Something went wrong!'
@@ -566,9 +569,7 @@ export const createStory = (payload,setState,props,state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
       
-            
-
-            console.warn(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`);
+      
             // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.CREATE_STORY}`,payload).then((response)=>{                    
             

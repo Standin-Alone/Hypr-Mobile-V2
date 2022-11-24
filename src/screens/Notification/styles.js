@@ -10,6 +10,11 @@ export const styles = StyleSheet.create({
         fontFamily:constants.Fonts.PoppinsExtraBold,
         fontSize:constants.Dimensions.normalize(8),
         color:constants.Colors.dark
+    },
+    emptyNotif:{
+        fontFamily:constants.Fonts.PoppinsMedium,
+        fontSize:constants.Dimensions.normalize(8),
+        color:constants.Colors.gray
     }
 });
 

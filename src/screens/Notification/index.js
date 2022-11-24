@@ -5,18 +5,14 @@ import constants from '../../constants';
 
 import { getUserInfo,logOut} from '../../actions/auth';
 import { styles } from './styles';
+import { getNotifications } from '../../actions/notification';
 
 export default class Notification extends React.Component {
     constructor(props) {
       super(props);
       this.state = {   
         userInfo:[],
-        notifs:[{
-            name:'John Edcel Zenarosa',
-            message:`"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"1914 translation by H. Rackham`,
-            date:'11/03/2022',
-            profile:'50ea1b4f-97a9-461e-ba0e-bf933635a04d.jpg'
-        }],
+        notifs:[],
         isLoadingPlaceholder:true 
 
      }    
@@ -27,6 +23,14 @@ export default class Notification extends React.Component {
     componentDidMount(){        
         getUserInfo(this.setMyState)
 
+
+        let payload = {
+            currentPage:1,
+            previousNotifs:[],
+         
+        }
+
+        getNotifications(payload,this.setMyState)
         InteractionManager.runAfterInteractions(()=>{
                 this.setState({isLoadingPlaceholder:false})
           })
@@ -42,7 +46,13 @@ export default class Notification extends React.Component {
             />
         )
     }
-
+    renderEmpty = ()=>{ 
+        return(
+            <View style={{alignSelf:'center'}}>
+                <Text  style={styles.emptyNotif}  allowFontScaling={false}>No Notifications.</Text>
+            </View>
+        )
+    }
     render(){
         
        
@@ -68,6 +78,7 @@ export default class Notification extends React.Component {
                         data={this.state.notifs}
                         renderItem={this.renderNotifs}
                         contentContainerStyle={{ paddingVertical:constants.Dimensions.vh(5) }}
+                        ListEmptyComponent={this.renderEmpty}
                     />
                 }
                 </View>   

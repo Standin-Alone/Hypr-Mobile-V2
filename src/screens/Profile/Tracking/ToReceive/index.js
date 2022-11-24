@@ -1,6 +1,5 @@
 import React from 'react';
-import { View,InteractionManager } from 'react-native';
-import { FlatList } from 'react-native-gesture-handler';
+import { View,InteractionManager,FlatList } from 'react-native';
 import { getToVerifyOrders,checkOrdersStatus } from '../../../../actions/tracking';
 import Components from '../../../../components';
 import constants from '../../../../constants';
@@ -13,7 +12,8 @@ export default class ToReceive extends React.Component {
       this.state = {   
         isReadyToRender:false,     
         orders:[],
-        loadingData:true
+        loadingData:true,
+        refreshing:false
       };
     }
 
@@ -26,9 +26,8 @@ export default class ToReceive extends React.Component {
             condition:'SHIPPED'
         }
 
-          
         checkOrdersStatus(payload,this.setMyState)
-     
+      
     }
 
     renderItems = ({item,index}) =>{
@@ -68,6 +67,15 @@ export default class ToReceive extends React.Component {
                 ) : (
                     <>                    
                         <FlatList
+                            refreshing={this.state.refreshing}
+                            onRefresh={async()=>{                                
+                                let payload = {
+                                    userId: await GET_SESSION('USER_ID'),
+                                    condition:'SHIPPED'
+                                }
+                                this.setState({refreshing:true});
+                                checkOrdersStatus(payload,this.setMyState)
+                            }}
                             data={this.state.orders}            
                             renderItem={this.renderItems}
                             ListEmptyComponent={this.renderEmptyComponent}

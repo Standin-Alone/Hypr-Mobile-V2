@@ -43,7 +43,7 @@ export const PrimaryButton = ({
                 />
                 :
 
-                <Text style={[styles.primaryButtonText,moreStyleText]}>
+                <Text style={[styles.primaryButtonText,moreStyleText]} allowFontScaling={false}>
                     { isLoading ? loadingTitle : title}
                 </Text>
 
@@ -241,8 +241,8 @@ export const OrderCardButton = ({
 
             <View style={{flexDirection:'column'}}>     
                 <View>
-                    <Text>Order Number:</Text>
-                    <Text style={[styles.primaryButtonNoOutlineText]}>
+                    <Text allowFontScaling={false}>Order Number:</Text>
+                    <Text style={[styles.primaryButtonNoOutlineText]} allowFontScaling={false}>
                         {title}
                     </Text>
                 </View>    

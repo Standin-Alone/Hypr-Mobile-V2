@@ -1,5 +1,5 @@
 import React from 'react';
-import { View,Image,Text,TouchableOpacity, ScrollView,FlatList,Platform,PermissionsAndroid} from 'react-native';
+import { View,Image,Text,TouchableOpacity, ScrollView,FlatList} from 'react-native';
 import Components from '../../../components';
 import constants from '../../../constants';
 import FastImage from 'react-native-fast-image'
@@ -35,35 +35,13 @@ export default class ProductDetail extends React.Component {
     
    
     setMyState = (value)=>this.setState(value)
-     requestPermission = async () => {
-        try {
-          const granted = await PermissionsAndroid.request(
-            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
-            {
-              title: 'Get Read External Storage Access',
-              message:
-                'get read external storage access for detecting screenshots',
-              buttonNeutral: 'Ask Me Later',
-              buttonNegative: 'Cancel',
-              buttonPositive: 'OK',
-            }
-          );
-          if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            console.log('You can use the READ_EXTERNAL_STORAGE');
-          } else {
-            console.log('READ_EXTERNAL_STORAGE permission denied');
-          }
-        } catch (err) {
-          console.warn(err);
-        }
-      };
+
 
     userDidScreenshot = () => {
         alert('helop')
     };
 
-     componentDidMount(){    
-        this.requestPermission();     
+     componentDidMount(){         
         addScreenshotListener(this.userDidScreenshot);
 
 

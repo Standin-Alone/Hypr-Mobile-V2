@@ -6,6 +6,7 @@ export default {
       VERIFY_OTP:'VerifyOtp',
       HOME:'Home',
       PRIMARY_HOME:'PrimaryHome',
+      MAIN_HOME:'MainHome',
       NOTIFICATION:'Notification',
       FORGOT_PASSWORD:'ForgotPassword'
    },

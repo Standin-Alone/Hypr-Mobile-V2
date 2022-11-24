@@ -15,7 +15,7 @@ export const getAllFriendSuggestion = (payload,setState)=>{
          if(state.isConnected && state.isInternetReachable){
 
             
-            // GET REQUEST
+            // POST REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_ALL_FRIENDS_SUGGESTION}`,payload).then((response)=>{                    
                          
                 if(response.data.status == true){
