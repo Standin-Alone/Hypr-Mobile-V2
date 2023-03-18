@@ -14,7 +14,7 @@ export const styles = StyleSheet.create({
         borderRadius:20,
         flexDirection:'column',
         justifyContent:'center',
-        marginVertical:constants.Dimensions.vh(2)        
+        marginVertical:constants.Dimensions.vh(4)        
     },
     partnerButtonLabel:{
         textAlign:'center'

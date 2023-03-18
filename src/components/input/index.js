@@ -125,19 +125,25 @@ onChangeText,
 onChangeFormattedText,
 onChangeCountry,
 isError,
-errorMessage
+errorMessage,
+defaultCode,
+ref,
+textInputProps
 })=>{
     return (
         <View>
-            <PhoneInput           
+            <PhoneInput                    
                 textInputStyle={styles.phoneInput}
                 defaultValue={value}
-                defaultCode="IT"
+                defaultCode={defaultCode ? defaultCode : 'IT'}
                 layout="first"
                 onChangeText={onChangeText}
                 onChangeFormattedText={onChangeFormattedText}          
                 onChangeCountry = {onChangeCountry}    
-                containerStyle ={styles.phoneInputContainer}                       
+                containerStyle ={styles.phoneInputContainer}      
+                textInputProps={textInputProps}                
+                ref={ref}   
+                                  
             />
              {isError && 
                     <View style={{ flexDirection:'row',width:constants.Dimensions.vw(90) }}>

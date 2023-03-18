@@ -31,7 +31,7 @@ openNotification
                     </TouchableOpacity>                
                 </View>
                 <View style={{left:constants.Dimensions.vw(20)}}>
-                    <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
+                    <FastImage source={constants.Images.quartaLogo2Light} style={styles.hyprLogo} resizeMode="contain"/>
                 </View>
                 <View style={{left:constants.Dimensions.vw(30),top:constants.Dimensions.vh(2)}}>
                     <TouchableOpacity onPress={openNotification} >

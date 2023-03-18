@@ -29,7 +29,7 @@ export const calculateFreight = (payload,setState,props)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-                
+            console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CALCULATE_FREIGHT}`);
             // POST REQUEST
             POST(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CALCULATE_FREIGHT}`,cleanPayload).then((response)=>{                    
               
@@ -50,9 +50,11 @@ export const calculateFreight = (payload,setState,props)=>{
                     }
                   
                 }else{
+                    console.warn(response.data);
                     Toast.show({
                         type:'error',
-                        text1: response.data.message
+                        text1: response.data.message,
+                        text2:'sample'
                     });
 
                 }

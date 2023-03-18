@@ -63,11 +63,11 @@ export default class Login extends React.Component {
 
                     <View style={styles.bannerContainer}>
                         <View>
-                            <FastImage source={constants.Images.signIn} style={styles.loginCover} resizeMode="contain"/>
+                            <FastImage source={constants.Images.quartaLogo1} style={styles.loginCover} resizeMode="contain"/>
                         </View>
                         <View style={styles.headerContainer}>
                                 <View style={{ left:constants.Dimensions.vw(5) }}>
-                                    <Text style={styles.headerText} allowFontScaling={false}>Welcome to Hypr</Text>
+                                    <Text style={styles.headerText} allowFontScaling={false}>Welcome to Quarta</Text>
                                     <Text style={styles.subtitleText} allowFontScaling={false}>Sign in to start shopping.</Text>
                                 </View>
                         </View>
@@ -158,8 +158,8 @@ export default class Login extends React.Component {
 
                         
                         <View style={styles.signUpContainer}>
-                            <Text style={styles.signUpTitle} allowFontScaling={false}>Don't have an account?</Text>
-                            <Text  style={styles.signUpText} onPress={this.goToSignUp}  allowFontScaling={false}> Sign Up here...</Text>
+                            {/* <Text style={styles.signUpTitle} allowFontScaling={false}>Don't have an account?</Text> */}
+                            {/* <Text  style={styles.signUpText} onPress={this.goToSignUp}  allowFontScaling={false}> Sign Up here...</Text> */}
                         </View>
                         
                     </View>

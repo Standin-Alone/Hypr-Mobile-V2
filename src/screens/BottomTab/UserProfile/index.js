@@ -27,12 +27,8 @@ export default class UserProfile extends React.Component {
     setMyState = (value)=>this.setState(value)
 
 
-     componentDidMount(){
-     
-        
-        this.props.navigation.addListener('focus',()=>{
-            getUserInfo(this.setMyState)
-        })
+     componentDidMount(){              
+        getUserInfo(this.setMyState)      
 
     }
 
@@ -56,18 +52,13 @@ export default class UserProfile extends React.Component {
         this.setState({showSelection:true,changeImageType:type});
     }
 
-
+    handleGoToAccountSettings = ()=>{
+        this.props.navigation.navigate(constants.ScreenNames.Profile.MANAGE_ACOUNT)
+    }
 
     render(){
         return(
-            <>  
-                {/* <Components.ProfileHeader
-                    goToProfileSettings={()=>this.props.navigation.navigate(constants.ScreenNames.Profile.ACCOUNT_SETTINGS)}
-                    onShareReferralLink={()=>this.setState({showReferralModal: this.state.showReferralModal ? false :true})}
-                    onChangeCoverPhoto={()=>this.openUploadSelection('cover')}
-                    onGoBack={()=>this.props.navigation.goBack()}
-                /> */}
-
+            <>                  
             <Components.UploadingSelectionCard
                     showPanel={this.state.showSelection}
                     onDismiss = {()=>this.setState({showSelection:false})}
@@ -92,7 +83,7 @@ export default class UserProfile extends React.Component {
 
                 
                 {this.state.isLoading ?
-                        <ActivityIndicator animating={true} size="large" color={constants.Colors.primary} style={{top:constants.Dimensions.vh(70)}}/>
+                        <Components.UserProfileSkeletonHolder/>
                     :
 
                 <>
@@ -113,6 +104,11 @@ export default class UserProfile extends React.Component {
                                                 <Text style={styles.walletLabel} >Available Balance</Text>
                                             </View>
                                         </View>
+                                    </View>
+                                    <View style={{top:constants.Dimensions.vh(5),left:constants.Dimensions.vw(5)}}> 
+                                        <TouchableOpacity onPress={this.handleGoToAccountSettings}>
+                                            <constants.Icons.Ionicons name="settings-outline" size={constants.Dimensions.normalize(20)}  color={constants.Colors.dark_tint}/>
+                                        </TouchableOpacity>
                                     </View>
                                 </View>
                                 
@@ -139,7 +135,7 @@ export default class UserProfile extends React.Component {
                                         </View>
                                             
                                         </View>                                
-                                        <TouchableOpacity style={styles.icon}     onPress={this.handleCopyLink}>
+                                        <TouchableOpacity style={styles.icon}   onPress={()=>this.handleCopyLink(this.state.userInfo?.referral_link)}>
                                             <constants.Icons.Ionicons 
                                                     name={'copy'} 
                                                     size={constants.Dimensions.normalize(12)} 

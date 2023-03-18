@@ -7,10 +7,14 @@ import { PrimaryHeader } from '../../components/headers';
 import { createAccount } from '../../actions/auth';
 import moment from 'moment';
 import { showPassword } from '../../utils/functions';
+import { createRef } from 'react';
+
 
 export default class SignUp extends React.Component {
+    
     constructor(props) {
       super(props);
+      this._phoneInput = createRef();
       this.state = {        
           firstName:{
               focus:false,
@@ -34,7 +38,8 @@ export default class SignUp extends React.Component {
             focus:false,
             error:false,
             errorMessage:'',
-            value:''
+            value:'',
+            phoneCode:''
           },
           birthday:{
             focus:false,
@@ -65,11 +70,17 @@ export default class SignUp extends React.Component {
           showPassword1:true,
           showPassword2:true      
       };
+
       
     }
 
     setMyState = (value)=>this.setState(value);
 
+    componentDidMount(){
+        // if (this.props.onRef != null) {
+        //     this.props.onRef(this)
+        // }
+    }
     handleCreateAccount = ()=>{
 
         let payload = {
@@ -81,10 +92,14 @@ export default class SignUp extends React.Component {
             password:this.state.password.value,
             confirmPassword:this.state.confirmPassword.value,
         }
-    
-        return createAccount(payload,this.setMyState,this.props)
+        console.warn(this._phoneInput)
+        // return createAccount(payload,this.setMyState,this.props)
         
     }
+
+    // _phoneInput = (e)=>{
+    //     console.warn(e)
+    // }
 
     render(){
         return(
@@ -135,11 +150,16 @@ export default class SignUp extends React.Component {
                         </View>
 
                         <View>     
-                            <Components.PrimaryPhoneInput 
-                                onChangeText={(value)=>this.setState({contact:{...this.state.contact,value:value,error:false}})}                                 
+                            <Components.PrimaryPhoneInput                                 
+                                ref={this._phoneInput}
+                                onChangeText={(value)=>{
+                                    console.warn(this._phoneInput);
+                                    this.setState({contact:{...this.state.contact,value:value,error:false}})                            
+                                }}                                 
                                 isError={this.state.contact.error}
                                 errorMessage={this.state.contact.errorMessage}
                                 value={this.state.contact.value}
+                                defaultCode={this.state.contact.phoneCode}
                             />                  
                         </View>                        
                    
@@ -153,8 +173,7 @@ export default class SignUp extends React.Component {
                                     isError={this.state.birthday.error}
                                     errorMessage={this.state.birthday.errorMessage}                                    
                                     value={this.state.birthday.value}
-                                    onChangeDate={(setValue,value)=>this.setState({birthday:{...this.state.birthday,value:moment(value).format('MM-DD-YYYY'),error:false,openDatePicker:false}})}
-                                    
+                                    onChangeDate={(setValue,value)=>this.setState({birthday:{...this.state.birthday,value:moment(value).format('MM-DD-YYYY'),error:false,openDatePicker:false}})}                                    
                                     openDatePicker={this.state.birthday.openDatePicker}
                                     onPressIn={()=>this.setState({birthday:{...this.state.birthday,openDatePicker:this.state.birthday.openDatePicker ? false : true }})}
                             />                        

@@ -27,7 +27,6 @@ export const styles = StyleSheet.create({
     borderRadius:2000,
     borderWidth:1,
     borderColor:'rgba(255,255,255,1)',    
-
  },
  orderTitleText:{
    top:constants.Dimensions.vh(15),  

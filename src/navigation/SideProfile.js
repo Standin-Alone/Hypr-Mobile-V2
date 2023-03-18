@@ -39,7 +39,7 @@ export default class SideProfile extends React.Component {
                 <TouchableOpacity onPress={()=>this.goToUserProfile()}>
                     <Image source={{uri: `${constants.Directories.PROFILE_PICTURE_DIRECTORY}/${this.state.userInfo?.profile_image}`}} style={styles.userProfile}  />
                 </TouchableOpacity>
-                <Text style={styles.fullName}>{`${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}  `}</Text>
+                <Text style={styles.fullName}>{ this.state.userInfo?.first_name ? `${this.state.userInfo?.first_name}  ${this.state.userInfo?.last_name}` : 'Processing'}</Text>
             </View>
             <DrawerContentScrollView {...this.props}>
                 <DrawerItemList

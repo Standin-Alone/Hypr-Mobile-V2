@@ -77,7 +77,9 @@ import {
 
 import {
     PostSkeletonHolder,
-    FriendSkeletonHolder
+    FriendSkeletonHolder,
+    UpdateProfileSkeletonHolder,
+    UserProfileSkeletonHolder
     
 } from "./placeholder"
 
@@ -150,6 +152,8 @@ export default {
 
 
     PostSkeletonHolder,
-    FriendSkeletonHolder
+    FriendSkeletonHolder,
+    UpdateProfileSkeletonHolder,
+    UserProfileSkeletonHolder
 
 }

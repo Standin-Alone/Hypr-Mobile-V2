@@ -38,7 +38,7 @@ export const SideMenuBar =   (props)=>{
 
             }}
             drawerContent={(propsState)=><SideProfile {...propsState}/>}
-            
+            useLegacyImplementation={false}
          >
 
             <SideMenu.Screen 

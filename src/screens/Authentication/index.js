@@ -69,13 +69,13 @@ export default class Authentication extends React.Component {
                 {/* <ImageBackground source={constants.Images.socialPageBackground} style={styles.container}>                                 
                      */}
                  <LinearGradient
-                    start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }}
-                    colors={[constants.Colors.gradient.primary, constants.Colors.gradient.secondary,constants.Colors.gradient.tertiary,constants.Colors.gradient.quarternary]}
+                    start={{ x: 0, y: 1.3 }} end={{ x: -1, y: 0 }}
+                    colors={[constants.Colors.light, constants.Colors.light,constants.Colors.light,constants.Colors.light]}
                     style={[styles.container]}
                 >
-                        <FastImage source={constants.Images.hyprLogoNew} style={styles.hyprLogo} resizeMode="contain"/>
+                        <FastImage source={constants.Images.quartaLogo1} style={styles.hyprLogo} resizeMode="contain"/>
                         <View style={{top:constants.Dimensions.vh(80)}}>
-                        <ActivityIndicator animating={true} size="large" color={constants.Colors.light}/>
+                        <ActivityIndicator animating={true} size="large" color={constants.Colors.primary}/>
                         <Text style={styles.loadingText}>{this.state.loadingText}</Text>
                         </View>                    
                 </LinearGradient>

@@ -57,6 +57,7 @@ import ReviewProduct from "../screens/Market/ReviewProduct";
 import MainHome from "../screens/MainHome";
 
 import { AuthContext } from "../contexts/AuthContexts";
+import ManageAccount from "../screens/Profile/ManageAccount";
 // LogBox.ignoreLogs([
 //   "[react-native-gesture-handler] Seems like you\'re using an old API with gesture components, check out new Gestures system!",
 // ]);
@@ -105,6 +106,7 @@ const AppStack = () =>(
                     <Stack.Screen component={ReviewProduct} name={constants.ScreenNames.Market.REVIEW_PRODUCT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
                     <Stack.Screen component={OrderStatus} name={constants.ScreenNames.Market.ORDER_STATUS} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
                     <Stack.Screen component={ViewNewProfilePic} name={constants.ScreenNames.Profile.VIEW_NEW_PROFILE_PIC} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
+                    <Stack.Screen component={ManageAccount} name={constants.ScreenNames.Profile.MANAGE_ACOUNT} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    
 
                     {/*SOCIAL  */}
                     <Stack.Screen component={Home} name={constants.ScreenNames.Social.SOCIAL} options={{cardStyleInterpolator:CardStyleInterpolators.forHorizontalIOS}}/>    

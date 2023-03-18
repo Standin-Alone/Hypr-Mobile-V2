@@ -73,6 +73,7 @@ export default class MainHome extends React.Component {
                             <FlatList
                                 data={this.state.partners}
                                 renderItem={this.renderPartners}
+                               
                             />
                         }
 

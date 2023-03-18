@@ -6,6 +6,7 @@ const EndPoints = {
     RESEND_OTP:'/user/resend-otp',
     GET_USER_INFO:'/user/get-user-info',
     CHANGE_PROFILE_PICTURE:'/user/change-profile-picture',
+    CHANGE_PROFILE_INFO:'/user/change-profile-info',
     SEND_FORGOT_PASSWORD_LINK:'/user/send-forgot-password-link',
 
     GET_ALL_CATEGORIES:'/get-categories',

@@ -20,7 +20,7 @@ export const styles = StyleSheet.create({
     loadingText:{
         top:constants.Dimensions.vw(5),
         fontFamily:constants.Fonts.PoppinsRegular,
-        color:constants.Colors.light,
+        color:constants.Colors.primary,
         fontSize:constants.Dimensions.normalize(8),
         textAlign:'center'
     }

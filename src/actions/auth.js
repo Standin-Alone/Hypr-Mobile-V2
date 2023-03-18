@@ -179,7 +179,7 @@ export const createAccount = (payload,setState,props)=>{
                     age:computeAge,
                     username:payload.email,
                     password:payload.password,
-                    age:computeAge               
+              
                 }
 
              
@@ -503,10 +503,6 @@ export const resendOtp = (payload,setState)=>{
 
 
 export const getUserInfo = (setState)=>{
-
-  
-
-    
     // Check Internet Connection
     NetInfo.fetch().then(async(state)=>{
          // if internet connected
@@ -558,6 +554,62 @@ export const getUserInfo = (setState)=>{
 
 }
 
+
+// GET USER INFO IN MANAGE ACCOUNT
+export const getUserProfileInfo = (setState,state)=>{
+    // Check Internet Connection
+    NetInfo.fetch().then(async(state)=>{
+         // if internet connected
+         if(state.isConnected && state.isInternetReachable){
+            let userId = await GET_SESSION('USER_ID');            
+            let payload = {
+                userId:userId
+            }
+            // POST REQUEST
+            POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_USER_INFO}`,payload).then((response)=>{                         
+                if(response.data.status == true){          
+
+                    setState((prevData)=>({...prevData,userInfo:response.data.data}))
+                    setState({
+                        firstName:{...state.firstName,value:response.data.data.first_name},
+                        lastName:{...state.lastName,value:response.data.data.last_name},
+                        birthday:{...state.birthday,value:moment(response.data.data.birthday).format('MM-DD-YYYY')},
+                        email:{...state.email,value:response.data.data.email},
+                        contactNumber:{...state.contactNumber,value:response.data.data.phone,phoneCode:response.data.data.phone_code}
+                      })
+                  
+                    // turn off loading
+                     setState((prevData)=>({...prevData,isLoading:false}))
+                }else{
+                    Toast.show({
+                        type:'error',
+                        text1: 'Error',
+                        text2:response.data.errorMessage
+                    });
+                    // turn off loading
+                     setState((prevData)=>({...prevData,isLoading:false}))
+                }
+            }).catch((error)=>{
+                console.warn(error)
+                Toast.show({
+                    type:'error',
+                    text1: 'Error',
+                    text2:error
+                });
+                 setState((prevData)=>({...prevData,isLoading:false}))   
+            });
+
+         }else{
+             //  No internet Connection
+            Toast.show({
+                type:'error',
+                text1:'No internet Connection!'
+            })
+             setState((prevData)=>({...prevData,isLoading:false}))
+         }
+    });
+
+}
 
 
 

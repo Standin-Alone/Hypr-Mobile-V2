@@ -116,7 +116,7 @@ export const checkOrdersStatus= (payload,setState)=>{
     NetInfo.fetch().then((state)=>{
          // if internet connected
          if(state.isConnected && state.isInternetReachable){
-
+            console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=45`);
             // GET REQUEST
             POST(`${getBaseUrl().accesspoint}${constants.EndPoints.GET_TO_VERIFY_ORDERS}`,payload).then(async (response)=>{                    
            
@@ -128,14 +128,15 @@ export const checkOrdersStatus= (payload,setState)=>{
             
               
                     Promise.all(orders.map(  (items,index)=>{
+                        
                          // GET TRACKING DETAILS IN CJ
                          return  GET(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`).then( (result)=>{                    
-                                                
+                                                  
                             if(result.data.result == true){                                
                                 // LIST OF ORDERS FROM CJ   
                                 
                                 if( result.data.data?.orderStatus == payload.condition){  
-                                  
+                                    console.warn(`${getBaseUrl().CJ_ACCESS_POINT}${constants.EndPoints.CHECK_ORDER_STATUS}?orderId=${items.order_number}`);
                                 // result.data.data.shippingAddress = {
                                 //         billing_address: items.billing_address,
                                 //         billing_state: items.billing_state,
@@ -147,6 +148,8 @@ export const checkOrdersStatus= (payload,setState)=>{
                                 //     }
 
                                     result.data.data.order_status = items.order_status;
+                                    return result.data.data;
+                                }else{
                                     return result.data.data;
                                 }                                                                                                                                     
                             }else[

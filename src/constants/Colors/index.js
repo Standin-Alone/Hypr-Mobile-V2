@@ -14,6 +14,7 @@ export default Colors = {
         tertiary:'#f49f2e',
         quarternary:'#f2a937',
     }, 
+    orange_tint:'#fff0da',
     // FIGO
     // gradient:{
     //     primary:'#BB22FE',

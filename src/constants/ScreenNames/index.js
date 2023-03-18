@@ -38,6 +38,7 @@ export default {
    Profile:{
       PROFILE:'Profile',       
       ACCOUNT_SETTINGS:'AccountSettings',
+      MANAGE_ACOUNT:'ManageAccount',
       ADDRESS_BOOK:'AddressBook',
       ADDRESS_EDIT_FORM:'AddressEditForm',
       tracking:{

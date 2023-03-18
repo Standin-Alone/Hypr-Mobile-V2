@@ -27,9 +27,8 @@ export default class ToShip extends React.Component {
         }
 
           
-        this.props.navigation.addListener('focus',()=>{
-            checkOrdersStatus(payload,this.setMyState)
-        })
+        checkOrdersStatus(payload,this.setMyState)
+       
      
     }
 
